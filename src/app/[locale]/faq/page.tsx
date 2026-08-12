@@ -1,44 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { motion, AnimatePresence } from "framer-motion";
-
-const faqs = [
-  {
-    q: "How long does shipping take?",
-    a: "Standard shipping takes 3-5 business days. Express shipping is available for 1-2 business day delivery. Free shipping is offered on orders over €100.",
-  },
-  {
-    q: "What is your return policy?",
-    a: "We offer a 14-day return policy on all items. Products must be unused and in their original packaging. Contact our support team to initiate a return.",
-  },
-  {
-    q: "Do you ship internationally?",
-    a: "Yes! We ship to most countries worldwide. International shipping typically takes 7-14 business days depending on the destination.",
-  },
-  {
-    q: "How can I track my order?",
-    a: "Once your order ships, you'll receive a confirmation email with a tracking number. You can also track your order from your account dashboard.",
-  },
-  {
-    q: "What payment methods do you accept?",
-    a: "We accept Visa, Mastercard, American Express, PayPal, and bank transfers. All payments are processed securely with SSL encryption.",
-  },
-  {
-    q: "Can I change or cancel my order?",
-    a: "Orders can be modified or cancelled within 1 hour of placement. After that, please contact our support team and we'll do our best to help.",
-  },
-  {
-    q: "Do you offer gift wrapping?",
-    a: "Yes! Gift wrapping is available at checkout for a small additional fee. You can also include a personalized message with your gift.",
-  },
-  {
-    q: "How do I contact customer support?",
-    a: "You can reach us via our contact form, email at support@misaelectro.ro, or through live chat on our website. We're available 24/7 to help.",
-  },
-];
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
@@ -97,17 +63,24 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 export default function FaqPage() {
+  const t = useTranslations("faqPage");
+  const nav = useTranslations("nav");
+  const faqs = Array.from({ length: 8 }, (_, i) => ({
+    q: t(`q${i + 1}`),
+    a: t(`a${i + 1}`),
+  }));
+
   return (
     <div style={{ maxWidth: "var(--max-width)", margin: "0 auto", padding: "0 1rem 4rem" }}>
-      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "FAQ" }]} />
+      <Breadcrumbs items={[{ label: nav("home"), href: "/" }, { label: t("breadcrumb") }]} />
 
       <div style={{ maxWidth: "720px", margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "2rem" }}>
           <h1 style={{ fontSize: "clamp(1.5rem, 5.5vw, 2.25rem)", fontWeight: 800, letterSpacing: "-0.04em", marginBottom: "0.75rem", wordBreak: "break-word" }}>
-            Frequently Asked <span className="gradient-text">Questions</span>
+            {t("heading1")} <span className="gradient-text">{t("heading2")}</span>
           </h1>
           <p style={{ fontSize: "clamp(0.875rem, 2.4vw, 1rem)", color: "var(--color-text-secondary)", lineHeight: 1.6 }}>
-            Everything you need to know about shopping with us
+            {t("subtitle")}
           </p>
         </div>
 

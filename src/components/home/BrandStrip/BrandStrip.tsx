@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import styles from "./BrandStrip.module.css";
 
@@ -16,6 +17,7 @@ interface Props {
 }
 
 export function BrandStrip({ brands }: Props) {
+  const t = useTranslations("homeSections");
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (dir: number) => {
@@ -27,12 +29,12 @@ export function BrandStrip({ brands }: Props) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <h3 className={styles.title}>Popular Brands</h3>
+        <h3 className={styles.title}>{t("bsTitle")}</h3>
         <div className={styles.arrows}>
-          <button className={styles.arrow} onClick={() => scroll(-1)} aria-label="Scroll left">
+          <button className={styles.arrow} onClick={() => scroll(-1)} aria-label={t("scrollLeft")}>
             <ChevronLeft size={16} />
           </button>
-          <button className={styles.arrow} onClick={() => scroll(1)} aria-label="Scroll right">
+          <button className={styles.arrow} onClick={() => scroll(1)} aria-label={t("scrollRight")}>
             <ChevronRight size={16} />
           </button>
         </div>
@@ -43,7 +45,7 @@ export function BrandStrip({ brands }: Props) {
             ? brand.linkUrl
             : `/catalog?brand=${encodeURIComponent(brand.name)}`;
           return (
-            <a key={brand.id} href={href} className={styles.brand} aria-label={`Shop ${brand.name}`}>
+            <a key={brand.id} href={href} className={styles.brand} aria-label={t("bsShop", { brand: brand.name })}>
               {brand.logoUrl ? (
                 <img src={brand.logoUrl} alt={brand.name} className={styles.brandLogo} />
               ) : (

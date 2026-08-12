@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { unstable_cache } from "next/cache";
 import { prisma } from "@/lib/prisma";
+import { translateBatch } from "@/lib/translate";
 import { JsonLd } from "@/components/shared/SEO/JsonLd";
 import { MarketplaceHome } from "@/components/home/MarketplaceHome/MarketplaceHome";
 import {
@@ -18,11 +19,11 @@ interface HomePageProps {
 }
 
 export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
-  const { locale } = await params;
+  await params;
 
   return {
-    alternates: { canonical: `/${locale}` },
-    openGraph: { url: `/${locale}` },
+    alternates: { canonical: "/" },
+    openGraph: { url: "/" },
   };
 }
 
@@ -381,8 +382,87 @@ function findNodeBySlug(roots: CategoryNode[], slug: string): CategoryNode | nul
   return null;
 }
 
-export default async function HomePage() {
-  const data = await getHomeData();
+type HomeData = Awaited<ReturnType<typeof getHomeData>>;
+
+// Machine-translate every product name and category name in the homepage
+// payload into the active locale in a single batched pass (cached in the DB).
+async function localizeHomeData(data: HomeData, locale: string): Promise<HomeData> {
+  const productArrays: HomepageProduct[][] = [
+    data.featuredProducts,
+    data.saleProducts,
+    data.newProducts,
+    data.popularProducts,
+    ...data.categorySections.map((s) => s.products),
+    ...data.brandSections.map((s) => s.products),
+    ...Object.values(data.sectionProducts),
+  ];
+
+  const strings = new Set<string>();
+  for (const arr of productArrays) {
+    for (const p of arr) {
+      if (p.name) strings.add(p.name);
+      for (const c of p.categories ?? []) if (c.category?.name) strings.add(c.category.name);
+    }
+  }
+  const collectCat = (c: HomepageCategory) => {
+    if (c.name) strings.add(c.name);
+    c.children?.forEach(collectCat);
+  };
+  data.categories.forEach(collectCat);
+  data.categorySections.forEach((s) => {
+    if (s.category.name) strings.add(s.category.name);
+    s.tabs.forEach((t) => strings.add(t.label));
+  });
+  data.categoryShowcase.forEach((c) => strings.add(c.name));
+
+  const map = await translateBatch([...strings], locale);
+  const tr = (s: string) => map.get(s) ?? s;
+
+  const mapProduct = (p: HomepageProduct): HomepageProduct => ({
+    ...p,
+    name: tr(p.name),
+    categories: p.categories?.map((c) => ({
+      ...c,
+      category: { ...c.category, name: tr(c.category.name) },
+    })),
+  });
+  const mapCategory = (c: HomepageCategory): HomepageCategory => ({
+    ...c,
+    name: tr(c.name),
+    children: c.children?.map(mapCategory),
+  });
+
+  return {
+    ...data,
+    featuredProducts: data.featuredProducts.map(mapProduct),
+    saleProducts: data.saleProducts.map(mapProduct),
+    newProducts: data.newProducts.map(mapProduct),
+    popularProducts: data.popularProducts.map(mapProduct),
+    categories: data.categories.map(mapCategory),
+    categoryShowcase: data.categoryShowcase.map((c) => ({ ...c, name: tr(c.name) })),
+    categorySections: data.categorySections.map((s) => ({
+      ...s,
+      category: { ...s.category, name: tr(s.category.name) },
+      products: s.products.map(mapProduct),
+      tabs: s.tabs.map((t) => ({ ...t, label: tr(t.label) })),
+    })),
+    brandSections: data.brandSections.map((s) => ({
+      ...s,
+      products: s.products.map(mapProduct),
+    })),
+    sectionProducts: Object.fromEntries(
+      Object.entries(data.sectionProducts).map(([k, v]) => [k, v.map(mapProduct)])
+    ),
+  };
+}
+
+interface HomePageParams {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function HomePage({ params }: HomePageParams) {
+  const { locale } = await params;
+  const data = await localizeHomeData(await getHomeData(), locale);
 
   return (
     <>

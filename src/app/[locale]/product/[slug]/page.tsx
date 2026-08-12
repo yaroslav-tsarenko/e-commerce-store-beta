@@ -1,5 +1,7 @@
 import { unstable_cache } from "next/cache";
 import { prisma } from "@/lib/prisma";
+import { getTranslations } from "next-intl/server";
+import { localizeProductDetail, translateBatch } from "@/lib/translate";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ProductGallery } from "@/components/product/ProductGallery/ProductGallery";
@@ -48,7 +50,7 @@ async function getCategoryChain(categoryId: string): Promise<{ name: string; slu
 }
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
-  const { slug, locale } = await params;
+  const { slug } = await params;
   const product = await prisma.product.findUnique({
     where: { slug },
     select: { name: true, metaTitle: true, metaDescription: true, shortDescription: true },
@@ -59,17 +61,17 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   return {
     title: product.metaTitle || product.name,
     description: product.metaDescription || product.shortDescription || product.name,
-    alternates: { canonical: `/${locale}/product/${slug}` },
+    alternates: { canonical: `/product/${slug}` },
     openGraph: {
       title: product.metaTitle || product.name,
       description: product.metaDescription || product.shortDescription || undefined,
-      url: `/${locale}/product/${slug}`,
+      url: `/product/${slug}`,
     },
   };
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
 
   const product = await prisma.product.findUnique({
     where: { slug },
@@ -115,6 +117,18 @@ export default async function ProductPage({ params }: ProductPageProps) {
     ? await getCategoryChain(primaryCategory.id)
     : [];
 
+  // Machine-translate product content + breadcrumb category names into the
+  // active locale (cached in the DB). English (source) is returned as-is.
+  const [localized, chainMap, tNav] = await Promise.all([
+    localizeProductDetail(product, locale),
+    translateBatch(categoryChain.map((c) => c.name), locale),
+    getTranslations("nav"),
+  ]);
+  const localizedChain = categoryChain.map((c) => ({
+    ...c,
+    name: chainMap.get(c.name) ?? c.name,
+  }));
+
   const reviewCount = product.reviews.length;
   const avgRating = reviewCount > 0
     ? product.reviews.reduce((sum: number, r: { rating: number }) => sum + r.rating, 0) / reviewCount
@@ -152,13 +166,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
   };
 
   const breadcrumbItems = [
-    { label: "Home", href: "/" },
-    { label: "Catalog", href: "/catalog" },
-    ...categoryChain.map((cat) => ({
+    { label: tNav("home"), href: "/" },
+    { label: tNav("catalog"), href: "/catalog" },
+    ...localizedChain.map((cat) => ({
       label: cat.name,
       href: `/catalog/${cat.slug}`,
     })),
-    { label: product.name },
+    { label: localized.name },
   ];
 
   return (
@@ -169,18 +183,18 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
       <div className={styles.layout}>
         <div className={styles.gallerySticky}>
-          <ProductGallery images={product.images} productName={product.name} />
+          <ProductGallery images={product.images} productName={localized.name} />
         </div>
         <ProductInfo
           id={product.id}
-          name={product.name}
+          name={localized.name}
           slug={product.slug}
           sku={product.sku}
           price={Number(product.price)}
           comparePrice={product.comparePrice ? Number(product.comparePrice) : null}
           quantity={product.quantity}
-          shortDescription={product.shortDescription}
-          description={product.description}
+          shortDescription={localized.shortDescription}
+          description={localized.description}
           brand={product.brand}
           condition={product.condition}
           lowStockAlert={product.lowStockAlert}
@@ -188,12 +202,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
           ean={product.ean}
           reviewCount={reviewCount}
           avgRating={avgRating}
-          categoryPath={categoryChain}
+          categoryPath={localizedChain}
         />
       </div>
 
       <ProductTabs
-        description={product.description}
+        description={localized.description}
         characteristics={characteristics}
         reviews={product.reviews.map((r) => ({
           ...r,

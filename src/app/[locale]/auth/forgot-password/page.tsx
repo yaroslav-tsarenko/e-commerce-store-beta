@@ -26,11 +26,11 @@ export default function ForgotPasswordPage() {
       });
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.error || "Something went wrong");
+        throw new Error(data.error || t("somethingWrong"));
       }
       setSent(true);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Something went wrong");
+      toast.error(error instanceof Error ? error.message : t("somethingWrong"));
     } finally {
       setLoading(false);
     }

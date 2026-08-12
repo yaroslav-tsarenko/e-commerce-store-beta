@@ -40,10 +40,10 @@ export default function ResetPasswordPage() {
         body: JSON.stringify({ token, password }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Something went wrong");
+      if (!res.ok) throw new Error(data.error || t("somethingWrong"));
       setSuccess(true);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Something went wrong");
+      toast.error(error instanceof Error ? error.message : t("somethingWrong"));
     } finally {
       setLoading(false);
     }
@@ -117,7 +117,7 @@ export default function ResetPasswordPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  placeholder="Min 6 characters"
+                  placeholder={t("minChars")}
                   className={`${styles.input} ${styles.inputWithToggle}`}
                 />
                 <button
@@ -140,7 +140,7 @@ export default function ResetPasswordPage() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
-                  placeholder="Confirm your new password"
+                  placeholder={t("phConfirmNewPassword")}
                   className={`${styles.input} ${styles.inputWithToggle}`}
                 />
                 <button

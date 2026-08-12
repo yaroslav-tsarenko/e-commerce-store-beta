@@ -36,7 +36,7 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
   }, [id]);
 
   if (loading) return <LoadingSpinner />;
-  if (!order) return <div style={{ padding: "2rem", textAlign: "center" }}>Order not found</div>;
+  if (!order) return <div style={{ padding: "2rem", textAlign: "center" }}>{t("orderNotFound")}</div>;
 
   return (
     <div>
@@ -46,15 +46,15 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
             {t("orderNumber", { number: order.orderNumber.slice(-8) })}
           </h1>
           <p style={{ fontSize: "0.875rem", color: "var(--color-text-tertiary)" }}>
-            Placed on {format(new Date(order.createdAt), "MMM d, yyyy 'at' HH:mm")}
+            {t("placedOn", { date: format(new Date(order.createdAt), "MMM d, yyyy 'at' HH:mm") })}
           </p>
         </div>
-        <Chip size="lg" color={statusColors[order.status] || "default"}>{order.status}</Chip>
+        <Chip size="lg" color={statusColors[order.status] || "default"}>{t(`statuses.${order.status}`)}</Chip>
       </div>
 
       <div className={styles.detailInfoGrid}>
         <div className={styles.detailInfoBlock}>
-          <div className={styles.detailInfoTitle}>Shipping Address</div>
+          <div className={styles.detailInfoTitle}>{t("shippingAddress")}</div>
           <div className={styles.detailInfoText}>
             {order.shippingAddress.firstName} {order.shippingAddress.lastName}<br />
             {order.shippingAddress.address1}<br />
@@ -64,12 +64,12 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
           </div>
         </div>
         <div className={styles.detailInfoBlock}>
-          <div className={styles.detailInfoTitle}>Order Info</div>
+          <div className={styles.detailInfoTitle}>{t("orderInfo")}</div>
           <div className={styles.detailInfoText}>
-            Payment: <strong>{order.paymentStatus}</strong>
-            {order.paymentMethod && <><br />Method: {order.paymentMethod}</>}
-            {order.shippingMethod && <><br />Shipping: {order.shippingMethod}</>}
-            {order.trackingNumber && <><br />Tracking: <strong>{order.trackingNumber}</strong></>}
+            {t("payment")}: <strong>{order.paymentStatus}</strong>
+            {order.paymentMethod && <><br />{t("method")}: {order.paymentMethod}</>}
+            {order.shippingMethod && <><br />{t("shippingLabel")}: {order.shippingMethod}</>}
+            {order.trackingNumber && <><br />{t("tracking")}: <strong>{order.trackingNumber}</strong></>}
           </div>
         </div>
       </div>
@@ -78,10 +78,10 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
         <table className={styles.itemsTable}>
           <thead>
             <tr>
-              <th>Product</th>
-              <th style={{ textAlign: "right" }}>Qty</th>
-              <th style={{ textAlign: "right" }}>Price</th>
-              <th style={{ textAlign: "right" }}>Total</th>
+              <th>{t("colProduct")}</th>
+              <th style={{ textAlign: "right" }}>{t("colQty")}</th>
+              <th style={{ textAlign: "right" }}>{t("colPrice")}</th>
+              <th style={{ textAlign: "right" }}>{t("colTotal")}</th>
             </tr>
           </thead>
           <tbody>
@@ -106,7 +106,7 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
               <div className={styles.itemRowName}>{item.productName}</div>
               {item.variantName && <div style={{ fontSize: "0.75rem", color: "var(--color-text-tertiary)" }}>{item.variantName}</div>}
               <div className={styles.itemRowMeta}>
-                <span>Qty {item.quantity} × {formatPrice(convert(Number(item.price)), currency)}</span>
+                <span>{t("colQty")} {item.quantity} × {formatPrice(convert(Number(item.price)), currency)}</span>
                 <span className={styles.itemRowTotal}>{formatPrice(convert(Number(item.total)), currency)}</span>
               </div>
             </div>
@@ -115,25 +115,25 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
 
         <div className={styles.totals}>
           <div className={styles.totalsRow}>
-            <span style={{ color: "var(--color-text-secondary)" }}>Subtotal</span>
+            <span style={{ color: "var(--color-text-secondary)" }}>{t("subtotal")}</span>
             <span>{formatPrice(convert(Number(order.subtotal)), currency)}</span>
           </div>
           <div className={styles.totalsRow}>
-            <span style={{ color: "var(--color-text-secondary)" }}>Shipping</span>
-            <span>{Number(order.shippingCost) === 0 ? "Free" : formatPrice(convert(Number(order.shippingCost)), currency)}</span>
+            <span style={{ color: "var(--color-text-secondary)" }}>{t("shippingLabel")}</span>
+            <span>{Number(order.shippingCost) === 0 ? t("free") : formatPrice(convert(Number(order.shippingCost)), currency)}</span>
           </div>
           <div className={styles.totalsRow}>
-            <span style={{ color: "var(--color-text-secondary)" }}>Tax</span>
+            <span style={{ color: "var(--color-text-secondary)" }}>{t("tax")}</span>
             <span>{formatPrice(convert(Number(order.taxAmount)), currency)}</span>
           </div>
           {Number(order.discountAmount) > 0 && (
             <div className={styles.totalsRow}>
-              <span style={{ color: "var(--color-success)" }}>Discount</span>
+              <span style={{ color: "var(--color-success)" }}>{t("discount")}</span>
               <span style={{ color: "var(--color-success)" }}>−{formatPrice(convert(Number(order.discountAmount)), currency)}</span>
             </div>
           )}
           <div className={`${styles.totalsRow} ${styles.totalsTotal}`}>
-            <span>Total</span>
+            <span>{t("colTotal")}</span>
             <span>{formatPrice(convert(Number(order.total)), currency)}</span>
           </div>
         </div>

@@ -1,13 +1,14 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, useCallback, type ReactNode } from "react";
+import { useLocale } from "next-intl";
 
-export type Currency = "EUR" | "USD" | "GBP";
+export type Currency = "EUR" | "RON" | "HUF";
 
 interface Rates {
-  USD: number;
-  GBP: number;
   EUR: number;
+  RON: number;
+  HUF: number;
 }
 
 interface CurrencyContextType {
@@ -17,17 +18,28 @@ interface CurrencyContextType {
   rates: Rates;
 }
 
-const DEFAULT_RATES: Rates = { EUR: 1, USD: 1.08, GBP: 0.85 };
+const DEFAULT_RATES: Rates = { EUR: 1, RON: 4.97, HUF: 395 };
+
+// Default display currency inferred from the active locale/region.
+const LOCALE_CURRENCY: Record<string, Currency> = {
+  ro: "RON",
+  hu: "HUF",
+  bg: "EUR",
+  en: "EUR",
+};
 
 const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined);
 
 export function CurrencyProvider({ children }: { children: ReactNode }) {
-  const [currency, setCurrencyState] = useState<Currency>("EUR");
+  const locale = useLocale();
+  const [currency, setCurrencyState] = useState<Currency>(
+    () => LOCALE_CURRENCY[locale] ?? "EUR"
+  );
   const [rates, setRates] = useState<Rates>(DEFAULT_RATES);
 
   useEffect(() => {
     const stored = localStorage.getItem("currency") as Currency | null;
-    if (stored && ["EUR", "USD", "GBP"].includes(stored)) {
+    if (stored && ["EUR", "RON", "HUF"].includes(stored)) {
       setCurrencyState(stored);
     }
   }, []);
@@ -37,7 +49,7 @@ export function CurrencyProvider({ children }: { children: ReactNode }) {
       .then((r) => r.json())
       .then((data) => {
         if (data.rates) {
-          setRates({ EUR: 1, USD: data.rates.USD, GBP: data.rates.GBP });
+          setRates({ EUR: 1, RON: data.rates.RON, HUF: data.rates.HUF });
         }
       })
       .catch(() => {});

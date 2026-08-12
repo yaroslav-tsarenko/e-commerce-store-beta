@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { CheckCircle, Copy, Check } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { toast } from "sonner";
 import styles from "./NewsletterBanner.module.css";
 
 export function NewsletterBanner() {
+  const t = useTranslations("homeSections");
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [discountCode, setDiscountCode] = useState<string | null>(null);
@@ -27,9 +29,9 @@ export function NewsletterBanner() {
       const data = await res.json();
       if (!res.ok) throw new Error(data?.error || "Subscribe failed");
       setDiscountCode(data.discountCode ?? null);
-      if (data.alreadySubscribed) toast.success("Welcome back!");
+      if (data.alreadySubscribed) toast.success(t("nbWelcomeBack"));
     } catch {
-      toast.error("Could not subscribe. Try again.");
+      toast.error(t("nbSubscribeFailed"));
     } finally {
       setSubmitting(false);
     }
@@ -42,7 +44,7 @@ export function NewsletterBanner() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      toast.error("Copy failed");
+      toast.error(t("nbCopyFailed"));
     }
   };
 
@@ -67,11 +69,11 @@ export function NewsletterBanner() {
             transition={{ duration: 0.8, delay: 0.5 }}
           >
             <span className={styles.discountNum}>10%</span>
-            <span className={styles.discountOff}>OFF</span>
+            <span className={styles.discountOff}>{t("nbOff")}</span>
           </motion.div>
           <div>
-            <h2 className={styles.title}>Subscribe & Save 10%</h2>
-            <p className={styles.subtitle}>Get exclusive deals, new arrivals & special offers straight to your inbox.</p>
+            <h2 className={styles.title}>{t("nbTitle")}</h2>
+            <p className={styles.subtitle}>{t("nbSubtitle")}</p>
           </div>
         </div>
       </motion.div>
@@ -90,7 +92,7 @@ export function NewsletterBanner() {
             style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}
           >
             <span style={{ display: "flex", alignItems: "center", gap: "0.375rem", fontSize: "0.8125rem", opacity: 0.9 }}>
-              <CheckCircle size={16} /> You&apos;re in! Use code:
+              <CheckCircle size={16} /> {t("nbYoureIn")}
             </span>
             <button
               type="button"
@@ -121,13 +123,13 @@ export function NewsletterBanner() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+              placeholder={t("nbEmailPlaceholder")}
               required
               disabled={submitting}
               className={styles.emailInput}
             />
             <button type="submit" className={styles.submitBtn} disabled={submitting}>
-              {submitting ? "…" : "Subscribe"}
+              {submitting ? "…" : t("nbSubscribe")}
             </button>
           </form>
         )}

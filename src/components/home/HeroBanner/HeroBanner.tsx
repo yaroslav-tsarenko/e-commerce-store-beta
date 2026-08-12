@@ -156,10 +156,10 @@ export function HeroBanner() {
         </AnimatePresence>
       </div>
 
-      <button className={`${styles.arrow} ${styles.arrowLeft}`} onClick={prev} aria-label="Previous slide">
+      <button className={`${styles.arrow} ${styles.arrowLeft}`} onClick={prev} aria-label={t("prevSlide")}>
         <ChevronLeft size={20} />
       </button>
-      <button className={`${styles.arrow} ${styles.arrowRight}`} onClick={next} aria-label="Next slide">
+      <button className={`${styles.arrow} ${styles.arrowRight}`} onClick={next} aria-label={t("nextSlide")}>
         <ChevronRight size={20} />
       </button>
 
@@ -169,7 +169,7 @@ export function HeroBanner() {
             key={i}
             className={`${styles.dot} ${i === current ? styles.dotActive : ""}`}
             onClick={() => setCurrent(i)}
-            aria-label={`Go to slide ${i + 1}`}
+            aria-label={t("goToSlide", { n: i + 1 })}
           />
         ))}
       </div>

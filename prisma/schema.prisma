@@ -457,3 +457,19 @@ model FeedConfig {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }
+
+// ── Translation cache ────────────────────────────
+// Persistent cache of machine-translated strings (product names, descriptions,
+// category names) keyed by a hash of the source text + target locale. Avoids
+// re-hitting Google Translate for text already translated.
+
+model Translation {
+  id         String   @id @default(cuid())
+  sourceHash String
+  locale     String
+  text       String
+  createdAt  DateTime @default(now())
+
+  @@unique([sourceHash, locale])
+  @@index([locale])
+}

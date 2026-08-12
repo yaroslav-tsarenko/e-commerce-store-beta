@@ -136,12 +136,14 @@ function PriceSection({
     onMaxPriceChange(max);
   };
 
+  const t = useTranslations("product");
+
   return (
     <FilterSection title={title}>
       <div className={styles.priceInputs}>
         <input
           type="number"
-          placeholder="Min"
+          placeholder={t("filterMin")}
           value={localMin}
           onChange={(e) => debouncedMin(e.target.value)}
           className={styles.priceInput}
@@ -150,7 +152,7 @@ function PriceSection({
         <span className={styles.priceSep}>–</span>
         <input
           type="number"
-          placeholder="Max"
+          placeholder={t("filterMax")}
           value={localMax}
           onChange={(e) => debouncedMax(e.target.value)}
           className={styles.priceInput}
@@ -158,10 +160,10 @@ function PriceSection({
         />
       </div>
       <div className={styles.pricePresets}>
-        <button className={styles.presetBtn} onClick={() => applyPreset("", "25")}>Under €25</button>
-        <button className={styles.presetBtn} onClick={() => applyPreset("25", "50")}>€25–€50</button>
-        <button className={styles.presetBtn} onClick={() => applyPreset("50", "100")}>€50–€100</button>
-        <button className={styles.presetBtn} onClick={() => applyPreset("100", "")}>€100+</button>
+        <button className={styles.presetBtn} onClick={() => applyPreset("", "25")}>{t("priceUnder25")}</button>
+        <button className={styles.presetBtn} onClick={() => applyPreset("25", "50")}>{t("price25to50")}</button>
+        <button className={styles.presetBtn} onClick={() => applyPreset("50", "100")}>{t("price50to100")}</button>
+        <button className={styles.presetBtn} onClick={() => applyPreset("100", "")}>{t("price100plus")}</button>
       </div>
     </FilterSection>
   );
@@ -228,13 +230,13 @@ export function ProductFilters({
       />
 
       {brands.length > 0 && (
-        <FilterSection title="Brand" defaultOpen={false}>
+        <FilterSection title={t("brand")} defaultOpen={false}>
           <ul className={styles.categoryList}>
             <li
               className={`${styles.categoryItem} ${!selectedBrand ? styles.categoryItemActive : ""}`}
               onClick={() => onBrandChange("")}
             >
-              All Brands
+              {t("allBrands")}
             </li>
             {brands.map((brand) => (
               <li
@@ -256,7 +258,7 @@ export function ProductFilters({
         </label>
         <label className={styles.checkbox}>
           <input type="checkbox" checked={onSale} onChange={(e) => onSaleChange(e.target.checked)} />
-          <span>On Sale</span>
+          <span>{t("onSaleLabel")}</span>
         </label>
       </FilterSection>
     </aside>

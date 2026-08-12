@@ -1,11 +1,13 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import styles from "./PromoBanner.module.css";
 
 export function PromoBanner() {
+  const t = useTranslations("homeSections");
   return (
     <section className="section-padding">
       <div className="section-container">
@@ -19,11 +21,11 @@ export function PromoBanner() {
             <Link href="/catalog?onSale=true" className={styles.card}>
               <div className={styles.cardBg1} />
               <div className={styles.cardContent}>
-                <span className={styles.cardLabel}>Limited Offer</span>
-                <h3 className={styles.cardTitle}>Up to 40% off</h3>
-                <p className={styles.cardDesc}>Don&apos;t miss our biggest sale of the season</p>
+                <span className={styles.cardLabel}>{t("promo1Label")}</span>
+                <h3 className={styles.cardTitle}>{t("promo1Title")}</h3>
+                <p className={styles.cardDesc}>{t("promo1Desc")}</p>
                 <span className={styles.cardCta}>
-                  Shop now <ArrowRight size={16} />
+                  {t("promo1Cta")} <ArrowRight size={16} />
                 </span>
               </div>
             </Link>
@@ -38,11 +40,11 @@ export function PromoBanner() {
             <Link href="/catalog?sort=newest" className={styles.card}>
               <div className={styles.cardBg2} />
               <div className={styles.cardContent}>
-                <span className={styles.cardLabel}>Just Arrived</span>
-                <h3 className={styles.cardTitle}>New Collection</h3>
-                <p className={styles.cardDesc}>Explore the latest trends and must-have items</p>
+                <span className={styles.cardLabel}>{t("promo2Label")}</span>
+                <h3 className={styles.cardTitle}>{t("promo2Title")}</h3>
+                <p className={styles.cardDesc}>{t("promo2Desc")}</p>
                 <span className={styles.cardCta}>
-                  Explore <ArrowRight size={16} />
+                  {t("promo2Cta")} <ArrowRight size={16} />
                 </span>
               </div>
             </Link>

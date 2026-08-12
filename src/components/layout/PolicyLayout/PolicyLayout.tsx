@@ -1,5 +1,6 @@
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { ReactNode } from "react";
+import { useTranslations } from "next-intl";
 import styles from "./PolicyLayout.module.css";
 
 interface PolicyLayoutProps {
@@ -9,18 +10,20 @@ interface PolicyLayoutProps {
 }
 
 export function PolicyLayout({ title, lastUpdated, children }: PolicyLayoutProps) {
+  const nav = useTranslations("nav");
+  const t = useTranslations("policyLayout");
   return (
     <div className={styles.container}>
       <Breadcrumbs
         items={[
-          { label: "Home", href: "/" },
-          { label: "Policies", href: "/policies" },
+          { label: nav("home"), href: "/" },
+          { label: t("policies"), href: "/policies" },
           { label: title },
         ]}
       />
       <h1 className={styles.title}>{title}</h1>
       <div className={styles.content}>
-        <p className={styles.lastUpdated}>Last updated: {lastUpdated}</p>
+        <p className={styles.lastUpdated}>{t("lastUpdated")}: {lastUpdated}</p>
         {children}
       </div>
     </div>
@@ -28,18 +31,19 @@ export function PolicyLayout({ title, lastUpdated, children }: PolicyLayoutProps
 }
 
 export function ContactBlock() {
+  const t = useTranslations("policyLayout");
   return (
     <div className={styles.contactBlock}>
       <p>
         <strong>MISARELIANA S.R.L.</strong>
         <br />
-        Registration number: 54316682
+        {t("registrationNumber")}: 54316682
         <br />
-        Registered office: IAŞI, Mun. Iaşi, Str. Fântânilor 43
+        {t("registeredOffice")}: IAŞI, Mun. Iaşi, Str. Fântânilor 43
         <br />
-        General email: info@misaelectro.ro
+        {t("generalEmail")}: info@misaelectro.ro
         <br />
-        Wholesale (B2B): b2b@misaelectro.ro
+        {t("wholesale")}: b2b@misaelectro.ro
       </p>
     </div>
   );

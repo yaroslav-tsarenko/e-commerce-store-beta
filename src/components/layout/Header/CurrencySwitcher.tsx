@@ -1,15 +1,17 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { useCurrency, type Currency } from "@/providers/CurrencyProvider";
 
 const CURRENCIES: { code: Currency; symbol: string; label: string }[] = [
   { code: "EUR", symbol: "€", label: "EUR (€)" },
-  { code: "USD", symbol: "$", label: "USD ($)" },
-  { code: "GBP", symbol: "£", label: "GBP (£)" },
+  { code: "RON", symbol: "lei", label: "RON (lei)" },
+  { code: "HUF", symbol: "Ft", label: "HUF (Ft)" },
 ];
 
 export function CurrencySwitcher() {
+  const t = useTranslations("nav");
   const { currency, setCurrency } = useCurrency();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -28,7 +30,7 @@ export function CurrencySwitcher() {
     <div ref={ref} style={{ position: "relative" }}>
       <button
         onClick={() => setOpen(!open)}
-        aria-label="Currency"
+        aria-label={t("currency")}
         style={{
           display: "flex",
           alignItems: "center",

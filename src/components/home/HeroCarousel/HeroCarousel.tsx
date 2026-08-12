@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import Image, { type StaticImageData } from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@/i18n/routing";
@@ -37,89 +38,54 @@ interface DealData {
   imageUrl?: string | null;
 }
 
-interface MisaElectroSlide {
-  id: string;
-  eyebrow: string;
-  title: React.ReactNode;
-  subtitle: string;
-  primaryCta: { label: string; href: string };
-  secondaryCta?: { label: string; href: string };
+interface SlideConfig {
+  id: "audio" | "power" | "smart";
+  primaryHref: string;
+  secondaryHref: string;
   gradient: string;
   accent: string;
   bgImage: StaticImageData;
-  thumbLabel: string;
   thumbIcon: React.ElementType;
 }
 
-const misaElectroSlides: MisaElectroSlide[] = [
+// Visual/link config only — all copy is pulled from next-intl messages
+// (homeBlocks.hero.slides.<id>) so the hero is fully localized.
+const slideConfig: SlideConfig[] = [
   {
     id: "audio",
-    eyebrow: "Audio · This week's pick",
-    title: (
-      <>
-        Sound that goes
-        <br />
-        <span className="hero-highlight">where you go.</span>
-      </>
-    ),
-    subtitle:
-      "Wireless headphones, soundbars and Hi-Fi gear from T'NB, Belkin, Trust and more — shipped from our EU warehouse.",
-    primaryCta: { label: "Shop audio", href: "/catalog/audio-and-hi-fi-equipment" },
-    secondaryCta: { label: "Top headphones", href: "/catalog/headphones" },
+    primaryHref: "/catalog/audio-and-hi-fi-equipment",
+    secondaryHref: "/catalog/headphones",
     gradient: "linear-gradient(135deg, #0B2447 0%, #1E3A6F 45%, #2563EB 100%)",
     accent: "#F97316",
     bgImage: banner1,
-    thumbLabel: "Audio",
     thumbIcon: Headphones,
   },
   {
     id: "power",
-    eyebrow: "Power & connectivity",
-    title: (
-      <>
-        Stay charged. Stay
-        <br />
-        <span className="hero-highlight">connected.</span>
-      </>
-    ),
-    subtitle:
-      "Chargers, batteries, multi-socket adapters and power strips you can rely on — engineered for daily use.",
-    primaryCta: { label: "Shop power", href: "/catalog/batteries-and-chargers" },
-    secondaryCta: { label: "Multi-socket adapters", href: "/catalog/power-strips" },
+    primaryHref: "/catalog/batteries-and-chargers",
+    secondaryHref: "/catalog/power-strips",
     gradient: "linear-gradient(135deg, #0F172A 0%, #1F2937 50%, #064E3B 100%)",
     accent: "#10B981",
     bgImage: banner2,
-    thumbLabel: "Power",
     thumbIcon: BatteryCharging,
   },
   {
     id: "smart",
-    eyebrow: "Smart gear · New arrivals",
-    title: (
-      <>
-        Smart tech for
-        <br />
-        <span className="hero-highlight">every day.</span>
-      </>
-    ),
-    subtitle:
-      "Smartwatches, GPS, action cameras and gaming accessories — curated for the way you actually live and work.",
-    primaryCta: { label: "Browse new arrivals", href: "/catalog?sort=newest" },
-    secondaryCta: { label: "Smart watches", href: "/catalog?search=watch" },
+    primaryHref: "/catalog?sort=newest",
+    secondaryHref: "/catalog?search=watch",
     gradient: "linear-gradient(135deg, #1E1B4B 0%, #4C1D95 50%, #7C3AED 100%)",
     accent: "#FACC15",
     bgImage: banner3,
-    thumbLabel: "Smart",
     thumbIcon: Watch,
   },
 ];
 
-const trustItems = [
-  { icon: Truck, label: "Free EU shipping", sub: "Over €100" },
-  { icon: RotateCcw, label: "30-day returns", sub: "No questions" },
-  { icon: ShieldCheck, label: "2-year warranty", sub: "Every product" },
-  { icon: Zap, label: "Same-day dispatch", sub: "Before 14:00 CET" },
-];
+const trustConfig = [
+  { icon: Truck, key: "shipping" },
+  { icon: RotateCcw, key: "returns" },
+  { icon: ShieldCheck, key: "warranty" },
+  { icon: Zap, key: "dispatch" },
+] as const;
 
 interface Props {
   slides: SlideData[];
@@ -130,14 +96,16 @@ export function HeroCarousel({ deals }: Props) {
   // We always use MisaElectro-tailored slides for the hero.
   // Admin-configured slides (`slides` prop) are intentionally ignored here —
   // they belong on dedicated marketing landing pages, not the brand hero.
+  const t = useTranslations("homeBlocks");
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
-  const slide = misaElectroSlides[current];
+  const slide = slideConfig[current];
+  const eyebrow = t(`hero.slides.${slide.id}.eyebrow`);
 
   const go = useCallback(
     (idx: number) => {
       setDirection(idx > current ? 1 : -1);
-      setCurrent(((idx % misaElectroSlides.length) + misaElectroSlides.length) % misaElectroSlides.length);
+      setCurrent(((idx % slideConfig.length) + slideConfig.length) % slideConfig.length);
     },
     [current]
   );
@@ -148,13 +116,13 @@ export function HeroCarousel({ deals }: Props) {
   useEffect(() => {
     const id = setInterval(() => {
       setDirection(1);
-      setCurrent((p) => (p + 1) % misaElectroSlides.length);
+      setCurrent((p) => (p + 1) % slideConfig.length);
     }, 6500);
     return () => clearInterval(id);
   }, []);
 
   return (
-    <section className={styles.hero} aria-label="Featured collections">
+    <section className={styles.hero} aria-label={t("hero.featuredCollections")}>
       <div className={`${styles.heroContainer} ${deals.length > 0 ? styles.withDeals : ""}`}>
         <div className={styles.heroMain}>
           <div className={styles.stage} style={{ background: slide.gradient }}>
@@ -199,39 +167,47 @@ export function HeroCarousel({ deals }: Props) {
                     style={{ borderColor: slide.accent + "55", color: slide.accent }}
                   >
                     <Sparkles size={14} />
-                    {slide.eyebrow}
+                    {eyebrow}
                   </span>
-                  <h1 className={styles.title}>{slide.title}</h1>
-                  <p className={styles.subtitle}>{slide.subtitle}</p>
+                  <h1 className={styles.title}>
+                    {t(`hero.slides.${slide.id}.titleLine1`)}
+                    <br />
+                    <span className="hero-highlight">
+                      {t(`hero.slides.${slide.id}.titleHighlight`)}
+                    </span>
+                  </h1>
+                  <p className={styles.subtitle}>{t(`hero.slides.${slide.id}.subtitle`)}</p>
 
                   <div className={styles.actions}>
                     <Link
-                      href={slide.primaryCta.href}
+                      href={slide.primaryHref}
                       className={styles.ctaPrimary}
                       style={{
                         background: slide.accent,
                         boxShadow: `0 12px 28px -10px ${slide.accent}`,
                       }}
                     >
-                      {slide.primaryCta.label}
+                      {t(`hero.slides.${slide.id}.primaryCta`)}
                       <ArrowRight size={16} />
                     </Link>
-                    {slide.secondaryCta && (
-                      <Link href={slide.secondaryCta.href} className={styles.ctaSecondary}>
-                        {slide.secondaryCta.label}
-                      </Link>
-                    )}
+                    <Link href={slide.secondaryHref} className={styles.ctaSecondary}>
+                      {t(`hero.slides.${slide.id}.secondaryCta`)}
+                    </Link>
                   </div>
 
                   <ul className={styles.trust}>
-                    {trustItems.map((t) => (
-                      <li key={t.label} className={styles.trustItem}>
+                    {trustConfig.map((item) => (
+                      <li key={item.key} className={styles.trustItem}>
                         <span className={styles.trustIcon}>
-                          <t.icon size={14} />
+                          <item.icon size={14} />
                         </span>
                         <span className={styles.trustText}>
-                          <span className={styles.trustLabel}>{t.label}</span>
-                          <span className={styles.trustSub}>{t.sub}</span>
+                          <span className={styles.trustLabel}>
+                            {t(`hero.trust.${item.key}Label`)}
+                          </span>
+                          <span className={styles.trustSub}>
+                            {t(`hero.trust.${item.key}Sub`)}
+                          </span>
                         </span>
                       </li>
                     ))}
@@ -245,9 +221,9 @@ export function HeroCarousel({ deals }: Props) {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{ duration: 0.55, delay: 0.25 }}
                   >
-                    <span className={styles.priceTagFrom}>From</span>
+                    <span className={styles.priceTagFrom}>{t("hero.priceFrom")}</span>
                     <span className={styles.priceTagPrice}>€8.29</span>
-                    <span className={styles.priceTagSub}>In stock today</span>
+                    <span className={styles.priceTagSub}>{t("hero.inStock")}</span>
                   </motion.div>
                 </div>
               </motion.div>
@@ -258,12 +234,12 @@ export function HeroCarousel({ deals }: Props) {
                 type="button"
                 className={styles.arrow}
                 onClick={prev}
-                aria-label="Previous slide"
+                aria-label={t("hero.prevSlide")}
               >
                 <ChevronLeft size={18} />
               </button>
               <div className={styles.dots}>
-                {misaElectroSlides.map((s, i) => (
+                {slideConfig.map((s, i) => (
                   <button
                     key={s.id}
                     type="button"
@@ -278,7 +254,7 @@ export function HeroCarousel({ deals }: Props) {
                 type="button"
                 className={styles.arrow}
                 onClick={next}
-                aria-label="Next slide"
+                aria-label={t("hero.nextSlide")}
               >
                 <ChevronRight size={18} />
               </button>
@@ -286,7 +262,7 @@ export function HeroCarousel({ deals }: Props) {
           </div>
 
           <div className={styles.thumbs}>
-            {misaElectroSlides.map((s, i) => (
+            {slideConfig.map((s, i) => (
               <button
                 key={s.id}
                 type="button"
@@ -297,8 +273,10 @@ export function HeroCarousel({ deals }: Props) {
                   <s.thumbIcon size={16} />
                 </span>
                 <span className={styles.thumbMeta}>
-                  <span className={styles.thumbLabel}>{s.thumbLabel}</span>
-                  <span className={styles.thumbHint}>{s.eyebrow.split("·")[0].trim()}</span>
+                  <span className={styles.thumbLabel}>{t(`hero.slides.${s.id}.thumbLabel`)}</span>
+                  <span className={styles.thumbHint}>
+                    {t(`hero.slides.${s.id}.eyebrow`).split("·")[0].trim()}
+                  </span>
                 </span>
               </button>
             ))}
@@ -306,11 +284,11 @@ export function HeroCarousel({ deals }: Props) {
         </div>
 
         {deals.length > 0 && (
-          <aside className={styles.sideDeals} aria-label="Hot deals">
+          <aside className={styles.sideDeals} aria-label={t("hero.hotDeals")}>
             <div className={styles.sideHeading}>
-              <span className={styles.sideHeadingText}>Hot deals</span>
+              <span className={styles.sideHeadingText}>{t("hero.hotDeals")}</span>
               <Link href="/catalog?onSale=true" className={styles.sideHeadingLink}>
-                See all
+                {t("hero.seeAll")}
               </Link>
             </div>
             {deals.slice(0, 2).map((deal) => (

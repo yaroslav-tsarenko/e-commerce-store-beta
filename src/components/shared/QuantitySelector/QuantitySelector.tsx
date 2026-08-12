@@ -1,6 +1,7 @@
 "use client";
 
 import { Minus, Plus } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 
 interface QuantitySelectorProps {
@@ -10,6 +11,7 @@ interface QuantitySelectorProps {
 }
 
 export function QuantitySelector({ quantity, maxQuantity, onChange }: QuantitySelectorProps) {
+  const t = useTranslations("product");
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
       <Button
@@ -18,7 +20,7 @@ export function QuantitySelector({ quantity, maxQuantity, onChange }: QuantitySe
         variant="flat"
         onPress={() => onChange(Math.max(1, quantity - 1))}
         isDisabled={quantity <= 1}
-        aria-label="Decrease quantity"
+        aria-label={t("decreaseQuantity")}
       >
         <Minus size={14} />
       </Button>
@@ -38,7 +40,7 @@ export function QuantitySelector({ quantity, maxQuantity, onChange }: QuantitySe
         variant="flat"
         onPress={() => onChange(Math.min(maxQuantity, quantity + 1))}
         isDisabled={quantity >= maxQuantity}
-        aria-label="Increase quantity"
+        aria-label={t("increaseQuantity")}
       >
         <Plus size={14} />
       </Button>

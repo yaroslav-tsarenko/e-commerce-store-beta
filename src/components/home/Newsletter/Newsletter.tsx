@@ -28,13 +28,13 @@ export function Newsletter() {
       if (!res.ok) throw new Error(data?.error || "Subscribe failed");
       if (data.discountCode) {
         setDiscountCode(data.discountCode);
-        toast.success(data.alreadySubscribed ? "Welcome back!" : "Thanks! Use your code at checkout.");
+        toast.success(data.alreadySubscribed ? t("nlWelcomeBack") : t("nlThanks"));
       } else {
-        toast.success("Subscribed!");
+        toast.success(t("nlSubscribed"));
       }
       setEmail("");
     } catch {
-      toast.error("Could not subscribe. Try again.");
+      toast.error(t("nlCouldNot"));
     } finally {
       setSubmitting(false);
     }
@@ -47,7 +47,7 @@ export function Newsletter() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      toast.error("Copy failed");
+      toast.error(t("nlCopyFailed"));
     }
   };
 
@@ -79,13 +79,13 @@ export function Newsletter() {
           }}>
             <Check size={18} />
             <div style={{ display: "flex", flexDirection: "column", lineHeight: 1.2 }}>
-              <span style={{ fontSize: "0.6875rem", fontWeight: 500, opacity: 0.7 }}>Your 10% code</span>
+              <span style={{ fontSize: "0.6875rem", fontWeight: 500, opacity: 0.7 }}>{t("nlYourCode")}</span>
               <span style={{ fontSize: "1rem", letterSpacing: "0.5px" }}>{discountCode}</span>
             </div>
             <button
               type="button"
               onClick={copyCode}
-              aria-label="Copy code"
+              aria-label={t("nlCopyCode")}
               style={{
                 border: "none",
                 background: "#10B981",
@@ -101,7 +101,7 @@ export function Newsletter() {
               }}
             >
               {copied ? <Check size={14} /> : <Copy size={14} />}
-              {copied ? "Copied" : "Copy"}
+              {copied ? t("nlCopied") : t("nlCopy")}
             </button>
           </div>
         ) : (

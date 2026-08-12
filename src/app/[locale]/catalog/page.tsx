@@ -15,6 +15,7 @@ import styles from "./catalog.module.css";
 export default function CatalogPage() {
   const t = useTranslations("product");
   const nav = useTranslations("nav");
+  const cat = useTranslations("catalog");
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -117,11 +118,11 @@ export default function CatalogPage() {
   const activeFilterCount = [category, minPrice, maxPrice, inStock, onSale, selectedBrand, search].filter(Boolean).length;
 
   const view = (() => {
-    if (search) return { title: `Search: "${search}"`, subtitle: t("showing", { count: products.length, total }) };
-    if (onSale) return { title: "Sale", subtitle: "Discounted products across the catalog" };
-    if (sort === "popular") return { title: "Best Sellers", subtitle: "Most ordered products" };
-    if (selectedBrand) return { title: selectedBrand, subtitle: `Products by ${selectedBrand}` };
-    if (searchParams.has("sort") && sort === "newest") return { title: "New Arrivals", subtitle: "Just landed in store" };
+    if (search) return { title: cat("searchResultsTitle", { query: search }), subtitle: t("showing", { count: products.length, total }) };
+    if (onSale) return { title: cat("saleTitle"), subtitle: cat("saleSubtitle") };
+    if (sort === "popular") return { title: cat("bestSellers"), subtitle: cat("bestSellersSubtitle") };
+    if (selectedBrand) return { title: selectedBrand, subtitle: cat("brandSubtitle", { brand: selectedBrand }) };
+    if (searchParams.has("sort") && sort === "newest") return { title: cat("newArrivals"), subtitle: cat("newArrivalsSubtitle") };
     return { title: nav("catalog"), subtitle: t("showing", { count: products.length, total }) };
   })();
 
@@ -158,8 +159,8 @@ export default function CatalogPage() {
               type="search"
               value={searchInput}
               onChange={(e) => handleSearchChange(e.target.value)}
-              placeholder="Search products…"
-              aria-label="Search products"
+              placeholder={cat("searchPlaceholder")}
+              aria-label={cat("searchAria")}
               style={{
                 width: "100%",
                 padding: "0.5rem 0.75rem 0.5rem 2rem",
@@ -178,7 +179,7 @@ export default function CatalogPage() {
             type="button"
           >
             <SlidersHorizontal size={16} />
-            Filters
+            {cat("filters")}
             {activeFilterCount > 0 && (
               <span className={styles.filterBadge}>{activeFilterCount}</span>
             )}
@@ -201,7 +202,7 @@ export default function CatalogPage() {
                 gap: "0.25rem",
               }}
             >
-              <X size={14} /> Clear
+              <X size={14} /> {cat("clear")}
             </button>
           )}
           <ProductSort value={sort} onChange={(v) => updateParams({ sort: v, page: "1" })} />
@@ -233,8 +234,8 @@ export default function CatalogPage() {
             <ProductSkeleton count={12} />
           ) : products.length === 0 ? (
             <EmptyState
-              title={t("filterBy")}
-              subtitle={t("priceRange")}
+              title={cat("emptyTitle")}
+              subtitle={cat("emptySubtitle")}
               actionLabel={nav("home")}
               actionHref="/"
             />
@@ -248,7 +249,7 @@ export default function CatalogPage() {
                     disabled={page <= 1}
                     className={`${styles.pageBtn} ${styles.pageBtnEdge} ${page <= 1 ? styles.pageBtnDisabled : ""}`}
                   >
-                    Prev
+                    {cat("prev")}
                   </button>
                   {(() => {
                     const pages: (number | "ellipsis-start" | "ellipsis-end")[] = [];
@@ -282,7 +283,7 @@ export default function CatalogPage() {
                     disabled={page >= totalPages}
                     className={`${styles.pageBtn} ${styles.pageBtnEdge} ${page >= totalPages ? styles.pageBtnDisabled : ""}`}
                   >
-                    Next
+                    {cat("next")}
                   </button>
                 </div>
               )}
@@ -297,11 +298,11 @@ export default function CatalogPage() {
           <div className={styles.overlayBackdrop} onClick={() => setMobileFiltersOpen(false)} />
           <div className={styles.overlaySheet}>
             <div className={styles.overlayHeader}>
-              <span className={styles.overlayTitle}>Filters</span>
+              <span className={styles.overlayTitle}>{cat("filters")}</span>
               <button
                 onClick={() => setMobileFiltersOpen(false)}
                 className={styles.overlayClose}
-                aria-label="Close filters"
+                aria-label={cat("closeFilters")}
               >
                 <X size={18} />
               </button>

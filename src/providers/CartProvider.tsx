@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, useCallback, type ReactNode } from "react";
+import { useTranslations } from "next-intl";
 import type { Cart, CartItem } from "@/types/cart";
 import { toast } from "sonner";
 import { CartToast } from "@/components/cart/CartToast/CartToast";
@@ -39,6 +40,7 @@ function calculateTotals(items: CartItem[], taxRate: number = 21): Cart {
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {
+  const t = useTranslations("cart");
   const [cart, setCart] = useState<Cart>(emptyCart);
   const [cartBounce, setCartBounce] = useState(0);
 
@@ -107,9 +109,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
           !(item.productId === productId && item.variantId === variantId)
       );
       persistCart(updatedItems);
-      toast.success("Removed from cart", { id: `cart-remove-${productId}-${variantId || "default"}` });
+      toast.success(t("removed"), { id: `cart-remove-${productId}-${variantId || "default"}` });
     },
-    [cart.items, persistCart]
+    [cart.items, persistCart, t]
   );
 
   const updateQuantity = useCallback(

@@ -26,15 +26,15 @@ export default function LoginPage() {
         body: JSON.stringify({ email, password }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Login failed");
-      toast.success("Logged in successfully!");
+      if (!res.ok) throw new Error(data.error || t("loginFailed"));
+      toast.success(t("loginSuccess"));
       if (data.user?.role === "ADMIN" || data.user?.role === "SUPER_ADMIN") {
         window.location.href = "/admin";
       } else {
-        window.location.href = "/en/account";
+        window.location.href = "/account";
       }
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Login failed");
+      toast.error(error instanceof Error ? error.message : t("loginFailed"));
     } finally {
       setLoading(false);
     }
@@ -90,7 +90,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                placeholder="Enter your password"
+                placeholder={t("phPassword")}
                 className={`${styles.input} ${styles.inputWithToggle}`}
               />
               <button

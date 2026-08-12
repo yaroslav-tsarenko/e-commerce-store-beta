@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { motion } from "framer-motion";
 import { ArrowRight, Package, MessageCircle, UserPlus } from "lucide-react";
@@ -8,27 +9,21 @@ import styles from "./HomeCTABanners.module.css";
 const cards = [
   {
     icon: Package,
-    title: "See our full range",
-    subtitle: "Browse the entire catalog of electrical materials and supplies.",
-    cta: "Shop catalog",
+    key: "range",
     href: "/catalog",
     bg: "linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%)",
     accent: "#4F46E5",
   },
   {
     icon: MessageCircle,
-    title: "Have a question?",
-    subtitle: "Contact our team and we will help you find what you need.",
-    cta: "Get in touch",
+    key: "question",
     href: "/contact",
     bg: "linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)",
     accent: "#059669",
   },
   {
     icon: UserPlus,
-    title: "Create an account",
-    subtitle: "Shop securely, track orders, and unlock a 10% welcome discount.",
-    cta: "Sign up",
+    key: "account",
     href: "/auth/register",
     bg: "linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%)",
     accent: "#D97706",
@@ -36,6 +31,7 @@ const cards = [
 ] as const;
 
 export function HomeCTABanners() {
+  const t = useTranslations("homeBlocks.ctaBanners");
   return (
     <section className={styles.section}>
       <div className={styles.grid}>
@@ -43,7 +39,7 @@ export function HomeCTABanners() {
           const Icon = card.icon;
           return (
             <motion.div
-              key={card.title}
+              key={card.key}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
@@ -54,11 +50,11 @@ export function HomeCTABanners() {
                   <Icon size={24} />
                 </div>
                 <div className={styles.body}>
-                  <h3 className={styles.title}>{card.title}</h3>
-                  <p className={styles.subtitle}>{card.subtitle}</p>
+                  <h3 className={styles.title}>{t(`${card.key}Title`)}</h3>
+                  <p className={styles.subtitle}>{t(`${card.key}Subtitle`)}</p>
                 </div>
                 <span className={styles.cta} style={{ color: card.accent }}>
-                  {card.cta}
+                  {t(`${card.key}Cta`)}
                   <ArrowRight size={16} />
                 </span>
               </Link>

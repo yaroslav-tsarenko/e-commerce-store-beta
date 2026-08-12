@@ -24,6 +24,7 @@ interface FeaturedProductsProps {
 
 export function FeaturedProducts({ products }: FeaturedProductsProps) {
   const t = useTranslations("home");
+  const sections = useTranslations("homeSections");
   const common = useTranslations("common");
 
   if (products.length === 0) return null;
@@ -35,7 +36,7 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "2rem", gap: "1rem", flexWrap: "wrap" }}>
             <div>
               <h2 className="section-title">{t("featured")}</h2>
-              <p className="section-subtitle">Handpicked products just for you</p>
+              <p className="section-subtitle">{sections("fpSubtitle")}</p>
             </div>
             <Link
               href="/catalog"
