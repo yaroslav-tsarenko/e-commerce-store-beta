@@ -1,69 +1,35 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { motion, useInView } from "framer-motion";
 import { Building2, Home, Factory, Lightbulb, ShieldCheck, Wrench, ArrowRight } from "lucide-react";
 import styles from "./ShopByPurpose.module.css";
 
-const purposes = [
-  {
-    icon: Home,
-    title: "Residential",
-    desc: "Switches, sockets, lighting and household wiring kits.",
-    href: "/catalog?purpose=residential",
-    gradient: "linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%)",
-  },
-  {
-    icon: Building2,
-    title: "Commercial",
-    desc: "Distribution boards, smart panels and energy meters.",
-    href: "/catalog?purpose=commercial",
-    gradient: "linear-gradient(135deg, #7C3AED 0%, #EC4899 100%)",
-  },
-  {
-    icon: Factory,
-    title: "Industrial",
-    desc: "High-current cables, motor protection and PLC accessories.",
-    href: "/catalog?purpose=industrial",
-    gradient: "linear-gradient(135deg, #F97316 0%, #EF4444 100%)",
-  },
-  {
-    icon: Lightbulb,
-    title: "Lighting",
-    desc: "LED fixtures, drivers, dimmers and outdoor luminaires.",
-    href: "/catalog?purpose=lighting",
-    gradient: "linear-gradient(135deg, #FACC15 0%, #F97316 100%)",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Protection",
-    desc: "RCDs, MCBs, fuses, surge protection devices.",
-    href: "/catalog?purpose=protection",
-    gradient: "linear-gradient(135deg, #10B981 0%, #06B6D4 100%)",
-  },
-  {
-    icon: Wrench,
-    title: "Tools & Accessories",
-    desc: "Conduit, mounting, terminals, professional hand tools.",
-    href: "/catalog?purpose=tools",
-    gradient: "linear-gradient(135deg, #64748B 0%, #0F172A 100%)",
-  },
-];
-
 export function ShopByPurpose() {
+  const t = useTranslations("homeSections");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-40px" });
+
+  const purposes = [
+    { icon: Home, title: t("purpose1Title"), desc: t("purpose1Desc"), href: "/catalog?purpose=residential", gradient: "linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%)" },
+    { icon: Building2, title: t("purpose2Title"), desc: t("purpose2Desc"), href: "/catalog?purpose=commercial", gradient: "linear-gradient(135deg, #7C3AED 0%, #EC4899 100%)" },
+    { icon: Factory, title: t("purpose3Title"), desc: t("purpose3Desc"), href: "/catalog?purpose=industrial", gradient: "linear-gradient(135deg, #F97316 0%, #EF4444 100%)" },
+    { icon: Lightbulb, title: t("purpose4Title"), desc: t("purpose4Desc"), href: "/catalog?purpose=lighting", gradient: "linear-gradient(135deg, #FACC15 0%, #F97316 100%)" },
+    { icon: ShieldCheck, title: t("purpose5Title"), desc: t("purpose5Desc"), href: "/catalog?purpose=protection", gradient: "linear-gradient(135deg, #10B981 0%, #06B6D4 100%)" },
+    { icon: Wrench, title: t("purpose6Title"), desc: t("purpose6Desc"), href: "/catalog?purpose=tools", gradient: "linear-gradient(135deg, #64748B 0%, #0F172A 100%)" },
+  ];
 
   return (
     <section ref={ref} className={styles.section}>
       <div className={styles.header}>
         <div>
-          <span className={styles.eyebrow}>Curated paths</span>
-          <h2 className={styles.title}>Shop by purpose</h2>
+          <span className={styles.eyebrow}>{t("sbpEyebrow")}</span>
+          <h2 className={styles.title}>{t("sbpTitle")}</h2>
         </div>
         <p className={styles.subtitle}>
-          Six tailored entry points into the catalog — every product is filtered, spec-matched, and ready to install.
+          {t("sbpSubtitle")}
         </p>
       </div>
 
@@ -82,7 +48,7 @@ export function ShopByPurpose() {
               <h3 className={styles.cardTitle}>{p.title}</h3>
               <p className={styles.cardDesc}>{p.desc}</p>
               <span className={styles.cardCta}>
-                Browse <ArrowRight size={14} />
+                {t("sbpBrowse")} <ArrowRight size={14} />
               </span>
             </Link>
           </motion.div>

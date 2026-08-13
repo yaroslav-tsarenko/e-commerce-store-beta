@@ -27,7 +27,7 @@ export function AccountSidebar() {
           {(user?.name?.[0] || user?.email?.[0] || "U").toUpperCase()}
         </div>
         <div>
-          <p className={styles.userName}>{user?.name || "User"}</p>
+          <p className={styles.userName}>{user?.name || t("defaultName")}</p>
           <p className={styles.userEmail}>{user?.email}</p>
         </div>
       </div>

@@ -71,10 +71,10 @@ export default function OrdersPage() {
                 <div className={styles.orderCardNumber}>#{order.orderNumber.slice(-8)}</div>
                 <div className={styles.orderCardDate}>{format(new Date(order.createdAt), "MMM d, yyyy")}</div>
                 <div className={styles.orderCardItems}>
-                  {order.items.length} {order.items.length === 1 ? "item" : "items"}
+                  {t("itemCount", { count: order.items.length })}
                 </div>
               </div>
-              <Chip size="sm" color={statusColors[order.status] || "default"}>{order.status}</Chip>
+              <Chip size="sm" color={statusColors[order.status] || "default"}>{t(`statuses.${order.status}`)}</Chip>
               <span className={styles.orderCardPrice}>{formatPrice(convert(Number(order.total)), currency)}</span>
             </Link>
           ))}

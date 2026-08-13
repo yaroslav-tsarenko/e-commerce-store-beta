@@ -35,7 +35,7 @@ export default function CartPage() {
         {t("title")}{" "}
         {cart.items.length > 0 && (
           <span style={{ color: "var(--color-text-tertiary)", fontWeight: 500 }}>
-            ({cart.itemCount} {cart.itemCount === 1 ? "item" : "items"})
+            ({t("itemCount", { count: cart.itemCount })})
           </span>
         )}
       </motion.h1>
@@ -58,13 +58,13 @@ export default function CartPage() {
               <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                 <Package size={16} style={{ color: "var(--color-text-secondary)" }} />
                 <span style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--color-text-secondary)" }}>
-                  {cart.itemCount} {cart.itemCount === 1 ? "item" : "items"} in your cart
+                  {t("itemsInCart", { count: cart.itemCount })}
                 </span>
               </div>
               {subtotalConverted >= freeShippingThreshold && (
                 <div style={{ display: "flex", alignItems: "center", gap: "0.375rem", fontSize: "0.75rem", fontWeight: 600, color: "#2E7D32" }}>
                   <Truck size={14} />
-                  Free shipping
+                  {t("freeShipping")}
                 </div>
               )}
             </div>
@@ -136,7 +136,7 @@ export default function CartPage() {
                           }}
                           onMouseEnter={(e) => { e.currentTarget.style.color = "var(--color-danger)"; e.currentTarget.style.background = "var(--color-bg-tertiary)"; }}
                           onMouseLeave={(e) => { e.currentTarget.style.color = "var(--color-text-tertiary)"; e.currentTarget.style.background = "transparent"; }}
-                          aria-label="Remove"
+                          aria-label={t("remove")}
                         >
                           <Trash2 size={16} />
                         </motion.button>
@@ -156,7 +156,7 @@ export default function CartPage() {
             className={styles.summary}
           >
             <h2 style={{ fontSize: "1.125rem", fontWeight: 700, marginBottom: "1.25rem" }}>
-              Order Summary
+              {t("orderSummary")}
             </h2>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginBottom: "1.25rem" }}>
@@ -167,7 +167,7 @@ export default function CartPage() {
               <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.875rem" }}>
                 <span style={{ color: "var(--color-text-secondary)" }}>{t("shipping")}</span>
                 <span style={{ fontWeight: 600, color: cart.shippingCost === 0 ? "#2E7D32" : undefined }}>
-                  {cart.shippingCost > 0 ? formatPrice(convert(cart.shippingCost), currency) : "Free"}
+                  {cart.shippingCost > 0 ? formatPrice(convert(cart.shippingCost), currency) : t("free")}
                 </span>
               </div>
               <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.875rem" }}>
@@ -189,7 +189,7 @@ export default function CartPage() {
                   }}
                 >
                   <Truck size={14} />
-                  Add {formatPrice(freeShippingThreshold - subtotalConverted, currency)} more for free shipping
+                  {t("freeShippingRemaining", { amount: formatPrice(freeShippingThreshold - subtotalConverted, currency) })}
                 </div>
               )}
 
@@ -241,7 +241,7 @@ export default function CartPage() {
               color: "var(--color-text-tertiary)",
             }}>
               <ShieldCheck size={14} />
-              Secure checkout with SSL encryption
+              {t("secureSsl")}
             </div>
           </motion.div>
         </div>

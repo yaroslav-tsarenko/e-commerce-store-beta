@@ -32,6 +32,7 @@ export function ProductCard({
   quantity,
 }: ProductCardProps) {
   const t = useTranslations("product");
+  const common = useTranslations("common");
   const { addItem } = useCart();
   const isOnSale = comparePrice && comparePrice > price;
   const outOfStock = quantity <= 0;
@@ -73,12 +74,12 @@ export function ProductCard({
         ) : (
           <div className={styles.noImage}>
             <ImageOff size={32} />
-            No Image
+            {common("noImage")}
           </div>
         )}
 
         {isOnSale && (
-          <span className={`${styles.badge} ${styles.saleBadge}`}>Sale</span>
+          <span className={`${styles.badge} ${styles.saleBadge}`}>{t("saleBadge")}</span>
         )}
         {outOfStock && (
           <span className={`${styles.badge} ${styles.outOfStock}`}>
@@ -89,7 +90,7 @@ export function ProductCard({
         <button
           className={styles.wishlistBtn}
           onClick={handleWishlist}
-          aria-label="Add to wishlist"
+          aria-label={t("addToWishlist")}
         >
           <Heart size={14} />
         </button>

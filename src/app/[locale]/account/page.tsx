@@ -32,6 +32,7 @@ const statusColors: Record<string, "default" | "accent" | "success" | "warning" 
 
 export default function AccountPage() {
   const t = useTranslations("account");
+  const common = useTranslations("common");
   const { user, loading } = useAuth();
   const { currency, convert } = useCurrency();
   const [orders, setOrders] = useState<Order[]>([]);
@@ -62,38 +63,38 @@ export default function AccountPage() {
 
       <div className={styles.cardsGrid}>
         <div className={styles.statCard}>
-          <span className={styles.statCardLabel}>Orders</span>
+          <span className={styles.statCardLabel}>{t("statOrders")}</span>
           <span className={styles.statCardValue}>{orders.length}</span>
-          <span className={styles.statCardSub}>All-time</span>
+          <span className={styles.statCardSub}>{t("allTime")}</span>
         </div>
         <div className={styles.statCard}>
-          <span className={styles.statCardLabel}>Total Spent</span>
+          <span className={styles.statCardLabel}>{t("totalSpent")}</span>
           <span className={styles.statCardValue}>{formatPrice(convert(totalSpent), currency)}</span>
-          <span className={styles.statCardSub}>Across all orders</span>
+          <span className={styles.statCardSub}>{t("acrossAllOrders")}</span>
         </div>
         <div className={styles.statCard}>
-          <span className={styles.statCardLabel}>Account</span>
+          <span className={styles.statCardLabel}>{t("accountLabel")}</span>
           <span className={styles.statCardValue} style={{ fontSize: "1rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{user?.email}</span>
-          <span className={styles.statCardSub}>{user?.name || "No name set"}</span>
+          <span className={styles.statCardSub}>{user?.name || t("noNameSet")}</span>
         </div>
       </div>
 
       <div className={styles.dashboardGrid}>
         <div>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem" }}>
-            <h2 style={{ fontSize: "1.0625rem", fontWeight: 700 }}>Recent Orders</h2>
+            <h2 style={{ fontSize: "1.0625rem", fontWeight: 700 }}>{t("recentOrders")}</h2>
             <Link href="/account/orders" style={{ fontSize: "0.8125rem", color: "var(--color-accent)", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "0.25rem" }}>
-              View all <ChevronRight size={14} />
+              {common("viewAll")} <ChevronRight size={14} />
             </Link>
           </div>
           {ordersLoading ? (
-            <div style={{ padding: "1.5rem", textAlign: "center", color: "var(--color-text-tertiary)" }}>Loading...</div>
+            <div style={{ padding: "1.5rem", textAlign: "center", color: "var(--color-text-tertiary)" }}>{common("loading")}</div>
           ) : recentOrders.length === 0 ? (
             <div style={{ padding: "2rem", textAlign: "center", border: "1px dashed var(--color-border)", borderRadius: "var(--radius-lg)", color: "var(--color-text-tertiary)" }}>
               <Package size={32} style={{ margin: "0 auto 0.5rem", opacity: 0.5 }} />
-              <p style={{ fontSize: "0.875rem" }}>No orders yet</p>
+              <p style={{ fontSize: "0.875rem" }}>{t("noOrdersYet")}</p>
               <Link href="/catalog" style={{ display: "inline-block", marginTop: "0.75rem", color: "var(--color-accent)", fontSize: "0.875rem", fontWeight: 600, textDecoration: "none" }}>
-                Start shopping →
+                {t("startShopping")}
               </Link>
             </div>
           ) : (
@@ -104,7 +105,7 @@ export default function AccountPage() {
                     <div className={styles.orderCardNumber}>#{order.orderNumber.slice(-8)}</div>
                     <div className={styles.orderCardDate}>{format(new Date(order.createdAt), "MMM d, yyyy")}</div>
                   </div>
-                  <Chip size="sm" color={statusColors[order.status] || "default"}>{order.status}</Chip>
+                  <Chip size="sm" color={statusColors[order.status] || "default"}>{t(`statuses.${order.status}`)}</Chip>
                   <span className={styles.orderCardPrice}>{formatPrice(convert(Number(order.total)), currency)}</span>
                 </Link>
               ))}
@@ -113,7 +114,7 @@ export default function AccountPage() {
         </div>
 
         <div className={styles.quickLinks}>
-          <h2 style={{ fontSize: "1.0625rem", fontWeight: 700, marginBottom: "0.75rem" }}>Quick Links</h2>
+          <h2 style={{ fontSize: "1.0625rem", fontWeight: 700, marginBottom: "0.75rem" }}>{t("quickLinks")}</h2>
           <Link href="/account/orders" className={styles.quickLink}>
             <span className={styles.quickLinkIcon}><Package size={16} /></span>
             <span style={{ flex: 1 }}>{t("orders")}</span>

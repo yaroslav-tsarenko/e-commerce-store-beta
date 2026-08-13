@@ -24,6 +24,7 @@ interface NewArrivalsProps {
 
 export function NewArrivals({ products }: NewArrivalsProps) {
   const t = useTranslations("home");
+  const sections = useTranslations("homeSections");
   const common = useTranslations("common");
 
   if (products.length === 0) return null;
@@ -35,7 +36,7 @@ export function NewArrivals({ products }: NewArrivalsProps) {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "2rem", gap: "1rem", flexWrap: "wrap" }}>
             <div>
               <h2 className="section-title">{t("newArrivals")}</h2>
-              <p className="section-subtitle">The latest additions to our collection</p>
+              <p className="section-subtitle">{sections("naSubtitle")}</p>
             </div>
             <Link
               href="/catalog?sort=newest"

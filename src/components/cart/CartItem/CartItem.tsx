@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { Trash2 } from "lucide-react";
 import { QuantitySelector } from "@/components/shared/QuantitySelector/QuantitySelector";
@@ -15,6 +16,8 @@ interface CartItemProps {
 
 export function CartItem({ item }: CartItemProps) {
   const { updateQuantity, removeItem } = useCart();
+  const t = useTranslations("cart");
+  const common = useTranslations("common");
 
   return (
     <div className={styles.item}>
@@ -29,7 +32,7 @@ export function CartItem({ item }: CartItemProps) {
           />
         ) : (
           <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.625rem", color: "var(--color-text-tertiary)" }}>
-            No Image
+            {common("noImage")}
           </div>
         )}
       </div>
@@ -52,7 +55,7 @@ export function CartItem({ item }: CartItemProps) {
               variant="light"
               color="danger"
               onPress={() => removeItem(item.productId, item.variantId)}
-              aria-label="Remove"
+              aria-label={t("remove")}
             >
               <Trash2 size={16} />
             </Button>

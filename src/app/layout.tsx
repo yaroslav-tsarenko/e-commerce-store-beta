@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getLocale } from "next-intl/server";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/styles/globals.css";
 
@@ -14,38 +15,39 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "NetimStore — Electrical Materials & Supplies | netim.com",
-    template: "%s | NetimStore — netim.com",
+    default: "MisaElectro — Electrical Materials & Supplies | misaelectro.ro",
+    template: "%s | MisaElectro — misaelectro.ro",
   },
   description:
-    "NetimStore (netim.com) — your trusted source for electrical materials, wiring, lighting and installation supplies across Europe. Certified inventory, fast delivery.",
-  applicationName: "NetimStore",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://netim.com"),
-  alternates: { canonical: "/" },
+    "MisaElectro (misaelectro.ro) — your trusted source for electrical materials, wiring, lighting and installation supplies across Europe. Certified inventory, fast delivery.",
+  applicationName: "MisaElectro",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://misaelectro.ro"),
   openGraph: {
     type: "website",
-    siteName: "NetimStore",
-    url: "https://netim.com",
-    title: "NetimStore — Electrical Materials & Supplies",
+    siteName: "MisaElectro",
+    url: "https://misaelectro.ro",
+    title: "MisaElectro — Electrical Materials & Supplies",
     description:
       "Certified electrical materials, wiring, lighting and installation supplies. Delivered across Europe.",
   },
   twitter: {
     card: "summary_large_image",
-    site: "@netimstore",
-    title: "NetimStore — netim.com",
+    site: "@misaelectro",
+    title: "MisaElectro — misaelectro.ro",
   },
   icons: { icon: "/icon.svg", apple: "/icon.svg" },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+
   return (
     <html
-      lang="en"
+      lang={locale}
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >

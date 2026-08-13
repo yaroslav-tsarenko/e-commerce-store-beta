@@ -6,6 +6,7 @@ import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { formatPrice } from "@/lib/utils/format-price";
+import { useCurrency } from "@/providers/CurrencyProvider";
 import { getProductImage, getProductImageFallback } from "@/lib/utils/product-image";
 import { getDiscountPercent, type HomepageProduct } from "@/lib/homepage-products";
 import styles from "./DealOfTheDay.module.css";
@@ -26,13 +27,19 @@ function getTimeUntilMidnight() {
 }
 
 export function DealOfTheDay({ product }: Props) {
-  const [time, setTime] = useState(getTimeUntilMidnight);
+  const { currency, convert } = useCurrency();
+  const [time, setTime] = useState<ReturnType<typeof getTimeUntilMidnight> | null>(null);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
   useEffect(() => {
-    const id = setInterval(() => setTime(getTimeUntilMidnight()), 1000);
-    return () => clearInterval(id);
+    const update = () => setTime(getTimeUntilMidnight());
+    const initialId = window.setTimeout(update, 0);
+    const intervalId = window.setInterval(update, 1000);
+    return () => {
+      window.clearTimeout(initialId);
+      window.clearInterval(intervalId);
+    };
   }, []);
 
   const discount = getDiscountPercent(product);
@@ -62,11 +69,11 @@ export function DealOfTheDay({ product }: Props) {
             Deal of the Day
           </motion.span>
           <div className={styles.timer}>
-            <span className={styles.timeBlock}>{pad(time.h)}</span>
+            <span className={styles.timeBlock}>{time ? pad(time.h) : "--"}</span>
             <span className={styles.timeSep}>:</span>
-            <span className={styles.timeBlock}>{pad(time.m)}</span>
+            <span className={styles.timeBlock}>{time ? pad(time.m) : "--"}</span>
             <span className={styles.timeSep}>:</span>
-            <span className={styles.timeBlock}>{pad(time.s)}</span>
+            <span className={styles.timeBlock}>{time ? pad(time.s) : "--"}</span>
           </div>
         </div>
         <h2 className={styles.title}>{product.name}</h2>
@@ -74,9 +81,9 @@ export function DealOfTheDay({ product }: Props) {
           Limited time offer — grab it before the deal expires!
         </p>
         <div className={styles.priceRow}>
-          <span className={styles.newPrice}>{formatPrice(Number(product.price))}</span>
+          <span className={styles.newPrice}>{formatPrice(convert(Number(product.price)), currency)}</span>
           {product.comparePrice && (
-            <span className={styles.oldPrice}>{formatPrice(Number(product.comparePrice))}</span>
+            <span className={styles.oldPrice}>{formatPrice(convert(Number(product.comparePrice)), currency)}</span>
           )}
           {discount > 0 && <span className={styles.discountTag}>-{discount}%</span>}
         </div>

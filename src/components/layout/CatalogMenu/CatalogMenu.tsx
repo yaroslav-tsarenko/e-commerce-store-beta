@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -96,6 +97,7 @@ function pickDepartments(categories: CatalogCategory[]): CatalogCategory[] {
 }
 
 export function CatalogMenu({ open, onClose, categories }: Props) {
+  const t = useTranslations("homeBlocks.catalogMenu");
   const [pinnedId, setPinnedId] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const panelRef = useRef<HTMLDivElement>(null);
@@ -169,14 +171,14 @@ export function CatalogMenu({ open, onClose, categories }: Props) {
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
             role="dialog"
-            aria-label="Catalog"
+            aria-label={t("title")}
             aria-modal="true"
           >
             {/* Top toolbar: title + search + close */}
             <div className={styles.toolbar}>
               <div className={styles.toolbarTitle}>
                 <Sparkles size={16} className={styles.toolbarTitleIcon} />
-                <span>Catalog</span>
+                <span>{t("title")}</span>
               </div>
               <div className={styles.toolbarSearch}>
                 <Search size={14} />
@@ -184,7 +186,7 @@ export function CatalogMenu({ open, onClose, categories }: Props) {
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search categories…"
+                  placeholder={t("searchPlaceholder")}
                   className={styles.toolbarSearchInput}
                 />
                 {query && (
@@ -192,7 +194,7 @@ export function CatalogMenu({ open, onClose, categories }: Props) {
                     type="button"
                     className={styles.toolbarSearchClear}
                     onClick={() => setQuery("")}
-                    aria-label="Clear search"
+                    aria-label={t("clearSearch")}
                   >
                     <X size={12} />
                   </button>
@@ -202,7 +204,7 @@ export function CatalogMenu({ open, onClose, categories }: Props) {
                 type="button"
                 onClick={onClose}
                 className={styles.toolbarClose}
-                aria-label="Close catalog"
+                aria-label={t("closeCatalog")}
               >
                 <X size={18} />
               </button>
@@ -228,7 +230,7 @@ export function CatalogMenu({ open, onClose, categories }: Props) {
                 </div>
               ) : (
                 <>
-                  <nav className={styles.rail} aria-label="Departments">
+                  <nav className={styles.rail} aria-label={t("departments")}>
                     {filteredDepartments.map((dept) => {
                       const Icon = getIcon(dept.name);
                       const isActive = active?.id === dept.id;
@@ -251,7 +253,7 @@ export function CatalogMenu({ open, onClose, categories }: Props) {
                     })}
                     {filteredDepartments.length === 0 && (
                       <div className={styles.railEmpty}>
-                        No departments match &ldquo;{query}&rdquo;
+                        {t("noMatch", { query })}
                       </div>
                     )}
                     <Link
@@ -259,7 +261,7 @@ export function CatalogMenu({ open, onClose, categories }: Props) {
                       onClick={onClose}
                       className={styles.railAll}
                     >
-                      Browse all <ArrowRight size={14} />
+                      {t("browseAll")} <ArrowRight size={14} />
                     </Link>
                   </nav>
 
@@ -274,10 +276,12 @@ export function CatalogMenu({ open, onClose, categories }: Props) {
                       >
                         <div className={styles.contentHero}>
                           <div>
-                            <span className={styles.contentEyebrow}>Department</span>
+                            <span className={styles.contentEyebrow}>{t("department")}</span>
                             <h3 className={styles.contentTitle}>{active.name}</h3>
                             <p className={styles.contentMeta}>
-                              {subtreeCount(active).toLocaleString("en-US")} products in stock
+                              {t("productsInStock", {
+                                count: subtreeCount(active).toLocaleString("en-US"),
+                              })}
                             </p>
                           </div>
                           <Link
@@ -285,7 +289,7 @@ export function CatalogMenu({ open, onClose, categories }: Props) {
                             onClick={onClose}
                             className={styles.contentCta}
                           >
-                            Shop all
+                            {t("shopAll")}
                             <ArrowRight size={14} />
                           </Link>
                         </div>
@@ -308,7 +312,7 @@ export function CatalogMenu({ open, onClose, categories }: Props) {
                                   <span className={styles.subCardText}>
                                     <span className={styles.subCardName}>{child.name}</span>
                                     <span className={styles.subCardCount}>
-                                      {count.toLocaleString("en-US")} items
+                                      {t("items", { count: count.toLocaleString("en-US") })}
                                     </span>
                                   </span>
                                 </Link>
@@ -322,27 +326,27 @@ export function CatalogMenu({ open, onClose, categories }: Props) {
                             className={styles.contentEmpty}
                           >
                             <Sparkles size={16} />
-                            Browse all {subtreeCount(active).toLocaleString("en-US")} products in
-                            {" "}{active.name} →
+                            {t("browseAllIn", {
+                              count: subtreeCount(active).toLocaleString("en-US"),
+                              name: active.name,
+                            })}
                           </Link>
                         )}
 
                         <div className={styles.promo}>
                           <div className={styles.promoCopy}>
-                            <span className={styles.promoEyebrow}>Free EU shipping</span>
+                            <span className={styles.promoEyebrow}>{t("promoShipping")}</span>
                             <span className={styles.promoTitle}>
-                              On {active.name} orders over €100
+                              {t("promoTitle", { name: active.name })}
                             </span>
-                            <span className={styles.promoSub}>
-                              Same-day dispatch · 30-day returns · 2-year warranty
-                            </span>
+                            <span className={styles.promoSub}>{t("promoSub")}</span>
                           </div>
                           <Link
                             href={`/catalog/${active.slug}`}
                             onClick={onClose}
                             className={styles.promoBtn}
                           >
-                            Shop now <ArrowRight size={14} />
+                            {t("shopNow")} <ArrowRight size={14} />
                           </Link>
                         </div>
                       </motion.div>

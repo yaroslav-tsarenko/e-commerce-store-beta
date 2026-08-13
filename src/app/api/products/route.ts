@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { productSchema } from "@/lib/validators/product";
 import { PRODUCTS_PER_PAGE } from "@/lib/utils/constants";
 import { slugify } from "@/lib/utils/slugify";
+import { getDescendantCategoryIds } from "@/lib/category-tree";
 import { Prisma } from "@prisma/client";
 
 export async function GET(request: NextRequest) {
@@ -22,6 +24,7 @@ export async function GET(request: NextRequest) {
     const onSale = searchParams.get("onSale");
 
     const where: Prisma.ProductWhereInput = {};
+    const andClauses: Prisma.ProductWhereInput[] = [];
 
     const isPublicQuery = !status || (status !== "ALL" && status === "ACTIVE");
 
@@ -38,32 +41,25 @@ export async function GET(request: NextRequest) {
     }
 
     if (search) {
-      where.OR = [
-        { name: { contains: search, mode: "insensitive" } },
-        { sku: { contains: search, mode: "insensitive" } },
-        { description: { contains: search, mode: "insensitive" } },
-      ];
+      andClauses.push({
+        OR: [
+          { name: { contains: search, mode: "insensitive" } },
+          { sku: { contains: search, mode: "insensitive" } },
+          { description: { contains: search, mode: "insensitive" } },
+          { brand: { contains: search, mode: "insensitive" } },
+        ],
+      });
     }
 
     if (category) {
       const cat = await prisma.category.findUnique({
         where: { slug: category },
-        include: {
-          children: {
-            select: { slug: true, children: { select: { slug: true } } },
-          },
-        },
+        select: { id: true },
       });
       if (cat) {
-        const slugs = [cat.slug];
-        for (const child of cat.children) {
-          slugs.push(child.slug);
-          for (const grandchild of child.children) {
-            slugs.push(grandchild.slug);
-          }
-        }
+        const categoryIds = await getDescendantCategoryIds(cat.id);
         where.categories = {
-          some: { category: { slug: { in: slugs } } },
+          some: { categoryId: { in: categoryIds } },
         };
       } else {
         where.categories = {
@@ -79,7 +75,9 @@ export async function GET(request: NextRequest) {
     }
 
     if (inStock === "true") {
-      where.quantity = { gt: 0 };
+      andClauses.push({
+        OR: [{ trackInventory: false }, { quantity: { gt: 0 } }],
+      });
     }
 
     if (featured === "true") {
@@ -87,19 +85,30 @@ export async function GET(request: NextRequest) {
     }
 
     if (brand) {
-      where.brand = brand;
+      where.brand = { equals: brand, mode: "insensitive" };
     }
 
     if (onSale === "true") {
-      where.comparePrice = { not: null };
+      andClauses.push({ comparePrice: { gt: 0 } });
     }
 
-    const orderBy: Prisma.ProductOrderByWithRelationInput = (() => {
+    if (andClauses.length) {
+      where.AND = andClauses;
+    }
+
+    const orderBy: Prisma.ProductOrderByWithRelationInput[] = (() => {
       switch (sort) {
-        case "price-asc": return { price: "asc" };
-        case "price-desc": return { price: "desc" };
-        case "name-asc": return { name: "asc" };
-        default: return { createdAt: "desc" };
+        case "price-asc": return [{ price: "asc" }];
+        case "price-desc": return [{ price: "desc" }];
+        case "name-asc": return [{ name: "asc" }];
+        case "popular":
+          return [
+            { orderItems: { _count: "desc" } },
+            { isFeatured: "desc" },
+            { quantity: "desc" },
+            { createdAt: "desc" },
+          ];
+        default: return [{ createdAt: "desc" }];
       }
     })();
 
@@ -109,9 +118,28 @@ export async function GET(request: NextRequest) {
         orderBy,
         skip: (page - 1) * pageSize,
         take: pageSize,
-        include: {
-          images: { orderBy: { sortOrder: "asc" }, take: 2 },
-          categories: { include: { category: { select: { id: true, name: true, slug: true } } } },
+        select: {
+          id: true,
+          name: true,
+          slug: true,
+          sku: true,
+          description: isPublicQuery ? false : true,
+          price: true,
+          comparePrice: true,
+          quantity: true,
+          status: true,
+          isFeatured: true,
+          brand: true,
+          createdAt: true,
+          images: {
+            select: { url: true, alt: true },
+            orderBy: { sortOrder: "asc" },
+            take: 2,
+          },
+          categories: {
+            select: { category: { select: { id: true, name: true, slug: true } } },
+            take: 3,
+          },
         },
       }),
       prisma.product.count({ where }),
@@ -176,6 +204,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    revalidateTag("products", "max");
     return NextResponse.json(product, { status: 201 });
   } catch (error) {
     console.error("Error creating product:", error);

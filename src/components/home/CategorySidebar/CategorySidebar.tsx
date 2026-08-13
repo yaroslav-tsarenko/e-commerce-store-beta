@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { ChevronRight, ChevronDown, Menu, X } from "lucide-react";
 import styles from "./CategorySidebar.module.css";
@@ -14,6 +15,7 @@ interface Category {
 }
 
 function CategoryItem({ cat, depth = 0, onNavigate }: { cat: Category; depth?: number; onNavigate: () => void }) {
+  const t = useTranslations("homeSections");
   const [expanded, setExpanded] = useState(false);
   const hasChildren = cat.children && cat.children.length > 0;
   const count = cat._count?.products || 0;
@@ -33,7 +35,7 @@ function CategoryItem({ cat, depth = 0, onNavigate }: { cat: Category; depth?: n
           <button
             className={styles.expandBtn}
             onClick={(e) => { e.preventDefault(); setExpanded(!expanded); }}
-            aria-label={expanded ? "Collapse" : "Expand"}
+            aria-label={expanded ? t("csbCollapse") : t("csbExpand")}
           >
             {expanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
           </button>
@@ -47,6 +49,7 @@ function CategoryItem({ cat, depth = 0, onNavigate }: { cat: Category; depth?: n
 }
 
 export function CategorySidebar() {
+  const t = useTranslations("homeSections");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
 
@@ -64,10 +67,10 @@ export function CategorySidebar() {
       <button
         className={styles.mobileToggle}
         onClick={() => setMobileOpen(true)}
-        aria-label="Open categories"
+        aria-label={t("csbOpen")}
       >
         <Menu size={20} />
-        <span>Categories</span>
+        <span>{t("csbCategories")}</span>
       </button>
 
       {mobileOpen && (
@@ -78,12 +81,12 @@ export function CategorySidebar() {
         <div className={styles.header}>
           <h3 className={styles.title}>
             <Menu size={16} />
-            Catalog
+            {t("csbCatalog")}
           </h3>
           <button
             className={styles.closeBtn}
             onClick={closeMobile}
-            aria-label="Close categories"
+            aria-label={t("csbClose")}
           >
             <X size={20} />
           </button>

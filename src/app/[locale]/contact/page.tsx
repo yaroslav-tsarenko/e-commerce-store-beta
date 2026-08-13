@@ -10,7 +10,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Mail, Phone, MapPin, Clock, Send,
+  Mail, MapPin, Clock, Send,
   CheckCircle, MessageSquare, HelpCircle, ShieldCheck,
 } from "lucide-react";
 import styles from "./contact.module.css";
@@ -47,26 +47,33 @@ const errorStyle: React.CSSProperties = {
   marginTop: "0.25rem",
 };
 
-const CONTACT_INFO = [
-  { icon: Mail, title: "Email Us", detail: "info@voltmarket.store", sub: "We reply within 24 hours" },
-  { icon: Phone, title: "Call Us", detail: "+44 7360 545980", sub: "Mon-Fri 9:00-18:00 GMT" },
-  { icon: MapPin, title: "Our Office", detail: "London, United Kingdom", sub: "AVONTRA LTD", tooltip: "Dept 6735, 196 High Road, Wood Green, London, N22 8HH, UK\nCompany No. 17245887" },
-  { icon: Clock, title: "Working Hours", detail: "Mon-Fri 9:00-18:00", sub: "Sat 10:00-14:00" },
-];
-
-const TOPICS = [
-  { icon: MessageSquare, label: "General Inquiry", value: "general" },
-  { icon: HelpCircle, label: "Product Support", value: "support" },
-  { icon: ShieldCheck, label: "Warranty & Returns", value: "warranty" },
-  { icon: Send, label: "Business / Wholesale", value: "business" },
-];
-
 export default function ContactPage() {
   const t = useTranslations("contact");
   const nav = useTranslations("nav");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState("");
+
+  const CONTACT_INFO = [
+    { icon: Mail, title: t("infoEmailTitle"), detail: "info@misaelectro.ro", sub: t("infoEmailSub") },
+    { icon: Mail, title: t("infoB2bTitle"), detail: "b2b@misaelectro.ro", sub: t("infoB2bSub") },
+    { icon: MapPin, title: t("infoOfficeTitle"), detail: "IAŞI, Mun. Iaşi", sub: "MISARELIANA S.R.L.", tooltip: "Str. Fântânilor 43, IAŞI, Mun. Iaşi, Romania\nReg. No. 54316682" },
+    { icon: Clock, title: t("infoHoursTitle"), detail: t("infoHoursDetail"), sub: t("infoHoursSub") },
+  ];
+
+  const TOPICS = [
+    { icon: MessageSquare, label: t("topicGeneral"), value: "general" },
+    { icon: HelpCircle, label: t("topicSupport"), value: "support" },
+    { icon: ShieldCheck, label: t("topicWarranty"), value: "warranty" },
+    { icon: Send, label: t("topicBusiness"), value: "business" },
+  ];
+
+  const FAQS = [
+    { q: t("faq1Q"), a: t("faq1A") },
+    { q: t("faq2Q"), a: t("faq2A") },
+    { q: t("faq3Q"), a: t("faq3A") },
+    { q: t("faq4Q"), a: t("faq4A") },
+  ];
 
   const { register, handleSubmit, formState: { errors }, setValue } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
@@ -84,7 +91,7 @@ export default function ContactPage() {
       setSubmitted(true);
       toast.success(t("success"));
     } catch {
-      toast.error("Failed to send message");
+      toast.error(t("sendError"));
     } finally {
       setLoading(false);
     }
@@ -110,7 +117,7 @@ export default function ContactPage() {
           {t("title")}
         </h1>
         <p className={styles.subtitle}>
-          {t("subtitle")}. We&apos;re here to help with orders, products, and any questions you may have.
+          {t("heroDescription")}
         </p>
       </motion.div>
 
@@ -175,12 +182,12 @@ export default function ContactPage() {
                 >
                   <CheckCircle size={64} style={{ color: "#2E7D32", margin: "0 auto 1.5rem" }} />
                 </motion.div>
-                <h2 style={{ fontSize: "1.5rem", fontWeight: 800, marginBottom: "0.75rem" }}>Message Sent!</h2>
+                <h2 style={{ fontSize: "1.5rem", fontWeight: 800, marginBottom: "0.75rem" }}>{t("messageSent")}</h2>
                 <p style={{ color: "var(--color-text-secondary)", maxWidth: "320px", margin: "0 auto 1.5rem", lineHeight: 1.6 }}>
                   {t("success")}
                 </p>
                 <Button color="primary" onPress={() => setSubmitted(false)}>
-                  Send Another Message
+                  {t("sendAnother")}
                 </Button>
               </motion.div>
             ) : (
@@ -195,12 +202,12 @@ export default function ContactPage() {
                   <div style={{ width: "2rem", height: "2rem", borderRadius: "10px", background: "var(--color-accent-light)", color: "var(--color-accent)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <Send size={16} />
                   </div>
-                  <h2 style={{ fontSize: "1.125rem", fontWeight: 700 }}>Send us a message</h2>
+                  <h2 style={{ fontSize: "1.125rem", fontWeight: 700 }}>{t("formHeading")}</h2>
                 </div>
 
                 {/* Topic Selector */}
                 <div>
-                  <label style={labelStyle}>What can we help with?</label>
+                  <label style={labelStyle}>{t("topicLabel")}</label>
                   <div className={styles.topicGrid}>
                     {TOPICS.map((topic) => {
                       const isActive = selectedTopic === topic.value;
@@ -241,7 +248,7 @@ export default function ContactPage() {
                     <input
                       className="contact-input"
                       style={inputPlainStyle}
-                      placeholder="John Doe"
+                      placeholder={t("phName")}
                       {...register("name")}
                     />
                     {errors.name && <span style={errorStyle}>{errors.name.message}</span>}
@@ -267,7 +274,7 @@ export default function ContactPage() {
                   <input
                     className="contact-input"
                     style={inputPlainStyle}
-                    placeholder="How can we help?"
+                    placeholder={t("phSubject")}
                     {...register("subject")}
                   />
                   {errors.subject && <span style={errorStyle}>{errors.subject.message}</span>}
@@ -279,7 +286,7 @@ export default function ContactPage() {
                     className="contact-input"
                     rows={5}
                     style={{ ...inputPlainStyle, resize: "vertical", lineHeight: 1.6 }}
-                    placeholder="Tell us more about your question or concern..."
+                    placeholder={t("phMessage")}
                     {...register("message")}
                   />
                   {errors.message && <span style={errorStyle}>{errors.message.message}</span>}
@@ -318,15 +325,10 @@ export default function ContactPage() {
           }}>
             <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "1rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
               <HelpCircle size={18} style={{ color: "var(--color-accent)" }} />
-              Frequently Asked
+              {t("faqTitle")}
             </h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-              {[
-                { q: "How long does shipping take?", a: "Standard 5-7 days, Express 2-3 days." },
-                { q: "What is your return policy?", a: "30-day returns on all unused items." },
-                { q: "Do you ship internationally?", a: "Yes, across all EU countries." },
-                { q: "How do I track my order?", a: "Check your account or email for tracking." },
-              ].map((faq, i) => (
+              {FAQS.map((faq, i) => (
                 <div key={i} style={{
                   padding: "0.75rem",
                   borderRadius: "10px",
@@ -349,20 +351,16 @@ export default function ContactPage() {
           }}>
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.875rem" }}>
               <Clock size={18} style={{ color: "#FF5A00" }} />
-              <h3 style={{ fontSize: "0.9375rem", fontWeight: 700 }}>Response Times</h3>
+              <h3 style={{ fontSize: "0.9375rem", fontWeight: 700 }}>{t("responseTitle")}</h3>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>
               <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.8125rem" }}>
-                <span style={{ color: "rgba(255,255,255,0.7)" }}>Email</span>
-                <span style={{ fontWeight: 600 }}>Within 24h</span>
+                <span style={{ color: "rgba(255,255,255,0.7)" }}>{t("responseGeneral")}</span>
+                <span style={{ fontWeight: 600 }}>{t("responseGeneralTime")}</span>
               </div>
               <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.8125rem" }}>
-                <span style={{ color: "rgba(255,255,255,0.7)" }}>Phone</span>
-                <span style={{ fontWeight: 600 }}>Immediate</span>
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.8125rem" }}>
-                <span style={{ color: "rgba(255,255,255,0.7)" }}>Wholesale</span>
-                <span style={{ fontWeight: 600 }}>Within 48h</span>
+                <span style={{ color: "rgba(255,255,255,0.7)" }}>{t("responseB2b")}</span>
+                <span style={{ fontWeight: 600 }}>{t("responseB2bTime")}</span>
               </div>
             </div>
           </div>
@@ -379,7 +377,7 @@ export default function ContactPage() {
           }}>
             <ShieldCheck size={20} style={{ color: "#2E7D32", flexShrink: 0 }} />
             <p style={{ fontSize: "0.75rem", color: "var(--color-text-secondary)", lineHeight: 1.5 }}>
-              Your information is secure and will only be used to respond to your inquiry. We never share your data.
+              {t("trustText")}
             </p>
           </div>
         </motion.div>

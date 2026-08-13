@@ -44,7 +44,7 @@ export default function SearchPage() {
 
       <div style={{ textAlign: "center", marginBottom: "1.75rem" }}>
         <h1 style={{ fontSize: "clamp(1.375rem, 4.5vw, 1.75rem)", fontWeight: 800, letterSpacing: "-0.03em", marginBottom: "1rem" }}>
-          Search
+          {t("search")}
         </h1>
         <div style={{ maxWidth: "32rem", margin: "0 auto", position: "relative" }}>
           <div style={{ position: "absolute", left: "1rem", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "var(--color-text-tertiary)" }}>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { motion, useInView } from "framer-motion";
 import { Package } from "lucide-react";
@@ -25,6 +26,7 @@ interface Props {
 }
 
 export function CategoryShowcase({ categories }: Props) {
+  const t = useTranslations("homeSections");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-40px" });
 
@@ -38,7 +40,7 @@ export function CategoryShowcase({ categories }: Props) {
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5 }}
       >
-        <h2 className={styles.title}>Shop by Category</h2>
+        <h2 className={styles.title}>{t("csTitle")}</h2>
       </motion.div>
       <div className={styles.grid}>
         {categories.map((cat, i) => (
@@ -54,7 +56,7 @@ export function CategoryShowcase({ categories }: Props) {
               </div>
               <div className={styles.info}>
                 <h3 className={styles.cardName}>{cat.name}</h3>
-                <span className={styles.cardCount}>{cat.productCount} products</span>
+                <span className={styles.cardCount}>{t("productsCount", { count: cat.productCount })}</span>
               </div>
             </Link>
           </motion.div>

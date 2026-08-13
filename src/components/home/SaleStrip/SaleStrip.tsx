@@ -1,11 +1,13 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { Flame, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { formatPrice } from "@/lib/utils/format-price";
+import { useCurrency } from "@/providers/CurrencyProvider";
 import { getProductImage, getProductImageFallback } from "@/lib/utils/product-image";
 import { getDiscountPercent, type HomepageProduct } from "@/lib/homepage-products";
 import styles from "./SaleStrip.module.css";
@@ -15,6 +17,8 @@ interface Props {
 }
 
 export function SaleStrip({ products }: Props) {
+  const t = useTranslations("homeSections");
+  const { currency, convert } = useCurrency();
   const scrollRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-40px" });
@@ -40,18 +44,18 @@ export function SaleStrip({ products }: Props) {
           >
             <Flame size={18} className={styles.fireIcon} />
           </motion.div>
-          <h2 className={styles.title}>Hot Deals</h2>
-          <span className={styles.badge}>Sale</span>
+          <h2 className={styles.title}>{t("ssTitle")}</h2>
+          <span className={styles.badge}>{t("ssBadge")}</span>
         </div>
         <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
           <Link href="/catalog?sort=price-asc&onSale=true" className={styles.viewAll}>
-            View all <ChevronRight size={14} />
+            {t("ssViewAll")} <ChevronRight size={14} />
           </Link>
           <div className={styles.arrows}>
-            <button className={styles.arrow} onClick={() => scroll(-1)} aria-label="Scroll left">
+            <button className={styles.arrow} onClick={() => scroll(-1)} aria-label={t("scrollLeft")}>
               <ChevronLeft size={16} />
             </button>
-            <button className={styles.arrow} onClick={() => scroll(1)} aria-label="Scroll right">
+            <button className={styles.arrow} onClick={() => scroll(1)} aria-label={t("scrollRight")}>
               <ChevronRight size={16} />
             </button>
           </div>
@@ -87,9 +91,9 @@ export function SaleStrip({ products }: Props) {
                   </div>
                   <h4 className={styles.cardName}>{p.name}</h4>
                   <div className={styles.prices}>
-                    <span className={styles.newPrice}>{formatPrice(Number(p.price))}</span>
+                    <span className={styles.newPrice}>{formatPrice(convert(Number(p.price)), currency)}</span>
                     {p.comparePrice && (
-                      <span className={styles.oldPrice}>{formatPrice(Number(p.comparePrice))}</span>
+                      <span className={styles.oldPrice}>{formatPrice(convert(Number(p.comparePrice)), currency)}</span>
                     )}
                   </div>
                 </Link>

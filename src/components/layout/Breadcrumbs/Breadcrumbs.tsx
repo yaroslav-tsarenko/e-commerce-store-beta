@@ -1,6 +1,7 @@
 "use client";
 
 import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import { ChevronRight } from "lucide-react";
 import styles from "./Breadcrumbs.module.css";
 
@@ -14,8 +15,9 @@ interface BreadcrumbsProps {
 }
 
 export function Breadcrumbs({ items }: BreadcrumbsProps) {
+  const t = useTranslations("nav");
   return (
-    <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
+    <nav className={styles.breadcrumbs} aria-label={t("breadcrumb")}>
       <ol className={styles.list}>
         {items.map((item, index) => (
           <li key={index} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>

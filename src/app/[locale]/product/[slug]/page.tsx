@@ -1,4 +1,7 @@
+import { unstable_cache } from "next/cache";
 import { prisma } from "@/lib/prisma";
+import { getTranslations } from "next-intl/server";
+import { localizeProductDetail, translateBatch } from "@/lib/translate";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ProductGallery } from "@/components/product/ProductGallery/ProductGallery";
@@ -14,16 +17,30 @@ interface ProductPageProps {
   params: Promise<{ slug: string; locale: string }>;
 }
 
+type CategoryRow = { id: string; name: string; slug: string; parentId: string | null };
+
+const getCategoryLookup = unstable_cache(
+  async (): Promise<CategoryRow[]> => {
+    return prisma.category.findMany({
+      select: { id: true, name: true, slug: true, parentId: true },
+    });
+  },
+  ["product-page-category-lookup-v2"],
+  { revalidate: 300, tags: ["categories"] },
+);
+
 async function getCategoryChain(categoryId: string): Promise<{ name: string; slug: string }[]> {
+  const rows = await getCategoryLookup();
+  const map = new Map<string, CategoryRow>();
+  for (const r of rows) map.set(r.id, r);
+
   const chain: { name: string; slug: string }[] = [];
   let currentId: string | null = categoryId;
+  const guard = new Set<string>();
 
-  while (currentId) {
-    const cat: { name: string; slug: string; parentId: string | null } | null =
-      await prisma.category.findUnique({
-        where: { id: currentId },
-        select: { name: true, slug: true, parentId: true },
-      });
+  while (currentId && !guard.has(currentId)) {
+    guard.add(currentId);
+    const cat = map.get(currentId);
     if (!cat) break;
     chain.unshift({ name: cat.name, slug: cat.slug });
     currentId = cat.parentId;
@@ -44,26 +61,51 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   return {
     title: product.metaTitle || product.name,
     description: product.metaDescription || product.shortDescription || product.name,
+    alternates: { canonical: `/product/${slug}` },
     openGraph: {
       title: product.metaTitle || product.name,
       description: product.metaDescription || product.shortDescription || undefined,
+      url: `/product/${slug}`,
     },
   };
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
 
   const product = await prisma.product.findUnique({
     where: { slug },
-    include: {
-      images: { orderBy: { sortOrder: "asc" } },
-      categories: { include: { category: true } },
+    select: {
+      id: true,
+      name: true,
+      slug: true,
+      sku: true,
+      description: true,
+      shortDescription: true,
+      price: true,
+      comparePrice: true,
+      quantity: true,
+      lowStockAlert: true,
+      status: true,
+      brand: true,
+      condition: true,
+      ean: true,
+      gtin: true,
+      characteristics: true,
+      images: { select: { id: true, url: true, alt: true, sortOrder: true }, orderBy: { sortOrder: "asc" } },
+      categories: { select: { category: { select: { id: true, name: true, slug: true } } } },
       variants: true,
       reviews: {
         where: { isApproved: true },
-        include: { user: { select: { name: true } } },
+        select: {
+          id: true,
+          rating: true,
+          comment: true,
+          createdAt: true,
+          user: { select: { name: true } },
+        },
         orderBy: { createdAt: "desc" },
+        take: 50,
       },
     },
   });
@@ -75,12 +117,24 @@ export default async function ProductPage({ params }: ProductPageProps) {
     ? await getCategoryChain(primaryCategory.id)
     : [];
 
+  // Machine-translate product content + breadcrumb category names into the
+  // active locale (cached in the DB). English (source) is returned as-is.
+  const [localized, chainMap, tNav] = await Promise.all([
+    localizeProductDetail(product, locale),
+    translateBatch(categoryChain.map((c) => c.name), locale),
+    getTranslations("nav"),
+  ]);
+  const localizedChain = categoryChain.map((c) => ({
+    ...c,
+    name: chainMap.get(c.name) ?? c.name,
+  }));
+
   const reviewCount = product.reviews.length;
   const avgRating = reviewCount > 0
     ? product.reviews.reduce((sum: number, r: { rating: number }) => sum + r.rating, 0) / reviewCount
     : 0;
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://misaelectro.ro";
 
   const characteristics = product.characteristics as Record<string, Record<string, string>> | null;
 
@@ -112,13 +166,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
   };
 
   const breadcrumbItems = [
-    { label: "Home", href: "/" },
-    { label: "Catalog", href: "/catalog" },
-    ...categoryChain.map((cat) => ({
+    { label: tNav("home"), href: "/" },
+    { label: tNav("catalog"), href: "/catalog" },
+    ...localizedChain.map((cat) => ({
       label: cat.name,
       href: `/catalog/${cat.slug}`,
     })),
-    { label: product.name },
+    { label: localized.name },
   ];
 
   return (
@@ -129,18 +183,18 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
       <div className={styles.layout}>
         <div className={styles.gallerySticky}>
-          <ProductGallery images={product.images} productName={product.name} />
+          <ProductGallery images={product.images} productName={localized.name} />
         </div>
         <ProductInfo
           id={product.id}
-          name={product.name}
+          name={localized.name}
           slug={product.slug}
           sku={product.sku}
           price={Number(product.price)}
           comparePrice={product.comparePrice ? Number(product.comparePrice) : null}
           quantity={product.quantity}
-          shortDescription={product.shortDescription}
-          description={product.description}
+          shortDescription={localized.shortDescription}
+          description={localized.description}
           brand={product.brand}
           condition={product.condition}
           lowStockAlert={product.lowStockAlert}
@@ -148,12 +202,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
           ean={product.ean}
           reviewCount={reviewCount}
           avgRating={avgRating}
-          categoryPath={categoryChain}
+          categoryPath={localizedChain}
         />
       </div>
 
       <ProductTabs
-        description={product.description}
+        description={localized.description}
         characteristics={characteristics}
         reviews={product.reviews.map((r) => ({
           ...r,

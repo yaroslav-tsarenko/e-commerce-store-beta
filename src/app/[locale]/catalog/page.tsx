@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { useSearchParams, useRouter } from "next/navigation";
-import { Link } from "@/i18n/routing";
-import { SlidersHorizontal, X, Sparkles, ChevronRight } from "lucide-react";
+import { SlidersHorizontal, X, Search } from "lucide-react";
 import { ProductGrid } from "@/components/product/ProductGrid/ProductGrid";
 import { ProductFilters } from "@/components/product/ProductFilters/ProductFilters";
 import { ProductSort } from "@/components/product/ProductSort/ProductSort";
@@ -13,39 +12,17 @@ import { EmptyState } from "@/components/shared/EmptyState/EmptyState";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import styles from "./catalog.module.css";
 
-interface CatalogCategory {
-  id: string;
-  name: string;
-  slug: string;
-  _count?: { products: number };
-  children?: CatalogCategory[];
-}
-
-function subtreeCount(cat: CatalogCategory): number {
-  const own = cat._count?.products || 0;
-  return own + (cat.children || []).reduce((s, c) => s + subtreeCount(c), 0);
-}
-
-function findCategoryName(cats: CatalogCategory[], slug: string): string | null {
-  for (const c of cats) {
-    if (c.slug === slug) return c.name;
-    if (c.children) {
-      const found = findCategoryName(c.children, slug);
-      if (found) return found;
-    }
-  }
-  return null;
-}
-
 export default function CatalogPage() {
   const t = useTranslations("product");
   const nav = useTranslations("nav");
+  const cat = useTranslations("catalog");
   const searchParams = useSearchParams();
   const router = useRouter();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [products, setProducts] = useState<any[]>([]);
-  const [categories, setCategories] = useState<CatalogCategory[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [categories, setCategories] = useState<any[]>([]);
   const [total, setTotal] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -60,6 +37,10 @@ export default function CatalogPage() {
   const inStock = searchParams.get("inStock") === "true";
   const onSale = searchParams.get("onSale") === "true";
   const selectedBrand = searchParams.get("brand") || "";
+  const search = searchParams.get("search") || "";
+
+  const [searchInput, setSearchInput] = useState(search);
+  useEffect(() => { setSearchInput(search); }, [search]);
 
   const updateParams = useCallback(
     (updates: Record<string, string>) => {
@@ -68,11 +49,25 @@ export default function CatalogPage() {
         if (value) params.set(key, value);
         else params.delete(key);
       });
-      if (updates.page === undefined && !updates.page) params.set("page", "1");
+      if (!("page" in updates)) params.set("page", "1");
       router.push(`?${params.toString()}`);
     },
     [searchParams, router]
   );
+
+  const searchDebounce = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const handleSearchChange = (value: string) => {
+    setSearchInput(value);
+    if (searchDebounce.current) clearTimeout(searchDebounce.current);
+    searchDebounce.current = setTimeout(() => {
+      updateParams({ search: value, page: "1" });
+    }, 350);
+  };
+
+  const clearAll = () => {
+    setSearchInput("");
+    router.push("?");
+  };
 
   useEffect(() => {
     fetch("/api/categories")
@@ -96,6 +91,7 @@ export default function CatalogPage() {
     if (inStock) params.set("inStock", "true");
     if (onSale) params.set("onSale", "true");
     if (selectedBrand) params.set("brand", selectedBrand);
+    if (search) params.set("search", search);
 
     fetch(`/api/products?${params}`)
       .then((res) => res.json())
@@ -106,7 +102,7 @@ export default function CatalogPage() {
       })
       .catch(console.error)
       .finally(() => setLoading(false));
-  }, [page, sort, category, minPrice, maxPrice, inStock, onSale, selectedBrand]);
+  }, [page, sort, category, minPrice, maxPrice, inStock, onSale, selectedBrand, search]);
 
   useEffect(() => {
     if (mobileFiltersOpen) {
@@ -119,127 +115,99 @@ export default function CatalogPage() {
     };
   }, [mobileFiltersOpen]);
 
-  const activeFilterCount = [category, minPrice, maxPrice, inStock, onSale, selectedBrand].filter(Boolean).length;
+  const activeFilterCount = [category, minPrice, maxPrice, inStock, onSale, selectedBrand, search].filter(Boolean).length;
 
-  const topCategories = useMemo(() => {
-    return [...categories]
-      .map((c) => ({ ...c, total: subtreeCount(c) }))
-      .sort((a, b) => b.total - a.total)
-      .slice(0, 8);
-  }, [categories]);
-
-  const selectedCategoryName = useMemo(
-    () => (category ? findCategoryName(categories, category) : null),
-    [category, categories]
-  );
-
-  const activeChips: { label: string; onRemove: () => void }[] = [];
-  if (category) activeChips.push({ label: selectedCategoryName || category, onRemove: () => updateParams({ category: "", page: "1" }) });
-  if (selectedBrand) activeChips.push({ label: selectedBrand, onRemove: () => updateParams({ brand: "", page: "1" }) });
-  if (minPrice) activeChips.push({ label: `Min €${minPrice}`, onRemove: () => updateParams({ minPrice: "", page: "1" }) });
-  if (maxPrice) activeChips.push({ label: `Max €${maxPrice}`, onRemove: () => updateParams({ maxPrice: "", page: "1" }) });
-  if (inStock) activeChips.push({ label: "In stock", onRemove: () => updateParams({ inStock: "", page: "1" }) });
-  if (onSale) activeChips.push({ label: "On sale", onRemove: () => updateParams({ onSale: "", page: "1" }) });
-
-  const clearAll = () => {
-    router.push("?");
-  };
+  const view = (() => {
+    if (search) return { title: cat("searchResultsTitle", { query: search }), subtitle: t("showing", { count: products.length, total }) };
+    if (onSale) return { title: cat("saleTitle"), subtitle: cat("saleSubtitle") };
+    if (sort === "popular") return { title: cat("bestSellers"), subtitle: cat("bestSellersSubtitle") };
+    if (selectedBrand) return { title: selectedBrand, subtitle: cat("brandSubtitle", { brand: selectedBrand }) };
+    if (searchParams.has("sort") && sort === "newest") return { title: cat("newArrivals"), subtitle: cat("newArrivalsSubtitle") };
+    return { title: nav("catalog"), subtitle: t("showing", { count: products.length, total }) };
+  })();
 
   return (
     <div className={styles.wrapper}>
       <Breadcrumbs
         items={[
           { label: nav("home"), href: "/" },
-          { label: nav("catalog") },
+          ...(view.title !== nav("catalog")
+            ? [{ label: nav("catalog"), href: "/catalog" }, { label: view.title }]
+            : [{ label: nav("catalog") }]),
         ]}
       />
 
-      <div className={styles.hero}>
-        <div className={styles.heroInner}>
-          <span className={styles.heroEyebrow}>
-            <Sparkles size={14} /> Full catalog
-          </span>
-          <h1 className={styles.heroTitle}>
-            {selectedCategoryName ? selectedCategoryName : "Electrical materials & supplies"}
-          </h1>
-          <p className={styles.heroSub}>
-            {total > 0
-              ? `${total.toLocaleString("en-US")} certified products — filter by category, brand, price and availability.`
-              : "Browse our certified inventory of cables, breakers, lighting, distribution panels and more."}
-          </p>
-        </div>
-        <div className={styles.heroVisual} aria-hidden="true">
-          <div className={styles.heroBlob} style={{ background: "radial-gradient(circle, rgba(255,90,0,0.45), transparent 60%)" }} />
-          <div className={styles.heroBlob2} style={{ background: "radial-gradient(circle, rgba(0,163,255,0.5), transparent 60%)" }} />
-        </div>
-      </div>
-
-      {topCategories.length > 0 && (
-        <div className={styles.quickCats}>
-          <Link
-            href="/catalog"
-            className={`${styles.quickCat} ${!category ? styles.quickCatActive : ""}`}
-          >
-            All
-          </Link>
-          {topCategories.map((cat) => (
-            <Link
-              key={cat.id}
-              href={`/catalog/${cat.slug}`}
-              className={`${styles.quickCat} ${category === cat.slug ? styles.quickCatActive : ""}`}
-            >
-              {cat.name}
-              <span className={styles.quickCatCount}>{cat.total}</span>
-            </Link>
-          ))}
-          <Link href="/catalog" className={styles.quickCatMore}>
-            All categories <ChevronRight size={14} />
-          </Link>
-        </div>
-      )}
-
       <div className={styles.header}>
         <div>
-          <h2 className={styles.title}>{selectedCategoryName || nav("catalog")}</h2>
-          <p className={styles.headerSub}>
-            {t("showing", { count: products.length, total })}
-          </p>
+          <h1 className={styles.title}>{view.title}</h1>
+          <p className={styles.headerSub}>{view.subtitle}</p>
         </div>
         <div className={styles.headerActions}>
+          <div style={{ position: "relative", flex: "1 1 220px", minWidth: 0 }}>
+            <Search
+              size={14}
+              style={{
+                position: "absolute",
+                left: 12,
+                top: "50%",
+                transform: "translateY(-50%)",
+                color: "var(--color-text-tertiary)",
+                pointerEvents: "none",
+              }}
+            />
+            <input
+              type="search"
+              value={searchInput}
+              onChange={(e) => handleSearchChange(e.target.value)}
+              placeholder={cat("searchPlaceholder")}
+              aria-label={cat("searchAria")}
+              style={{
+                width: "100%",
+                padding: "0.5rem 0.75rem 0.5rem 2rem",
+                border: "1.5px solid var(--color-border)",
+                borderRadius: 10,
+                background: "var(--color-bg)",
+                color: "var(--color-text)",
+                fontSize: "0.8125rem",
+                outline: "none",
+              }}
+            />
+          </div>
           <button
             onClick={() => setMobileFiltersOpen(true)}
             className={styles.filtersBtn}
             type="button"
           >
             <SlidersHorizontal size={16} />
-            Filters
+            {cat("filters")}
             {activeFilterCount > 0 && (
               <span className={styles.filterBadge}>{activeFilterCount}</span>
             )}
           </button>
+          {activeFilterCount > 0 && (
+            <button
+              onClick={clearAll}
+              type="button"
+              style={{
+                padding: "0.5rem 0.75rem",
+                border: "1.5px solid var(--color-border)",
+                borderRadius: 10,
+                background: "transparent",
+                color: "var(--color-text-secondary)",
+                fontSize: "0.8125rem",
+                fontWeight: 600,
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.25rem",
+              }}
+            >
+              <X size={14} /> {cat("clear")}
+            </button>
+          )}
           <ProductSort value={sort} onChange={(v) => updateParams({ sort: v, page: "1" })} />
         </div>
       </div>
-
-      {activeChips.length > 0 && (
-        <div className={styles.chipsRow}>
-          <span className={styles.chipsLabel}>Active filters:</span>
-          {activeChips.map((chip) => (
-            <button
-              key={chip.label}
-              type="button"
-              onClick={chip.onRemove}
-              className={styles.chip}
-            >
-              {chip.label}
-              <X size={12} />
-            </button>
-          ))}
-          <button type="button" onClick={clearAll} className={styles.clearAll}>
-            Clear all
-          </button>
-        </div>
-      )}
 
       <div className={styles.layout}>
         <aside className={styles.sidebar}>
@@ -266,8 +234,8 @@ export default function CatalogPage() {
             <ProductSkeleton count={12} />
           ) : products.length === 0 ? (
             <EmptyState
-              title={t("filterBy")}
-              subtitle={t("priceRange")}
+              title={cat("emptyTitle")}
+              subtitle={cat("emptySubtitle")}
               actionLabel={nav("home")}
               actionHref="/"
             />
@@ -281,7 +249,7 @@ export default function CatalogPage() {
                     disabled={page <= 1}
                     className={`${styles.pageBtn} ${styles.pageBtnEdge} ${page <= 1 ? styles.pageBtnDisabled : ""}`}
                   >
-                    Prev
+                    {cat("prev")}
                   </button>
                   {(() => {
                     const pages: (number | "ellipsis-start" | "ellipsis-end")[] = [];
@@ -315,7 +283,7 @@ export default function CatalogPage() {
                     disabled={page >= totalPages}
                     className={`${styles.pageBtn} ${styles.pageBtnEdge} ${page >= totalPages ? styles.pageBtnDisabled : ""}`}
                   >
-                    Next
+                    {cat("next")}
                   </button>
                 </div>
               )}
@@ -330,11 +298,11 @@ export default function CatalogPage() {
           <div className={styles.overlayBackdrop} onClick={() => setMobileFiltersOpen(false)} />
           <div className={styles.overlaySheet}>
             <div className={styles.overlayHeader}>
-              <span className={styles.overlayTitle}>Filters</span>
+              <span className={styles.overlayTitle}>{cat("filters")}</span>
               <button
                 onClick={() => setMobileFiltersOpen(false)}
                 className={styles.overlayClose}
-                aria-label="Close filters"
+                aria-label={cat("closeFilters")}
               >
                 <X size={18} />
               </button>

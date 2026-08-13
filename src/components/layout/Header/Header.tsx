@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import NextLink from "next/link";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
-import { Link } from "@/i18n/routing";
+import { Link, useRouter } from "@/i18n/routing";
 import {
   ShoppingCart, Search, Menu, X, User, Shield,
   ChevronRight, Heart, Bell,
@@ -18,8 +18,9 @@ import { useCart } from "@/providers/CartProvider";
 import { useAuth } from "@/providers/AuthProvider";
 import { ThemeToggle } from "./ThemeToggle";
 import { AnimatePresence, motion } from "framer-motion";
-import { AvontLogo } from "../AvontLogo";
+import { MisaElectroLogo } from "../MisaElectroLogo";
 import { CurrencySwitcher } from "./CurrencySwitcher";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { CatalogMenu } from "../CatalogMenu/CatalogMenu";
 import styles from "./Header.module.css";
 
@@ -193,7 +194,7 @@ export function Header() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      router.push(`/en/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
     }
   };
 
@@ -224,11 +225,11 @@ export function Header() {
           <div className={styles.topStripContainer}>
             <nav className={styles.topNav}>
               <Link href="/" className={`${styles.topNavLink} ${styles.topNavLinkActive}`}>
-                Shopping
+                {t("shopping")}
               </Link>
               <span className={styles.topNavDivider} />
               <Link href="/about" className={styles.topNavLink}>
-                About
+                {t("about")}
               </Link>
               <span className={styles.topNavDivider} />
               <Link href="/contact" className={styles.topNavLink}>
@@ -237,6 +238,7 @@ export function Header() {
             </nav>
             <div className={styles.topActions}>
               <ThemeToggle />
+              <LanguageSwitcher />
               <CurrencySwitcher />
             </div>
           </div>
@@ -256,11 +258,11 @@ export function Header() {
               <span className={styles.catalogBtnText}>{t("catalog")}</span>
             </button>
 
-            <Link href="/" className={styles.logo} aria-label="NetimStore — netim.com">
-              <AvontLogo size={30} />
+            <Link href="/" className={styles.logo} aria-label="MisaElectro — misaelectro.ro">
+              <MisaElectroLogo size={30} />
               <span className={styles.logoText}>
-                <span className={styles.logoTextPrimary}>Netim</span>
-                <span className={styles.logoTextAccent}>Store</span>
+                <span className={styles.logoTextPrimary}>Misa</span>
+                <span className={styles.logoTextAccent}>Electro</span>
               </span>
             </Link>
 
@@ -268,26 +270,26 @@ export function Header() {
               <input
                 type="text"
                 className={styles.searchInput}
-                placeholder="Search products..."
+                placeholder={t("search")}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <button type="submit" className={styles.searchBtn} aria-label="Search">
+              <button type="submit" className={styles.searchBtn} aria-label={t("search")}>
                 <Search size={18} />
               </button>
             </form>
 
             <div className={styles.headerActions}>
               {user && (
-                <Link href="/account/wishlist" className={styles.headerAction} aria-label="Wishlist">
+                <Link href="/account/wishlist" className={styles.headerAction} aria-label={t("wishlist")}>
                   <Heart size={20} />
-                  <span className={styles.headerActionLabel}>Wishlist</span>
+                  <span className={styles.headerActionLabel}>{t("wishlist")}</span>
                 </Link>
               )}
 
-              <Link href="/search" className={styles.headerAction} aria-label="Alerts">
+              <Link href="/search" className={styles.headerAction} aria-label={t("alerts")}>
                 <Bell size={20} />
-                <span className={styles.headerActionLabel}>Alerts</span>
+                <span className={styles.headerActionLabel}>{t("alerts")}</span>
               </Link>
 
               <span className={styles.headerActionDivider} />
@@ -305,10 +307,10 @@ export function Header() {
               )}
 
               {user && (role === "ADMIN" || role === "SUPER_ADMIN") && (
-                <a href="/admin" className={styles.headerAction} aria-label="Admin">
+                <NextLink href="/admin" className={styles.headerAction} aria-label={t("adminShort")}>
                   <Shield size={20} />
-                  <span className={styles.headerActionLabel}>Admin</span>
-                </a>
+                  <span className={styles.headerActionLabel}>{t("adminShort")}</span>
+                </NextLink>
               )}
 
               <Link href="/cart" className={styles.headerAction} aria-label={t("cart")}>
@@ -350,7 +352,7 @@ export function Header() {
               <button
                 className={styles.mobileBtn}
                 onClick={() => setMobileOpen(true)}
-                aria-label="Menu"
+                aria-label={t("menu")}
               >
                 <Menu size={22} />
               </button>
@@ -363,11 +365,11 @@ export function Header() {
               <input
                 type="text"
                 className={styles.mobileSearchInput}
-                placeholder="Search products..."
+                placeholder={t("search")}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <button type="submit" className={styles.mobileSearchBtn} aria-label="Search">
+              <button type="submit" className={styles.mobileSearchBtn} aria-label={t("search")}>
                 <Search size={16} />
               </button>
             </form>
@@ -401,7 +403,7 @@ export function Header() {
           <div className={styles.subCategoryStrip}>
             <div className={styles.subCategoryStripContainer}>
               <span className={styles.subCategoryHeading}>
-                Trending:
+                {t("trending")}
               </span>
               {featuredSubcategories.map((sub) => (
                 <Link
@@ -414,7 +416,7 @@ export function Header() {
                 </Link>
               ))}
               <Link href="/catalog" className={styles.subCategoryAll}>
-                All categories <ChevronRight size={12} />
+                {t("allCategories")} <ChevronRight size={12} />
               </Link>
             </div>
           </div>
@@ -447,7 +449,7 @@ export function Header() {
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
             >
               <div className={styles.drawerHeader}>
-                <span className={styles.drawerTitle}>Menu</span>
+                <span className={styles.drawerTitle}>{t("menu")}</span>
                 <button className={styles.drawerClose} onClick={() => setMobileOpen(false)}>
                   <X size={20} />
                 </button>
@@ -462,10 +464,10 @@ export function Header() {
                     {t("catalog")} <ChevronRight size={18} />
                   </Link>
                   <Link href="/catalog?sort=newest" className={styles.drawerNavLink} onClick={() => setMobileOpen(false)}>
-                    New Arrivals <ChevronRight size={18} />
+                    {t("newArrivals")} <ChevronRight size={18} />
                   </Link>
                   <Link href="/catalog?onSale=true" className={styles.drawerNavLink} onClick={() => setMobileOpen(false)}>
-                    Deals <ChevronRight size={18} />
+                    {t("deals")} <ChevronRight size={18} />
                   </Link>
 
                   <div className={styles.drawerDivider} />
@@ -493,9 +495,9 @@ export function Header() {
                     {t("contact")} <ChevronRight size={18} />
                   </Link>
                   {user && (role === "ADMIN" || role === "SUPER_ADMIN") && (
-                    <a href="/admin" className={styles.drawerNavLink} onClick={() => setMobileOpen(false)}>
-                      Admin Panel <ChevronRight size={18} />
-                    </a>
+                    <NextLink href="/admin" className={styles.drawerNavLink} onClick={() => setMobileOpen(false)}>
+                      {t("admin")} <ChevronRight size={18} />
+                    </NextLink>
                   )}
                 </nav>
               </div>
@@ -504,19 +506,19 @@ export function Header() {
                 {user ? (
                   <Link href="/account" onClick={() => setMobileOpen(false)}>
                     <div className={`${styles.drawerBtn} ${styles.drawerBtnPrimary}`}>
-                      My Account
+                      {t("myAccount")}
                     </div>
                   </Link>
                 ) : (
                   <>
                     <Link href="/auth/login" onClick={() => setMobileOpen(false)}>
                       <div className={`${styles.drawerBtn} ${styles.drawerBtnPrimary}`}>
-                        Sign In
+                        {t("signIn")}
                       </div>
                     </Link>
                     <Link href="/auth/register" onClick={() => setMobileOpen(false)}>
                       <div className={`${styles.drawerBtn} ${styles.drawerBtnSecondary}`}>
-                        Create Account
+                        {t("createAccount")}
                       </div>
                     </Link>
                   </>

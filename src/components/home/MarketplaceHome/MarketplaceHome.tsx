@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { PromoStrip } from "../PromoStrip/PromoStrip";
 import { HeroCarousel } from "../HeroCarousel/HeroCarousel";
 import { PromoBannerGrid } from "../PromoBannerGrid/PromoBannerGrid";
@@ -16,6 +17,7 @@ import { Testimonials } from "../Testimonials/Testimonials";
 import { KnowledgeHub } from "../KnowledgeHub/KnowledgeHub";
 import { CategoryShowcase } from "../CategoryShowcase/CategoryShowcase";
 import { WhyShopWithUs } from "../WhyShopWithUs/WhyShopWithUs";
+import { HomeCTABanners } from "../HomeCTABanners/HomeCTABanners";
 import styles from "./MarketplaceHome.module.css";
 import type { HomepageProduct, CategorySection, BrandSection } from "@/lib/homepage-products";
 
@@ -113,6 +115,7 @@ interface Props {
 }
 
 export function MarketplaceHome({ data }: Props) {
+  const t = useTranslations("homeSections");
   const {
     heroSlides, dealCards, promoSmall, promoWide,
     brands, sections, promoStripItems,
@@ -131,14 +134,16 @@ export function MarketplaceHome({ data }: Props) {
           <div className={styles.content}>
             {/* === ABOVE THE FOLD — start selling immediately === */}
 
+            <HomeCTABanners />
+
             {/* Most Popular — visible right after hero */}
             {popularProducts.length > 0 && (
               <ProductSection
-                title="Most Popular"
-                subtitle="Top products customers buy this week"
+                title={t("mpPopularTitle")}
+                subtitle={t("mpPopularSubtitle")}
                 products={popularProducts}
                 viewAllHref="/catalog?sort=popular"
-                viewAllLabel="View all popular"
+                viewAllLabel={t("mpViewAllPopular")}
                 bg="white"
                 columns={5}
               />
@@ -147,11 +152,11 @@ export function MarketplaceHome({ data }: Props) {
             {/* New Arrivals — right after popular */}
             {newProducts.length > 0 && (
               <ProductSection
-                title="New Arrivals"
-                subtitle="Just landed in store"
+                title={t("mpNewTitle")}
+                subtitle={t("mpNewSubtitle")}
                 products={newProducts}
                 viewAllHref="/catalog?sort=newest"
-                viewAllLabel="View all new"
+                viewAllLabel={t("mpViewAllNew")}
                 bg="gray"
                 columns={5}
               />
@@ -167,11 +172,11 @@ export function MarketplaceHome({ data }: Props) {
               <ProductSection
                 key={cs.category.id}
                 title={cs.category.name}
-                subtitle={`${cs.products.length}+ products`}
+                subtitle={t("productsCount", { count: cs.totalCount ?? cs.products.length })}
                 products={cs.products}
-                tabs={cs.subcategoryTabs}
+                tabs={cs.tabs}
                 viewAllHref={`/catalog/${cs.category.slug}`}
-                viewAllLabel={`All ${cs.category.name}`}
+                viewAllLabel={t("mpAllOf", { name: cs.category.name })}
                 bg="white"
                 columns={5}
               />
@@ -188,11 +193,11 @@ export function MarketplaceHome({ data }: Props) {
               <ProductSection
                 key={cs.category.id}
                 title={cs.category.name}
-                subtitle={`${cs.products.length}+ products`}
+                subtitle={t("productsCount", { count: cs.totalCount ?? cs.products.length })}
                 products={cs.products}
-                tabs={cs.subcategoryTabs}
+                tabs={cs.tabs}
                 viewAllHref={`/catalog/${cs.category.slug}`}
-                viewAllLabel={`All ${cs.category.name}`}
+                viewAllLabel={t("mpAllOf", { name: cs.category.name })}
                 bg={i % 2 === 0 ? "gray" : "white"}
                 columns={5}
               />
@@ -211,11 +216,11 @@ export function MarketplaceHome({ data }: Props) {
               <ProductSection
                 key={cs.category.id}
                 title={cs.category.name}
-                subtitle={`${cs.products.length}+ products`}
+                subtitle={t("productsCount", { count: cs.totalCount ?? cs.products.length })}
                 products={cs.products}
-                tabs={cs.subcategoryTabs}
+                tabs={cs.tabs}
                 viewAllHref={`/catalog/${cs.category.slug}`}
-                viewAllLabel={`All ${cs.category.name}`}
+                viewAllLabel={t("mpAllOf", { name: cs.category.name })}
                 bg={i % 2 === 0 ? "white" : "gray"}
                 columns={5}
               />

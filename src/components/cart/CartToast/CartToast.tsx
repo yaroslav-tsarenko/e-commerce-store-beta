@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { Check, ShoppingCart } from "lucide-react";
 import styles from "./CartToast.module.css";
@@ -12,6 +13,7 @@ interface CartToastProps {
 }
 
 export function CartToast({ name, imageUrl, quantity }: CartToastProps) {
+  const t = useTranslations("cart");
   return (
     <motion.div
       className={styles.toast}
@@ -38,9 +40,9 @@ export function CartToast({ name, imageUrl, quantity }: CartToastProps) {
       </div>
 
       <div className={styles.textWrap}>
-        <span className={styles.title}>Added to cart</span>
+        <span className={styles.title}>{t("addedToCart")}</span>
         <span className={styles.name}>{name}</span>
-        {quantity > 1 && <span className={styles.qty}>Qty: {quantity}</span>}
+        {quantity > 1 && <span className={styles.qty}>{t("qty", { count: quantity })}</span>}
       </div>
     </motion.div>
   );

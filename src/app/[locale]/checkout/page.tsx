@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "@/i18n/routing";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
@@ -20,14 +20,21 @@ import { toast } from "sonner";
 import styles from "./checkout.module.css";
 import {
   Mail, Phone, MapPin, Truck, CreditCard,
-  ChevronRight, ShieldCheck, Lock, Check, ImageOff, UserPlus,
+  ChevronRight, ShieldCheck, Lock, Check, ImageOff, UserPlus, Tag, X as XIcon,
 } from "lucide-react";
 
+interface AppliedDiscount {
+  type: "welcome" | "newsletter";
+  percent: number;
+  code: string;
+  source: "auto" | "code";
+}
+
 const SHIPPING_METHODS = [
-  { key: "standard", label: "Standard Shipping", time: "5-7 business days", price: 5.99, icon: Truck },
-  { key: "express", label: "Express Shipping", time: "2-3 business days", price: 12.99, icon: Truck },
-  { key: "free", label: "Economy Shipping", time: "7-14 business days", price: 0, icon: Truck },
-];
+  { key: "standard", labelKey: "methodStandard", timeKey: "methodStandardTime", price: 5.99, icon: Truck },
+  { key: "express", labelKey: "methodExpress", timeKey: "methodExpressTime", price: 12.99, icon: Truck },
+  { key: "free", labelKey: "methodEconomy", timeKey: "methodEconomyTime", price: 0, icon: Truck },
+] as const;
 
 const stepIcons = [Mail, MapPin, CreditCard];
 const stepVariants = {
@@ -101,12 +108,17 @@ function InputWithIcon({ icon: Icon, error, ...props }: { icon: React.ElementTyp
 export default function CheckoutPage() {
   const t = useTranslations("checkout");
   const nav = useTranslations("nav");
+  const locale = useLocale();
   const router = useRouter();
-  const { cart, clearCart } = useCart();
+  const { cart, clearCart, removeItem } = useCart();
   const { user } = useAuth();
   const { currency, convert } = useCurrency();
   const [step, setStep] = useState(0);
   const [submitting, setSubmitting] = useState(false);
+  const [discount, setDiscount] = useState<AppliedDiscount | null>(null);
+  const [promoInput, setPromoInput] = useState("");
+  const [promoError, setPromoError] = useState<string | null>(null);
+  const [applyingPromo, setApplyingPromo] = useState(false);
 
   const {
     register,
@@ -143,6 +155,51 @@ export default function CheckoutPage() {
   const countryData = COUNTRIES.find((c) => c.code === selectedCountry);
   const phoneHint = countryData ? `${countryData.phone} XX XXX XXXX` : "+44 XX XXX XXXX";
 
+  const discountAmount = discount ? +(cart.subtotal * (discount.percent / 100)).toFixed(2) : 0;
+  const discountedSubtotal = Math.max(cart.subtotal - discountAmount, 0);
+  const taxOnDiscounted = +(discountedSubtotal * 0.21).toFixed(2);
+  const finalShipping = discountedSubtotal >= 100 && selectedMethod === "free" ? 0 : shippingPrice;
+
+  useEffect(() => {
+    let cancelled = false;
+    if (user) {
+      fetch("/api/discounts")
+        .then((r) => r.json())
+        .then((d) => {
+          if (!cancelled && d?.discount) setDiscount(d.discount);
+        })
+        .catch(() => null);
+    }
+    return () => { cancelled = true; };
+  }, [user]);
+
+  const applyPromo = async () => {
+    const code = promoInput.trim();
+    if (!code) return;
+    setApplyingPromo(true);
+    setPromoError(null);
+    try {
+      const r = await fetch(`/api/discounts?code=${encodeURIComponent(code)}`);
+      const data = await r.json();
+      if (data?.discount) {
+        setDiscount(data.discount);
+        setPromoInput("");
+        toast.success(t("discountToast", { percent: data.discount.percent }));
+      } else {
+        setPromoError(t("invalidCode"));
+      }
+    } catch {
+      setPromoError(t("failApplyCode"));
+    } finally {
+      setApplyingPromo(false);
+    }
+  };
+
+  const removeDiscount = () => {
+    setDiscount(null);
+    setPromoError(null);
+  };
+
   const goNext = async () => {
     if (step === 0) {
       const valid = await trigger("contact");
@@ -162,6 +219,8 @@ export default function CheckoutPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...data,
+          locale,
+          discountCode: discount?.source === "code" ? discount.code : undefined,
           items: cart.items.map((item) => ({
             productId: item.productId,
             quantity: item.quantity,
@@ -170,15 +229,27 @@ export default function CheckoutPage() {
         }),
       });
 
-      if (!res.ok) throw new Error("Order failed");
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        if (res.status === 409 && Array.isArray(data?.unavailableProductIds)) {
+          const stale = cart.items.filter((item) =>
+            data.unavailableProductIds.includes(item.productId)
+          );
+          stale.forEach((item) => removeItem(item.productId, item.variantId));
+          toast.error(t("itemsUnavailable"));
+          setSubmitting(false);
+          return;
+        }
+        throw new Error("Order failed");
+      }
 
-      const order = await res.json();
+      const { url } = await res.json();
+      if (!url) throw new Error("No checkout URL");
+
       clearCart();
-      toast.success("Order placed successfully!");
-      router.push(`/order/confirmed?orderId=${order.id}`);
+      window.location.href = url;
     } catch {
-      toast.error("Failed to place order. Please try again.");
-    } finally {
+      toast.error(t("failOrder"));
       setSubmitting(false);
     }
   };
@@ -226,15 +297,18 @@ export default function CheckoutPage() {
         >
           <UserPlus size={18} style={{ color: "var(--color-accent)", flexShrink: 0 }} />
           <span>
-            Checking out as guest.{" "}
-            <Link href="/auth/login" style={{ color: "var(--color-accent)", fontWeight: 600, textDecoration: "none" }}>
-              Log in
-            </Link>{" "}
-            or{" "}
-            <Link href="/auth/register" style={{ color: "var(--color-accent)", fontWeight: 600, textDecoration: "none" }}>
-              create an account
-            </Link>{" "}
-            to track orders easily.
+            {t.rich("guestNotice", {
+              login: (chunks) => (
+                <Link href="/auth/login" style={{ color: "var(--color-accent)", fontWeight: 600, textDecoration: "none" }}>
+                  {chunks}
+                </Link>
+              ),
+              register: (chunks) => (
+                <Link href="/auth/register" style={{ color: "var(--color-accent)", fontWeight: 600, textDecoration: "none" }}>
+                  {chunks}
+                </Link>
+              ),
+            })}
           </span>
         </motion.div>
       )}
@@ -315,7 +389,7 @@ export default function CheckoutPage() {
                   />
                   {!user && (
                     <span style={{ fontSize: "0.75rem", color: "var(--color-text-tertiary)", marginTop: "0.25rem", display: "block" }}>
-                      Order confirmation will be sent to this email
+                      {t("emailHint")}
                     </span>
                   )}
                 </div>
@@ -328,11 +402,11 @@ export default function CheckoutPage() {
                     {...register("contact.phone")}
                   />
                   <span style={{ fontSize: "0.75rem", color: "var(--color-text-tertiary)", marginTop: "0.25rem", display: "block" }}>
-                    Include country code (e.g. +371, +44, +49)
+                    {t("phoneHint")}
                   </span>
                 </div>
                 <Button color="primary" size="lg" onPress={goNext} style={{ marginTop: "0.5rem" }}>
-                  Continue to Shipping <ChevronRight size={16} />
+                  {t("continueToShipping")} <ChevronRight size={16} />
                 </Button>
               </motion.div>
             )}
@@ -357,41 +431,41 @@ export default function CheckoutPage() {
                 <div className={styles.twoCol}>
                   <div>
                     <label style={labelStyle}>{t("firstName")} *</label>
-                    <input style={{ ...inputPlainStyle, borderColor: errors.shipping?.firstName ? "var(--color-danger)" : undefined }} placeholder="John" {...register("shipping.firstName")} />
+                    <input style={{ ...inputPlainStyle, borderColor: errors.shipping?.firstName ? "var(--color-danger)" : undefined }} placeholder={t("phFirstName")} {...register("shipping.firstName")} />
                     {errors.shipping?.firstName && <span style={errorStyle}>{errors.shipping.firstName.message}</span>}
                   </div>
                   <div>
                     <label style={labelStyle}>{t("lastName")} *</label>
-                    <input style={{ ...inputPlainStyle, borderColor: errors.shipping?.lastName ? "var(--color-danger)" : undefined }} placeholder="Doe" {...register("shipping.lastName")} />
+                    <input style={{ ...inputPlainStyle, borderColor: errors.shipping?.lastName ? "var(--color-danger)" : undefined }} placeholder={t("phLastName")} {...register("shipping.lastName")} />
                     {errors.shipping?.lastName && <span style={errorStyle}>{errors.shipping.lastName.message}</span>}
                   </div>
                 </div>
 
                 <div>
                   <label style={labelStyle}>{t("address")} *</label>
-                  <InputWithIcon icon={MapPin} placeholder="123 Main Street" error={errors.shipping?.address1?.message} {...register("shipping.address1")} />
+                  <InputWithIcon icon={MapPin} placeholder={t("phAddress")} error={errors.shipping?.address1?.message} {...register("shipping.address1")} />
                 </div>
                 <div>
                   <label style={labelStyle}>{t("apartment")}</label>
-                  <input style={inputPlainStyle} placeholder="Apt 4B (optional)" {...register("shipping.address2")} />
+                  <input style={inputPlainStyle} placeholder={t("phApartment")} {...register("shipping.address2")} />
                 </div>
 
                 <div className={styles.twoCol}>
                   <div>
                     <label style={labelStyle}>{t("city")} *</label>
-                    <input style={{ ...inputPlainStyle, borderColor: errors.shipping?.city ? "var(--color-danger)" : undefined }} placeholder="Riga" {...register("shipping.city")} />
+                    <input style={{ ...inputPlainStyle, borderColor: errors.shipping?.city ? "var(--color-danger)" : undefined }} placeholder={t("phCity")} {...register("shipping.city")} />
                     {errors.shipping?.city && <span style={errorStyle}>{errors.shipping.city.message}</span>}
                   </div>
                   <div>
                     <label style={labelStyle}>{t("province")}</label>
-                    <input style={inputPlainStyle} placeholder="Region (optional)" {...register("shipping.province")} />
+                    <input style={inputPlainStyle} placeholder={t("phProvince")} {...register("shipping.province")} />
                   </div>
                 </div>
 
                 <div className={styles.twoCol}>
                   <div>
                     <label style={labelStyle}>{t("postalCode")} *</label>
-                    <input style={{ ...inputPlainStyle, borderColor: errors.shipping?.postalCode ? "var(--color-danger)" : undefined }} placeholder="LV-1001" {...register("shipping.postalCode")} />
+                    <input style={{ ...inputPlainStyle, borderColor: errors.shipping?.postalCode ? "var(--color-danger)" : undefined }} placeholder={t("phPostalCode")} {...register("shipping.postalCode")} />
                     {errors.shipping?.postalCode && <span style={errorStyle}>{errors.shipping.postalCode.message}</span>}
                   </div>
                   <div>
@@ -403,7 +477,7 @@ export default function CheckoutPage() {
                       }}
                       {...register("shipping.country")}
                     >
-                      <option value="">Select country...</option>
+                      <option value="">{t("selectCountry")}</option>
                       {COUNTRIES.map((c) => (
                         <option key={c.code} value={c.code}>{c.name}</option>
                       ))}
@@ -449,11 +523,11 @@ export default function CheckoutPage() {
                             {isSelected && <div style={{ width: "0.5rem", height: "0.5rem", borderRadius: "50%", background: "var(--color-accent)" }} />}
                           </div>
                           <div style={{ flex: 1 }}>
-                            <div style={{ fontSize: "0.875rem", fontWeight: 600 }}>{m.label}</div>
-                            <div style={{ fontSize: "0.75rem", color: "var(--color-text-tertiary)" }}>{m.time}</div>
+                            <div style={{ fontSize: "0.875rem", fontWeight: 600 }}>{t(m.labelKey)}</div>
+                            <div style={{ fontSize: "0.75rem", color: "var(--color-text-tertiary)" }}>{t(m.timeKey)}</div>
                           </div>
                           <span style={{ fontSize: "0.875rem", fontWeight: 700, color: m.price === 0 ? "#2E7D32" : "var(--color-text)" }}>
-                            {m.price === 0 ? "Free" : formatPrice(convert(m.price), currency)}
+                            {m.price === 0 ? t("free") : formatPrice(convert(m.price), currency)}
                           </span>
                         </label>
                       );
@@ -463,10 +537,10 @@ export default function CheckoutPage() {
 
                 <div style={{ display: "flex", gap: "0.75rem", marginTop: "0.5rem" }}>
                   <Button variant="bordered" size="lg" onPress={() => setStep(0)} style={{ flex: "0 0 auto" }}>
-                    Back
+                    {t("back")}
                   </Button>
                   <Button color="primary" size="lg" onPress={goNext} style={{ flex: 1 }}>
-                    Review Order <ChevronRight size={16} />
+                    {t("review")} <ChevronRight size={16} />
                   </Button>
                 </div>
               </motion.div>
@@ -525,7 +599,7 @@ export default function CheckoutPage() {
                       </div>
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <div style={{ fontSize: "0.8125rem", fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{item.name}</div>
-                        <div style={{ fontSize: "0.75rem", color: "var(--color-text-tertiary)" }}>Qty: {item.quantity}</div>
+                        <div style={{ fontSize: "0.75rem", color: "var(--color-text-tertiary)" }}>{t("qty", { count: item.quantity })}</div>
                       </div>
                       <span style={{ fontSize: "0.875rem", fontWeight: 700, flexShrink: 0 }}>
                         {formatPrice(convert(item.price * item.quantity), currency)}
@@ -536,7 +610,7 @@ export default function CheckoutPage() {
 
                 <div style={{ display: "flex", gap: "0.75rem", marginTop: "0.5rem" }}>
                   <Button variant="bordered" size="lg" onPress={() => setStep(1)} style={{ flex: "0 0 auto" }}>
-                    Back
+                    {t("back")}
                   </Button>
                   <motion.div style={{ flex: 1 }} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                     <Button
@@ -576,7 +650,7 @@ export default function CheckoutPage() {
             }}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.5rem" }}>
                 <Truck size={14} style={{ color: "var(--color-accent)" }} />
-                <span>Add <strong>{formatPrice(amountToFreeShipping, currency)}</strong> more for free shipping</span>
+                <span>{t.rich("freeShippingRemaining", { amount: formatPrice(amountToFreeShipping, currency), b: (c) => <strong>{c}</strong> })}</span>
               </div>
               <div style={{ height: 4, borderRadius: 2, background: "var(--color-border)", overflow: "hidden" }}>
                 <div style={{
@@ -639,20 +713,94 @@ export default function CheckoutPage() {
             ))}
           </div>
 
+          {/* Promo / discount block */}
+          <div style={{ marginBottom: "1rem", paddingBottom: "1rem", borderBottom: "1px solid var(--color-border)" }}>
+            {discount ? (
+              <div style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                padding: "0.625rem 0.75rem",
+                borderRadius: "10px",
+                background: "#ECFDF5",
+                border: "1px solid #A7F3D0",
+                fontSize: "0.8125rem",
+              }}>
+                <Tag size={14} style={{ color: "#15803d", flexShrink: 0 }} />
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontWeight: 700, color: "#166534" }}>
+                    {t("discountApplied", { percent: discount.percent })}
+                  </div>
+                  <div style={{ color: "#15803d", fontSize: "0.6875rem" }}>
+                    {discount.type === "welcome" ? t("welcomeDiscount") : t("codeLabel", { code: discount.code })}
+                  </div>
+                </div>
+                {discount.source === "code" && (
+                  <button
+                    type="button"
+                    onClick={removeDiscount}
+                    aria-label={t("removeDiscount")}
+                    style={{ background: "none", border: "none", cursor: "pointer", color: "#15803d", padding: 4, display: "flex" }}
+                  >
+                    <XIcon size={14} />
+                  </button>
+                )}
+              </div>
+            ) : (
+              <div>
+                <label style={{ ...labelStyle, marginBottom: "0.375rem" }}>{t("promoCode")}</label>
+                <div style={{ display: "flex", gap: "0.5rem" }}>
+                  <input
+                    type="text"
+                    value={promoInput}
+                    onChange={(e) => { setPromoInput(e.target.value.toUpperCase()); setPromoError(null); }}
+                    placeholder="NEWS-XXXXXX"
+                    style={{ ...inputPlainStyle, fontSize: "0.8125rem", letterSpacing: "0.5px" }}
+                  />
+                  <button
+                    type="button"
+                    onClick={applyPromo}
+                    disabled={!promoInput.trim() || applyingPromo}
+                    style={{
+                      padding: "0 0.875rem",
+                      borderRadius: "12px",
+                      border: "none",
+                      background: "var(--color-accent)",
+                      color: "#fff",
+                      fontWeight: 600,
+                      fontSize: "0.8125rem",
+                      cursor: promoInput.trim() && !applyingPromo ? "pointer" : "not-allowed",
+                      opacity: promoInput.trim() && !applyingPromo ? 1 : 0.5,
+                    }}
+                  >
+                    {applyingPromo ? "…" : t("apply")}
+                  </button>
+                </div>
+                {promoError && <span style={errorStyle}>{promoError}</span>}
+              </div>
+            )}
+          </div>
+
           <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem", fontSize: "0.875rem" }}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <span style={{ color: "var(--color-text-secondary)" }}>Subtotal</span>
+              <span style={{ color: "var(--color-text-secondary)" }}>{t("subtotal")}</span>
               <span style={{ fontWeight: 500 }}>{formatPrice(convert(cart.subtotal), currency)}</span>
             </div>
+            {discount && (
+              <div style={{ display: "flex", justifyContent: "space-between", color: "#15803d" }}>
+                <span>{t("discountLine", { percent: discount.percent })}</span>
+                <span style={{ fontWeight: 600 }}>−{formatPrice(convert(discountAmount), currency)}</span>
+              </div>
+            )}
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <span style={{ color: "var(--color-text-secondary)" }}>Shipping</span>
-              <span style={{ fontWeight: 500, color: shippingPrice === 0 ? "#2E7D32" : undefined }}>
-                {shippingPrice > 0 ? formatPrice(convert(shippingPrice), currency) : "Free"}
+              <span style={{ color: "var(--color-text-secondary)" }}>{t("shippingLine")}</span>
+              <span style={{ fontWeight: 500, color: finalShipping === 0 ? "#2E7D32" : undefined }}>
+                {finalShipping > 0 ? formatPrice(convert(finalShipping), currency) : t("free")}
               </span>
             </div>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <span style={{ color: "var(--color-text-secondary)" }}>Tax (21%)</span>
-              <span style={{ fontWeight: 500 }}>{formatPrice(convert(cart.taxAmount), currency)}</span>
+              <span style={{ color: "var(--color-text-secondary)" }}>{t("taxLine")}</span>
+              <span style={{ fontWeight: 500 }}>{formatPrice(convert(taxOnDiscounted), currency)}</span>
             </div>
             <div style={{
               display: "flex",
@@ -663,8 +811,8 @@ export default function CheckoutPage() {
               paddingTop: "0.875rem",
               marginTop: "0.375rem",
             }}>
-              <span>Total</span>
-              <span>{formatPrice(convert(cart.subtotal + cart.taxAmount + shippingPrice), currency)}</span>
+              <span>{t("total")}</span>
+              <span>{formatPrice(convert(discountedSubtotal + taxOnDiscounted + finalShipping), currency)}</span>
             </div>
           </div>
 
@@ -679,11 +827,11 @@ export default function CheckoutPage() {
           }}>
             <div style={{ display: "flex", alignItems: "center", gap: "0.375rem", fontSize: "0.75rem", color: "var(--color-text-tertiary)" }}>
               <ShieldCheck size={14} />
-              Secure checkout with SSL encryption
+              {t("secureSsl")}
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "0.375rem", fontSize: "0.75rem", color: "var(--color-text-tertiary)" }}>
               <Lock size={14} />
-              Your data is protected
+              {t("dataProtected")}
             </div>
           </div>
         </motion.div>

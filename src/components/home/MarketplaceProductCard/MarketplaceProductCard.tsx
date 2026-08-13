@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { Heart, ShoppingCart, Star, Eye } from "lucide-react";
 import { useCart } from "@/providers/CartProvider";
+import { useCurrency } from "@/providers/CurrencyProvider";
 import { formatPrice } from "@/lib/utils/format-price";
 import { getProductImage, getProductImageFallback } from "@/lib/utils/product-image";
 import styles from "./MarketplaceProductCard.module.css";
@@ -26,6 +28,8 @@ interface Props {
 
 export function MarketplaceProductCard({ product }: Props) {
   const { addItem } = useCart();
+  const { currency, convert } = useCurrency();
+  const t = useTranslations("product");
   const price = Number(product.price);
   const comparePrice = product.comparePrice ? Number(product.comparePrice) : null;
   const hasDiscount = comparePrice && comparePrice > price;
@@ -69,19 +73,19 @@ export function MarketplaceProductCard({ product }: Props) {
         {hasDiscount && (
           <span className={styles.discountBadge}>-{discountPercent}%</span>
         )}
-        {!inStock && <span className={styles.oosOverlay}>Out of Stock</span>}
+        {!inStock && <span className={styles.oosOverlay}>{t("outOfStock")}</span>}
         <div className={styles.actions}>
           <button
             className={styles.actionBtn}
             onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
-            aria-label="Add to wishlist"
+            aria-label={t("addToWishlist")}
           >
             <Heart size={14} />
           </button>
           <button
             className={styles.actionBtn}
             onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
-            aria-label="Quick view"
+            aria-label={t("quickView")}
           >
             <Eye size={14} />
           </button>
@@ -100,24 +104,24 @@ export function MarketplaceProductCard({ product }: Props) {
         </div>
         <div className={styles.priceRow}>
           <div className={styles.prices}>
-            <span className={styles.price}>{formatPrice(price)}</span>
+            <span className={styles.price}>{formatPrice(convert(price), currency)}</span>
             {hasDiscount && (
-              <span className={styles.oldPrice}>{formatPrice(comparePrice)}</span>
+              <span className={styles.oldPrice}>{formatPrice(convert(comparePrice), currency)}</span>
             )}
           </div>
           <button
             className={`${styles.cartBtn} ${!inStock ? styles.cartBtnDisabled : ""}`}
             onClick={handleAddToCart}
             disabled={!inStock}
-            aria-label="Add to cart"
+            aria-label={t("addToCart")}
           >
             <ShoppingCart size={15} />
           </button>
         </div>
         {inStock ? (
-          <span className={styles.stockIn}>In stock</span>
+          <span className={styles.stockIn}>{t("inStock")}</span>
         ) : (
-          <span className={styles.stockOut}>Out of stock</span>
+          <span className={styles.stockOut}>{t("outOfStock")}</span>
         )}
       </div>
     </Link>

@@ -85,7 +85,7 @@ export function ProductInfo({
     addItem({
       productId: id,
       name: warrantyOption.years > 0
-        ? `${name} + ${warrantyOption.years}yr warranty`
+        ? `${name} ${t("warrantyNameSuffix", { years: warrantyOption.years })}`
         : name,
       slug,
       sku,
@@ -100,7 +100,7 @@ export function ProductInfo({
     addItem({
       productId: id,
       name: warrantyOption.years > 0
-        ? `${name} + ${warrantyOption.years}yr warranty`
+        ? `${name} ${t("warrantyNameSuffix", { years: warrantyOption.years })}`
         : name,
       slug,
       sku,
@@ -126,7 +126,7 @@ export function ProductInfo({
         toast.success(t("removeFromWishlist"));
       }
     } catch {
-      toast.error("Please log in to use wishlist");
+      toast.error(t("loginForWishlist"));
     }
   };
 

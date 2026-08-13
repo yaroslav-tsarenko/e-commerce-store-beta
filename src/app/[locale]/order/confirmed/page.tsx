@@ -13,7 +13,7 @@ import { LoadingSpinner } from "@/components/shared/LoadingSpinner/LoadingSpinne
 import type { OrderDetail } from "@/types/order";
 
 function ConfirmedContent() {
-  const t = useTranslations("notifications");
+  const t = useTranslations("orderConfirmed");
   const { currency, convert } = useCurrency();
   const searchParams = useSearchParams();
   const orderId = searchParams.get("orderId");
@@ -58,14 +58,14 @@ function ConfirmedContent() {
           <CheckCircle size={40} />
         </motion.div>
         <h1 style={{ fontSize: "1.75rem", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "0.5rem" }}>
-          {t("orderPlaced")}
+          {t("title")}
         </h1>
         <p style={{ color: "var(--color-text-secondary)", fontSize: "0.9375rem" }}>
-          Thank you for your order. We&apos;ll send a confirmation email shortly.
+          {t("thankYou")}
         </p>
         {order && (
           <p style={{ marginTop: "0.75rem", fontSize: "0.875rem", color: "var(--color-text-tertiary)" }}>
-            Order <strong style={{ color: "var(--color-text)" }}>#{order.orderNumber.slice(-8)}</strong>
+            {t.rich("orderNumber", { number: order.orderNumber.slice(-8), b: (c) => <strong style={{ color: "var(--color-text)" }}>{c}</strong> })}
           </p>
         )}
       </motion.div>
@@ -85,7 +85,7 @@ function ConfirmedContent() {
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "1rem" }}>
             <Package size={18} color="var(--color-accent)" />
-            <h2 style={{ fontSize: "1rem", fontWeight: 700 }}>Order Summary</h2>
+            <h2 style={{ fontSize: "1rem", fontWeight: 700 }}>{t("summary")}</h2>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginBottom: "1rem" }}>
@@ -94,7 +94,7 @@ function ConfirmedContent() {
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontWeight: 600, overflow: "hidden", textOverflow: "ellipsis" }}>{item.productName}</div>
                   <div style={{ fontSize: "0.75rem", color: "var(--color-text-tertiary)", marginTop: "0.125rem" }}>
-                    Qty {item.quantity} × {formatPrice(convert(Number(item.price)), currency)}
+                    {t("qtyLabel")} {item.quantity} × {formatPrice(convert(Number(item.price)), currency)}
                   </div>
                 </div>
                 <span style={{ fontWeight: 700, whiteSpace: "nowrap" }}>{formatPrice(convert(Number(item.total)), currency)}</span>
@@ -104,15 +104,15 @@ function ConfirmedContent() {
 
           <div style={{ display: "flex", flexDirection: "column", gap: "0.375rem", fontSize: "0.875rem" }}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <span style={{ color: "var(--color-text-secondary)" }}>Subtotal</span>
+              <span style={{ color: "var(--color-text-secondary)" }}>{t("subtotal")}</span>
               <span>{formatPrice(convert(Number(order.subtotal)), currency)}</span>
             </div>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <span style={{ color: "var(--color-text-secondary)" }}>Shipping</span>
-              <span>{Number(order.shippingCost) === 0 ? "Free" : formatPrice(convert(Number(order.shippingCost)), currency)}</span>
+              <span style={{ color: "var(--color-text-secondary)" }}>{t("shipping")}</span>
+              <span>{Number(order.shippingCost) === 0 ? t("free") : formatPrice(convert(Number(order.shippingCost)), currency)}</span>
             </div>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <span style={{ color: "var(--color-text-secondary)" }}>Tax</span>
+              <span style={{ color: "var(--color-text-secondary)" }}>{t("tax")}</span>
               <span>{formatPrice(convert(Number(order.taxAmount)), currency)}</span>
             </div>
             <div style={{
@@ -124,7 +124,7 @@ function ConfirmedContent() {
               paddingTop: "0.625rem",
               marginTop: "0.375rem",
             }}>
-              <span>Total</span>
+              <span>{t("total")}</span>
               <span>{formatPrice(convert(Number(order.total)), currency)}</span>
             </div>
           </div>
@@ -147,7 +147,7 @@ function ConfirmedContent() {
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.5rem" }}>
               <MapPin size={14} color="var(--color-accent)" />
               <span style={{ fontSize: "0.75rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.04em", color: "var(--color-text-tertiary)" }}>
-                Delivery to
+                {t("deliveryTo")}
               </span>
             </div>
             <p style={{ fontSize: "0.8125rem", color: "var(--color-text-secondary)", lineHeight: 1.5 }}>
@@ -161,13 +161,13 @@ function ConfirmedContent() {
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.5rem" }}>
               <Truck size={14} color="var(--color-accent)" />
               <span style={{ fontSize: "0.75rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.04em", color: "var(--color-text-tertiary)" }}>
-                Next Steps
+                {t("nextSteps")}
               </span>
             </div>
             <ul style={{ fontSize: "0.8125rem", color: "var(--color-text-secondary)", lineHeight: 1.6, paddingLeft: "1rem", margin: 0 }}>
-              <li>We&apos;ll prepare your order within 1–2 business days</li>
-              <li>You&apos;ll receive a tracking link by email</li>
-              <li>Estimated delivery depends on destination</li>
+              <li>{t("step1")}</li>
+              <li>{t("step2")}</li>
+              <li>{t("step3")}</li>
             </ul>
           </div>
         </motion.div>
@@ -191,8 +191,7 @@ function ConfirmedContent() {
       >
         <Mail size={16} color="var(--color-accent)" style={{ flexShrink: 0 }} />
         <span>
-          A confirmation email has been sent to{" "}
-          <strong>{order?.customerEmail || "your email"}</strong>
+          {t.rich("emailSent", { email: order?.customerEmail || t("yourEmail"), b: (c) => <strong>{c}</strong> })}
         </span>
       </motion.div>
 
@@ -207,10 +206,10 @@ function ConfirmedContent() {
         }}
       >
         <Button as={Link} href="/account/orders" variant="bordered" style={{ flex: "1 1 200px" }}>
-          View Orders <ChevronRight size={16} />
+          {t("viewOrders")} <ChevronRight size={16} />
         </Button>
         <Button as={Link} href="/catalog" color="primary" style={{ flex: "1 1 200px" }}>
-          Continue Shopping
+          {t("continueShopping")}
         </Button>
       </motion.div>
     </div>

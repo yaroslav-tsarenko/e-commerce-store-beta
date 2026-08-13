@@ -13,15 +13,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { COUNTRIES } from "@/lib/countries";
 import styles from "../auth.module.css";
 
-function getPasswordStrength(password: string): { level: number; label: string; color: string } {
-  if (password.length === 0) return { level: 0, label: "", color: "transparent" };
-  if (password.length < 6) return { level: 25, label: "Weak", color: "#ef4444" };
-  if (password.length < 10) return { level: 50, label: "Fair", color: "#f59e0b" };
-  if (password.length < 14) return { level: 75, label: "Good", color: "#22c55e" };
-  return { level: 100, label: "Strong", color: "#16a34a" };
+function getPasswordStrength(password: string): { level: number; labelKey: string; color: string } {
+  if (password.length === 0) return { level: 0, labelKey: "", color: "transparent" };
+  if (password.length < 6) return { level: 25, labelKey: "pwWeak", color: "#ef4444" };
+  if (password.length < 10) return { level: 50, labelKey: "pwFair", color: "#f59e0b" };
+  if (password.length < 14) return { level: 75, labelKey: "pwGood", color: "#22c55e" };
+  return { level: 100, labelKey: "pwStrong", color: "#16a34a" };
 }
 
-const STEP_LABELS = ["Personal Info", "Contact Details", "Address", "Password"];
+const STEP_LABEL_KEYS = ["stepPersonal", "stepContact", "stepAddress", "stepPassword"];
 const STEP_ICONS = [User, Phone, MapPin, Lock];
 
 interface FormData {
@@ -62,6 +62,7 @@ export default function RegisterPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const strength = getPasswordStrength(form.password);
+  const stepLabels = STEP_LABEL_KEYS.map((k) => t(k));
 
   const selectedCountry = COUNTRIES.find((c) => c.code === form.country);
   const phoneHint = selectedCountry ? selectedCountry.phone : "+44";
@@ -74,27 +75,27 @@ export default function RegisterPage() {
   function validateStep(s: number): boolean {
     const errs: Partial<Record<keyof FormData, string>> = {};
     if (s === 0) {
-      if (!form.firstName.trim()) errs.firstName = "First name is required";
-      if (!form.lastName.trim()) errs.lastName = "Last name is required";
-      if (!form.dateOfBirth) errs.dateOfBirth = "Date of birth is required";
+      if (!form.firstName.trim()) errs.firstName = t("firstNameRequired");
+      if (!form.lastName.trim()) errs.lastName = t("lastNameRequired");
+      if (!form.dateOfBirth) errs.dateOfBirth = t("dobRequired");
       else {
         const dob = new Date(form.dateOfBirth);
         const age = (Date.now() - dob.getTime()) / (365.25 * 24 * 60 * 60 * 1000);
-        if (age < 18) errs.dateOfBirth = "You must be at least 18 years old";
+        if (age < 18) errs.dateOfBirth = t("ageRequirement");
       }
     } else if (s === 1) {
-      if (!form.email.trim()) errs.email = "Email is required";
-      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errs.email = "Invalid email";
-      if (!form.phone.trim()) errs.phone = "Phone is required";
+      if (!form.email.trim()) errs.email = t("emailRequired");
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errs.email = t("invalidEmail");
+      if (!form.phone.trim()) errs.phone = t("phoneRequired");
     } else if (s === 2) {
-      if (!form.street.trim()) errs.street = "Street address is required";
-      if (!form.city.trim()) errs.city = "City is required";
-      if (!form.country) errs.country = "Country is required";
-      if (!form.postalCode.trim()) errs.postalCode = "Postal code is required";
+      if (!form.street.trim()) errs.street = t("streetRequired");
+      if (!form.city.trim()) errs.city = t("cityRequired");
+      if (!form.country) errs.country = t("countryRequired");
+      if (!form.postalCode.trim()) errs.postalCode = t("postalRequired");
     } else if (s === 3) {
-      if (!form.password) errs.password = "Password is required";
-      else if (form.password.length < 6) errs.password = "Min 6 characters";
-      if (form.password !== form.confirmPassword) errs.confirmPassword = "Passwords do not match";
+      if (!form.password) errs.password = t("passwordRequired");
+      else if (form.password.length < 6) errs.password = t("minChars");
+      if (form.password !== form.confirmPassword) errs.confirmPassword = t("passwordsMismatch");
     }
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -128,11 +129,11 @@ export default function RegisterPage() {
         }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Registration failed");
-      toast.success("Account created!");
-      window.location.href = "/en/account";
+      if (!res.ok) throw new Error(data.error || t("registerFailed"));
+      toast.success(t("accountCreated"));
+      window.location.href = "/account";
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Registration failed");
+      toast.error(error instanceof Error ? error.message : t("registerFailed"));
     } finally {
       setLoading(false);
     }
@@ -193,6 +194,37 @@ export default function RegisterPage() {
           <p className={styles.authSubtitle}>{t("registerSubtitle")}</p>
         </div>
 
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "0.75rem",
+          padding: "0.75rem 1rem",
+          borderRadius: "12px",
+          background: "linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)",
+          border: "1px solid #6EE7B7",
+          marginBottom: "1.5rem",
+          fontSize: "0.8125rem",
+        }}>
+          <div style={{
+            minWidth: "44px",
+            height: "44px",
+            borderRadius: "50%",
+            background: "#10B981",
+            color: "#fff",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontWeight: 800,
+            fontSize: "0.9375rem",
+          }}>
+            10%
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontWeight: 700, color: "#065F46" }}>{t("welcomeGiftTitle")}</div>
+            <div style={{ color: "#047857", fontSize: "0.75rem" }}>{t("welcomeGiftDesc")}</div>
+          </div>
+        </div>
+
         {/* Step indicator */}
         <div style={{
           display: "flex",
@@ -200,7 +232,7 @@ export default function RegisterPage() {
           gap: "0.25rem",
           marginBottom: "1.75rem",
         }}>
-          {STEP_LABELS.map((label, i) => {
+          {stepLabels.map((label, i) => {
             const Icon = STEP_ICONS[i];
             const isActive = i === step;
             const isDone = i < step;
@@ -245,7 +277,7 @@ export default function RegisterPage() {
           gap: "0.5rem",
           marginBottom: "1.25rem",
         }}>
-          {STEP_LABELS.map((_, i) => (
+          {stepLabels.map((_, i) => (
             <div
               key={i}
               style={{
@@ -260,7 +292,7 @@ export default function RegisterPage() {
         </div>
 
         <p style={{ fontSize: "0.8125rem", color: "var(--color-text-secondary)", marginBottom: "1rem", fontWeight: 600 }}>
-          Step {step + 1} of 4: {STEP_LABELS[step]}
+          {t("stepIndicator", { current: step + 1, total: 4, label: stepLabels[step] })}
         </p>
 
         <form onSubmit={handleSubmit}>
@@ -276,14 +308,14 @@ export default function RegisterPage() {
                 className={styles.form}
               >
                 <div className={styles.inputGroup}>
-                  <label className={styles.inputLabel}>First Name *</label>
+                  <label className={styles.inputLabel}>{t("firstName")} *</label>
                   <div className={styles.inputWrapper}>
                     <User size={16} className={styles.inputIcon} />
                     <input
                       type="text"
                       value={form.firstName}
                       onChange={set("firstName")}
-                      placeholder="John"
+                      placeholder={t("phFirstName")}
                       className={styles.input}
                       style={errors.firstName ? { borderColor: "var(--color-danger)" } : undefined}
                     />
@@ -292,14 +324,14 @@ export default function RegisterPage() {
                 </div>
 
                 <div className={styles.inputGroup}>
-                  <label className={styles.inputLabel}>Last Name *</label>
+                  <label className={styles.inputLabel}>{t("lastName")} *</label>
                   <div className={styles.inputWrapper}>
                     <User size={16} className={styles.inputIcon} />
                     <input
                       type="text"
                       value={form.lastName}
                       onChange={set("lastName")}
-                      placeholder="Doe"
+                      placeholder={t("phLastName")}
                       className={styles.input}
                       style={errors.lastName ? { borderColor: "var(--color-danger)" } : undefined}
                     />
@@ -308,7 +340,7 @@ export default function RegisterPage() {
                 </div>
 
                 <div className={styles.inputGroup}>
-                  <label className={styles.inputLabel}>Date of Birth *</label>
+                  <label className={styles.inputLabel}>{t("dateOfBirth")} *</label>
                   <div className={styles.inputWrapper}>
                     <Calendar size={16} className={styles.inputIcon} />
                     <input
@@ -324,7 +356,7 @@ export default function RegisterPage() {
 
                 <div className={styles.submitButton}>
                   <Button type="button" color="primary" fullWidth onPress={goNext}>
-                    Continue <ChevronRight size={16} />
+                    {t("continue")} <ChevronRight size={16} />
                   </Button>
                 </div>
               </motion.div>
@@ -357,7 +389,7 @@ export default function RegisterPage() {
                 </div>
 
                 <div className={styles.inputGroup}>
-                  <label className={styles.inputLabel}>Phone *</label>
+                  <label className={styles.inputLabel}>{t("phone")} *</label>
                   <div className={styles.inputWrapper}>
                     <Phone size={16} className={styles.inputIcon} />
                     <input
@@ -372,17 +404,17 @@ export default function RegisterPage() {
                   {renderError("phone")}
                   {!form.country && (
                     <span style={{ fontSize: "0.7rem", color: "var(--color-text-tertiary)" }}>
-                      Select country in next step for phone code hint
+                      {t("phoneCodeHint")}
                     </span>
                   )}
                 </div>
 
                 <div style={{ display: "flex", gap: "0.75rem" }} className={styles.submitButton}>
                   <Button type="button" variant="bordered" onPress={goBack}>
-                    <ChevronLeft size={16} /> Back
+                    <ChevronLeft size={16} /> {t("back")}
                   </Button>
                   <Button type="button" color="primary" style={{ flex: 1 }} onPress={goNext}>
-                    Continue <ChevronRight size={16} />
+                    {t("continue")} <ChevronRight size={16} />
                   </Button>
                 </div>
               </motion.div>
@@ -399,14 +431,14 @@ export default function RegisterPage() {
                 className={styles.form}
               >
                 <div className={styles.inputGroup}>
-                  <label className={styles.inputLabel}>Street Address *</label>
+                  <label className={styles.inputLabel}>{t("street")} *</label>
                   <div className={styles.inputWrapper}>
                     <MapPin size={16} className={styles.inputIcon} />
                     <input
                       type="text"
                       value={form.street}
                       onChange={set("street")}
-                      placeholder="123 Main Street, Apt 4B"
+                      placeholder={t("phStreet")}
                       className={styles.input}
                       style={errors.street ? { borderColor: "var(--color-danger)" } : undefined}
                     />
@@ -415,12 +447,12 @@ export default function RegisterPage() {
                 </div>
 
                 <div className={styles.inputGroup}>
-                  <label className={styles.inputLabel}>City *</label>
+                  <label className={styles.inputLabel}>{t("city")} *</label>
                   <input
                     type="text"
                     value={form.city}
                     onChange={set("city")}
-                    placeholder="Riga"
+                    placeholder={t("phCity")}
                     style={{
                       ...plainInputStyle,
                       borderColor: errors.city ? "var(--color-danger)" : undefined,
@@ -430,7 +462,7 @@ export default function RegisterPage() {
                 </div>
 
                 <div className={styles.inputGroup}>
-                  <label className={styles.inputLabel}>Country *</label>
+                  <label className={styles.inputLabel}>{t("country")} *</label>
                   <select
                     value={form.country}
                     onChange={set("country")}
@@ -440,7 +472,7 @@ export default function RegisterPage() {
                       color: form.country ? "var(--color-text)" : "var(--color-text-tertiary)",
                     }}
                   >
-                    <option value="">Select country...</option>
+                    <option value="">{t("selectCountry")}</option>
                     {COUNTRIES.map((c) => (
                       <option key={c.code} value={c.code}>{c.name}</option>
                     ))}
@@ -449,7 +481,7 @@ export default function RegisterPage() {
                 </div>
 
                 <div className={styles.inputGroup}>
-                  <label className={styles.inputLabel}>Postal Code *</label>
+                  <label className={styles.inputLabel}>{t("postalCode")} *</label>
                   <input
                     type="text"
                     value={form.postalCode}
@@ -465,10 +497,10 @@ export default function RegisterPage() {
 
                 <div style={{ display: "flex", gap: "0.75rem" }} className={styles.submitButton}>
                   <Button type="button" variant="bordered" onPress={goBack}>
-                    <ChevronLeft size={16} /> Back
+                    <ChevronLeft size={16} /> {t("back")}
                   </Button>
                   <Button type="button" color="primary" style={{ flex: 1 }} onPress={goNext}>
-                    Continue <ChevronRight size={16} />
+                    {t("continue")} <ChevronRight size={16} />
                   </Button>
                 </div>
               </motion.div>
@@ -492,7 +524,7 @@ export default function RegisterPage() {
                       type={showPassword ? "text" : "password"}
                       value={form.password}
                       onChange={set("password")}
-                      placeholder="Min 6 characters"
+                      placeholder={t("minChars")}
                       className={`${styles.input} ${styles.inputWithToggle}`}
                       style={errors.password ? { borderColor: "var(--color-danger)" } : undefined}
                     />
@@ -511,7 +543,7 @@ export default function RegisterPage() {
                       <div style={{ height: 4, borderRadius: 2, background: "var(--color-border)", overflow: "hidden" }}>
                         <div style={{ width: `${strength.level}%`, height: "100%", background: strength.color, transition: "width 0.3s" }} />
                       </div>
-                      <p style={{ fontSize: "0.75rem", color: strength.color, marginTop: "0.25rem", margin: "0.25rem 0 0" }}>{strength.label}</p>
+                      <p style={{ fontSize: "0.75rem", color: strength.color, marginTop: "0.25rem", margin: "0.25rem 0 0" }}>{strength.labelKey ? t(strength.labelKey) : ""}</p>
                     </div>
                   )}
                 </div>
@@ -524,7 +556,7 @@ export default function RegisterPage() {
                       type={showConfirmPassword ? "text" : "password"}
                       value={form.confirmPassword}
                       onChange={set("confirmPassword")}
-                      placeholder="Confirm your password"
+                      placeholder={t("phConfirmPassword")}
                       className={`${styles.input} ${styles.inputWithToggle}`}
                       style={errors.confirmPassword ? { borderColor: "var(--color-danger)" } : undefined}
                     />
@@ -541,14 +573,15 @@ export default function RegisterPage() {
                 </div>
 
                 <p className={styles.termsText}>
-                  By creating an account, you agree to our{" "}
-                  <Link href="/policies/terms">Terms of Service</Link> and{" "}
-                  <Link href="/policies/privacy">Privacy Policy</Link>.
+                  {t.rich("termsText", {
+                    terms: (c) => <Link href="/policies/terms">{c}</Link>,
+                    privacy: (c) => <Link href="/policies/privacy">{c}</Link>,
+                  })}
                 </p>
 
                 <div style={{ display: "flex", gap: "0.75rem" }} className={styles.submitButton}>
                   <Button type="button" variant="bordered" onPress={goBack}>
-                    <ChevronLeft size={16} /> Back
+                    <ChevronLeft size={16} /> {t("back")}
                   </Button>
                   <Button type="submit" color="primary" style={{ flex: 1 }} isLoading={loading}>
                     {t("signUp")}
@@ -560,7 +593,7 @@ export default function RegisterPage() {
         </form>
 
         <p className={styles.authFooter}>
-          {t("haveAccount")}{" "}
+          {t("hasAccount")}{" "}
           <Link href="/auth/login">{t("signIn")}</Link>
         </p>
       </motion.div>
