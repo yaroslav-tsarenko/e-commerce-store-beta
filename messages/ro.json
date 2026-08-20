@@ -783,5 +783,15 @@
     "a7": "Da! Ambalajul cadou este disponibil la finalizarea comenzii pentru o mică taxă suplimentară. Poți include și un mesaj personalizat cu cadoul tău.",
     "q8": "Cum contactez asistența pentru clienți?",
     "a8": "Ne poți contacta prin formularul de contact, prin e-mail la support@misaelectro.ro sau prin chat live pe site-ul nostru. Suntem disponibili 24/7 pentru a te ajuta."
+  },
+  "policiesIndex": {
+    "intro": "Vă rugăm să consultați politicile noastre de mai jos. Aceste politici reglementează utilizarea site-ului MisaElectro și orice achiziții efectuate prin intermediul acestuia.",
+    "terms": "Termeni și condiții",
+    "shipping": "Politica de livrare",
+    "privacy": "Politica de confidențialitate",
+    "cookies": "Politica de cookie-uri",
+    "returns": "Politica de returnare, rambursare și anulare",
+    "payment": "Politica de plată",
+    "warranty": "Politica de garanție"
   }
 }

@@ -783,5 +783,15 @@
     "a7": "Igen! Az ajándékcsomagolás a pénztárnál elérhető egy kis felárért. Ajándékodhoz személyre szabott üzenetet is mellékelhetsz.",
     "q8": "Hogyan léphetek kapcsolatba az ügyfélszolgálattal?",
     "a8": "Elérhetsz minket a kapcsolatfelvételi űrlapon, e-mailben a support@misaelectro.ro címen, vagy élő csevegésen keresztül a weboldalunkon. A nap 24 órájában rendelkezésre állunk."
+  },
+  "policiesIndex": {
+    "intro": "Kérjük, tekintse át az alábbi szabályzatainkat. Ezek a szabályzatok a MisaElectro webhely használatára és az azon keresztül végzett vásárlásokra vonatkoznak.",
+    "terms": "Általános szerződési feltételek",
+    "shipping": "Szállítási szabályzat",
+    "privacy": "Adatvédelmi szabályzat",
+    "cookies": "Cookie-szabályzat",
+    "returns": "Visszaküldési, visszatérítési és lemondási szabályzat",
+    "payment": "Fizetési szabályzat",
+    "warranty": "Jótállási szabályzat"
   }
 }

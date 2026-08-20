@@ -1,28 +1,37 @@
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
-export const metadata = { title: "Policies — MisaElectro" };
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "policyLayout" });
+  return { title: `${t("policies")} — MisaElectro` };
+}
 
-const policies = [
-  { label: "Terms and Conditions", href: "/policies/terms" },
-  { label: "Shipping Policy", href: "/policies/shipping" },
-  { label: "Privacy Policy", href: "/policies/privacy" },
-  { label: "Cookie Policy", href: "/policies/cookies" },
-  { label: "Returns, Refunds and Cancellation Policy", href: "/policies/returns" },
-  { label: "Payment Policy", href: "/policies/payment" },
-  { label: "Warranty Policy", href: "/policies/warranty" },
-];
+const policyLinks = [
+  { key: "terms", href: "/policies/terms" },
+  { key: "shipping", href: "/policies/shipping" },
+  { key: "privacy", href: "/policies/privacy" },
+  { key: "cookies", href: "/policies/cookies" },
+  { key: "returns", href: "/policies/returns" },
+  { key: "payment", href: "/policies/payment" },
+  { key: "warranty", href: "/policies/warranty" },
+] as const;
 
 export default function PoliciesIndexPage() {
+  const t = useTranslations("policiesIndex");
+  const nav = useTranslations("nav");
+  const policyLayout = useTranslations("policyLayout");
+  const policies = policyLinks.map((p) => ({ label: t(p.key), href: p.href }));
   return (
     <div style={{ maxWidth: "48rem", margin: "0 auto", padding: "0 1rem 4rem" }}>
-      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Policies" }]} />
+      <Breadcrumbs items={[{ label: nav("home"), href: "/" }, { label: policyLayout("policies") }]} />
       <h1 style={{ fontSize: "clamp(1.375rem, 4.5vw, 1.75rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "1rem", color: "var(--color-text)" }}>
-        Policies
+        {policyLayout("policies")}
       </h1>
       <p style={{ lineHeight: 1.7, color: "var(--color-text-secondary)", marginBottom: "1.5rem", fontSize: "0.9375rem" }}>
-        Please review our policies below. These policies govern your use of the MisaElectro website and
-        any purchases made through it.
+        {t("intro")}
       </p>
       <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.5rem" }}>
         {policies.map((policy) => (

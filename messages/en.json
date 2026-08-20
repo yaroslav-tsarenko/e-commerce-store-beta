@@ -783,5 +783,15 @@
     "a7": "Yes! Gift wrapping is available at checkout for a small additional fee. You can also include a personalized message with your gift.",
     "q8": "How do I contact customer support?",
     "a8": "You can reach us via our contact form, email at support@misaelectro.ro, or through live chat on our website. We're available 24/7 to help."
+  },
+  "policiesIndex": {
+    "intro": "Please review our policies below. These policies govern your use of the MisaElectro website and any purchases made through it.",
+    "terms": "Terms and Conditions",
+    "shipping": "Shipping Policy",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookie Policy",
+    "returns": "Returns, Refunds and Cancellation Policy",
+    "payment": "Payment Policy",
+    "warranty": "Warranty Policy"
   }
 }
