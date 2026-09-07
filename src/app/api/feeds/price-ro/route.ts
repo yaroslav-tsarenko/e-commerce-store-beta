@@ -14,6 +14,21 @@ export const dynamic = "force-dynamic";
 export const maxDuration = 300;
 
 const FEED_LOCALE = "ro";
+
+const COLUMNS = [
+  "Cod unic",
+  "Categorii",
+  "Producător",
+  "Model",
+  "Cod producător",
+  "Preț (RON)",
+  "Stoc",
+  "Transport",
+  "Garanție",
+  "Link",
+  "Imagine",
+  "Descriere",
+];
 const DEFAULT_TAX_RATE = 21;
 const DEFAULT_FREE_SHIPPING_MIN = 100; // EUR (net), matches checkout
 const FLAT_SHIPPING_EUR = 5.99;
@@ -70,8 +85,14 @@ function specsToText(characteristics: unknown): string {
   return parts.join("; ");
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const forceDownload =
+      searchParams.has("download") || searchParams.has("txt") || searchParams.get("format") === "txt";
+    const wantsHtml =
+      !forceDownload && (request.headers.get("accept") || "").includes("text/html");
+
     const [products, settings, ronRate, allCategories] = await Promise.all([
       prisma.product.findMany({
         where: {
@@ -131,7 +152,7 @@ export async function GET() {
       translateBatch(htmlStrings, FEED_LOCALE, "html"),
     ]);
 
-    const lines = products.map((product) => {
+    const rows = products.map((product) => {
       const uniqueCode = product.id;
       const categories = [...product.categories]
         .sort((a, b) => depthOf(a.category.id) - depthOf(b.category.id))
@@ -174,19 +195,113 @@ export async function GET() {
         link,
         image,
         description,
-      ].join("|");
+      ];
     });
 
-    const body = lines.join("\n");
+    if (wantsHtml) {
+      return new NextResponse(renderHtml(rows), {
+        headers: { "Content-Type": "text/html; charset=utf-8" },
+      });
+    }
+
+    const body = rows.map((r) => r.join("|")).join("\n");
 
     return new NextResponse(body, {
       headers: {
         "Content-Type": "text/plain; charset=utf-8",
-        "Content-Disposition": 'inline; filename="price-ro-feed.txt"',
+        "Content-Disposition": forceDownload
+          ? 'attachment; filename="price-ro-feed.txt"'
+          : 'inline; filename="price-ro-feed.txt"',
       },
     });
   } catch (error) {
     console.error("Error generating price.ro feed:", error);
     return NextResponse.json({ error: "Failed to generate feed" }, { status: 500 });
   }
+}
+
+function htmlEscape(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function renderHtml(rows: string[][]): string {
+  const head = COLUMNS.map((c) => `<th>${htmlEscape(c)}</th>`).join("");
+  const linkCols = new Set([9, 10]); // link, image
+
+  const body = rows
+    .map((cells) => {
+      const tds = COLUMNS.map((_, i) => {
+        const value = cells[i] ?? "";
+        const safe = htmlEscape(value);
+        const cls = i === 11 ? "desc" : i === 1 ? "cats" : "";
+        if (linkCols.has(i) && value) {
+          return `<td class="${cls}" title="${safe}"><a href="${safe}" target="_blank" rel="noreferrer">${safe}</a></td>`;
+        }
+        return `<td class="${cls}" title="${safe}">${safe}</td>`;
+      }).join("");
+      return `<tr>${tds}</tr>`;
+    })
+    .join("");
+
+  return `<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Feed price.ro — ${rows.length} produse</title>
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: #0e0f13; color: #e7e9ee; }
+  header { position: sticky; top: 0; z-index: 3; display: flex; gap: 1rem; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 1rem 1.25rem; background: #14161c; border-bottom: 1px solid #262a35; }
+  header h1 { font-size: 1.05rem; margin: 0; font-weight: 700; }
+  header .meta { color: #9aa1af; font-size: .85rem; }
+  .actions { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+  input[type=search] { background: #0e0f13; border: 1px solid #2c313d; color: #e7e9ee; border-radius: 8px; padding: .5rem .7rem; font-size: .85rem; min-width: 220px; }
+  a.btn { text-decoration: none; background: #3b82f6; color: #fff; padding: .5rem .8rem; border-radius: 8px; font-size: .85rem; font-weight: 600; }
+  a.btn.secondary { background: #262a35; color: #e7e9ee; }
+  .wrap { overflow: auto; max-height: calc(100vh - 64px); }
+  table { border-collapse: collapse; width: 100%; font-size: .8rem; }
+  thead th { position: sticky; top: 0; background: #1b1e26; text-align: left; padding: .55rem .6rem; white-space: nowrap; border-bottom: 1px solid #2c313d; color: #c7ccd6; }
+  tbody td { padding: .5rem .6rem; border-bottom: 1px solid #1d2027; max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  tbody td.desc { max-width: 420px; }
+  tbody td.cats { max-width: 320px; color: #b7c0d0; }
+  tbody tr:nth-child(even) { background: #12141a; }
+  tbody tr:hover { background: #1a1d25; }
+  td a { color: #7ab0ff; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Feed price.ro</h1>
+    <div class="meta">${rows.length} produse</div>
+  </div>
+  <div class="actions">
+    <input id="q" type="search" placeholder="Caută în tabel…" />
+    <a class="btn" href="?download=1">Export .txt</a>
+    <a class="btn secondary" href="?" onclick="location.reload();return false;">Reîncarcă</a>
+  </div>
+</header>
+<div class="wrap">
+  <table id="t">
+    <thead><tr>${head}</tr></thead>
+    <tbody>${body}</tbody>
+  </table>
+</div>
+<script>
+  const q = document.getElementById('q');
+  const rows = Array.from(document.querySelectorAll('#t tbody tr'));
+  q.addEventListener('input', () => {
+    const term = q.value.toLowerCase();
+    for (const r of rows) r.style.display = r.textContent.toLowerCase().includes(term) ? '' : 'none';
+  });
+</script>
+</body>
+</html>`;
 }
