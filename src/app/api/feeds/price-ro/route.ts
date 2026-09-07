@@ -72,7 +72,7 @@ function specsToText(characteristics: unknown): string {
 
 export async function GET() {
   try {
-    const [products, settings, ronRate] = await Promise.all([
+    const [products, settings, ronRate, allCategories] = await Promise.all([
       prisma.product.findMany({
         where: {
           status: "ACTIVE",
@@ -80,12 +80,34 @@ export async function GET() {
         },
         include: {
           images: { orderBy: { sortOrder: "asc" }, take: 1 },
-          categories: { include: { category: { select: { name: true } } } },
+          categories: {
+            include: { category: { select: { id: true, name: true, parentId: true } } },
+          },
         },
       }),
       prisma.storeSettings.findUnique({ where: { id: "default" } }),
       getRonRate(),
+      prisma.category.findMany({ select: { id: true, parentId: true } }),
     ]);
+
+    // Depth of each category (root = 0), so a product's categories can be
+    // ordered as a general → specific path for price.ro.
+    const parentOf = new Map(allCategories.map((c) => [c.id, c.parentId]));
+    const depthCache = new Map<string, number>();
+    const depthOf = (id: string): number => {
+      const cached = depthCache.get(id);
+      if (cached !== undefined) return cached;
+      let depth = 0;
+      let current = parentOf.get(id) ?? null;
+      const seen = new Set<string>([id]);
+      while (current && !seen.has(current)) {
+        depth++;
+        seen.add(current);
+        current = parentOf.get(current) ?? null;
+      }
+      depthCache.set(id, depth);
+      return depth;
+    };
 
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://misaelectro.ro";
     const taxRate = settings?.taxRate != null ? Number(settings.taxRate) : DEFAULT_TAX_RATE;
@@ -111,7 +133,8 @@ export async function GET() {
 
     const lines = products.map((product) => {
       const uniqueCode = product.id;
-      const categories = product.categories
+      const categories = [...product.categories]
+        .sort((a, b) => depthOf(a.category.id) - depthOf(b.category.id))
         .map((c) => cell(textMap.get(c.category.name) ?? c.category.name))
         .filter(Boolean)
         .join(" > ");
