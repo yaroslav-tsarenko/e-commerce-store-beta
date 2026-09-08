@@ -21,7 +21,8 @@ const COLUMNS = [
   "Producător",
   "Model",
   "Cod producător",
-  "Preț (RON)",
+  "Preț",
+  "Moneda",
   "Stoc",
   "Transport",
   "Garanție",
@@ -163,11 +164,13 @@ export async function GET(request: Request) {
       const model = cell(textMap.get(product.name) ?? product.name);
       const manufacturerCode = cell(product.mpn || product.sku);
       const priceRon = (Number(product.price) * vatMultiplier * ronRate).toFixed(2);
+      const currency = "RON";
       const stock =
         !product.trackInventory || product.quantity > 0 ? "În stoc" : "Indisponibil";
       const netPrice = Number(product.price);
-      const shipping =
-        netPrice >= freeShippingMin ? "Transport gratuit" : `${flatShippingRon} RON`;
+      // price.ro accepts either a bare number (paid) or one of the free-shipping
+      // keywords — never "31.46 RON", "0", ranges, or free text.
+      const shipping = netPrice >= freeShippingMin ? "gratuit" : flatShippingRon;
       const warranty = DEFAULT_WARRANTY;
       const link = `${siteUrl}/product/${product.slug}`;
       const image = cell(product.images[0]?.url);
@@ -189,6 +192,7 @@ export async function GET(request: Request) {
         model,
         manufacturerCode,
         priceRon,
+        currency,
         stock,
         shipping,
         warranty,
@@ -230,14 +234,14 @@ function htmlEscape(value: string): string {
 
 function renderHtml(rows: string[][]): string {
   const head = COLUMNS.map((c) => `<th>${htmlEscape(c)}</th>`).join("");
-  const linkCols = new Set([9, 10]); // link, image
+  const linkCols = new Set([10, 11]); // link, image
 
   const body = rows
     .map((cells) => {
       const tds = COLUMNS.map((_, i) => {
         const value = cells[i] ?? "";
         const safe = htmlEscape(value);
-        const cls = i === 11 ? "desc" : i === 1 ? "cats" : "";
+        const cls = i === 12 ? "desc" : i === 1 ? "cats" : "";
         if (linkCols.has(i) && value) {
           return `<td class="${cls}" title="${safe}"><a href="${safe}" target="_blank" rel="noreferrer">${safe}</a></td>`;
         }

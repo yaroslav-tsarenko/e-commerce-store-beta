@@ -7,7 +7,7 @@ import { Copy, Download, ExternalLink, Rss, Table2 } from "lucide-react";
 import { toast } from "sonner";
 
 const feeds = [
-  { name: "price.ro", type: "price-ro", url: "/api/feeds/price-ro", format: "TXT", previewable: true },
+  { name: "price.ro", type: "price-ro", url: "/api/feeds/price-feed-ro", format: "TXT", previewable: true },
   { name: "Google Merchant", type: "google", url: "/api/feeds/google", format: "XML" },
   { name: "Facebook / Instagram", type: "facebook", url: "/api/feeds/facebook", format: "CSV" },
   { name: "Generic Feed", type: "generic", url: "/api/feeds/generic", format: "JSON" },
@@ -19,7 +19,8 @@ const PRICE_RO_COLUMNS = [
   "Producător",
   "Model",
   "Cod producător",
-  "Preț (RON)",
+  "Preț",
+  "Moneda",
   "Stoc",
   "Transport",
   "Garanție",
@@ -62,7 +63,7 @@ export default function AdminFeedsPage() {
   const loadPreview = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/feeds/price-ro");
+      const res = await fetch("/api/feeds/price-feed-ro");
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
       const allLines = text.split("\n").filter((l) => l.trim().length > 0);
@@ -149,8 +150,8 @@ export default function AdminFeedsPage() {
                   <tr key={r}>
                     {PRICE_RO_COLUMNS.map((_, c) => {
                       const value = cells[c] ?? "";
-                      const isLink = c === 9 || c === 10;
-                      const isDesc = c === 11;
+                      const isLink = c === 10 || c === 11;
+                      const isDesc = c === 12;
                       return (
                         <td
                           key={c}
