@@ -8,6 +8,7 @@ import { toast } from "sonner";
 
 const feeds = [
   { name: "price.ro", type: "price-ro", url: "/api/feeds/price-feed-ro", format: "TXT", previewable: true },
+  { name: "Compari.ro", type: "compari-ro", url: "/api/feeds/compari-ro", format: "CSV" },
   { name: "Google Merchant", type: "google", url: "/api/feeds/google", format: "XML" },
   { name: "Facebook / Instagram", type: "facebook", url: "/api/feeds/facebook", format: "CSV" },
   { name: "Generic Feed", type: "generic", url: "/api/feeds/generic", format: "JSON" },
