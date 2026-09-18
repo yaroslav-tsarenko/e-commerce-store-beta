@@ -29,7 +29,6 @@ const COLUMNS = [
   "Description",
   "ImageURL",
 ];
-const DEFAULT_TAX_RATE = 21;
 const DEFAULT_FREE_SHIPPING_MIN = 100; // EUR (net), matches checkout
 const FLAT_SHIPPING_EUR = 5.99;
 const DEFAULT_RON_RATE = 4.97;
@@ -70,23 +69,108 @@ function csvField(value: string): string {
   return `"${value.replace(/"/g, '""')}"`;
 }
 
-function specsToText(characteristics: unknown): string {
-  if (!characteristics) return "";
-  const parts: string[] = [];
+// Flatten characteristics into [key, value] pairs. Supports three shapes:
+//   - grouped object: { "Group": { "Key": "Value" } }  (current DB shape)
+//   - flat object:    { "Key": "Value" }
+//   - array:          [{ name/key, value/val }]
+function flattenCharacteristics(characteristics: unknown): Array<[string, string]> {
+  const pairs: Array<[string, string]> = [];
+  if (!characteristics) return pairs;
   if (Array.isArray(characteristics)) {
     for (const c of characteristics) {
       if (c && typeof c === "object") {
         const name = (c as Record<string, unknown>).name ?? (c as Record<string, unknown>).key;
         const val = (c as Record<string, unknown>).value ?? (c as Record<string, unknown>).val;
-        if (name && val) parts.push(`${name}: ${val}`);
+        if (name && val) pairs.push([String(name), String(val)]);
       }
     }
   } else if (typeof characteristics === "object") {
+    for (const v of Object.values(characteristics as Record<string, unknown>)) {
+      if (v && typeof v === "object" && !Array.isArray(v)) {
+        for (const [k2, v2] of Object.entries(v as Record<string, unknown>)) {
+          if (v2 != null && typeof v2 !== "object") pairs.push([k2, String(v2)]);
+        }
+      }
+    }
+    // Also handle a flat object (no group nesting).
     for (const [k, v] of Object.entries(characteristics as Record<string, unknown>)) {
-      if (v != null && typeof v !== "object") parts.push(`${k}: ${v}`);
+      if (v != null && typeof v !== "object") pairs.push([k, String(v)]);
     }
   }
-  return parts.join("; ");
+  return pairs;
+}
+
+function specsToText(characteristics: unknown): string {
+  return flattenCharacteristics(characteristics)
+    .map(([k, v]) => `${k}: ${v}`)
+    .join("; ");
+}
+
+// Pull the specs that matter for Compari.ro product matching (storage, RAM,
+// Dual SIM, screen diagonal, network, color) out of the characteristics and
+// return a compact suffix like "128GB · 6GB RAM · Dual SIM · 6.7\"".
+// Only specs not already present in the product name are appended.
+function matchingSpecs(characteristics: unknown, name: string): string {
+  const pairs = flattenCharacteristics(characteristics);
+  if (pairs.length === 0) return "";
+
+  const norm = (s: string) => s.toLowerCase();
+  const nameLc = norm(name);
+  const find = (re: RegExp): string | null => {
+    for (const [k, v] of pairs) {
+      if (re.test(norm(k)) && v.trim()) return clean(v);
+    }
+    return null;
+  };
+  const has = (needle: string) => nameLc.includes(norm(needle));
+
+  const out: string[] = [];
+  const push = (val: string | null | undefined) => {
+    if (!val) return;
+    const compact = val.replace(/\s+/g, " ").trim();
+    if (compact && !has(compact)) out.push(compact);
+  };
+
+  // Internal storage (memorie internă / capacitate stocare / storage), but not RAM.
+  const storageRaw = (() => {
+    for (const [k, v] of pairs) {
+      const kl = norm(k);
+      if (/\bram\b/.test(kl)) continue;
+      if (/(memorie intern|capacitate (de )?stocare|stocare intern|storage|rom\b|capacitate memorie)/.test(kl) && v.trim()) {
+        return clean(v);
+      }
+    }
+    return null;
+  })();
+  if (storageRaw && !/\bram\b/i.test(storageRaw)) push(storageRaw);
+
+  // RAM
+  push(
+    (() => {
+      const v = find(/\bram\b|memorie ram/);
+      if (!v) return null;
+      return /ram/i.test(v) ? v : `${v} RAM`;
+    })()
+  );
+
+  // Dual SIM
+  const sim = find(/\bsim\b|dual sim|number of sim|nr\.? sim/);
+  if (sim) {
+    if (/dual|2|două|doua/i.test(sim)) push("Dual SIM");
+    else if (/single|1|una|unic/i.test(sim)) push("Single SIM");
+    else push(sim);
+  }
+
+  // Screen diagonal (diagonală / dimensiune ecran / display size)
+  push(find(/diagonal|dimensiune ecran|display size|screen size|marime ecran/));
+
+  // Network generation (5G / 4G)
+  push(find(/re(t|ț)ea|network|conectivitate mobil|genera(t|ț)ie re(t|ț)ea/));
+
+  // Color (culoare / color)
+  push(find(/^culoare$|^color$|culoare produs/));
+
+  return out.join(" · ");
 }
 
 export async function GET(request: Request) {
@@ -135,12 +219,10 @@ export async function GET(request: Request) {
     };
 
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://misaelectro.ro";
-    const taxRate = settings?.taxRate != null ? Number(settings.taxRate) : DEFAULT_TAX_RATE;
     const freeShippingMin =
       settings?.freeShippingMin != null
         ? Number(settings.freeShippingMin)
         : DEFAULT_FREE_SHIPPING_MIN;
-    const vatMultiplier = 1 + taxRate / 100;
     const flatShippingRon = (FLAT_SHIPPING_EUR * ronRate).toFixed(2);
 
     // Batch-translate everything into Romanian (cached in the DB after first run).
@@ -164,9 +246,15 @@ export async function GET(request: Request) {
         .filter(Boolean)
         .join(" > ");
       const manufacturer = clean(product.brand);
-      const name = clean(textMap.get(product.name) ?? product.name);
-      const productNumber = clean(product.mpn || product.sku);
-      const price = (Number(product.price) * vatMultiplier * ronRate).toFixed(2);
+      const baseName = clean(textMap.get(product.name) ?? product.name);
+      const specSuffix = matchingSpecs(product.characteristics, baseName);
+      const name = specSuffix ? `${baseName} ${specSuffix}` : baseName;
+      // ProductNumber (Cod producător) is the manufacturer MPN only — never our
+      // internal SKU. Left empty when the product has no MPN.
+      const productNumber = clean(product.mpn);
+      // Price must match the site 1:1. The storefront shows price × RON rate
+      // (no extra VAT), rounded to 2 decimals — replicate that exactly.
+      const price = (Math.round(Number(product.price) * ronRate * 100) / 100).toFixed(2);
       const currency = "RON";
       const netPrice = Number(product.price);
       // A bare number for paid shipping or the literal "Free".
