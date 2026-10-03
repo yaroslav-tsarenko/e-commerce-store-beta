@@ -14,7 +14,9 @@ interface Order {
   status: string;
   total: number;
   createdAt: string;
-  user: { name: string | null; email: string };
+  customerName: string;
+  customerEmail: string;
+  user: { name: string | null; email: string } | null;
   items: { id: string }[];
 }
 
@@ -79,7 +81,7 @@ export default function AdminOrdersPage() {
                       #{order.orderNumber.slice(-8)}
                     </Link>
                   </td>
-                  <td>{order.user.name || order.user.email}</td>
+                  <td>{order.customerName || order.user?.name || order.customerEmail}</td>
                   <td style={{ textAlign: "center" }}>
                     <Chip size="sm" color={statusColors[order.status]}>{order.status}</Chip>
                   </td>
