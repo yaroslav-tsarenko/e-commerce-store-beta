@@ -55,3 +55,12 @@ export function getTokenFromRequest(request: Request): string | null {
   const match = cookieHeader.match(/session_token=([^;]+)/);
   return match ? match[1] : null;
 }
+
+export function isAdminRole(role: string | null | undefined): boolean {
+  return role === "ADMIN" || role === "SUPER_ADMIN";
+}
+
+export async function getAdminUser() {
+  const user = await getSessionUser();
+  return user && isAdminRole(user.role) ? user : null;
+}

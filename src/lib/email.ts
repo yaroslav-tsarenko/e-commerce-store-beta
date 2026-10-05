@@ -626,3 +626,35 @@ export async function sendContactAutoReplyEmail(submission: ContactSubmission): 
     ),
   });
 }
+
+interface SupplierAlert {
+  orderId: string;
+  orderNumber: string;
+  title: string;
+  message: string;
+}
+
+export async function sendSupplierAlertEmail(alert: SupplierAlert): Promise<boolean> {
+  const inbox =
+    process.env.BIGBUY_ALERT_EMAIL ||
+    getReplyTo() ||
+    process.env.RESEND_FROM_EMAIL ||
+    process.env.RESEND_FROM;
+  if (!inbox) {
+    console.log("[Email] Supplier alert skipped (no inbox configured)");
+    return false;
+  }
+
+  const orderUrl = `${getSiteUrl()}/admin/orders/${alert.orderId}`;
+
+  return send({
+    to: inbox,
+    subject: `${alert.title} — order #${alert.orderNumber.slice(-8)}`,
+    html: emailWrapper(`
+      <h1 style="margin:0 0 16px;font-size:20px;font-weight:800;color:${TEXT_COLOR};">${escape(alert.title)}</h1>
+      <p style="color:${MUTED_COLOR};line-height:1.6;margin:0 0 16px;">Order #${escape(alert.orderNumber.slice(-8))}</p>
+      <div style="background:#f9f9f9;border-radius:8px;padding:16px;color:${TEXT_COLOR};font-size:14px;line-height:1.6;white-space:pre-wrap;">${escape(alert.message)}</div>
+      ${button(orderUrl, "Open order")}
+    `),
+  });
+}

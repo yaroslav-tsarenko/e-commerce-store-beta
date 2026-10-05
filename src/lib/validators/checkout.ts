@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const checkoutContactSchema = z.object({
   email: z.string().email("Valid email is required"),
-  phone: z.string().optional(),
+  phone: z.string().trim().min(6, "Phone is required"),
 });
 
 export const checkoutShippingSchema = z.object({

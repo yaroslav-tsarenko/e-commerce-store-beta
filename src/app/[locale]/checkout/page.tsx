@@ -394,7 +394,7 @@ export default function CheckoutPage() {
                   )}
                 </div>
                 <div>
-                  <label style={labelStyle}>{t("phone")}</label>
+                  <label style={labelStyle}>{t("phone")} *</label>
                   <InputWithIcon
                     icon={Phone}
                     placeholder={phoneHint}

@@ -33,16 +33,41 @@ export interface OrderDetail {
   total: number;
   paymentStatus: string;
   paymentMethod: string | null;
+  paymentId: string | null;
   notes: string | null;
   items: {
     id: string;
+    productId: string;
     productName: string;
     productSku: string;
     variantName: string | null;
     quantity: number;
     price: number;
     total: number;
+    product?: OrderItemProduct;
   }[];
+  bigbuyStatus?: BigBuyOrderStatus | null;
+  bigbuyOrderIds?: string[];
+  bigbuyRemoteStatus?: string | null;
+  bigbuyCarrier?: string | null;
+  bigbuyShippingCost?: number | string | null;
+  bigbuyError?: string | null;
+  bigbuyAttempts?: number;
+  bigbuySentAt?: string | null;
+  bigbuySyncedAt?: string | null;
   createdAt: string;
   updatedAt: string;
+}
+
+export type BigBuyOrderStatus = "PENDING" | "SENT" | "FAILED" | "SHIPPED" | "CANCELLED";
+
+export interface OrderItemProduct {
+  id: string;
+  slug: string;
+  sku: string;
+  ean: string | null;
+  gtin: string | null;
+  mpn: string | null;
+  metadata: { source?: string; bigbuyId?: number } | null;
+  images: { url: string }[];
 }

@@ -26,7 +26,70 @@ export interface BigBuyClientOptions {
   maxRetries?: number;
   /** Called with human-readable progress/log lines. */
   log?: (msg: string) => void;
+  maxWaitMs?: number;
 }
+
+export class BigBuyHttpError extends Error {
+  readonly status: number;
+  readonly path: string;
+  readonly body: string;
+
+  constructor(status: number, path: string, body: string) {
+    super(`BigBuy: HTTP ${status} on ${path} — ${body.slice(0, 300)}`);
+    this.name = "BigBuyHttpError";
+    this.status = status;
+    this.path = path;
+    this.body = body;
+  }
+
+  json(): unknown {
+    try {
+      return JSON.parse(this.body);
+    } catch {
+      return null;
+    }
+  }
+}
+
+export interface BigBuyOrderProduct {
+  reference: string;
+  quantity: number;
+}
+
+export interface BigBuyShippingAddress {
+  firstName: string;
+  lastName: string;
+  country: string;
+  postcode: string;
+  town: string;
+  address: string;
+  phone: string;
+  email: string;
+  comment?: string;
+  companyName?: string;
+  vatNumber?: string;
+}
+
+export interface BigBuyOrderRequest {
+  internalReference: string;
+  language: string;
+  paymentMethod: string;
+  carriers: { name: string }[];
+  shippingAddress: BigBuyShippingAddress;
+  products: BigBuyOrderProduct[];
+}
+
+type RequestParams = Record<string, string | number | undefined>;
+
+interface RequestOptions {
+  method?: "GET" | "POST";
+  params?: RequestParams;
+  body?: unknown;
+  shouldRetry: (status: number) => boolean;
+}
+
+const retryCatalog = (status: number) => status === 429 || status === 409 || status >= 500;
+const retryOrders = (status: number) => status === 429 || status >= 500;
 
 /** A node in BigBuy's taxonomy tree (their "categories"). */
 export interface BigBuyTaxonomy {
@@ -64,6 +127,7 @@ export class BigBuyClient {
   private token: string;
   private maxRetries: number;
   private log: (msg: string) => void;
+  private maxWaitMs: number;
 
   constructor(opts: BigBuyClientOptions) {
     if (!opts.token) throw new Error("BigBuyClient: missing API token");
@@ -71,6 +135,7 @@ export class BigBuyClient {
     this.base = BASE_URLS[opts.env ?? "production"];
     this.maxRetries = opts.maxRetries ?? 6;
     this.log = opts.log ?? (() => {});
+    this.maxWaitMs = opts.maxWaitMs ?? Infinity;
   }
 
   private buildUrl(path: string, params: Record<string, string | number | undefined>): string {
@@ -86,23 +151,34 @@ export class BigBuyClient {
   /** Low-level GET returning parsed JSON, with rate-limit aware retries. */
   async get<T = unknown>(
     path: string,
-    params: Record<string, string | number | undefined> = {}
+    params: RequestParams = {}
   ): Promise<T> {
-    const url = this.buildUrl(path, params);
+    return this.request<T>(path, { params, shouldRetry: retryCatalog });
+  }
+
+  async post<T = unknown>(path: string, body: unknown, params: RequestParams = {}): Promise<T> {
+    return this.request<T>(path, { method: "POST", params, body, shouldRetry: retryOrders });
+  }
+
+  private async request<T>(path: string, options: RequestOptions): Promise<T> {
+    const url = this.buildUrl(path, options.params ?? {});
+    const method = options.method ?? "GET";
 
     for (let attempt = 1; attempt <= this.maxRetries; attempt++) {
       let res: Response;
       try {
         res = await fetch(url, {
-          method: "GET",
+          method,
           headers: {
             Authorization: `Bearer ${this.token}`,
             "Content-Type": "application/json",
             Accept: "application/json",
           },
+          body: options.body === undefined ? undefined : JSON.stringify(options.body),
         });
       } catch (err) {
         const wait = Math.min(60_000, 2 ** attempt * 1000);
+        if (wait > this.maxWaitMs) throw err;
         this.log(`  network error (${(err as Error).message}); retry in ${wait / 1000}s`);
         await sleep(wait);
         continue;
@@ -118,23 +194,23 @@ export class BigBuyClient {
         }
       }
 
-      // Rate limited or cache-warming — back off and retry.
-      if (res.status === 429 || res.status === 409 || res.status >= 500) {
+      if (options.shouldRetry(res.status) && attempt < this.maxRetries) {
         const retryAfter = Number(res.headers.get("retry-after"));
         const wait = Number.isFinite(retryAfter) && retryAfter > 0
           ? retryAfter * 1000
           : Math.min(15 * 60_000, 2 ** attempt * 5000);
-        this.log(
-          `  HTTP ${res.status} on ${path}; waiting ${Math.round(wait / 1000)}s ` +
-            `(attempt ${attempt}/${this.maxRetries})`
-        );
-        await sleep(wait);
-        continue;
+        if (wait <= this.maxWaitMs) {
+          this.log(
+            `  HTTP ${res.status} on ${path}; waiting ${Math.round(wait / 1000)}s ` +
+              `(attempt ${attempt}/${this.maxRetries})`
+          );
+          await sleep(wait);
+          continue;
+        }
       }
 
-      // Non-retryable.
       const body = await res.text().catch(() => "");
-      throw new Error(`BigBuy: HTTP ${res.status} on ${path} — ${body.slice(0, 300)}`);
+      throw new BigBuyHttpError(res.status, path, body);
     }
 
     throw new Error(`BigBuy: exhausted retries on ${path}`);
@@ -212,6 +288,39 @@ export class BigBuyClient {
       page: opts.page,
       pageSize: opts.pageSize,
     });
+  }
+
+  getShippingOptions(input: {
+    isoCountry: string;
+    postcode: string;
+    products: BigBuyOrderProduct[];
+  }): Promise<Record<string, unknown>> {
+    return this.post("/rest/shipping/orders.json", {
+      order: {
+        delivery: { isoCountry: input.isoCountry, postcode: input.postcode },
+        products: input.products,
+      },
+    });
+  }
+
+  checkOrder(order: BigBuyOrderRequest): Promise<Record<string, unknown>> {
+    return this.post("/rest/order/check/multishipping.json", { order });
+  }
+
+  createOrder(order: BigBuyOrderRequest): Promise<Record<string, unknown>> {
+    return this.post("/rest/order/create/multishipping.json", { order });
+  }
+
+  getOrder(id: string | number): Promise<Record<string, unknown>> {
+    return this.request(`/rest/order/${encodeURIComponent(String(id))}.json`, { shouldRetry: retryOrders });
+  }
+
+  getOrderByReference(reference: string): Promise<Record<string, unknown>> {
+    return this.request(`/rest/order/reference/${encodeURIComponent(reference)}.json`, { shouldRetry: retryOrders });
+  }
+
+  getOrderTracking(id: string | number): Promise<unknown> {
+    return this.request(`/rest/tracking/order/${encodeURIComponent(String(id))}.json`, { shouldRetry: retryOrders });
   }
 }
 

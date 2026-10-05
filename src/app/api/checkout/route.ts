@@ -4,6 +4,7 @@ import { stripe } from "@/lib/stripe";
 import { checkoutSchema } from "@/lib/validators/checkout";
 import { getSessionUser } from "@/lib/auth";
 import { resolveDiscount, markDiscountUsed } from "@/lib/discounts";
+import { isBigBuyMetadata } from "@/lib/bigbuy/product";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
@@ -31,8 +32,12 @@ export async function POST(request: NextRequest) {
     const productMap = new Map(products.map((p) => [p.id, p]));
 
     const unavailableProductIds = items
-      .map((item: { productId: string }) => item.productId)
-      .filter((id: string) => !productMap.has(id));
+      .filter((item: { productId: string; quantity: number }) => {
+        const product = productMap.get(item.productId);
+        if (!product) return true;
+        return isBigBuyMetadata(product.metadata) && product.trackInventory && product.quantity < item.quantity;
+      })
+      .map((item: { productId: string }) => item.productId);
 
     if (unavailableProductIds.length > 0) {
       return NextResponse.json(

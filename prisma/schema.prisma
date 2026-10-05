@@ -235,12 +235,24 @@ model Order {
   notes String?
   items OrderItem[]
 
+  bigbuyStatus       BigBuyOrderStatus?
+  bigbuyOrderIds     String[]           @default([])
+  bigbuyRemoteStatus String?
+  bigbuyCarrier      String?
+  bigbuyShippingCost Decimal?
+  bigbuyError        String?
+  bigbuyAttempts     Int                @default(0)
+  bigbuyLockedAt     DateTime?
+  bigbuySentAt       DateTime?
+  bigbuySyncedAt     DateTime?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([userId])
   @@index([status])
   @@index([createdAt])
+  @@index([bigbuyStatus])
 }
 
 enum OrderStatus {
@@ -258,6 +270,14 @@ enum PaymentStatus {
   PAID
   FAILED
   REFUNDED
+}
+
+enum BigBuyOrderStatus {
+  PENDING
+  SENT
+  FAILED
+  SHIPPED
+  CANCELLED
 }
 
 model OrderItem {

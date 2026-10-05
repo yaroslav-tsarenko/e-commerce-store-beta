@@ -8,7 +8,8 @@
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint",
-    "import:bigbuy": "tsx scripts/import-bigbuy.ts"
+    "import:bigbuy": "tsx scripts/import-bigbuy.ts",
+    "bigbuy:test-order": "tsx scripts/test-bigbuy-order.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1054.0",

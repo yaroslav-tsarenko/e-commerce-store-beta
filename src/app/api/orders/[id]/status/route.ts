@@ -6,6 +6,9 @@ import {
   sendOrderStatusEmail,
 } from "@/lib/email";
 import { scheduleEmail } from "@/lib/email-jobs";
+import { getAdminUser } from "@/lib/auth";
+
+const PRE_SHIPPING_STATUSES = new Set(["PENDING", "CONFIRMED", "PROCESSING"]);
 
 const statusSchema = z.object({
   status: z.enum([
@@ -18,6 +21,11 @@ export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const admin = await getAdminUser();
+  if (!admin) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   try {
     const { id } = await params;
     const body = await request.json();
@@ -25,23 +33,31 @@ export async function PATCH(
 
     const previous = await prisma.order.findUnique({
       where: { id },
-      select: { status: true },
+      select: { status: true, trackingNumber: true, paymentStatus: true },
     });
+    if (!previous) {
+      return NextResponse.json({ error: "Order not found" }, { status: 404 });
+    }
+
+    const trackingNumber =
+      validated.trackingNumber === undefined ? previous.trackingNumber : validated.trackingNumber.trim() || null;
+    const trackingAdded = Boolean(trackingNumber) && trackingNumber !== previous.trackingNumber;
+    const status = trackingAdded && PRE_SHIPPING_STATUSES.has(validated.status) ? "SHIPPED" : validated.status;
 
     const order = await prisma.order.update({
       where: { id },
       data: {
-        status: validated.status,
-        trackingNumber: validated.trackingNumber,
+        status,
+        trackingNumber,
         paymentStatus:
-          validated.status === "CANCELLED" || validated.status === "REFUNDED"
+          previous.paymentStatus === "PAID" && (status === "CANCELLED" || status === "REFUNDED")
             ? "REFUNDED"
             : undefined,
       },
       include: { items: true },
     });
 
-    const statusChanged = previous?.status !== order.status;
+    const statusChanged = previous.status !== order.status;
     if (statusChanged) {
       const payload = {
         orderId: order.id,
