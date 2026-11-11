@@ -3,7 +3,6 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
-import { FaLinkedinIn, FaInstagram } from "react-icons/fa6";
 import { BrenwElectroLogo } from "../BrenwElectroLogo";
 import visaLogo from "@/assets/visa-logo.svg";
 import mastercardLogo from "@/assets/mastercard-logo.svg";
@@ -30,18 +29,6 @@ export function Footer() {
             <p className={styles.brandDesc}>
               {t("brandDesc")}
             </p>
-            <div className={styles.socialRow}>
-              {process.env.NEXT_PUBLIC_LINKEDIN_URL && (
-                <a href={process.env.NEXT_PUBLIC_LINKEDIN_URL} className={styles.socialIcon} aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-                  <FaLinkedinIn size={16} />
-                </a>
-              )}
-              {process.env.NEXT_PUBLIC_INSTAGRAM_URL && (
-                <a href={process.env.NEXT_PUBLIC_INSTAGRAM_URL} className={styles.socialIcon} aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-                  <FaInstagram size={16} />
-                </a>
-              )}
-            </div>
           </div>
 
           <div>
