@@ -93,7 +93,7 @@ interface Props {
 }
 
 export function HeroCarousel({ deals }: Props) {
-  // We always use MisaElectro-tailored slides for the hero.
+  // We always use BrenwElectro-tailored slides for the hero.
   // Admin-configured slides (`slides` prop) are intentionally ignored here —
   // they belong on dedicated marketing landing pages, not the brand hero.
   const t = useTranslations("homeBlocks");

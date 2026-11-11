@@ -131,7 +131,7 @@ export async function GET(request: Request) {
       return depth;
     };
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://misaelectro.ro";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://brenwelectro.com";
     const taxRate = settings?.taxRate != null ? Number(settings.taxRate) : DEFAULT_TAX_RATE;
     const freeShippingMin =
       settings?.freeShippingMin != null

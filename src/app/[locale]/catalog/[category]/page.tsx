@@ -30,13 +30,13 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     title: category.name,
     description:
       category.description ||
-      `Shop ${category.name} products at MisaElectro. Browse electronics, accessories, electrical materials and installation supplies.`,
+      `Shop ${category.name} products at BrenwElectro. Browse electronics, accessories, electrical materials and installation supplies.`,
     alternates: { canonical: `/catalog/${category.slug}` },
     openGraph: {
-      title: `${category.name} | MisaElectro`,
+      title: `${category.name} | BrenwElectro`,
       description:
         category.description ||
-        `Shop ${category.name} products at MisaElectro.`,
+        `Shop ${category.name} products at BrenwElectro.`,
       url: `/catalog/${category.slug}`,
     },
   };

@@ -55,9 +55,9 @@ export default function ContactPage() {
   const [selectedTopic, setSelectedTopic] = useState("");
 
   const CONTACT_INFO = [
-    { icon: Mail, title: t("infoEmailTitle"), detail: "info@misaelectro.ro", sub: t("infoEmailSub") },
-    { icon: Mail, title: t("infoB2bTitle"), detail: "b2b@misaelectro.ro", sub: t("infoB2bSub") },
-    { icon: MapPin, title: t("infoOfficeTitle"), detail: "IAŞI, Mun. Iaşi", sub: "MISARELIANA S.R.L.", tooltip: "Str. Fântânilor 43, IAŞI, Mun. Iaşi, Romania\nReg. No. 54316682" },
+    { icon: Mail, title: t("infoEmailTitle"), detail: "info@brenwelectro.com", sub: t("infoEmailSub") },
+    { icon: Mail, title: t("infoB2bTitle"), detail: "b2b@brenwelectro.com", sub: t("infoB2bSub") },
+    { icon: MapPin, title: t("infoOfficeTitle"), detail: "Manchester, England", sub: "BRENWICK LIMITED", tooltip: "Suite 34, Cariocca Business Park, 2 Sawley Road, Manchester, England, M40 8BB\nCompany number 17550297" },
     { icon: Clock, title: t("infoHoursTitle"), detail: t("infoHoursDetail"), sub: t("infoHoursSub") },
   ];
 

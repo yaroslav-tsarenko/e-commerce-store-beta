@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import nodemailer, { type Transporter } from "nodemailer";
 
 let resend: Resend | null = null;
 
@@ -8,20 +9,36 @@ function getResend(): Resend | null {
   return resend;
 }
 
+// Spacemail SMTP when configured; Resend otherwise.
+let transporter: Transporter | null = null;
+
+function getTransporter(): Transporter | null {
+  const host = process.env.SMTP_HOST;
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASSWORD;
+  if (!host || !user || !pass) return null;
+  if (!transporter) {
+    const port = Number(process.env.SMTP_PORT ?? 587);
+    transporter = nodemailer.createTransport({ host, port, secure: process.env.SMTP_SECURE === "true" || port === 465, auth: { user, pass } });
+  }
+  return transporter;
+}
+
 function getFrom(): string {
   return (
+    process.env.SMTP_FROM ||
     process.env.RESEND_FROM_EMAIL ||
     process.env.RESEND_FROM ||
-    "MisaElectro <noreply@misaelectro.ro>"
+    "BrenwElectro <noreply@brenwelectro.com>"
   );
 }
 
 function getReplyTo(): string | undefined {
-  return process.env.RESEND_REPLY_TO || undefined;
+  return process.env.SMTP_REPLY_TO || process.env.RESEND_REPLY_TO || undefined;
 }
 
 function getSiteUrl(): string {
-  const raw = process.env.NEXT_PUBLIC_SITE_URL || "https://misaelectro.ro";
+  const raw = process.env.NEXT_PUBLIC_SITE_URL || "https://brenwelectro.com";
   return raw.replace(/\/+$/, "");
 }
 
@@ -38,6 +55,16 @@ interface SendArgs {
 }
 
 async function send({ to, subject, html, replyTo }: SendArgs): Promise<boolean> {
+  const smtp = getTransporter();
+  if (smtp) {
+    try {
+      await smtp.sendMail({ from: getFrom(), to, subject, html, replyTo: replyTo ?? getReplyTo() });
+      return true;
+    } catch (err) {
+      console.error(`[Email] SMTP exception → ${subject} to ${to}:`, err);
+      return false;
+    }
+  }
   const r = getResend();
   if (!r) {
     console.log(`[Email] Skipped (Resend not configured) → ${subject} to ${to}`);
@@ -73,22 +100,22 @@ function emailWrapper(content: string, options: { preheader?: string } = {}): st
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>MisaElectro</title>
+  <title>BrenwElectro</title>
 </head>
 <body style="margin:0;padding:0;background:${BG_COLOR};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:${TEXT_COLOR};">
   ${preheader}
   <div style="max-width:600px;margin:0 auto;padding:32px 16px;">
     <div style="text-align:center;margin-bottom:24px;">
       <a href="${getSiteUrl()}" style="text-decoration:none;">
-        <span style="font-size:24px;font-weight:900;color:${BRAND_COLOR};letter-spacing:-0.03em;">MisaElectro</span>
+        <span style="font-size:24px;font-weight:900;color:${BRAND_COLOR};letter-spacing:-0.03em;">BrenwElectro</span>
       </a>
     </div>
     <div style="background:#fff;border-radius:12px;padding:32px;border:1px solid #e5e5e5;">
       ${content}
     </div>
     <div style="text-align:center;margin-top:24px;font-size:12px;color:#999;line-height:1.6;">
-      <p style="margin:0 0 4px;">&copy; ${new Date().getFullYear()} MisaElectro. All rights reserved.</p>
-      <p style="margin:0;">MISARELIANA S.R.L. &middot; IAŞI, Mun. Iaşi, Str. Fântânilor 43 &middot; Reg. 54316682 &middot; <a href="${getSiteUrl()}" style="color:${BRAND_COLOR};text-decoration:none;">misaelectro.ro</a></p>
+      <p style="margin:0 0 4px;">&copy; ${new Date().getFullYear()} BrenwElectro. All rights reserved.</p>
+      <p style="margin:0;">BRENWICK LIMITED &middot; Suite 34, Cariocca Business Park, 2 Sawley Road, Manchester, England, M40 8BB &middot; Company number 17550297 &middot; <a href="${getSiteUrl()}" style="color:${BRAND_COLOR};text-decoration:none;">brenwelectro.com</a></p>
       <p style="margin:8px 0 0;">
         <a href="${getSiteUrl()}/en/policies/privacy" style="color:#999;text-decoration:underline;margin:0 6px;">Privacy</a>
         <a href="${getSiteUrl()}/en/policies/terms" style="color:#999;text-decoration:underline;margin:0 6px;">Terms</a>
@@ -128,10 +155,10 @@ export async function sendWelcomeEmail(email: string, name?: string | null): Pro
 
   return send({
     to: email,
-    subject: "Welcome to MisaElectro!",
+    subject: "Welcome to BrenwElectro!",
     html: emailWrapper(
       `
-      <h1 style="margin:0 0 16px;font-size:22px;font-weight:800;color:${TEXT_COLOR};">${greeting}, welcome to MisaElectro!</h1>
+      <h1 style="margin:0 0 16px;font-size:22px;font-weight:800;color:${TEXT_COLOR};">${greeting}, welcome to BrenwElectro!</h1>
       <p style="color:${MUTED_COLOR};line-height:1.6;margin:0 0 16px;">
         Your account has been created successfully. You now have access to thousands of electrical materials and supplies at competitive prices.
       </p>
@@ -153,7 +180,7 @@ export async function sendWelcomeEmail(email: string, name?: string | null): Pro
         Standard 2-year EU warranty on all products
       </p>
     `,
-      { preheader: `${greeting}! Your MisaElectro account is ready.` },
+      { preheader: `${greeting}! Your BrenwElectro account is ready.` },
     ),
   });
 }
@@ -385,10 +412,11 @@ export async function sendOrderInvoiceEmail(data: OrderEmailData): Promise<boole
           <td style="width:50%;vertical-align:top;padding-right:12px;">
             <p style="margin:0 0 4px;font-size:11px;color:#999;text-transform:uppercase;letter-spacing:0.06em;font-weight:700;">From</p>
             <p style="margin:0;font-size:13px;color:${TEXT_COLOR};line-height:1.55;">
-              <strong>MISARELIANA S.R.L.</strong><br />
-              Registration number: 54316682<br />
-              Str. Fântânilor 43<br />
-              IAŞI, Mun. Iaşi<br />
+              <strong>BRENWICK LIMITED</strong><br />
+              Company number: 17550297<br />
+              Suite 34, Cariocca Business Park<br />
+2 Sawley Road<br />
+              Manchester, M40 8BB<br />
               Romania
             </p>
           </td>
@@ -406,7 +434,7 @@ export async function sendOrderInvoiceEmail(data: OrderEmailData): Promise<boole
 
       <p style="color:#999;font-size:12px;margin:24px 0 0;line-height:1.6;text-align:center;">
         VAT is included in the prices shown where applicable. This invoice serves as proof of purchase.<br />
-        For any questions, reply to this email or contact <a href="mailto:info@misaelectro.ro" style="color:${BRAND_COLOR};">info@misaelectro.ro</a>.
+        For any questions, reply to this email or contact <a href="mailto:info@brenwelectro.com" style="color:${BRAND_COLOR};">info@brenwelectro.com</a>.
       </p>
     `,
       { preheader: `Invoice for order #${id} — ${formatEur(toNum(data.total))}` },
@@ -536,12 +564,12 @@ export async function sendPasswordResetEmail(email: string, resetUrl: string, na
   const greeting = name ? `Hi ${escape(name)}` : "Hi there";
   return send({
     to: email,
-    subject: "Reset your MisaElectro password",
+    subject: "Reset your BrenwElectro password",
     html: emailWrapper(
       `
       <h1 style="margin:0 0 16px;font-size:22px;font-weight:800;color:${TEXT_COLOR};">Reset your password</h1>
       <p style="color:${MUTED_COLOR};line-height:1.6;margin:0 0 16px;">
-        ${greeting}, we received a request to reset the password on your MisaElectro account.
+        ${greeting}, we received a request to reset the password on your BrenwElectro account.
         Click the button below to choose a new password. This link expires in <strong>1 hour</strong>.
       </p>
       ${button(resetUrl, "Reset Password")}
@@ -554,7 +582,7 @@ export async function sendPasswordResetEmail(email: string, resetUrl: string, na
         If you didn&rsquo;t request this, you can safely ignore this email — your password won&rsquo;t change.
       </p>
     `,
-      { preheader: "Reset your MisaElectro password — link expires in 1 hour." },
+      { preheader: "Reset your BrenwElectro password — link expires in 1 hour." },
     ),
   });
 }
@@ -606,7 +634,7 @@ export async function sendContactFormEmail(submission: ContactSubmission): Promi
 export async function sendContactAutoReplyEmail(submission: ContactSubmission): Promise<boolean> {
   return send({
     to: submission.email,
-    subject: "We received your message — MisaElectro",
+    subject: "We received your message — BrenwElectro",
     html: emailWrapper(
       `
       <h1 style="margin:0 0 16px;font-size:22px;font-weight:800;color:${TEXT_COLOR};">Thanks for reaching out!</h1>

@@ -4,10 +4,10 @@ import type { ReactNode } from "react";
 type Locale = "ro" | "hu" | "bg" | "en";
 
 const metaTitles: Record<Locale, string> = {
-  ro: "Politica de plată — MisaElectro",
-  hu: "Fizetési szabályzat — MisaElectro",
-  bg: "Политика за плащане — MisaElectro",
-  en: "Payment Policy — MisaElectro",
+  ro: "Politica de plată — BrenwElectro",
+  hu: "Fizetési szabályzat — BrenwElectro",
+  bg: "Политика за плащане — BrenwElectro",
+  en: "Payment Policy — BrenwElectro",
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -20,13 +20,13 @@ const content: Record<Locale, ReactNode> = {
     <PolicyLayout title="Payment Policy" lastUpdated="29 May 2026">
       <p>
         This Payment Policy explains how payments are accepted, processed, verified, refunded, and handled
-        for purchases made through www.misaelectro.ro.
+        for purchases made through www.brenwelectro.com.
       </p>
       <p>The Website is operated by:</p>
       <ContactBlock />
       <p>
-        In this Policy, &ldquo;MisaElectro&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo;
-        means MISARELIANA S.R.L.. &ldquo;Customer&rdquo;, &ldquo;you&rdquo; or &ldquo;your&rdquo; means any
+        In this Policy, &ldquo;BrenwElectro&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo;
+        means BRENWICK LIMITED. &ldquo;Customer&rdquo;, &ldquo;you&rdquo; or &ldquo;your&rdquo; means any
         person or business placing an order through the Website.
       </p>
       <p>
@@ -40,7 +40,7 @@ const content: Record<Locale, ReactNode> = {
         charges, additional warranty options, and any other paid services or charges displayed at checkout.
       </p>
       <p>
-        1.2 MisaElectro sells electrical products, electrical materials, wiring accessories, lighting-related
+        1.2 BrenwElectro sells electrical products, electrical materials, wiring accessories, lighting-related
         products, installation components, distribution and circuit protection products, sockets, switches,
         cables, mounting accessories, and related goods.
       </p>
@@ -67,7 +67,7 @@ const content: Record<Locale, ReactNode> = {
         card issuer or bank may apply its own exchange rate, conversion fee, or foreign transaction fee.
       </p>
       <p>
-        2.5 MisaElectro does not control exchange rates, bank conversion fees, card issuer charges, or foreign
+        2.5 BrenwElectro does not control exchange rates, bank conversion fees, card issuer charges, or foreign
         transaction fees.
       </p>
 
@@ -87,7 +87,7 @@ const content: Record<Locale, ReactNode> = {
       </ul>
       <p>3.3 Prices may change at any time before an order is placed.</p>
       <p>
-        3.4 Price changes will not affect orders already accepted by MisaElectro, except where there has been
+        3.4 Price changes will not affect orders already accepted by BrenwElectro, except where there has been
         an obvious pricing, currency, tax, discount, or technical error.
       </p>
       <p>
@@ -96,14 +96,14 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>4. Accepted Payment Methods</h2>
-      <p>4.1 MisaElectro accepts secure card payments using:</p>
+      <p>4.1 BrenwElectro accepts secure card payments using:</p>
       <ul>
         <li>Visa</li>
         <li>Mastercard</li>
       </ul>
       <p>
         4.2 Other payment methods are not accepted unless they are expressly displayed at checkout or agreed
-        by MisaElectro in writing.
+        by BrenwElectro in writing.
       </p>
       <p>
         4.3 We do not currently offer cash on delivery, payment on account, open credit terms, cheque
@@ -119,7 +119,7 @@ const content: Record<Locale, ReactNode> = {
         approve, decline, or review the transaction.
       </p>
       <p>
-        5.3 MisaElectro does not guarantee that your payment will be accepted. Payment approval depends on
+        5.3 BrenwElectro does not guarantee that your payment will be accepted. Payment approval depends on
         your card issuer, bank, payment provider, fraud checks, authentication requirements, available
         funds, transaction limits, and other factors outside our control.
       </p>
@@ -133,9 +133,9 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>6. Card Security and Payment Data</h2>
-      <p>6.1 MisaElectro takes payment security seriously.</p>
+      <p>6.1 BrenwElectro takes payment security seriously.</p>
       <p>
-        6.2 Card payments are handled through secure third-party payment providers. MisaElectro does not store
+        6.2 Card payments are handled through secure third-party payment providers. BrenwElectro does not store
         your full card number, full card security code, or complete card credentials on its own systems.
       </p>
       <p>6.3 We may receive limited payment-related information from payment providers, such as:</p>
@@ -180,7 +180,7 @@ const content: Record<Locale, ReactNode> = {
         be processed.
       </p>
       <p>
-        8.2 MisaElectro is not responsible for payment failures caused by your bank, card issuer, payment
+        8.2 BrenwElectro is not responsible for payment failures caused by your bank, card issuer, payment
         provider, insufficient funds, incorrect card details, authentication failure, transaction limits,
         network issues, or fraud controls.
       </p>
@@ -194,7 +194,7 @@ const content: Record<Locale, ReactNode> = {
 
       <h2>9. Fraud Prevention and Payment Reviews</h2>
       <p>
-        9.1 To protect customers, MisaElectro, payment providers, and card networks, transactions may be
+        9.1 To protect customers, BrenwElectro, payment providers, and card networks, transactions may be
         screened for fraud, abuse, unauthorised activity, sanctions risk, and payment security concerns.
       </p>
       <p>
@@ -225,7 +225,7 @@ const content: Record<Locale, ReactNode> = {
         address, VAT/tax details, and any other information required for invoicing.
       </p>
       <p>
-        10.3 Where applicable, MisaElectro may issue order confirmations, payment confirmations, receipts, VAT
+        10.3 Where applicable, BrenwElectro may issue order confirmations, payment confirmations, receipts, VAT
         invoices, or commercial invoices.
       </p>
       <p>
@@ -258,7 +258,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>12. International Payments, Customs, and Import Charges</h2>
-      <p>12.1 MisaElectro dispatches orders from the United Kingdom.</p>
+      <p>12.1 BrenwElectro dispatches orders from the United Kingdom.</p>
       <p>
         12.2 For orders delivered outside the United Kingdom, your order may be subject to customs clearance,
         import duties, import VAT, local taxes, brokerage fees, courier handling fees, customs clearance
@@ -266,14 +266,14 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         12.3 Unless expressly stated otherwise at checkout, such customs and import charges are not included
-        in the product price, delivery price, or payment collected by MisaElectro.
+        in the product price, delivery price, or payment collected by BrenwElectro.
       </p>
       <p>
         12.4 You are responsible for paying any customs duties, import VAT, taxes, brokerage fees, handling
         charges, and local charges imposed in the destination country.
       </p>
       <p>
-        12.5 MisaElectro does not control customs authorities, customs delays, import tax assessments, courier
+        12.5 BrenwElectro does not control customs authorities, customs delays, import tax assessments, courier
         clearance fees, or local charges.
       </p>
       <p>
@@ -325,7 +325,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         14.5 If you validly cancel or return the product before the Additional Warranty begins and a refund
-        is required by law or approved by MisaElectro, the related Additional Warranty charge may also be
+        is required by law or approved by BrenwElectro, the related Additional Warranty charge may also be
         refunded.
       </p>
 
@@ -344,18 +344,18 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         15.5 Currency conversion differences, card issuer fees, foreign transaction fees, and bank charges
-        are not controlled by MisaElectro and are not refundable by MisaElectro.
+        are not controlled by BrenwElectro and are not refundable by BrenwElectro.
       </p>
       <p>
         15.6 Customs duties, import VAT, local taxes, brokerage fees, courier handling fees, customs
-        clearance fees, and other local charges are not charged by MisaElectro and are not refundable by
-        MisaElectro.
+        clearance fees, and other local charges are not charged by BrenwElectro and are not refundable by
+        BrenwElectro.
       </p>
 
       <h2>16. Chargebacks and Payment Disputes</h2>
       <p>
         16.1 If you have a problem with an order, payment, delivery, return, refund, or warranty claim, you
-        should contact us first at info@misaelectro.ro so we can investigate and try to resolve the issue.
+        should contact us first at info@brenwelectro.com so we can investigate and try to resolve the issue.
       </p>
       <p>
         16.2 If you open a chargeback, card dispute, or payment dispute, we may be required to provide
@@ -382,7 +382,7 @@ const content: Record<Locale, ReactNode> = {
         17.1 Business Customers must pay in full at checkout unless we expressly agree otherwise in writing.
       </p>
       <p>
-        17.2 MisaElectro does not offer credit terms, open account purchasing, or deferred payment to Business
+        17.2 BrenwElectro does not offer credit terms, open account purchasing, or deferred payment to Business
         Customers unless separately approved in writing.
       </p>
       <p>
@@ -437,13 +437,13 @@ const content: Record<Locale, ReactNode> = {
     <PolicyLayout title="Politica de plată" lastUpdated="29 mai 2026">
       <p>
         Această Politică de plată explică modul în care plățile sunt acceptate, procesate, verificate,
-        rambursate și gestionate pentru achizițiile efectuate prin www.misaelectro.ro.
+        rambursate și gestionate pentru achizițiile efectuate prin www.brenwelectro.com.
       </p>
       <p>Site-ul este operat de:</p>
       <ContactBlock />
       <p>
-        În prezenta Politică, &bdquo;MisaElectro&rdquo;, &bdquo;noi&rdquo; sau &bdquo;al nostru&rdquo;
-        înseamnă MISARELIANA S.R.L.. &bdquo;Clientul&rdquo;, &bdquo;dumneavoastră&rdquo; sau
+        În prezenta Politică, &bdquo;BrenwElectro&rdquo;, &bdquo;noi&rdquo; sau &bdquo;al nostru&rdquo;
+        înseamnă BRENWICK LIMITED. &bdquo;Clientul&rdquo;, &bdquo;dumneavoastră&rdquo; sau
         &bdquo;al dumneavoastră&rdquo; înseamnă orice persoană sau întreprindere care plasează o comandă
         prin intermediul Site-ului.
       </p>
@@ -460,7 +460,7 @@ const content: Record<Locale, ReactNode> = {
         afișate la finalizarea comenzii.
       </p>
       <p>
-        1.2 MisaElectro comercializează produse electrice, materiale electrice, accesorii de cablaj,
+        1.2 BrenwElectro comercializează produse electrice, materiale electrice, accesorii de cablaj,
         produse legate de iluminat, componente de instalare, produse de distribuție și protecție a
         circuitelor, prize, întrerupătoare, cabluri, accesorii de montaj și bunuri conexe.
       </p>
@@ -491,7 +491,7 @@ const content: Record<Locale, ReactNode> = {
         schimb, taxă de conversie sau taxă pentru tranzacții în valută.
       </p>
       <p>
-        2.5 MisaElectro nu controlează cursurile de schimb, taxele de conversie bancare, taxele emitentului
+        2.5 BrenwElectro nu controlează cursurile de schimb, taxele de conversie bancare, taxele emitentului
         cardului sau taxele pentru tranzacții în valută.
       </p>
 
@@ -511,7 +511,7 @@ const content: Record<Locale, ReactNode> = {
       </ul>
       <p>3.3 Prețurile se pot modifica în orice moment înainte de plasarea unei comenzi.</p>
       <p>
-        3.4 Modificările de preț nu vor afecta comenzile deja acceptate de MisaElectro, cu excepția cazurilor
+        3.4 Modificările de preț nu vor afecta comenzile deja acceptate de BrenwElectro, cu excepția cazurilor
         în care a existat o eroare evidentă de preț, de monedă, de taxă, de reducere sau de natură tehnică.
       </p>
       <p>
@@ -521,14 +521,14 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>4. Metode de plată acceptate</h2>
-      <p>4.1 MisaElectro acceptă plăți securizate cu cardul folosind:</p>
+      <p>4.1 BrenwElectro acceptă plăți securizate cu cardul folosind:</p>
       <ul>
         <li>Visa</li>
         <li>Mastercard</li>
       </ul>
       <p>
         4.2 Alte metode de plată nu sunt acceptate decât dacă sunt afișate în mod expres la finalizarea
-        comenzii sau agreate în scris de MisaElectro.
+        comenzii sau agreate în scris de BrenwElectro.
       </p>
       <p>
         4.3 În prezent nu oferim plata la livrare, plata în cont, condiții de credit deschis, plăți prin cec,
@@ -544,7 +544,7 @@ const content: Record<Locale, ReactNode> = {
         autentifica, aproba, respinge sau examina tranzacția.
       </p>
       <p>
-        5.3 MisaElectro nu garantează că plata dumneavoastră va fi acceptată. Aprobarea plății depinde de
+        5.3 BrenwElectro nu garantează că plata dumneavoastră va fi acceptată. Aprobarea plății depinde de
         emitentul cardului, de bancă, de furnizorul de plăți, de verificările antifraudă, de cerințele de
         autentificare, de fondurile disponibile, de limitele de tranzacție și de alți factori aflați în afara
         controlului nostru.
@@ -560,9 +560,9 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>6. Securitatea cardului și datele de plată</h2>
-      <p>6.1 MisaElectro tratează cu seriozitate securitatea plăților.</p>
+      <p>6.1 BrenwElectro tratează cu seriozitate securitatea plăților.</p>
       <p>
-        6.2 Plățile cu cardul sunt gestionate prin furnizori de plăți terți securizați. MisaElectro nu
+        6.2 Plățile cu cardul sunt gestionate prin furnizori de plăți terți securizați. BrenwElectro nu
         stochează numărul complet al cardului, codul complet de securitate al cardului sau datele complete
         de acreditare ale cardului în propriile sisteme.
       </p>
@@ -612,7 +612,7 @@ const content: Record<Locale, ReactNode> = {
         comanda dumneavoastră poate să nu fie procesată.
       </p>
       <p>
-        8.2 MisaElectro nu este responsabilă pentru eșecurile de plată cauzate de banca dumneavoastră, de
+        8.2 BrenwElectro nu este responsabilă pentru eșecurile de plată cauzate de banca dumneavoastră, de
         emitentul cardului, de furnizorul de plăți, de fonduri insuficiente, de detalii incorecte ale
         cardului, de eșecul autentificării, de limitele de tranzacție, de probleme de rețea sau de
         controalele antifraudă.
@@ -628,7 +628,7 @@ const content: Record<Locale, ReactNode> = {
 
       <h2>9. Prevenirea fraudei și verificările plăților</h2>
       <p>
-        9.1 Pentru a proteja clienții, MisaElectro, furnizorii de plăți și rețelele de carduri, tranzacțiile
+        9.1 Pentru a proteja clienții, BrenwElectro, furnizorii de plăți și rețelele de carduri, tranzacțiile
         pot fi verificate pentru fraudă, abuz, activitate neautorizată, risc de sancțiuni și probleme de
         securitate a plăților.
       </p>
@@ -661,7 +661,7 @@ const content: Record<Locale, ReactNode> = {
         facturare.
       </p>
       <p>
-        10.3 Acolo unde este cazul, MisaElectro poate emite confirmări de comandă, confirmări de plată,
+        10.3 Acolo unde este cazul, BrenwElectro poate emite confirmări de comandă, confirmări de plată,
         chitanțe, facturi cu TVA sau facturi comerciale.
       </p>
       <p>
@@ -696,7 +696,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>12. Plăți internaționale, vamă și taxe de import</h2>
-      <p>12.1 MisaElectro expediază comenzile din Regatul Unit.</p>
+      <p>12.1 BrenwElectro expediază comenzile din Regatul Unit.</p>
       <p>
         12.2 Pentru comenzile livrate în afara Regatului Unit, comanda dumneavoastră poate fi supusă vămuirii,
         taxelor de import, TVA-ului la import, taxelor locale, comisioanelor de brokeraj, taxelor de
@@ -705,14 +705,14 @@ const content: Record<Locale, ReactNode> = {
       <p>
         12.3 Cu excepția situațiilor în care se precizează în mod expres altfel la finalizarea comenzii,
         astfel de taxe vamale și de import nu sunt incluse în prețul produsului, prețul de livrare sau plata
-        colectată de MisaElectro.
+        colectată de BrenwElectro.
       </p>
       <p>
         12.4 Sunteți responsabil pentru plata oricăror taxe vamale, TVA la import, impozite, comisioane de
         brokeraj, taxe de manipulare și taxe locale impuse în țara de destinație.
       </p>
       <p>
-        12.5 MisaElectro nu controlează autoritățile vamale, întârzierile vamale, evaluările taxelor de
+        12.5 BrenwElectro nu controlează autoritățile vamale, întârzierile vamale, evaluările taxelor de
         import, taxele de vămuire ale curierului sau taxele locale.
       </p>
       <p>
@@ -764,7 +764,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         14.5 Dacă anulați sau returnați în mod valabil produsul înainte ca Garanția suplimentară să înceapă
-        și o rambursare este impusă de lege sau aprobată de MisaElectro, taxa aferentă Garanției suplimentare
+        și o rambursare este impusă de lege sau aprobată de BrenwElectro, taxa aferentă Garanției suplimentare
         poate fi de asemenea rambursată.
       </p>
 
@@ -784,19 +784,19 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         15.5 Diferențele de conversie valutară, taxele emitentului cardului, taxele pentru tranzacții în
-        valută și comisioanele bancare nu sunt controlate de MisaElectro și nu sunt rambursabile de
-        MisaElectro.
+        valută și comisioanele bancare nu sunt controlate de BrenwElectro și nu sunt rambursabile de
+        BrenwElectro.
       </p>
       <p>
         15.6 Taxele vamale, TVA-ul la import, taxele locale, comisioanele de brokeraj, taxele de manipulare
-        ale curierului, taxele de vămuire și alte taxe locale nu sunt percepute de MisaElectro și nu sunt
-        rambursabile de MisaElectro.
+        ale curierului, taxele de vămuire și alte taxe locale nu sunt percepute de BrenwElectro și nu sunt
+        rambursabile de BrenwElectro.
       </p>
 
       <h2>16. Chargeback-uri și litigii de plată</h2>
       <p>
         16.1 Dacă aveți o problemă cu o comandă, plată, livrare, returnare, rambursare sau cerere de
-        garanție, trebuie să ne contactați mai întâi la info@misaelectro.ro pentru a putea investiga și
+        garanție, trebuie să ne contactați mai întâi la info@brenwelectro.com pentru a putea investiga și
         încerca să rezolvăm problema.
       </p>
       <p>
@@ -825,7 +825,7 @@ const content: Record<Locale, ReactNode> = {
         cazului în care convenim în mod expres altfel în scris.
       </p>
       <p>
-        17.2 MisaElectro nu oferă condiții de credit, achiziții în cont deschis sau plată amânată clienților
+        17.2 BrenwElectro nu oferă condiții de credit, achiziții în cont deschis sau plată amânată clienților
         persoane juridice, cu excepția cazului în care este aprobat separat în scris.
       </p>
       <p>
@@ -884,13 +884,13 @@ const content: Record<Locale, ReactNode> = {
     <PolicyLayout title="Fizetési szabályzat" lastUpdated="2026. május 29.">
       <p>
         Ez a Fizetési szabályzat ismerteti, hogyan fogadjuk el, dolgozzuk fel, ellenőrizzük, térítjük vissza
-        és kezeljük a www.misaelectro.ro oldalon keresztül végzett vásárlások fizetéseit.
+        és kezeljük a www.brenwelectro.com oldalon keresztül végzett vásárlások fizetéseit.
       </p>
       <p>A Weboldalt az alábbi vállalkozás üzemelteti:</p>
       <ContactBlock />
       <p>
-        A jelen Szabályzatban a &bdquo;MisaElectro&rdquo;, &bdquo;mi&rdquo; vagy &bdquo;a miénk&rdquo;
-        kifejezés a MISARELIANA S.R.L. vállalkozást jelenti. Az &bdquo;Ügyfél&rdquo;, &bdquo;Ön&rdquo; vagy
+        A jelen Szabályzatban a &bdquo;BrenwElectro&rdquo;, &bdquo;mi&rdquo; vagy &bdquo;a miénk&rdquo;
+        kifejezés a BRENWICK LIMITED vállalkozást jelenti. Az &bdquo;Ügyfél&rdquo;, &bdquo;Ön&rdquo; vagy
         &bdquo;az Ön&rdquo; kifejezés bármely olyan személyt vagy vállalkozást jelent, aki a Weboldalon
         keresztül rendelést ad le.
       </p>
@@ -907,7 +907,7 @@ const content: Record<Locale, ReactNode> = {
         díjért teljesített összes fizetésre vonatkozik.
       </p>
       <p>
-        1.2 A MisaElectro elektromos termékeket, elektromos anyagokat, vezetékezési tartozékokat,
+        1.2 A BrenwElectro elektromos termékeket, elektromos anyagokat, vezetékezési tartozékokat,
         világítással kapcsolatos termékeket, szerelési alkatrészeket, elosztási és áramköri védelmi
         termékeket, aljzatokat, kapcsolókat, kábeleket, rögzítési tartozékokat és kapcsolódó árukat
         értékesít.
@@ -939,7 +939,7 @@ const content: Record<Locale, ReactNode> = {
         díjat alkalmazhat.
       </p>
       <p>
-        2.5 A MisaElectro nem ellenőrzi az átváltási árfolyamokat, a banki átváltási díjakat, a
+        2.5 A BrenwElectro nem ellenőrzi az átváltási árfolyamokat, a banki átváltási díjakat, a
         kártyakibocsátói díjakat vagy a külföldi tranzakciós díjakat.
       </p>
 
@@ -959,7 +959,7 @@ const content: Record<Locale, ReactNode> = {
       </ul>
       <p>3.3 Az árak a rendelés leadása előtt bármikor megváltozhatnak.</p>
       <p>
-        3.4 Az árváltozások nem érintik a MisaElectro által már elfogadott rendeléseket, kivéve, ha nyilvánvaló
+        3.4 Az árváltozások nem érintik a BrenwElectro által már elfogadott rendeléseket, kivéve, ha nyilvánvaló
         ár-, pénznem-, adó-, kedvezmény- vagy technikai hiba történt.
       </p>
       <p>
@@ -969,14 +969,14 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>4. Elfogadott fizetési módok</h2>
-      <p>4.1 A MisaElectro biztonságos kártyás fizetéseket fogad el az alábbiakkal:</p>
+      <p>4.1 A BrenwElectro biztonságos kártyás fizetéseket fogad el az alábbiakkal:</p>
       <ul>
         <li>Visa</li>
         <li>Mastercard</li>
       </ul>
       <p>
         4.2 Egyéb fizetési módokat nem fogadunk el, kivéve, ha azok a pénztárnál kifejezetten megjelennek,
-        vagy a MisaElectro írásban jóváhagyta.
+        vagy a BrenwElectro írásban jóváhagyta.
       </p>
       <p>
         4.3 Jelenleg nem kínálunk utánvétet, számlára történő fizetést, nyílt hitelfeltételeket, csekkes
@@ -992,7 +992,7 @@ const content: Record<Locale, ReactNode> = {
         hitelesítheti, jóváhagyhatja, elutasíthatja vagy felülvizsgálhatja a tranzakciót.
       </p>
       <p>
-        5.3 A MisaElectro nem garantálja, hogy az Ön fizetését elfogadják. A fizetés jóváhagyása az Ön
+        5.3 A BrenwElectro nem garantálja, hogy az Ön fizetését elfogadják. A fizetés jóváhagyása az Ön
         kártyakibocsátójától, bankjától, fizetési szolgáltatójától, a csalásellenőrzésektől, a hitelesítési
         követelményektől, a rendelkezésre álló fedezettől, a tranzakciós limitektől és egyéb, az
         ellenőrzésünkön kívül eső tényezőktől függ.
@@ -1007,10 +1007,10 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>6. Kártyabiztonság és fizetési adatok</h2>
-      <p>6.1 A MisaElectro komolyan veszi a fizetési biztonságot.</p>
+      <p>6.1 A BrenwElectro komolyan veszi a fizetési biztonságot.</p>
       <p>
         6.2 A kártyás fizetéseket biztonságos, harmadik fél fizetési szolgáltatókon keresztül kezeljük. A
-        MisaElectro nem tárolja a teljes kártyaszámát, a teljes kártyabiztonsági kódját vagy a teljes
+        BrenwElectro nem tárolja a teljes kártyaszámát, a teljes kártyabiztonsági kódját vagy a teljes
         kártyaadatait a saját rendszerein.
       </p>
       <p>6.3 A fizetési szolgáltatóktól korlátozott fizetéssel kapcsolatos információkat kaphatunk, például:</p>
@@ -1059,7 +1059,7 @@ const content: Record<Locale, ReactNode> = {
         rendelése nem kerülhet feldolgozásra.
       </p>
       <p>
-        8.2 A MisaElectro nem felelős az Ön bankja, kártyakibocsátója, fizetési szolgáltatója, a nem
+        8.2 A BrenwElectro nem felelős az Ön bankja, kártyakibocsátója, fizetési szolgáltatója, a nem
         elegendő fedezet, a helytelen kártyaadatok, a hitelesítés sikertelensége, a tranzakciós limitek, a
         hálózati problémák vagy a csalásellenőrzések által okozott fizetési hibákért.
       </p>
@@ -1074,7 +1074,7 @@ const content: Record<Locale, ReactNode> = {
 
       <h2>9. Csalásmegelőzés és fizetési felülvizsgálatok</h2>
       <p>
-        9.1 Az ügyfelek, a MisaElectro, a fizetési szolgáltatók és a kártyahálózatok védelme érdekében a
+        9.1 Az ügyfelek, a BrenwElectro, a fizetési szolgáltatók és a kártyahálózatok védelme érdekében a
         tranzakciók csalás, visszaélés, jogosulatlan tevékenység, szankciós kockázat és fizetési biztonsági
         aggályok szempontjából ellenőrzésre kerülhetnek.
       </p>
@@ -1106,7 +1106,7 @@ const content: Record<Locale, ReactNode> = {
         és minden egyéb, a számlázáshoz szükséges információt.
       </p>
       <p>
-        10.3 Ahol alkalmazandó, a MisaElectro rendelés-visszaigazolásokat, fizetési visszaigazolásokat,
+        10.3 Ahol alkalmazandó, a BrenwElectro rendelés-visszaigazolásokat, fizetési visszaigazolásokat,
         nyugtákat, áfás számlákat vagy kereskedelmi számlákat állíthat ki.
       </p>
       <p>
@@ -1141,7 +1141,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>12. Nemzetközi fizetések, vám és importdíjak</h2>
-      <p>12.1 A MisaElectro a rendeléseket az Egyesült Királyságból küldi ki.</p>
+      <p>12.1 A BrenwElectro a rendeléseket az Egyesült Királyságból küldi ki.</p>
       <p>
         12.2 Az Egyesült Királyságon kívülre szállított rendelések esetén rendelésére vámkezelés, importvámok,
         importáfa, helyi adók, közvetítői díjak, futárkezelési díjak, vámkezelési díjak vagy egyéb helyi díjak
@@ -1149,14 +1149,14 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         12.3 Eltérő kifejezett rendelkezés hiányában a pénztárnál az ilyen vám- és importdíjak nem tartoznak
-        bele a termék árába, a szállítási árba vagy a MisaElectro által beszedett fizetésbe.
+        bele a termék árába, a szállítási árba vagy a BrenwElectro által beszedett fizetésbe.
       </p>
       <p>
         12.4 Ön felelős a célországban kivetett bármely vám, importáfa, adók, közvetítői díjak, kezelési
         díjak és helyi díjak megfizetéséért.
       </p>
       <p>
-        12.5 A MisaElectro nem ellenőrzi a vámhatóságokat, a vámkésedelmeket, az importadó-megállapításokat,
+        12.5 A BrenwElectro nem ellenőrzi a vámhatóságokat, a vámkésedelmeket, az importadó-megállapításokat,
         a futár vámkezelési díjait vagy a helyi díjakat.
       </p>
       <p>
@@ -1209,7 +1209,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         14.5 Ha Ön érvényesen lemondja vagy visszaküldi a terméket, mielőtt a Kiegészítő garancia megkezdődne,
-        és a visszatérítést jogszabály írja elő vagy a MisaElectro jóváhagyja, a kapcsolódó Kiegészítő
+        és a visszatérítést jogszabály írja elő vagy a BrenwElectro jóváhagyja, a kapcsolódó Kiegészítő
         garanciás díj szintén visszatéríthető.
       </p>
 
@@ -1228,18 +1228,18 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         15.5 A pénznemátváltási különbözeteket, a kártyakibocsátói díjakat, a külföldi tranzakciós díjakat és
-        a banki díjakat a MisaElectro nem ellenőrzi, és azokat a MisaElectro nem téríti vissza.
+        a banki díjakat a BrenwElectro nem ellenőrzi, és azokat a BrenwElectro nem téríti vissza.
       </p>
       <p>
         15.6 A vámokat, az importáfát, a helyi adókat, a közvetítői díjakat, a futárkezelési díjakat, a
-        vámkezelési díjakat és egyéb helyi díjakat nem a MisaElectro számítja fel, és azokat a MisaElectro nem
+        vámkezelési díjakat és egyéb helyi díjakat nem a BrenwElectro számítja fel, és azokat a BrenwElectro nem
         téríti vissza.
       </p>
 
       <h2>16. Chargebackek és fizetési viták</h2>
       <p>
         16.1 Ha problémája van egy rendeléssel, fizetéssel, szállítással, visszaküldéssel, visszatérítéssel
-        vagy garanciális igénnyel, először vegye fel velünk a kapcsolatot az info@misaelectro.ro címen, hogy
+        vagy garanciális igénnyel, először vegye fel velünk a kapcsolatot az info@brenwelectro.com címen, hogy
         kivizsgálhassuk és megpróbálhassuk megoldani a problémát.
       </p>
       <p>
@@ -1268,7 +1268,7 @@ const content: Record<Locale, ReactNode> = {
         írásban másként állapodunk meg.
       </p>
       <p>
-        17.2 A MisaElectro nem kínál hitelfeltételeket, nyílt számlás vásárlást vagy halasztott fizetést az
+        17.2 A BrenwElectro nem kínál hitelfeltételeket, nyílt számlás vásárlást vagy halasztott fizetést az
         üzleti Ügyfeleknek, kivéve, ha ezt külön írásban jóváhagyta.
       </p>
       <p>
@@ -1327,13 +1327,13 @@ const content: Record<Locale, ReactNode> = {
     <PolicyLayout title="Политика за плащане" lastUpdated="29 май 2026 г.">
       <p>
         Тази Политика за плащане обяснява как плащанията се приемат, обработват, проверяват, възстановяват и
-        обработват за покупки, извършени чрез www.misaelectro.ro.
+        обработват за покупки, извършени чрез www.brenwelectro.com.
       </p>
       <p>Уебсайтът се управлява от:</p>
       <ContactBlock />
       <p>
-        В настоящата Политика &bdquo;MisaElectro&rdquo;, &bdquo;ние&rdquo;, &bdquo;нас&rdquo; или
-        &bdquo;наш&rdquo; означава MISARELIANA S.R.L.. &bdquo;Клиент&rdquo;, &bdquo;Вие&rdquo; или
+        В настоящата Политика &bdquo;BrenwElectro&rdquo;, &bdquo;ние&rdquo;, &bdquo;нас&rdquo; или
+        &bdquo;наш&rdquo; означава BRENWICK LIMITED. &bdquo;Клиент&rdquo;, &bdquo;Вие&rdquo; или
         &bdquo;Ваш&rdquo; означава всяко физическо лице или предприятие, което подава поръчка чрез Уебсайта.
       </p>
       <p>
@@ -1349,7 +1349,7 @@ const content: Record<Locale, ReactNode> = {
         показани при плащане.
       </p>
       <p>
-        1.2 MisaElectro продава електрически продукти, електрически материали, аксесоари за окабеляване,
+        1.2 BrenwElectro продава електрически продукти, електрически материали, аксесоари за окабеляване,
         продукти, свързани с осветлението, монтажни компоненти, продукти за разпределение и защита на
         веригите, контакти, ключове, кабели, монтажни аксесоари и свързани стоки.
       </p>
@@ -1379,7 +1379,7 @@ const content: Record<Locale, ReactNode> = {
         за чуждестранна транзакция.
       </p>
       <p>
-        2.5 MisaElectro не контролира обменните курсове, банковите такси за конвертиране, таксите на издателя
+        2.5 BrenwElectro не контролира обменните курсове, банковите такси за конвертиране, таксите на издателя
         на картата или таксите за чуждестранни транзакции.
       </p>
 
@@ -1399,7 +1399,7 @@ const content: Record<Locale, ReactNode> = {
       </ul>
       <p>3.3 Цените могат да се променят по всяко време преди подаване на поръчка.</p>
       <p>
-        3.4 Промените в цените няма да засегнат поръчки, които вече са приети от MisaElectro, освен когато е
+        3.4 Промените в цените няма да засегнат поръчки, които вече са приети от BrenwElectro, освен когато е
         налице очевидна грешка в цената, валутата, данъка, отстъпката или техническа грешка.
       </p>
       <p>
@@ -1409,14 +1409,14 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>4. Приемани методи на плащане</h2>
-      <p>4.1 MisaElectro приема сигурни плащания с карта, използвайки:</p>
+      <p>4.1 BrenwElectro приема сигурни плащания с карта, използвайки:</p>
       <ul>
         <li>Visa</li>
         <li>Mastercard</li>
       </ul>
       <p>
         4.2 Други методи на плащане не се приемат, освен ако не са изрично показани при плащане или
-        договорени писмено от MisaElectro.
+        договорени писмено от BrenwElectro.
       </p>
       <p>
         4.3 Понастоящем не предлагаме плащане при доставка, плащане по сметка, условия за отворен кредит,
@@ -1432,7 +1432,7 @@ const content: Record<Locale, ReactNode> = {
         удостовери, одобри, отхвърли или прегледа транзакцията.
       </p>
       <p>
-        5.3 MisaElectro не гарантира, че Вашето плащане ще бъде прието. Одобрението на плащането зависи от
+        5.3 BrenwElectro не гарантира, че Вашето плащане ще бъде прието. Одобрението на плащането зависи от
         издателя на картата Ви, банката, доставчика на плащания, проверките за измами, изискванията за
         удостоверяване, наличните средства, лимитите на транзакциите и други фактори извън нашия контрол.
       </p>
@@ -1446,9 +1446,9 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>6. Сигурност на картата и данни за плащане</h2>
-      <p>6.1 MisaElectro приема сигурността на плащанията сериозно.</p>
+      <p>6.1 BrenwElectro приема сигурността на плащанията сериозно.</p>
       <p>
-        6.2 Плащанията с карта се обработват чрез сигурни доставчици на плащания – трети страни. MisaElectro
+        6.2 Плащанията с карта се обработват чрез сигурни доставчици на плащания – трети страни. BrenwElectro
         не съхранява пълния номер на картата Ви, пълния защитен код на картата или пълните удостоверителни
         данни на картата в собствените си системи.
       </p>
@@ -1498,7 +1498,7 @@ const content: Record<Locale, ReactNode> = {
         Вашата поръчка може да не бъде обработена.
       </p>
       <p>
-        8.2 MisaElectro не носи отговорност за неуспешни плащания, причинени от Вашата банка, издателя на
+        8.2 BrenwElectro не носи отговорност за неуспешни плащания, причинени от Вашата банка, издателя на
         картата, доставчика на плащания, недостатъчни средства, неправилни данни за картата, неуспешно
         удостоверяване, лимити на транзакциите, мрежови проблеми или контроли срещу измами.
       </p>
@@ -1512,7 +1512,7 @@ const content: Record<Locale, ReactNode> = {
 
       <h2>9. Предотвратяване на измами и прегледи на плащания</h2>
       <p>
-        9.1 За да защитим клиентите, MisaElectro, доставчиците на плащания и картовите мрежи, транзакциите
+        9.1 За да защитим клиентите, BrenwElectro, доставчиците на плащания и картовите мрежи, транзакциите
         могат да бъдат проверявани за измами, злоупотреба, неоторизирана дейност, риск от санкции и опасения
         за сигурността на плащанията.
       </p>
@@ -1544,7 +1544,7 @@ const content: Record<Locale, ReactNode> = {
         за фактуриране, данни за ДДС/данъци и всякаква друга информация, необходима за фактуриране.
       </p>
       <p>
-        10.3 Когато е приложимо, MisaElectro може да издава потвърждения на поръчки, потвърждения на плащания,
+        10.3 Когато е приложимо, BrenwElectro може да издава потвърждения на поръчки, потвърждения на плащания,
         разписки, фактури с ДДС или търговски фактури.
       </p>
       <p>
@@ -1579,7 +1579,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>12. Международни плащания, мита и вносни такси</h2>
-      <p>12.1 MisaElectro изпраща поръчки от Обединеното кралство.</p>
+      <p>12.1 BrenwElectro изпраща поръчки от Обединеното кралство.</p>
       <p>
         12.2 За поръчки, доставяни извън Обединеното кралство, Вашата поръчка може да подлежи на митническо
         оформяне, вносни мита, ДДС при внос, местни данъци, брокерски такси, такси за обработка от куриера,
@@ -1587,14 +1587,14 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         12.3 Освен ако изрично не е посочено друго при плащане, такива митнически и вносни такси не са
-        включени в цената на продукта, цената на доставката или плащането, събрано от MisaElectro.
+        включени в цената на продукта, цената на доставката или плащането, събрано от BrenwElectro.
       </p>
       <p>
         12.4 Вие носите отговорност за заплащането на всякакви мита, ДДС при внос, данъци, брокерски такси,
         такси за обработка и местни такси, наложени в държавата на дестинация.
       </p>
       <p>
-        12.5 MisaElectro не контролира митническите органи, митническите забавяния, начисляването на вносни
+        12.5 BrenwElectro не контролира митническите органи, митническите забавяния, начисляването на вносни
         данъци, таксите за оформяне от куриера или местните такси.
       </p>
       <p>
@@ -1646,7 +1646,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         14.5 Ако валидно анулирате или върнете продукта, преди Допълнителната гаранция да започне, и
-        възстановяване на средства се изисква от закона или е одобрено от MisaElectro, свързаната такса за
+        възстановяване на средства се изисква от закона или е одобрено от BrenwElectro, свързаната такса за
         Допълнителна гаранция също може да бъде възстановена.
       </p>
 
@@ -1666,19 +1666,19 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         15.5 Разликите при конвертирането на валута, таксите на издателя на картата, таксите за чуждестранни
-        транзакции и банковите такси не се контролират от MisaElectro и не подлежат на възстановяване от
-        MisaElectro.
+        транзакции и банковите такси не се контролират от BrenwElectro и не подлежат на възстановяване от
+        BrenwElectro.
       </p>
       <p>
         15.6 Митата, ДДС при внос, местните данъци, брокерските такси, таксите за обработка от куриера,
-        таксите за митническо оформяне и други местни такси не се начисляват от MisaElectro и не подлежат на
-        възстановяване от MisaElectro.
+        таксите за митническо оформяне и други местни такси не се начисляват от BrenwElectro и не подлежат на
+        възстановяване от BrenwElectro.
       </p>
 
       <h2>16. Chargebackове и спорове за плащане</h2>
       <p>
         16.1 Ако имате проблем с поръчка, плащане, доставка, връщане, възстановяване на средства или
-        гаранционна претенция, следва първо да се свържете с нас на info@misaelectro.ro, за да можем да
+        гаранционна претенция, следва първо да се свържете с нас на info@brenwelectro.com, за да можем да
         разследваме и да се опитаме да разрешим проблема.
       </p>
       <p>
@@ -1707,7 +1707,7 @@ const content: Record<Locale, ReactNode> = {
         в писмена форма.
       </p>
       <p>
-        17.2 MisaElectro не предлага кредитни условия, покупки по открита сметка или отложено плащане на Бизнес
+        17.2 BrenwElectro не предлага кредитни условия, покупки по открита сметка или отложено плащане на Бизнес
         клиенти, освен ако това не е одобрено отделно в писмена форма.
       </p>
       <p>

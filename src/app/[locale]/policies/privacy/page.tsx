@@ -4,10 +4,10 @@ import type { ReactNode } from "react";
 type Locale = "ro" | "hu" | "bg" | "en";
 
 const metaTitles: Record<Locale, string> = {
-  ro: "Politica de confidențialitate — MisaElectro",
-  hu: "Adatvédelmi szabályzat — MisaElectro",
-  bg: "Политика за поверителност — MisaElectro",
-  en: "Privacy Policy — MisaElectro",
+  ro: "Politica de confidențialitate — BrenwElectro",
+  hu: "Adatvédelmi szabályzat — BrenwElectro",
+  bg: "Политика за поверителност — BrenwElectro",
+  en: "Privacy Policy — BrenwElectro",
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -19,16 +19,16 @@ const content: Record<Locale, ReactNode> = {
   ro: (
     <PolicyLayout title="Politica de confidențialitate" lastUpdated="29 mai 2026">
       <p>
-        Această Politică de confidențialitate explică modul în care MISARELIANA S.R.L., care își desfășoară
-        activitatea sub denumirea comercială MisaElectro, colectează, utilizează, stochează, partajează și
-        protejează datele cu caracter personal atunci când vizitați www.misaelectro.ro, creați un cont,
+        Această Politică de confidențialitate explică modul în care BRENWICK LIMITED, care își desfășoară
+        activitatea sub denumirea comercială BrenwElectro, colectează, utilizează, stochează, partajează și
+        protejează datele cu caracter personal atunci când vizitați www.brenwelectro.com, creați un cont,
         plasați o comandă, ne contactați, utilizați serviciile noastre sau interacționați în alt mod cu noi.
       </p>
       <p>Site-ul web este operat de:</p>
       <ContactBlock />
       <p>
-        În această Politică de confidențialitate, &bdquo;MisaElectro&rdquo;, &bdquo;noi&rdquo; sau
-        &bdquo;al nostru&rdquo; înseamnă MISARELIANA S.R.L.. &bdquo;Client&rdquo;, &bdquo;dumneavoastră&rdquo; sau
+        În această Politică de confidențialitate, &bdquo;BrenwElectro&rdquo;, &bdquo;noi&rdquo; sau
+        &bdquo;al nostru&rdquo; înseamnă BRENWICK LIMITED. &bdquo;Client&rdquo;, &bdquo;dumneavoastră&rdquo; sau
         &bdquo;al dumneavoastră&rdquo; înseamnă orice persoană care utilizează Site-ul web, plasează o comandă,
         creează un cont, ne contactează sau interacționează cu serviciile noastre.
       </p>
@@ -62,7 +62,7 @@ const content: Record<Locale, ReactNode> = {
       <p>
         2.1 În scopul legislației aplicabile privind protecția datelor, inclusiv Regulamentul general privind
         protecția datelor din Regatul Unit, Legea privind protecția datelor din 2018 și, acolo unde este cazul,
-        Regulamentul general al UE privind protecția datelor, MISARELIANA S.R.L. este operatorul datelor
+        Regulamentul general al UE privind protecția datelor, BRENWICK LIMITED este operatorul datelor
         dumneavoastră cu caracter personal.
       </p>
       <p>2.2 Aceasta înseamnă că noi stabilim de ce și cum sunt prelucrate datele dumneavoastră cu caracter personal.</p>
@@ -75,7 +75,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>3. Datele cu caracter personal pe care le colectăm</h2>
-      <p>3.1 Datele cu caracter personal pe care le colectăm depind de modul în care interacționați cu MisaElectro.</p>
+      <p>3.1 Datele cu caracter personal pe care le colectăm depind de modul în care interacționați cu BrenwElectro.</p>
       <p>3.2 Putem colecta și prelucra următoarele categorii de date cu caracter personal.</p>
 
       <h3>3.2.1 Date de identitate și de contact</h3>
@@ -430,7 +430,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         8.3 Vă puteți dezabona de la comunicările de marketing în orice moment utilizând linkul de dezabonare
-        din e-mailul relevant sau contactându-ne la info@misaelectro.ro.
+        din e-mailul relevant sau contactându-ne la info@brenwelectro.com.
       </p>
       <p>
         8.4 Chiar dacă vă dezabonați de la marketing, este posibil să vă trimitem în continuare mesaje de
@@ -488,7 +488,7 @@ const content: Record<Locale, ReactNode> = {
 
       <h2>11. Transferuri internaționale de date</h2>
       <p>
-        11.1 Deoarece MisaElectro vinde la nivel internațional și utilizează furnizori de servicii terți,
+        11.1 Deoarece BrenwElectro vinde la nivel internațional și utilizează furnizori de servicii terți,
         datele dumneavoastră cu caracter personal pot fi prelucrate în afara Regatului Unit, a Spațiului
         Economic European sau a țării dumneavoastră de reședință.
       </p>
@@ -594,7 +594,7 @@ const content: Record<Locale, ReactNode> = {
         14.2 Aceste drepturi nu sunt absolute și pot fi supuse unor condiții legale, exceptări, verificări de
         identitate și obligațiilor noastre legale.
       </p>
-      <p>14.3 Pentru a vă exercita drepturile, vă rugăm să ne contactați la info@misaelectro.ro.</p>
+      <p>14.3 Pentru a vă exercita drepturile, vă rugăm să ne contactați la info@brenwelectro.com.</p>
       <p>14.4 Este posibil să fie nevoie să vă verificăm identitatea înainte de a răspunde unei cereri.</p>
       <p>
         14.5 Ne propunem să răspundem la cererile valide privind protecția datelor în termenul cerut de
@@ -604,7 +604,7 @@ const content: Record<Locale, ReactNode> = {
       <h2>15. Reclamații</h2>
       <p>
         15.1 Dacă aveți preocupări cu privire la modul în care gestionăm datele dumneavoastră cu caracter
-        personal, vă rugăm să ne contactați mai întâi la info@misaelectro.ro pentru a putea încerca să
+        personal, vă rugăm să ne contactați mai întâi la info@brenwelectro.com pentru a putea încerca să
         soluționăm chestiunea.
       </p>
       <p>
@@ -655,7 +655,7 @@ const content: Record<Locale, ReactNode> = {
       <p>18.2 Nu colectăm cu bună știință date cu caracter personal de la copii.</p>
       <p>
         18.3 Dacă credeți că un copil ne-a furnizat date cu caracter personal, vă rugăm să ne contactați la
-        info@misaelectro.ro și vom lua măsurile adecvate pentru a examina și șterge informațiile acolo unde
+        info@brenwelectro.com și vom lua măsurile adecvate pentru a examina și șterge informațiile acolo unde
         este necesar.
       </p>
 
@@ -690,15 +690,15 @@ const content: Record<Locale, ReactNode> = {
     <PolicyLayout title="Adatvédelmi szabályzat" lastUpdated="2026. május 29.">
       <p>
         Ez az Adatvédelmi szabályzat elmagyarázza, hogyan gyűjti, használja, tárolja, osztja meg és védi a
-        MISARELIANA S.R.L., amely MisaElectro néven folytatja tevékenységét, a személyes adatokat, amikor
-        felkeresi a www.misaelectro.ro oldalt, fiókot hoz létre, rendelést ad le, kapcsolatba lép velünk,
+        BRENWICK LIMITED, amely BrenwElectro néven folytatja tevékenységét, a személyes adatokat, amikor
+        felkeresi a www.brenwelectro.com oldalt, fiókot hoz létre, rendelést ad le, kapcsolatba lép velünk,
         igénybe veszi szolgáltatásainkat, vagy más módon lép kapcsolatba velünk.
       </p>
       <p>A Weboldalt a következő cég üzemelteti:</p>
       <ContactBlock />
       <p>
-        Ebben az Adatvédelmi szabályzatban a &bdquo;MisaElectro&rdquo;, &bdquo;mi&rdquo; vagy
-        &bdquo;miénk&rdquo; a MISARELIANA S.R.L.-t jelenti. Az &bdquo;Ügyfél&rdquo;, &bdquo;Ön&rdquo; vagy
+        Ebben az Adatvédelmi szabályzatban a &bdquo;BrenwElectro&rdquo;, &bdquo;mi&rdquo; vagy
+        &bdquo;miénk&rdquo; a BRENWICK LIMITED-t jelenti. Az &bdquo;Ügyfél&rdquo;, &bdquo;Ön&rdquo; vagy
         &bdquo;az Ön&rdquo; kifejezés bármely olyan személyt jelent, aki a Weboldalt használja, rendelést ad
         le, fiókot hoz létre, kapcsolatba lép velünk, vagy szolgáltatásainkkal érintkezik.
       </p>
@@ -732,7 +732,7 @@ const content: Record<Locale, ReactNode> = {
       <p>
         2.1 Az alkalmazandó adatvédelmi jogszabályok, köztük az Egyesült Királyság Általános adatvédelmi
         rendelete, a 2018. évi adatvédelmi törvény, valamint adott esetben az EU Általános adatvédelmi rendelete
-        alkalmazásában a MISARELIANA S.R.L. az Ön személyes adatainak adatkezelője.
+        alkalmazásában a BRENWICK LIMITED az Ön személyes adatainak adatkezelője.
       </p>
       <p>2.2 Ez azt jelenti, hogy mi határozzuk meg, miért és hogyan kezeljük az Ön személyes adatait.</p>
       <p>2.3 Adatvédelmi kérdésekben az alábbi elérhetőségeken keresztül léphet kapcsolatba velünk:</p>
@@ -743,7 +743,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>3. Az általunk gyűjtött személyes adatok</h2>
-      <p>3.1 Az általunk gyűjtött személyes adatok attól függnek, hogyan lép kapcsolatba a MisaElectróval.</p>
+      <p>3.1 Az általunk gyűjtött személyes adatok attól függnek, hogyan lép kapcsolatba a BrenwElectróval.</p>
       <p>3.2 A személyes adatok következő kategóriáit gyűjthetjük és kezelhetjük.</p>
 
       <h3>3.2.1 Azonosító és kapcsolattartási adatok</h3>
@@ -1099,7 +1099,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         8.3 A marketingkommunikációról bármikor leiratkozhat a vonatkozó e-mailben található leiratkozási link
-        használatával, vagy az info@misaelectro.ro címen keresztül.
+        használatával, vagy az info@brenwelectro.com címen keresztül.
       </p>
       <p>
         8.4 Még ha le is iratkozik a marketingről, továbbra is küldhetünk Önnek szolgáltatási üzeneteket,
@@ -1156,7 +1156,7 @@ const content: Record<Locale, ReactNode> = {
 
       <h2>11. Nemzetközi adattovábbítások</h2>
       <p>
-        11.1 Mivel a MisaElectro nemzetközileg értékesít, és harmadik fél szolgáltatókat vesz igénybe, az Ön
+        11.1 Mivel a BrenwElectro nemzetközileg értékesít, és harmadik fél szolgáltatókat vesz igénybe, az Ön
         személyes adatai az Egyesült Királyságon, az Európai Gazdasági Térségen vagy az Ön lakóhely szerinti
         országon kívül is kezelhetők.
       </p>
@@ -1262,7 +1262,7 @@ const content: Record<Locale, ReactNode> = {
         14.2 Ezek a jogok nem abszolút jellegűek, és jogi feltételek, kivételek, személyazonosság-ellenőrzés és
         jogi kötelezettségeink hatálya alá tartozhatnak.
       </p>
-      <p>14.3 Jogai gyakorlásához kérjük, lépjen kapcsolatba velünk az info@misaelectro.ro címen.</p>
+      <p>14.3 Jogai gyakorlásához kérjük, lépjen kapcsolatba velünk az info@brenwelectro.com címen.</p>
       <p>14.4 Előfordulhat, hogy a kérésre való válaszadás előtt ellenőriznünk kell személyazonosságát.</p>
       <p>
         14.5 Célunk, hogy az érvényes adatvédelmi kérelmekre az alkalmazandó jog által előírt határidőn belül
@@ -1272,7 +1272,7 @@ const content: Record<Locale, ReactNode> = {
       <h2>15. Panaszok</h2>
       <p>
         15.1 Ha aggályai vannak azzal kapcsolatban, hogyan kezeljük személyes adatait, kérjük, először lépjen
-        kapcsolatba velünk az info@misaelectro.ro címen, hogy megpróbálhassuk rendezni az ügyet.
+        kapcsolatba velünk az info@brenwelectro.com címen, hogy megpróbálhassuk rendezni az ügyet.
       </p>
       <p>
         15.2 Ha Ön az Egyesült Királyságban tartózkodik, jogában áll panaszt tenni az Információs Biztos
@@ -1323,7 +1323,7 @@ const content: Record<Locale, ReactNode> = {
       <p>18.2 Nem gyűjtünk tudatosan személyes adatokat gyermekektől.</p>
       <p>
         18.3 Ha úgy véli, hogy egy gyermek személyes adatokat adott meg nekünk, kérjük, lépjen kapcsolatba
-        velünk az info@misaelectro.ro címen, és megfelelő lépéseket teszünk az információk felülvizsgálata és
+        velünk az info@brenwelectro.com címen, és megfelelő lépéseket teszünk az információk felülvizsgálata és
         szükség esetén törlése érdekében.
       </p>
 
@@ -1357,16 +1357,16 @@ const content: Record<Locale, ReactNode> = {
   bg: (
     <PolicyLayout title="Политика за поверителност" lastUpdated="29 май 2026 г.">
       <p>
-        Тази Политика за поверителност обяснява как MISARELIANA S.R.L., извършваща дейност под търговското
-        наименование MisaElectro, събира, използва, съхранява, споделя и защитава лични данни, когато
-        посещавате www.misaelectro.ro, създавате акаунт, правите поръчка, свързвате се с нас, използвате нашите
+        Тази Политика за поверителност обяснява как BRENWICK LIMITED, извършваща дейност под търговското
+        наименование BrenwElectro, събира, използва, съхранява, споделя и защитава лични данни, когато
+        посещавате www.brenwelectro.com, създавате акаунт, правите поръчка, свързвате се с нас, използвате нашите
         услуги или взаимодействате с нас по друг начин.
       </p>
       <p>Уебсайтът се управлява от:</p>
       <ContactBlock />
       <p>
-        В тази Политика за поверителност &bdquo;MisaElectro&rdquo;, &bdquo;ние&rdquo;, &bdquo;нас&rdquo; или
-        &bdquo;наш&rdquo; означава MISARELIANA S.R.L.. &bdquo;Клиент&rdquo;, &bdquo;Вие&rdquo; или
+        В тази Политика за поверителност &bdquo;BrenwElectro&rdquo;, &bdquo;ние&rdquo;, &bdquo;нас&rdquo; или
+        &bdquo;наш&rdquo; означава BRENWICK LIMITED. &bdquo;Клиент&rdquo;, &bdquo;Вие&rdquo; или
         &bdquo;Ваш&rdquo; означава всяко лице, което използва Уебсайта, прави поръчка, създава акаунт, свързва
         се с нас или взаимодейства с нашите услуги.
       </p>
@@ -1400,7 +1400,7 @@ const content: Record<Locale, ReactNode> = {
       <p>
         2.1 За целите на приложимите закони за защита на данните, включително Общия регламент относно защитата
         на данните на Обединеното кралство, Закона за защита на данните от 2018 г. и, където е приложимо, Общия
-        регламент на ЕС относно защитата на данните, MISARELIANA S.R.L. е администраторът на Вашите лични данни.
+        регламент на ЕС относно защитата на данните, BRENWICK LIMITED е администраторът на Вашите лични данни.
       </p>
       <p>2.2 Това означава, че ние определяме защо и как се обработват Вашите лични данни.</p>
       <p>2.3 Можете да се свържете с нас по въпроси, свързани с поверителността, като използвате следните данни:</p>
@@ -1412,7 +1412,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>3. Лични данни, които събираме</h2>
-      <p>3.1 Личните данни, които събираме, зависят от начина, по който взаимодействате с MisaElectro.</p>
+      <p>3.1 Личните данни, които събираме, зависят от начина, по който взаимодействате с BrenwElectro.</p>
       <p>3.2 Можем да събираме и обработваме следните категории лични данни.</p>
 
       <h3>3.2.1 Данни за самоличност и контакт</h3>
@@ -1769,7 +1769,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         8.3 Можете да се отпишете от маркетингови съобщения по всяко време, като използвате връзката за
-        отписване в съответния имейл или като се свържете с нас на info@misaelectro.ro.
+        отписване в съответния имейл или като се свържете с нас на info@brenwelectro.com.
       </p>
       <p>
         8.4 Дори ако се отпишете от маркетинг, все пак можем да Ви изпращаме служебни съобщения, като
@@ -1827,7 +1827,7 @@ const content: Record<Locale, ReactNode> = {
 
       <h2>11. Международни трансфери на данни</h2>
       <p>
-        11.1 Тъй като MisaElectro продава в международен план и използва трети страни доставчици на услуги,
+        11.1 Тъй като BrenwElectro продава в международен план и използва трети страни доставчици на услуги,
         Вашите лични данни могат да бъдат обработвани извън Обединеното кралство, Европейското икономическо
         пространство или Вашата страна на пребиваване.
       </p>
@@ -1932,7 +1932,7 @@ const content: Record<Locale, ReactNode> = {
         14.2 Тези права не са абсолютни и могат да подлежат на правни условия, изключения, проверка на
         самоличността и нашите правни задължения.
       </p>
-      <p>14.3 За да упражните правата си, моля, свържете се с нас на info@misaelectro.ro.</p>
+      <p>14.3 За да упражните правата си, моля, свържете се с нас на info@brenwelectro.com.</p>
       <p>14.4 Може да се наложи да проверим Вашата самоличност, преди да отговорим на заявка.</p>
       <p>
         14.5 Стремим се да отговаряме на валидни заявки за защита на данните в срока, изискван от приложимото
@@ -1942,7 +1942,7 @@ const content: Record<Locale, ReactNode> = {
       <h2>15. Оплаквания</h2>
       <p>
         15.1 Ако имате притеснения относно начина, по който обработваме Вашите лични данни, моля, първо се
-        свържете с нас на info@misaelectro.ro, за да можем да опитаме да разрешим въпроса.
+        свържете с нас на info@brenwelectro.com, за да можем да опитаме да разрешим въпроса.
       </p>
       <p>
         15.2 Ако се намирате в Обединеното кралство, имате право да подадете жалба до Службата на комисаря по
@@ -1991,7 +1991,7 @@ const content: Record<Locale, ReactNode> = {
       <p>18.1 Уебсайтът не е насочен към деца.</p>
       <p>18.2 Не събираме съзнателно лични данни от деца.</p>
       <p>
-        18.3 Ако смятате, че дете ни е предоставило лични данни, моля, свържете се с нас на info@misaelectro.ro
+        18.3 Ако смятате, че дете ни е предоставило лични данни, моля, свържете се с нас на info@brenwelectro.com
         и ще предприемем подходящи стъпки за преглед и изтриване на информацията, където се изисква.
       </p>
 
@@ -2025,15 +2025,15 @@ const content: Record<Locale, ReactNode> = {
   en: (
     <PolicyLayout title="Privacy Policy" lastUpdated="29 May 2026">
       <p>
-        This Privacy Policy explains how MISARELIANA S.R.L., trading as MisaElectro, collects, uses, stores, shares,
-        and protects personal data when you visit www.misaelectro.ro, create an account, place an order,
+        This Privacy Policy explains how BRENWICK LIMITED, trading as BrenwElectro, collects, uses, stores, shares,
+        and protects personal data when you visit www.brenwelectro.com, create an account, place an order,
         contact us, use our services, or otherwise interact with us.
       </p>
       <p>The Website is operated by:</p>
       <ContactBlock />
       <p>
-        In this Privacy Policy, &ldquo;MisaElectro&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or
-        &ldquo;our&rdquo; means MISARELIANA S.R.L.. &ldquo;Customer&rdquo;, &ldquo;you&rdquo; or
+        In this Privacy Policy, &ldquo;BrenwElectro&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or
+        &ldquo;our&rdquo; means BRENWICK LIMITED. &ldquo;Customer&rdquo;, &ldquo;you&rdquo; or
         &ldquo;your&rdquo; means any person using the Website, placing an order, creating an account,
         contacting us, or interacting with our services.
       </p>
@@ -2067,7 +2067,7 @@ const content: Record<Locale, ReactNode> = {
       <p>
         2.1 For the purposes of applicable data protection laws, including the UK General Data Protection
         Regulation, the Data Protection Act 2018, and, where applicable, the EU General Data Protection
-        Regulation, MISARELIANA S.R.L. is the data controller of your personal data.
+        Regulation, BRENWICK LIMITED is the data controller of your personal data.
       </p>
       <p>2.2 This means we determine why and how your personal data is processed.</p>
       <p>2.3 You can contact us about privacy matters using the following details:</p>
@@ -2078,7 +2078,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>3. Personal Data We Collect</h2>
-      <p>3.1 The personal data we collect depends on how you interact with MisaElectro.</p>
+      <p>3.1 The personal data we collect depends on how you interact with BrenwElectro.</p>
       <p>3.2 We may collect and process the following categories of personal data.</p>
 
       <h3>3.2.1 Identity and Contact Data</h3>
@@ -2430,7 +2430,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         8.3 You can unsubscribe from marketing communications at any time by using the unsubscribe link in
-        the relevant email or contacting us at info@misaelectro.ro.
+        the relevant email or contacting us at info@brenwelectro.com.
       </p>
       <p>
         8.4 Even if you unsubscribe from marketing, we may still send you service messages, such as order
@@ -2486,7 +2486,7 @@ const content: Record<Locale, ReactNode> = {
 
       <h2>11. International Data Transfers</h2>
       <p>
-        11.1 Because MisaElectro sells internationally and uses third-party service providers, your personal
+        11.1 Because BrenwElectro sells internationally and uses third-party service providers, your personal
         data may be processed outside the United Kingdom, the European Economic Area, or your country of
         residence.
       </p>
@@ -2590,7 +2590,7 @@ const content: Record<Locale, ReactNode> = {
         14.2 These rights are not absolute and may be subject to legal conditions, exemptions, identity
         verification, and our legal obligations.
       </p>
-      <p>14.3 To exercise your rights, please contact us at info@misaelectro.ro.</p>
+      <p>14.3 To exercise your rights, please contact us at info@brenwelectro.com.</p>
       <p>14.4 We may need to verify your identity before responding to a request.</p>
       <p>
         14.5 We aim to respond to valid data protection requests within the timeframe required by applicable
@@ -2600,7 +2600,7 @@ const content: Record<Locale, ReactNode> = {
       <h2>15. Complaints</h2>
       <p>
         15.1 If you have concerns about how we handle your personal data, please contact us first at
-        info@misaelectro.ro so we can try to resolve the matter.
+        info@brenwelectro.com so we can try to resolve the matter.
       </p>
       <p>
         15.2 If you are in the United Kingdom, you have the right to lodge a complaint with the Information
@@ -2648,7 +2648,7 @@ const content: Record<Locale, ReactNode> = {
       <p>18.2 We do not knowingly collect personal data from children.</p>
       <p>
         18.3 If you believe that a child has provided personal data to us, please contact us at
-        info@misaelectro.ro and we will take appropriate steps to review and delete the information where
+        info@brenwelectro.com and we will take appropriate steps to review and delete the information where
         required.
       </p>
 

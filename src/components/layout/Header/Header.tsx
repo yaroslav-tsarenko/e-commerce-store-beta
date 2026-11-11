@@ -18,7 +18,7 @@ import { useCart } from "@/providers/CartProvider";
 import { useAuth } from "@/providers/AuthProvider";
 import { ThemeToggle } from "./ThemeToggle";
 import { AnimatePresence, motion } from "framer-motion";
-import { MisaElectroLogo } from "../MisaElectroLogo";
+import { BrenwElectroLogo } from "../BrenwElectroLogo";
 import { CurrencySwitcher } from "./CurrencySwitcher";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { CatalogMenu } from "../CatalogMenu/CatalogMenu";
@@ -258,10 +258,10 @@ export function Header() {
               <span className={styles.catalogBtnText}>{t("catalog")}</span>
             </button>
 
-            <Link href="/" className={styles.logo} aria-label="MisaElectro — misaelectro.ro">
-              <MisaElectroLogo size={30} />
+            <Link href="/" className={styles.logo} aria-label="BrenwElectro — brenwelectro.com">
+              <BrenwElectroLogo size={30} />
               <span className={styles.logoText}>
-                <span className={styles.logoTextPrimary}>Misa</span>
+                <span className={styles.logoTextPrimary}>Brenw</span>
                 <span className={styles.logoTextAccent}>Electro</span>
               </span>
             </Link>

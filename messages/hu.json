@@ -555,14 +555,14 @@
   "homeSections": {
     "testimonialsEyebrow": "Vásárlói vélemények",
     "testimonialsTitle": "Szakemberek bíznak bennünk egész Európában",
-    "testimonialsSubtitle": "Valódi visszajelzések villanyszerelőktől, kivitelezőktől és beszerzési csapatoktól, akik hetente vásárolnak a MisaElectrótól.",
+    "testimonialsSubtitle": "Valódi visszajelzések villanyszerelőktől, kivitelezőktől és beszerzési csapatoktól, akik hetente vásárolnak a BrenwElectrótól.",
     "review1Role": "Villanyszerelő · Berlin",
     "review1Quote": "Péntek késő este rendeltem kábeleket és csöveket — hétfő reggel megérkezett. Minden szépen összecsomagolva, a specifikációs lappal együtt. Ez az egyetlen beszállító, akiben időérzékeny munkáknál megbízom.",
     "review2Role": "Építésvezető · Lyon",
     "review2Quote": "Egy 14 fős csapat beszerzését intézem. A katalógus amperérték és keresztmetszet szerinti szűrői hetente órákat spóroltak meg nekem. Átlátható árazás, nincs meglepetésvám az EU-s szállításnál.",
     "review3Role": "Ipari szerelő · Rotterdam",
     "review3Quote": "Sürgősen szükségem volt egy speciális Schneider elosztóblokkra. A támogatás egy órán belül talált egy kompatibilis OEM megfelelőt, és aznap el is küldte. Minden várakozást felülmúltak.",
-    "whyTitle": "Miért válaszd a MisaElectrót",
+    "whyTitle": "Miért válaszd a BrenwElectrót",
     "whySubtitle": "Professzionális minőségű villamos anyagok szakértői támogatással és gyors szállítással",
     "why1Title": "Biztonságos vásárlás",
     "why1Desc": "Adataidat vállalati szintű titkosítás és biztonságos fizetés védi.",
@@ -700,7 +700,7 @@
     "service": {
       "eyebrow": "Szolgáltatási ígéretünk",
       "title": "Profiknak, akik nem várhatnak.",
-      "lead": "Minden rendelést a MisaElectrónál olyan csapat kezel, amely tudja, mire van szüksége egy szerelőnek hétfő reggel. Pontos specifikáció, tanúsított, gyors kiszállítás.",
+      "lead": "Minden rendelést a BrenwElectrónál olyan csapat kezel, amely tudja, mire van szüksége egy szerelőnek hétfő reggel. Pontos specifikáció, tanúsított, gyors kiszállítás.",
       "bullet1": "Aznapi kiszállítás a 14:00 CET előtt leadott rendeléseknél",
       "bullet2": "Ingyenes EU-s visszaküldés 30 napon belül, kérdés nélkül",
       "bullet3": "Gyártó által tanúsított készlet, tételszintű nyomon követéssel",
@@ -782,10 +782,10 @@
     "q7": "Kínálnak ajándékcsomagolást?",
     "a7": "Igen! Az ajándékcsomagolás a pénztárnál elérhető egy kis felárért. Ajándékodhoz személyre szabott üzenetet is mellékelhetsz.",
     "q8": "Hogyan léphetek kapcsolatba az ügyfélszolgálattal?",
-    "a8": "Elérhetsz minket a kapcsolatfelvételi űrlapon, e-mailben a support@misaelectro.ro címen, vagy élő csevegésen keresztül a weboldalunkon. A nap 24 órájában rendelkezésre állunk."
+    "a8": "Elérhetsz minket a kapcsolatfelvételi űrlapon, e-mailben a support@brenwelectro.com címen, vagy élő csevegésen keresztül a weboldalunkon. A nap 24 órájában rendelkezésre állunk."
   },
   "policiesIndex": {
-    "intro": "Kérjük, tekintse át az alábbi szabályzatainkat. Ezek a szabályzatok a MisaElectro webhely használatára és az azon keresztül végzett vásárlásokra vonatkoznak.",
+    "intro": "Kérjük, tekintse át az alábbi szabályzatainkat. Ezek a szabályzatok a BrenwElectro webhely használatára és az azon keresztül végzett vásárlásokra vonatkoznak.",
     "terms": "Általános szerződési feltételek",
     "shipping": "Szállítási szabályzat",
     "privacy": "Adatvédelmi szabályzat",

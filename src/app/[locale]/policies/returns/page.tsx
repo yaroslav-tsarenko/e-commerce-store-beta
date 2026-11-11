@@ -4,10 +4,10 @@ import type { ReactNode } from "react";
 type Locale = "ro" | "hu" | "bg" | "en";
 
 const metaTitles: Record<Locale, string> = {
-  ro: "Politica de returnare, rambursare și anulare — MisaElectro",
-  hu: "Visszaküldési, visszatérítési és lemondási szabályzat — MisaElectro",
-  bg: "Политика за връщане, възстановяване и анулиране — MisaElectro",
-  en: "Returns, Refunds and Cancellation Policy — MisaElectro",
+  ro: "Politica de returnare, rambursare și anulare — BrenwElectro",
+  hu: "Visszaküldési, visszatérítési és lemondási szabályzat — BrenwElectro",
+  bg: "Политика за връщане, възстановяване и анулиране — BrenwElectro",
+  en: "Returns, Refunds and Cancellation Policy — BrenwElectro",
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -22,13 +22,13 @@ const content: Record<Locale, ReactNode> = {
         Această Politică de returnare, rambursare și anulare explică modul în care sunt gestionate
         anulările comenzilor, returnările consumatorilor, rambursările, bunurile deteriorate, bunurile
         defecte, bunurile incorecte și returnările restricționate pentru achizițiile efectuate prin
-        www.misaelectro.ro.
+        www.brenwelectro.com.
       </p>
       <p>Site-ul web este operat de:</p>
       <ContactBlock />
       <p>
-        În această Politică, &bdquo;MisaElectro&rdquo;, &bdquo;noi&rdquo; sau &bdquo;al nostru&rdquo;
-        înseamnă MISARELIANA S.R.L.. &bdquo;Client&rdquo;, &bdquo;dumneavoastră&rdquo; sau
+        În această Politică, &bdquo;BrenwElectro&rdquo;, &bdquo;noi&rdquo; sau &bdquo;al nostru&rdquo;
+        înseamnă BRENWICK LIMITED. &bdquo;Client&rdquo;, &bdquo;dumneavoastră&rdquo; sau
         &bdquo;al dumneavoastră&rdquo; înseamnă orice persoană sau întreprindere care plasează o comandă
         prin intermediul Site-ului web.
       </p>
@@ -43,9 +43,9 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>1. Domeniul de aplicare al acestei Politici</h2>
-      <p>1.1 Această Politică se aplică bunurilor fizice achiziționate prin MisaElectro.</p>
+      <p>1.1 Această Politică se aplică bunurilor fizice achiziționate prin BrenwElectro.</p>
       <p>
-        1.2 MisaElectro furnizează produse electrice, materiale electrice, accesorii de cablare, produse
+        1.2 BrenwElectro furnizează produse electrice, materiale electrice, accesorii de cablare, produse
         legate de iluminat, componente de instalare, produse de distribuție și de protecție a circuitelor,
         prize, întrerupătoare, cabluri, accesorii de montaj și bunuri conexe.
       </p>
@@ -82,7 +82,7 @@ const content: Record<Locale, ReactNode> = {
       <h2>3. Anularea unei comenzi înainte de expediere</h2>
       <p>3.1 Puteți solicita anularea unei comenzi înainte ca aceasta să fie expediată.</p>
       <p>
-        3.2 Pentru a solicita anularea, contactați-ne cât mai curând posibil la info@misaelectro.ro și
+        3.2 Pentru a solicita anularea, contactați-ne cât mai curând posibil la info@brenwelectro.com și
         includeți numărul comenzii dumneavoastră.
       </p>
       <p>
@@ -114,7 +114,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         4.4 Pentru a vă exercita dreptul de anulare, trebuie să ne notificați clar prin e-mail la
-        info@misaelectro.ro înainte de expirarea perioadei de anulare.
+        info@brenwelectro.com înainte de expirarea perioadei de anulare.
       </p>
       <p>4.5 E-mailul dumneavoastră trebuie să includă:</p>
       <ul>
@@ -186,7 +186,7 @@ const content: Record<Locale, ReactNode> = {
       <h2>7. Bunuri defecte, deteriorate sau incorecte</h2>
       <p>
         7.1 Dacă bunurile ajung defecte, deteriorate, incomplete sau incorecte, vă rugăm să ne contactați cât
-        mai curând posibil la info@misaelectro.ro.
+        mai curând posibil la info@brenwelectro.com.
       </p>
       <p>7.2 Vă rugăm să includeți:</p>
       <ul>
@@ -258,7 +258,7 @@ const content: Record<Locale, ReactNode> = {
         returnare, cu excepția cazului în care convenim altfel în scris.
       </p>
       <p>
-        9.2 Pentru bunurile defecte, deteriorate sau incorecte, MisaElectro va acoperi costurile rezonabile
+        9.2 Pentru bunurile defecte, deteriorate sau incorecte, BrenwElectro va acoperi costurile rezonabile
         de returnare în cazul în care problema este confirmată sau în cazul în care furnizăm instrucțiuni de
         returnare.
       </p>
@@ -274,7 +274,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>10. Procedura de returnare</h2>
-      <p>10.1 Pentru a iniția o returnare, contactați-ne la info@misaelectro.ro.</p>
+      <p>10.1 Pentru a iniția o returnare, contactați-ne la info@brenwelectro.com.</p>
       <p>10.2 Vă rugăm să includeți:</p>
       <ul>
         <li>numărul comenzii;</li>
@@ -345,8 +345,8 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         12.4 Taxele vamale, TVA-ul la import, comisioanele de brokeraj, comisioanele de manipulare ale
-        curierului, taxele locale, taxele de vămuire și alte taxe locale nu sunt percepute de MisaElectro și
-        nu sunt rambursabile de către MisaElectro.
+        curierului, taxele locale, taxele de vămuire și alte taxe locale nu sunt percepute de BrenwElectro și
+        nu sunt rambursabile de către BrenwElectro.
       </p>
 
       <h2>13. Returnări internaționale</h2>
@@ -367,7 +367,7 @@ const content: Record<Locale, ReactNode> = {
         cazului în care bunurile sunt defecte, deteriorate, incorecte sau convenim altfel în scris.
       </p>
       <p>
-        13.5 Dacă MisaElectro suportă taxe vamale sau de curierat din cauza unei returnări internaționale,
+        13.5 Dacă BrenwElectro suportă taxe vamale sau de curierat din cauza unei returnări internaționale,
         acestea pot fi deduse din orice rambursare acolo unde legea permite acest lucru.
       </p>
 
@@ -377,7 +377,7 @@ const content: Record<Locale, ReactNode> = {
         la finalizarea comenzii.
       </p>
       <p>
-        14.2 MisaElectro nu este responsabil pentru întârzieri, livrări eșuate, colete pierdute, taxe de
+        14.2 BrenwElectro nu este responsabil pentru întârzieri, livrări eșuate, colete pierdute, taxe de
         returnare sau costuri suplimentare cauzate de informații de adresă incorecte, incomplete, învechite
         sau formatate necorespunzător furnizate de dumneavoastră.
       </p>
@@ -421,7 +421,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         16.2 Orice returnare de bunuri care nu prezintă defecte, acceptată de la un Client comercial, este la
-        discreția MisaElectro.
+        discreția BrenwElectro.
       </p>
       <p>16.3 Dacă suntem de acord cu o returnare a unui Client comercial, putem aplica condiții, inclusiv:</p>
       <ul>
@@ -440,7 +440,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         16.5 Rambursările Clienților comerciali, atunci când sunt aprobate, pot fi emise sub formă de
-        rambursare, înlocuire, credit în cont sau altă soluție convenită de MisaElectro.
+        rambursare, înlocuire, credit în cont sau altă soluție convenită de BrenwElectro.
       </p>
 
       <h2>17. Schimburi și înlocuiri</h2>
@@ -558,14 +558,14 @@ const content: Record<Locale, ReactNode> = {
       <p>
         Ez a Visszaküldési, visszatérítési és lemondási szabályzat ismerteti, hogyan kezeljük a
         megrendelések lemondását, a fogyasztói visszaküldéseket, a visszatérítéseket, a sérült árukat, a
-        hibás árukat, a hibás termékeket és a korlátozott visszaküldéseket a www.misaelectro.ro oldalon
+        hibás árukat, a hibás termékeket és a korlátozott visszaküldéseket a www.brenwelectro.com oldalon
         keresztül végzett vásárlások esetén.
       </p>
       <p>A weboldalt a következő üzemelteti:</p>
       <ContactBlock />
       <p>
-        Ebben a Szabályzatban a &bdquo;MisaElectro&rdquo;, &bdquo;mi&rdquo; vagy &bdquo;miénk&rdquo; a
-        MISARELIANA S.R.L. társaságot jelenti. A &bdquo;Vásárló&rdquo;, &bdquo;Ön&rdquo; vagy &bdquo;Öné&rdquo;
+        Ebben a Szabályzatban a &bdquo;BrenwElectro&rdquo;, &bdquo;mi&rdquo; vagy &bdquo;miénk&rdquo; a
+        BRENWICK LIMITED társaságot jelenti. A &bdquo;Vásárló&rdquo;, &bdquo;Ön&rdquo; vagy &bdquo;Öné&rdquo;
         bármely olyan személyt vagy vállalkozást jelent, aki a weboldalon keresztül rendelést ad le.
       </p>
       <p>
@@ -579,9 +579,9 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>1. E Szabályzat hatálya</h2>
-      <p>1.1 Ez a Szabályzat a MisaElectro oldalon keresztül vásárolt fizikai árukra vonatkozik.</p>
+      <p>1.1 Ez a Szabályzat a BrenwElectro oldalon keresztül vásárolt fizikai árukra vonatkozik.</p>
       <p>
-        1.2 A MisaElectro elektromos termékeket, elektromos anyagokat, vezetékezési tartozékokat,
+        1.2 A BrenwElectro elektromos termékeket, elektromos anyagokat, vezetékezési tartozékokat,
         világítással kapcsolatos termékeket, szerelési alkatrészeket, elosztási és áramkörvédelmi
         termékeket, aljzatokat, kapcsolókat, kábeleket, rögzítési tartozékokat és kapcsolódó árukat kínál.
       </p>
@@ -615,7 +615,7 @@ const content: Record<Locale, ReactNode> = {
       <h2>3. Megrendelés lemondása feladás előtt</h2>
       <p>3.1 Kérheti a megrendelés lemondását annak feladása előtt.</p>
       <p>
-        3.2 A lemondás kéréséhez a lehető leghamarabb vegye fel velünk a kapcsolatot a info@misaelectro.ro
+        3.2 A lemondás kéréséhez a lehető leghamarabb vegye fel velünk a kapcsolatot a info@brenwelectro.com
         címen, és adja meg a rendelési számát.
       </p>
       <p>
@@ -647,7 +647,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         4.4 A lemondási jogának gyakorlásához a lemondási időszak lejárta előtt egyértelműen értesítenie kell
-        minket e-mailben a info@misaelectro.ro címen.
+        minket e-mailben a info@brenwelectro.com címen.
       </p>
       <p>4.5 Az e-mailnek tartalmaznia kell:</p>
       <ul>
@@ -718,7 +718,7 @@ const content: Record<Locale, ReactNode> = {
       <h2>7. Hibás, sérült vagy helytelen áruk</h2>
       <p>
         7.1 Ha az áru hibásan, sérülten, hiányosan vagy helytelenül érkezik meg, kérjük, a lehető leghamarabb
-        vegye fel velünk a kapcsolatot a info@misaelectro.ro címen.
+        vegye fel velünk a kapcsolatot a info@brenwelectro.com címen.
       </p>
       <p>7.2 Kérjük, tüntesse fel:</p>
       <ul>
@@ -790,7 +790,7 @@ const content: Record<Locale, ReactNode> = {
         költségekért, kivéve, ha írásban másként állapodunk meg.
       </p>
       <p>
-        9.2 Hibás, sérült vagy helytelen áruk esetén a MisaElectro fedezi az ésszerű visszaküldési szállítási
+        9.2 Hibás, sérült vagy helytelen áruk esetén a BrenwElectro fedezi az ésszerű visszaküldési szállítási
         költségeket, ahol a problémát megerősítik, vagy ahol visszaküldési utasításokat adunk.
       </p>
       <p>9.3 Ne küldjön vissza árut anélkül, hogy először felvenné velünk a kapcsolatot.</p>
@@ -806,7 +806,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>10. Visszaküldési eljárás</h2>
-      <p>10.1 A visszaküldés megkezdéséhez vegye fel velünk a kapcsolatot a info@misaelectro.ro címen.</p>
+      <p>10.1 A visszaküldés megkezdéséhez vegye fel velünk a kapcsolatot a info@brenwelectro.com címen.</p>
       <p>10.2 Kérjük, tüntesse fel:</p>
       <ul>
         <li>a rendelési számot;</li>
@@ -876,7 +876,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         12.4 A vámok, az importáfa, a brókeri díjak, a futár kezelési díjai, a helyi adók, a vámkezelési
-        díjak és egyéb helyi díjak nem a MisaElectro által kerülnek felszámításra, és a MisaElectro nem
+        díjak és egyéb helyi díjak nem a BrenwElectro által kerülnek felszámításra, és a BrenwElectro nem
         téríti vissza őket.
       </p>
 
@@ -898,7 +898,7 @@ const content: Record<Locale, ReactNode> = {
         az áruk hibásak, sérültek, helytelenek, vagy ha írásban másként állapodunk meg.
       </p>
       <p>
-        13.5 Ha a MisaElectrónál egy nemzetközi visszaküldés miatt vám- vagy futárdíjak merülnek fel, ezek
+        13.5 Ha a BrenwElectrónál egy nemzetközi visszaküldés miatt vám- vagy futárdíjak merülnek fel, ezek
         levonhatók bármely visszatérítésből, ahol a jog ezt megengedi.
       </p>
 
@@ -907,7 +907,7 @@ const content: Record<Locale, ReactNode> = {
         14.1 Ön felelős a teljes és pontos számlázási és kézbesítési adatok megadásáért a pénztárnál.
       </p>
       <p>
-        14.2 A MisaElectro nem felelős az Ön által megadott helytelen, hiányos, elavult vagy nem megfelelően
+        14.2 A BrenwElectro nem felelős az Ön által megadott helytelen, hiányos, elavult vagy nem megfelelően
         formázott címadatok által okozott késésekért, sikertelen kézbesítésekért, elveszett csomagokért,
         visszaküldési díjakért vagy további költségekért.
       </p>
@@ -949,7 +949,7 @@ const content: Record<Locale, ReactNode> = {
         specifikáció miatt, vagy mert már nincs szükségük az árura.
       </p>
       <p>
-        16.2 Bármely, Üzleti vásárlótól elfogadott, nem hibás áru visszaküldése a MisaElectro mérlegelésén
+        16.2 Bármely, Üzleti vásárlótól elfogadott, nem hibás áru visszaküldése a BrenwElectro mérlegelésén
         múlik.
       </p>
       <p>16.3 Ha beleegyezünk egy Üzleti vásárlói visszaküldésbe, feltételeket alkalmazhatunk, beleértve:</p>
@@ -969,7 +969,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         16.5 Az Üzleti vásárlói visszatérítések, ha jóváhagyják őket, visszatérítés, csere, számlajóváírás
-        vagy a MisaElectro által megállapodott egyéb jogorvoslat formájában teljesíthetők.
+        vagy a BrenwElectro által megállapodott egyéb jogorvoslat formájában teljesíthetők.
       </p>
 
       <h2>17. Cserék és pótlások</h2>
@@ -1087,13 +1087,13 @@ const content: Record<Locale, ReactNode> = {
       <p>
         Настоящата Политика за връщане, възстановяване и анулиране обяснява как се обработват анулиранията на
         поръчки, потребителските връщания, възстановяванията, повредените стоки, дефектните стоки, неправилните
-        стоки и ограничените връщания за покупки, направени чрез www.misaelectro.ro.
+        стоки и ограничените връщания за покупки, направени чрез www.brenwelectro.com.
       </p>
       <p>Уебсайтът се управлява от:</p>
       <ContactBlock />
       <p>
-        В настоящата Политика &bdquo;MisaElectro&rdquo;, &bdquo;ние&rdquo;, &bdquo;нас&rdquo; или
-        &bdquo;наш&rdquo; означава MISARELIANA S.R.L.. &bdquo;Клиент&rdquo;, &bdquo;Вие&rdquo; или
+        В настоящата Политика &bdquo;BrenwElectro&rdquo;, &bdquo;ние&rdquo;, &bdquo;нас&rdquo; или
+        &bdquo;наш&rdquo; означава BRENWICK LIMITED. &bdquo;Клиент&rdquo;, &bdquo;Вие&rdquo; или
         &bdquo;Ваш&rdquo; означава всяко физическо лице или предприятие, което прави поръчка чрез Уебсайта.
       </p>
       <p>
@@ -1107,9 +1107,9 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>1. Обхват на настоящата Политика</h2>
-      <p>1.1 Настоящата Политика се прилага за физически стоки, закупени чрез MisaElectro.</p>
+      <p>1.1 Настоящата Политика се прилага за физически стоки, закупени чрез BrenwElectro.</p>
       <p>
-        1.2 MisaElectro доставя електрически продукти, електрически материали, аксесоари за окабеляване,
+        1.2 BrenwElectro доставя електрически продукти, електрически материали, аксесоари за окабеляване,
         продукти, свързани с осветлението, монтажни компоненти, продукти за разпределение и защита на
         веригите, контакти, ключове, кабели, монтажни аксесоари и свързани стоки.
       </p>
@@ -1143,7 +1143,7 @@ const content: Record<Locale, ReactNode> = {
       <h2>3. Анулиране на поръчка преди изпращане</h2>
       <p>3.1 Можете да поискате анулиране на поръчка, преди тя да е изпратена.</p>
       <p>
-        3.2 За да поискате анулиране, свържете се с нас възможно най-скоро на info@misaelectro.ro и посочете
+        3.2 За да поискате анулиране, свържете се с нас възможно най-скоро на info@brenwelectro.com и посочете
         номера на Вашата поръчка.
       </p>
       <p>
@@ -1173,7 +1173,7 @@ const content: Record<Locale, ReactNode> = {
         деня, в който получите последната пратка.
       </p>
       <p>
-        4.4 За да упражните правото си на анулиране, трябва ясно да ни уведомите по имейл на info@misaelectro.ro
+        4.4 За да упражните правото си на анулиране, трябва ясно да ни уведомите по имейл на info@brenwelectro.com
         преди изтичането на срока за анулиране.
       </p>
       <p>4.5 Вашият имейл трябва да включва:</p>
@@ -1242,7 +1242,7 @@ const content: Record<Locale, ReactNode> = {
       <h2>7. Дефектни, повредени или неправилни стоки</h2>
       <p>
         7.1 Ако стоките пристигнат дефектни, повредени, непълни или неправилни, моля, свържете се с нас
-        възможно най-скоро на info@misaelectro.ro.
+        възможно най-скоро на info@brenwelectro.com.
       </p>
       <p>7.2 Моля, включете:</p>
       <ul>
@@ -1312,7 +1312,7 @@ const content: Record<Locale, ReactNode> = {
         ако не се договорим писмено за друго.
       </p>
       <p>
-        9.2 За дефектни, повредени или неправилни стоки MisaElectro ще покрие разумните разходи за връщане,
+        9.2 За дефектни, повредени или неправилни стоки BrenwElectro ще покрие разумните разходи за връщане,
         когато проблемът е потвърден или когато предоставим инструкции за връщане.
       </p>
       <p>9.3 Не трябва да връщате стоки, без първо да се свържете с нас.</p>
@@ -1326,7 +1326,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>10. Процедура за връщане</h2>
-      <p>10.1 За да започнете връщане, свържете се с нас на info@misaelectro.ro.</p>
+      <p>10.1 За да започнете връщане, свържете се с нас на info@brenwelectro.com.</p>
       <p>10.2 Моля, включете:</p>
       <ul>
         <li>номер на поръчката;</li>
@@ -1394,8 +1394,8 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         12.4 Митнически мита, ДДС при внос, брокерски такси, такси за обработка на куриера, местни данъци,
-        такси за митническо оформяне и други местни такси не се начисляват от MisaElectro и не подлежат на
-        възстановяване от MisaElectro.
+        такси за митническо оформяне и други местни такси не се начисляват от BrenwElectro и не подлежат на
+        възстановяване от BrenwElectro.
       </p>
 
       <h2>13. Международни връщания</h2>
@@ -1415,7 +1415,7 @@ const content: Record<Locale, ReactNode> = {
         дефектни, повредени, неправилни или се договорим писмено за друго.
       </p>
       <p>
-        13.5 Ако MisaElectro понесе митнически или куриерски такси поради международно връщане, те може да
+        13.5 Ако BrenwElectro понесе митнически или куриерски такси поради международно връщане, те може да
         бъдат приспаднати от всяко възстановяване, където това е разрешено от закона.
       </p>
 
@@ -1425,7 +1425,7 @@ const content: Record<Locale, ReactNode> = {
         плащане.
       </p>
       <p>
-        14.2 MisaElectro не носи отговорност за забавяния, неуспешни доставки, изгубени пратки, такси за
+        14.2 BrenwElectro не носи отговорност за забавяния, неуспешни доставки, изгубени пратки, такси за
         връщане или допълнителни разходи, причинени от неправилна, непълна, остаряла или неправилно
         форматирана адресна информация, предоставена от Вас.
       </p>
@@ -1468,7 +1468,7 @@ const content: Record<Locale, ReactNode> = {
         спецификация или защото вече не се нуждаят от стоките.
       </p>
       <p>
-        16.2 Всяко приемане на връщане на недефектни стоки от Бизнес клиент е по преценка на MisaElectro.
+        16.2 Всяко приемане на връщане на недефектни стоки от Бизнес клиент е по преценка на BrenwElectro.
       </p>
       <p>16.3 Ако се съгласим на връщане от Бизнес клиент, можем да приложим условия, включително:</p>
       <ul>
@@ -1486,7 +1486,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         16.5 Възстановяванията за Бизнес клиенти, когато са одобрени, могат да бъдат издадени като
-        възстановяване, замяна, кредит по сметка или друго обезщетение, договорено от MisaElectro.
+        възстановяване, замяна, кредит по сметка или друго обезщетение, договорено от BrenwElectro.
       </p>
 
       <h2>17. Замени и заместващи продукти</h2>
@@ -1601,13 +1601,13 @@ const content: Record<Locale, ReactNode> = {
       <p>
         This Returns, Refunds and Cancellation Policy explains how order cancellations, consumer returns,
         refunds, damaged goods, faulty goods, incorrect goods, and restricted returns are handled for
-        purchases made through www.misaelectro.ro.
+        purchases made through www.brenwelectro.com.
       </p>
       <p>The Website is operated by:</p>
       <ContactBlock />
       <p>
-        In this Policy, &ldquo;MisaElectro&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo;
-        means MISARELIANA S.R.L.. &ldquo;Customer&rdquo;, &ldquo;you&rdquo; or &ldquo;your&rdquo; means any
+        In this Policy, &ldquo;BrenwElectro&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo;
+        means BRENWICK LIMITED. &ldquo;Customer&rdquo;, &ldquo;you&rdquo; or &ldquo;your&rdquo; means any
         person or business placing an order through the Website.
       </p>
       <p>
@@ -1620,9 +1620,9 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>1. Scope of This Policy</h2>
-      <p>1.1 This Policy applies to physical goods purchased through MisaElectro.</p>
+      <p>1.1 This Policy applies to physical goods purchased through BrenwElectro.</p>
       <p>
-        1.2 MisaElectro supplies electrical products, electrical materials, wiring accessories,
+        1.2 BrenwElectro supplies electrical products, electrical materials, wiring accessories,
         lighting-related products, installation components, distribution and circuit protection products,
         sockets, switches, cables, mounting accessories, and related goods.
       </p>
@@ -1656,7 +1656,7 @@ const content: Record<Locale, ReactNode> = {
       <h2>3. Cancelling an Order Before Dispatch</h2>
       <p>3.1 You may request cancellation of an order before it has been dispatched.</p>
       <p>
-        3.2 To request cancellation, contact us as soon as possible at info@misaelectro.ro and include your
+        3.2 To request cancellation, contact us as soon as possible at info@brenwelectro.com and include your
         order number.
       </p>
       <p>
@@ -1687,7 +1687,7 @@ const content: Record<Locale, ReactNode> = {
         days after the day you receive the final parcel.
       </p>
       <p>
-        4.4 To exercise your cancellation right, you must clearly notify us by email at info@misaelectro.ro
+        4.4 To exercise your cancellation right, you must clearly notify us by email at info@brenwelectro.com
         before the cancellation period expires.
       </p>
       <p>4.5 Your email should include:</p>
@@ -1756,7 +1756,7 @@ const content: Record<Locale, ReactNode> = {
       <h2>7. Faulty, Damaged, or Incorrect Goods</h2>
       <p>
         7.1 If goods arrive faulty, damaged, incomplete, or incorrect, please contact us as soon as possible
-        at info@misaelectro.ro.
+        at info@brenwelectro.com.
       </p>
       <p>7.2 Please include:</p>
       <ul>
@@ -1826,7 +1826,7 @@ const content: Record<Locale, ReactNode> = {
         agree otherwise in writing.
       </p>
       <p>
-        9.2 For faulty, damaged, or incorrect goods, MisaElectro will cover reasonable return shipping costs
+        9.2 For faulty, damaged, or incorrect goods, BrenwElectro will cover reasonable return shipping costs
         where the issue is confirmed or where we provide return instructions.
       </p>
       <p>9.3 You should not return goods without contacting us first.</p>
@@ -1840,7 +1840,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>10. Return Procedure</h2>
-      <p>10.1 To start a return, contact us at info@misaelectro.ro.</p>
+      <p>10.1 To start a return, contact us at info@brenwelectro.com.</p>
       <p>10.2 Please include:</p>
       <ul>
         <li>order number;</li>
@@ -1907,8 +1907,8 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         12.4 Customs duties, import VAT, brokerage fees, courier handling fees, local taxes, customs
-        clearance fees, and other local charges are not charged by MisaElectro and are not refundable by
-        MisaElectro.
+        clearance fees, and other local charges are not charged by BrenwElectro and are not refundable by
+        BrenwElectro.
       </p>
 
       <h2>13. International Returns</h2>
@@ -1928,7 +1928,7 @@ const content: Record<Locale, ReactNode> = {
         we agree otherwise in writing.
       </p>
       <p>
-        13.5 If customs or courier charges are incurred by MisaElectro because of an international return,
+        13.5 If customs or courier charges are incurred by BrenwElectro because of an international return,
         these may be deducted from any refund where permitted by law.
       </p>
 
@@ -1938,7 +1938,7 @@ const content: Record<Locale, ReactNode> = {
         checkout.
       </p>
       <p>
-        14.2 MisaElectro is not responsible for delays, failed deliveries, lost parcels, return charges, or
+        14.2 BrenwElectro is not responsible for delays, failed deliveries, lost parcels, return charges, or
         additional costs caused by incorrect, incomplete, outdated, or improperly formatted address
         information provided by you.
       </p>
@@ -1980,7 +1980,7 @@ const content: Record<Locale, ReactNode> = {
         specification, or no longer needing the goods.
       </p>
       <p>
-        16.2 Any non-faulty return accepted from a Business Customer is at MisaElectro&rsquo;s discretion.
+        16.2 Any non-faulty return accepted from a Business Customer is at BrenwElectro&rsquo;s discretion.
       </p>
       <p>16.3 If we agree to a Business Customer return, we may apply conditions, including:</p>
       <ul>
@@ -1998,7 +1998,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         16.5 Business Customer refunds, where approved, may be issued as a refund, replacement, account
-        credit, or other remedy agreed by MisaElectro.
+        credit, or other remedy agreed by BrenwElectro.
       </p>
 
       <h2>17. Exchanges and Replacements</h2>

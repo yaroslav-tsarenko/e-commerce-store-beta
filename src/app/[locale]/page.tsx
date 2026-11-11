@@ -470,13 +470,13 @@ export default async function HomePage({ params }: HomePageParams) {
         data={{
           "@context": "https://schema.org",
           "@type": "Organization",
-          name: "MisaElectro",
-          legalName: "MISARELIANA S.R.L.",
-          alternateName: ["misaelectro.ro", "Misa Electro"],
-          url: "https://misaelectro.ro",
-          sameAs: ["https://misaelectro.ro"],
+          name: "BrenwElectro",
+          legalName: "BRENWICK LIMITED",
+          alternateName: ["brenwelectro.com", "Brenw Electro"],
+          url: "https://brenwelectro.com",
+          sameAs: ["https://brenwelectro.com"],
           description:
-            "MisaElectro (misaelectro.ro) — your trusted source for electrical materials, wiring, lighting and installation supplies across Europe.",
+            "BrenwElectro (brenwelectro.com) — your trusted source for electrical materials, wiring, lighting and installation supplies across Europe.",
         }}
       />
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}

@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
 import { FaLinkedinIn, FaInstagram } from "react-icons/fa6";
-import { MisaElectroLogo } from "../MisaElectroLogo";
+import { BrenwElectroLogo } from "../BrenwElectroLogo";
 import visaLogo from "@/assets/visa-logo.svg";
 import mastercardLogo from "@/assets/mastercard-logo.svg";
 import pciDssLogo from "@/assets/pci-dss-compliant-logo-vector.svg";
@@ -20,10 +20,10 @@ export function Footer() {
       <div className={styles.container}>
         <div className={styles.topSection}>
           <div className={styles.brandCol}>
-            <Link href="/" className={styles.logo} aria-label="MisaElectro — misaelectro.ro">
-              <MisaElectroLogo size={32} />
+            <Link href="/" className={styles.logo} aria-label="BrenwElectro — brenwelectro.com">
+              <BrenwElectroLogo size={32} />
               <span className={styles.logoBrand}>
-                <span className={styles.logoBrandPrimary}>Misa</span>
+                <span className={styles.logoBrandPrimary}>Brenw</span>
                 <span className={styles.logoBrandAccent}>Electro</span>
               </span>
             </Link>
@@ -80,13 +80,13 @@ export function Footer() {
         <div className={styles.bottom}>
           <div className={styles.legal}>
             <p className={styles.copyright}>
-              {t("copyright", { year: currentYear, storeName: "MisaElectro" })}
+              {t("copyright", { year: currentYear, storeName: "BrenwElectro" })}
             </p>
             <p className={styles.legalEntity}>
-              MISARELIANA S.R.L. · Reg. No. 54316682 · Str. Fântânilor 43, IAŞI, Mun. Iaşi
+              BRENWICK LIMITED · Company number 17550297 · Suite 34, Cariocca Business Park, 2 Sawley Road, Manchester, England, M40 8BB
             </p>
             <p className={styles.legalEntity}>
-              info@misaelectro.ro · b2b@misaelectro.ro
+              info@brenwelectro.com · b2b@brenwelectro.com
             </p>
           </div>
           <div className={styles.paymentMethods}>

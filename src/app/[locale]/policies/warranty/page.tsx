@@ -4,10 +4,10 @@ import type { ReactNode } from "react";
 type Locale = "ro" | "hu" | "bg" | "en";
 
 const metaTitles: Record<Locale, string> = {
-  ro: "Politica de garanție — MisaElectro",
-  hu: "Jótállási szabályzat — MisaElectro",
-  bg: "Гаранционна политика — MisaElectro",
-  en: "Warranty Policy — MisaElectro",
+  ro: "Politica de garanție — BrenwElectro",
+  hu: "Jótállási szabályzat — BrenwElectro",
+  bg: "Гаранционна политика — BrenwElectro",
+  en: "Warranty Policy — BrenwElectro",
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -19,13 +19,13 @@ const en: ReactNode = (
   <PolicyLayout title="Warranty Policy" lastUpdated="29 May 2026">
     <p>
       This Warranty Policy explains how statutory rights, legal guarantees, manufacturer warranties, and
-      paid Additional Warranty options apply to products purchased through www.misaelectro.ro.
+      paid Additional Warranty options apply to products purchased through www.brenwelectro.com.
     </p>
     <p>The Website is operated by:</p>
     <ContactBlock />
     <p>
-      In this Policy, &ldquo;MisaElectro&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo;
-      means MISARELIANA S.R.L.. &ldquo;Customer&rdquo;, &ldquo;you&rdquo; or &ldquo;your&rdquo; means any
+      In this Policy, &ldquo;BrenwElectro&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo;
+      means BRENWICK LIMITED. &ldquo;Customer&rdquo;, &ldquo;you&rdquo; or &ldquo;your&rdquo; means any
       person or business purchasing goods through the Website.
     </p>
     <p>
@@ -39,9 +39,9 @@ const en: ReactNode = (
     </p>
 
     <h2>1. Scope of This Policy</h2>
-    <p>1.1 This Policy applies to physical goods purchased through MisaElectro.</p>
+    <p>1.1 This Policy applies to physical goods purchased through BrenwElectro.</p>
     <p>
-      1.2 MisaElectro supplies electrical products, electrical materials, wiring accessories,
+      1.2 BrenwElectro supplies electrical products, electrical materials, wiring accessories,
       lighting-related products, installation components, distribution and circuit protection products,
       sockets, switches, cables, mounting accessories, and related goods.
     </p>
@@ -107,7 +107,7 @@ const en: ReactNode = (
 
     <h2>5. Manufacturer Warranty</h2>
     <p>5.1 Some products may come with a manufacturer warranty.</p>
-    <p>5.2 Manufacturer warranty terms are set by the manufacturer, not by MisaElectro.</p>
+    <p>5.2 Manufacturer warranty terms are set by the manufacturer, not by BrenwElectro.</p>
     <p>
       5.3 Manufacturer warranties may vary by product, brand, country, product type, installation
       requirements, and usage conditions.
@@ -124,7 +124,7 @@ const en: ReactNode = (
       <li>return or inspection of the product.</li>
     </ul>
     <p>
-      5.5 MisaElectro may assist with manufacturer warranty claims where reasonable, but we do not control
+      5.5 BrenwElectro may assist with manufacturer warranty claims where reasonable, but we do not control
       manufacturer decisions, warranty processing times, inspection results, replacement availability, or
       repair procedures.
     </p>
@@ -134,7 +134,7 @@ const en: ReactNode = (
     </p>
 
     <h2>6. Paid Additional Warranty</h2>
-    <p>6.1 MisaElectro may offer paid Additional Warranty options for selected products.</p>
+    <p>6.1 BrenwElectro may offer paid Additional Warranty options for selected products.</p>
     <p>6.2 Additional Warranty is optional and may be selected at checkout where available.</p>
     <p>
       6.3 Additional Warranty provides commercial warranty protection in addition to your statutory rights.
@@ -250,7 +250,7 @@ const en: ReactNode = (
     </ul>
     <p>
       9.3 Warranty does not cover defects or damage caused after delivery by events outside
-      MisaElectro&rsquo;s control.
+      BrenwElectro&rsquo;s control.
     </p>
 
     <h2>10. Electrical Installation Responsibility</h2>
@@ -288,7 +288,7 @@ const en: ReactNode = (
     </p>
 
     <h2>11. How to Make a Warranty Claim</h2>
-    <p>11.1 To make a warranty claim, contact us at info@misaelectro.ro.</p>
+    <p>11.1 To make a warranty claim, contact us at info@brenwelectro.com.</p>
     <p>11.2 Please provide:</p>
     <ul>
       <li>your full name;</li>
@@ -315,7 +315,7 @@ const en: ReactNode = (
 
     <h2>12. Inspection and Assessment</h2>
     <p>
-      12.1 Warranty claims may require inspection by MisaElectro, the manufacturer, supplier, service
+      12.1 Warranty claims may require inspection by BrenwElectro, the manufacturer, supplier, service
       provider, or another authorised party.
     </p>
     <p>12.2 We may require you to return the product for inspection before approving a remedy.</p>
@@ -346,7 +346,7 @@ const en: ReactNode = (
     <p>13.2 We will provide return instructions where a return is required.</p>
     <p>
       13.3 For valid warranty claims involving faulty, damaged, or non-conforming goods, return shipping
-      may be covered by MisaElectro where required by law or approved by us.
+      may be covered by BrenwElectro where required by law or approved by us.
     </p>
     <p>
       13.4 If a warranty claim is rejected because the defect is not covered, you may be responsible for
@@ -398,7 +398,7 @@ const en: ReactNode = (
     <p>
       16.1 If you validly cancel or return a product before the Additional Warranty begins and the product
       refund is approved, the related Additional Warranty charge may also be refunded where required by
-      law or approved by MisaElectro.
+      law or approved by BrenwElectro.
     </p>
     <p>
       16.2 If the Additional Warranty has already begun or has already been used for a claim, it may not
@@ -423,7 +423,7 @@ const en: ReactNode = (
       except where mandatory law provides otherwise.
     </p>
     <p>
-      17.4 To the fullest extent permitted by law, MisaElectro will not be liable to Business Customers for
+      17.4 To the fullest extent permitted by law, BrenwElectro will not be liable to Business Customers for
       labour costs, electrician costs, contractor costs, testing costs, removal costs, reinstallation
       costs, certification costs, project delays, downtime, loss of profit, loss of contract, loss of
       revenue, loss of business opportunity, or indirect or consequential losses arising from a warranty
@@ -488,13 +488,13 @@ const ro: ReactNode = (
     <p>
       Această Politică de garanție explică modul în care drepturile legale, garanțiile legale, garanțiile
       producătorului și opțiunile de Garanție suplimentară contra cost se aplică produselor achiziționate
-      prin www.misaelectro.ro.
+      prin www.brenwelectro.com.
     </p>
     <p>Site-ul este operat de:</p>
     <ContactBlock />
     <p>
-      În această Politică, &bdquo;MisaElectro&rdquo;, &bdquo;noi&rdquo; sau &bdquo;al nostru&rdquo;
-      înseamnă MISARELIANA S.R.L.. &bdquo;Clientul&rdquo;, &bdquo;dumneavoastră&rdquo; sau
+      În această Politică, &bdquo;BrenwElectro&rdquo;, &bdquo;noi&rdquo; sau &bdquo;al nostru&rdquo;
+      înseamnă BRENWICK LIMITED. &bdquo;Clientul&rdquo;, &bdquo;dumneavoastră&rdquo; sau
       &bdquo;al dumneavoastră&rdquo; înseamnă orice persoană sau întreprindere care achiziționează bunuri
       prin intermediul Site-ului.
     </p>
@@ -509,9 +509,9 @@ const ro: ReactNode = (
     </p>
 
     <h2>1. Domeniul de aplicare al acestei Politici</h2>
-    <p>1.1 Această Politică se aplică bunurilor fizice achiziționate prin MisaElectro.</p>
+    <p>1.1 Această Politică se aplică bunurilor fizice achiziționate prin BrenwElectro.</p>
     <p>
-      1.2 MisaElectro furnizează produse electrice, materiale electrice, accesorii de cablaj, produse legate
+      1.2 BrenwElectro furnizează produse electrice, materiale electrice, accesorii de cablaj, produse legate
       de iluminat, componente de instalare, produse de distribuție și de protecție a circuitelor, prize,
       întrerupătoare, cabluri, accesorii de montaj și bunuri conexe.
     </p>
@@ -577,7 +577,7 @@ const ro: ReactNode = (
 
     <h2>5. Garanția producătorului</h2>
     <p>5.1 Unele produse pot fi însoțite de o garanție a producătorului.</p>
-    <p>5.2 Condițiile garanției producătorului sunt stabilite de producător, nu de MisaElectro.</p>
+    <p>5.2 Condițiile garanției producătorului sunt stabilite de producător, nu de BrenwElectro.</p>
     <p>
       5.3 Garanțiile producătorului pot varia în funcție de produs, marcă, țară, tip de produs, cerințe de
       instalare și condiții de utilizare.
@@ -594,7 +594,7 @@ const ro: ReactNode = (
       <li>returnarea sau inspecția produsului.</li>
     </ul>
     <p>
-      5.5 MisaElectro poate oferi asistență în cazul reclamațiilor privind garanția producătorului, atunci
+      5.5 BrenwElectro poate oferi asistență în cazul reclamațiilor privind garanția producătorului, atunci
       când este rezonabil, dar nu controlăm deciziile producătorului, timpii de procesare a garanției,
       rezultatele inspecției, disponibilitatea înlocuirii sau procedurile de reparație.
     </p>
@@ -604,7 +604,7 @@ const ro: ReactNode = (
     </p>
 
     <h2>6. Garanția suplimentară contra cost</h2>
-    <p>6.1 MisaElectro poate oferi opțiuni de Garanție suplimentară contra cost pentru anumite produse.</p>
+    <p>6.1 BrenwElectro poate oferi opțiuni de Garanție suplimentară contra cost pentru anumite produse.</p>
     <p>6.2 Garanția suplimentară este opțională și poate fi selectată la finalizarea comenzii, unde este disponibilă.</p>
     <p>
       6.3 Garanția suplimentară oferă protecție prin garanție comercială în plus față de drepturile
@@ -724,7 +724,7 @@ const ro: ReactNode = (
     </ul>
     <p>
       9.3 Garanția nu acoperă defectele sau deteriorările cauzate după livrare de evenimente aflate în afara
-      controlului MisaElectro.
+      controlului BrenwElectro.
     </p>
 
     <h2>10. Responsabilitatea privind instalarea electrică</h2>
@@ -763,7 +763,7 @@ const ro: ReactNode = (
     </p>
 
     <h2>11. Cum să depuneți o reclamație de garanție</h2>
-    <p>11.1 Pentru a depune o reclamație de garanție, contactați-ne la info@misaelectro.ro.</p>
+    <p>11.1 Pentru a depune o reclamație de garanție, contactați-ne la info@brenwelectro.com.</p>
     <p>11.2 Vă rugăm să furnizați:</p>
     <ul>
       <li>numele dumneavoastră complet;</li>
@@ -790,7 +790,7 @@ const ro: ReactNode = (
 
     <h2>12. Inspecție și evaluare</h2>
     <p>
-      12.1 Reclamațiile de garanție pot necesita o inspecție de către MisaElectro, producător, furnizor,
+      12.1 Reclamațiile de garanție pot necesita o inspecție de către BrenwElectro, producător, furnizor,
       prestator de servicii sau o altă parte autorizată.
     </p>
     <p>12.2 Vă putem solicita să returnați produsul pentru inspecție înainte de a aproba un remediu.</p>
@@ -821,7 +821,7 @@ const ro: ReactNode = (
     <p>13.2 Vom furniza instrucțiuni de returnare atunci când este necesară o returnare.</p>
     <p>
       13.3 Pentru reclamațiile de garanție valide care implică bunuri defecte, deteriorate sau neconforme,
-      transportul de returnare poate fi acoperit de MisaElectro atunci când este impus de lege sau aprobat de
+      transportul de returnare poate fi acoperit de BrenwElectro atunci când este impus de lege sau aprobat de
       noi.
     </p>
     <p>
@@ -877,7 +877,7 @@ const ro: ReactNode = (
     <p>
       16.1 Dacă anulați sau returnați în mod valid un produs înainte de începerea Garanției suplimentare și
       rambursarea produsului este aprobată, taxa aferentă Garanției suplimentare poate fi de asemenea
-      rambursată atunci când este impusă de lege sau aprobată de MisaElectro.
+      rambursată atunci când este impusă de lege sau aprobată de BrenwElectro.
     </p>
     <p>
       16.2 Dacă Garanția suplimentară a început deja sau a fost deja utilizată pentru o reclamație, este
@@ -903,7 +903,7 @@ const ro: ReactNode = (
       Consumatorilor, cu excepția cazului în care legislația obligatorie prevede altfel.
     </p>
     <p>
-      17.4 În măsura maximă permisă de lege, MisaElectro nu va fi răspunzătoare față de clienții persoane
+      17.4 În măsura maximă permisă de lege, BrenwElectro nu va fi răspunzătoare față de clienții persoane
       juridice pentru costuri cu manopera, costuri cu electricianul, costuri cu antreprenorul, costuri de
       testare, costuri de demontare, costuri de reinstalare, costuri de certificare, întârzieri ale
       proiectului, perioade de nefuncționare, pierderi de profit, pierderea contractului, pierderea
@@ -974,13 +974,13 @@ const hu: ReactNode = (
     <p>
       Ez a Jótállási szabályzat elmagyarázza, hogyan alkalmazandók a törvényes jogok, a jogszabályi
       szavatosságok, a gyártói jótállások és a fizetős Kiegészítő jótállási lehetőségek a
-      www.misaelectro.ro oldalon keresztül vásárolt termékekre.
+      www.brenwelectro.com oldalon keresztül vásárolt termékekre.
     </p>
     <p>A Weboldalt a következő üzemelteti:</p>
     <ContactBlock />
     <p>
-      A jelen Szabályzatban a &bdquo;MisaElectro&rdquo;, &bdquo;mi&rdquo; vagy &bdquo;miénk&rdquo; a
-      MISARELIANA S.R.L. társaságot jelenti. Az &bdquo;Ügyfél&rdquo;, &bdquo;Ön&rdquo; vagy
+      A jelen Szabályzatban a &bdquo;BrenwElectro&rdquo;, &bdquo;mi&rdquo; vagy &bdquo;miénk&rdquo; a
+      BRENWICK LIMITED társaságot jelenti. Az &bdquo;Ügyfél&rdquo;, &bdquo;Ön&rdquo; vagy
       &bdquo;Öné&rdquo; bármely olyan személyt vagy vállalkozást jelent, amely a Weboldalon keresztül
       árukat vásárol.
     </p>
@@ -995,9 +995,9 @@ const hu: ReactNode = (
     </p>
 
     <h2>1. A Szabályzat hatálya</h2>
-    <p>1.1 Ez a Szabályzat a MisaElectro-n keresztül vásárolt fizikai árukra vonatkozik.</p>
+    <p>1.1 Ez a Szabályzat a BrenwElectro-n keresztül vásárolt fizikai árukra vonatkozik.</p>
     <p>
-      1.2 A MisaElectro elektromos termékeket, elektromos anyagokat, vezetékezési tartozékokat,
+      1.2 A BrenwElectro elektromos termékeket, elektromos anyagokat, vezetékezési tartozékokat,
       világítással kapcsolatos termékeket, szerelési alkatrészeket, elosztási és áramkörvédelmi termékeket,
       aljzatokat, kapcsolókat, kábeleket, rögzítési tartozékokat és kapcsolódó árukat szállít.
     </p>
@@ -1064,7 +1064,7 @@ const hu: ReactNode = (
 
     <h2>5. Gyártói jótállás</h2>
     <p>5.1 Egyes termékekhez gyártói jótállás járhat.</p>
-    <p>5.2 A gyártói jótállás feltételeit a gyártó határozza meg, nem a MisaElectro.</p>
+    <p>5.2 A gyártói jótállás feltételeit a gyártó határozza meg, nem a BrenwElectro.</p>
     <p>
       5.3 A gyártói jótállások termékenként, márkánként, országonként, terméktípusonként, szerelési
       követelményenként és használati feltételenként eltérhetnek.
@@ -1081,7 +1081,7 @@ const hu: ReactNode = (
       <li>a termék visszaküldése vagy ellenőrzése.</li>
     </ul>
     <p>
-      5.5 A MisaElectro észszerű mértékben segítséget nyújthat a gyártói jótállási igényekben, de nem
+      5.5 A BrenwElectro észszerű mértékben segítséget nyújthat a gyártói jótállási igényekben, de nem
       ellenőrizzük a gyártói döntéseket, a jótállás feldolgozási idejét, az ellenőrzés eredményeit, a csere
       rendelkezésre állását vagy a javítási eljárásokat.
     </p>
@@ -1091,7 +1091,7 @@ const hu: ReactNode = (
     </p>
 
     <h2>6. Fizetős Kiegészítő jótállás</h2>
-    <p>6.1 A MisaElectro kiválasztott termékekhez fizetős Kiegészítő jótállási lehetőségeket kínálhat.</p>
+    <p>6.1 A BrenwElectro kiválasztott termékekhez fizetős Kiegészítő jótállási lehetőségeket kínálhat.</p>
     <p>6.2 A Kiegészítő jótállás opcionális, és ahol elérhető, a fizetéskor választható.</p>
     <p>
       6.3 A Kiegészítő jótállás a törvényes jogain túl kereskedelmi jótállási védelmet nyújt.
@@ -1207,7 +1207,7 @@ const hu: ReactNode = (
       <li>munkadíjak, villanyszerelői költségek, vállalkozói költségek, tesztelési költségek, ellenőrzési költségek, eltávolítási költségek, újratelepítési költségek, tanúsítási költségek, projektkésedelmek, állásidő, elmaradt haszon vagy közvetett veszteségek.</li>
     </ul>
     <p>
-      9.3 A jótállás nem fedezi a szállítás után a MisaElectro ellenőrzési körén kívül eső események által
+      9.3 A jótállás nem fedezi a szállítás után a BrenwElectro ellenőrzési körén kívül eső események által
       okozott hibákat vagy károkat.
     </p>
 
@@ -1246,7 +1246,7 @@ const hu: ReactNode = (
     </p>
 
     <h2>11. Hogyan nyújtson be jótállási igényt</h2>
-    <p>11.1 Jótállási igény benyújtásához vegye fel velünk a kapcsolatot az info@misaelectro.ro címen.</p>
+    <p>11.1 Jótállási igény benyújtásához vegye fel velünk a kapcsolatot az info@brenwelectro.com címen.</p>
     <p>11.2 Kérjük, adja meg a következőket:</p>
     <ul>
       <li>teljes neve;</li>
@@ -1273,7 +1273,7 @@ const hu: ReactNode = (
 
     <h2>12. Ellenőrzés és értékelés</h2>
     <p>
-      12.1 A jótállási igények a MisaElectro, a gyártó, a beszállító, a szolgáltató vagy más felhatalmazott
+      12.1 A jótállási igények a BrenwElectro, a gyártó, a beszállító, a szolgáltató vagy más felhatalmazott
       fél általi ellenőrzést igényelhetnek.
     </p>
     <p>12.2 A jogorvoslat jóváhagyása előtt megkövetelhetjük, hogy a terméket ellenőrzésre visszaküldje.</p>
@@ -1304,7 +1304,7 @@ const hu: ReactNode = (
     <p>13.2 Visszaküldési utasításokat adunk, ha visszaküldés szükséges.</p>
     <p>
       13.3 A hibás, sérült vagy nem megfelelő árukat érintő érvényes jótállási igények esetén a
-      visszaküldési szállítást a MisaElectro fedezheti, ha ezt a jog megköveteli vagy mi jóváhagyjuk.
+      visszaküldési szállítást a BrenwElectro fedezheti, ha ezt a jog megköveteli vagy mi jóváhagyjuk.
     </p>
     <p>
       13.4 Ha egy jótállási igényt azért utasítanak el, mert a hiba nem fedezett, Ön felelős lehet a
@@ -1356,7 +1356,7 @@ const hu: ReactNode = (
     <p>
       16.1 Ha érvényesen lemond vagy visszaküld egy terméket a Kiegészítő jótállás megkezdése előtt, és a
       termék visszatérítését jóváhagyják, a kapcsolódó Kiegészítő jótállási díj is visszatéríthető, ahol ezt
-      a jog megköveteli vagy a MisaElectro jóváhagyja.
+      a jog megköveteli vagy a BrenwElectro jóváhagyja.
     </p>
     <p>
       16.2 Ha a Kiegészítő jótállás már megkezdődött, vagy már felhasználták egy igényhez, előfordulhat, hogy
@@ -1381,7 +1381,7 @@ const hu: ReactNode = (
       elérhetők, kivéve, ha a kötelező jog másképp rendelkezik.
     </p>
     <p>
-      17.4 A jog által megengedett legteljesebb mértékben a MisaElectro nem felel az Üzleti ügyfelek felé a
+      17.4 A jog által megengedett legteljesebb mértékben a BrenwElectro nem felel az Üzleti ügyfelek felé a
       munkadíjakért, villanyszerelői költségekért, vállalkozói költségekért, tesztelési költségekért,
       eltávolítási költségekért, újratelepítési költségekért, tanúsítási költségekért, projektkésedelmekért,
       állásidőért, elmaradt haszonért, szerződés elvesztéséért, bevételkiesésért, üzleti lehetőség
@@ -1450,13 +1450,13 @@ const bg: ReactNode = (
     <p>
       Тази Гаранционна политика обяснява как законовите права, законовите гаранции, гаранциите на
       производителя и платените опции за Допълнителна гаранция се прилагат към продукти, закупени чрез
-      www.misaelectro.ro.
+      www.brenwelectro.com.
     </p>
     <p>Уебсайтът се управлява от:</p>
     <ContactBlock />
     <p>
-      В тази Политика &bdquo;MisaElectro&rdquo;, &bdquo;ние&rdquo; или &bdquo;наш&rdquo; означава
-      MISARELIANA S.R.L.. &bdquo;Клиент&rdquo;, &bdquo;Вие&rdquo; или &bdquo;Ваш&rdquo; означава всяко
+      В тази Политика &bdquo;BrenwElectro&rdquo;, &bdquo;ние&rdquo; или &bdquo;наш&rdquo; означава
+      BRENWICK LIMITED. &bdquo;Клиент&rdquo;, &bdquo;Вие&rdquo; или &bdquo;Ваш&rdquo; означава всяко
       физическо лице или предприятие, което купува стоки чрез Уебсайта.
     </p>
     <p>
@@ -1470,9 +1470,9 @@ const bg: ReactNode = (
     </p>
 
     <h2>1. Обхват на тази Политика</h2>
-    <p>1.1 Тази Политика се прилага към физически стоки, закупени чрез MisaElectro.</p>
+    <p>1.1 Тази Политика се прилага към физически стоки, закупени чрез BrenwElectro.</p>
     <p>
-      1.2 MisaElectro доставя електрически продукти, електрически материали, аксесоари за окабеляване,
+      1.2 BrenwElectro доставя електрически продукти, електрически материали, аксесоари за окабеляване,
       продукти, свързани с осветление, монтажни компоненти, продукти за разпределение и защита на
       електрически вериги, контакти, ключове, кабели, монтажни аксесоари и свързани стоки.
     </p>
@@ -1540,7 +1540,7 @@ const bg: ReactNode = (
 
     <h2>5. Гаранция на производителя</h2>
     <p>5.1 Някои продукти може да се предлагат с гаранция на производителя.</p>
-    <p>5.2 Условията на гаранцията на производителя се определят от производителя, а не от MisaElectro.</p>
+    <p>5.2 Условията на гаранцията на производителя се определят от производителя, а не от BrenwElectro.</p>
     <p>
       5.3 Гаранциите на производителя може да варират в зависимост от продукта, марката, държавата, вида на
       продукта, изискванията за монтаж и условията на употреба.
@@ -1557,7 +1557,7 @@ const bg: ReactNode = (
       <li>връщане или проверка на продукта.</li>
     </ul>
     <p>
-      5.5 MisaElectro може да съдейства при претенции по гаранция на производителя, когато това е разумно, но
+      5.5 BrenwElectro може да съдейства при претенции по гаранция на производителя, когато това е разумно, но
       ние не контролираме решенията на производителя, времето за обработка на гаранцията, резултатите от
       проверката, наличността на замяна или процедурите за ремонт.
     </p>
@@ -1567,7 +1567,7 @@ const bg: ReactNode = (
     </p>
 
     <h2>6. Платена Допълнителна гаранция</h2>
-    <p>6.1 MisaElectro може да предлага платени опции за Допълнителна гаранция за избрани продукти.</p>
+    <p>6.1 BrenwElectro може да предлага платени опции за Допълнителна гаранция за избрани продукти.</p>
     <p>6.2 Допълнителната гаранция е по избор и може да бъде избрана при плащане, където е налична.</p>
     <p>
       6.3 Допълнителната гаранция осигурява защита чрез търговска гаранция в допълнение към законовите Ви
@@ -1686,7 +1686,7 @@ const bg: ReactNode = (
     </ul>
     <p>
       9.3 Гаранцията не покрива дефекти или повреди, причинени след доставката от събития извън контрола на
-      MisaElectro.
+      BrenwElectro.
     </p>
 
     <h2>10. Отговорност при електрически монтаж</h2>
@@ -1725,7 +1725,7 @@ const bg: ReactNode = (
     </p>
 
     <h2>11. Как да предявите гаранционна претенция</h2>
-    <p>11.1 За да предявите гаранционна претенция, свържете се с нас на info@misaelectro.ro.</p>
+    <p>11.1 За да предявите гаранционна претенция, свържете се с нас на info@brenwelectro.com.</p>
     <p>11.2 Моля, предоставете:</p>
     <ul>
       <li>пълното Ви име;</li>
@@ -1752,7 +1752,7 @@ const bg: ReactNode = (
 
     <h2>12. Проверка и оценка</h2>
     <p>
-      12.1 Гаранционните претенции може да изискват проверка от MisaElectro, производителя, доставчика,
+      12.1 Гаранционните претенции може да изискват проверка от BrenwElectro, производителя, доставчика,
       доставчика на услуги или друга оторизирана страна.
     </p>
     <p>12.2 Може да изискаме да върнете продукта за проверка, преди да одобрим средство за защита.</p>
@@ -1783,7 +1783,7 @@ const bg: ReactNode = (
     <p>13.2 Ще предоставим инструкции за връщане, когато се изисква връщане.</p>
     <p>
       13.3 За валидни гаранционни претенции, включващи дефектни, повредени или несъответстващи стоки,
-      транспортът за връщане може да бъде поет от MisaElectro, когато това се изисква от закона или е одобрено
+      транспортът за връщане може да бъде поет от BrenwElectro, когато това се изисква от закона или е одобрено
       от нас.
     </p>
     <p>
@@ -1836,7 +1836,7 @@ const bg: ReactNode = (
     <p>
       16.1 Ако валидно анулирате или върнете продукт преди началото на Допълнителната гаранция и
       възстановяването на средствата за продукта е одобрено, свързаната такса за Допълнителна гаранция също
-      може да бъде възстановена, когато това се изисква от закона или е одобрено от MisaElectro.
+      може да бъде възстановена, когато това се изисква от закона или е одобрено от BrenwElectro.
     </p>
     <p>
       16.2 Ако Допълнителната гаранция вече е започнала или вече е използвана за претенция, тя може да не
@@ -1861,7 +1861,7 @@ const bg: ReactNode = (
       Потребители, освен когато задължителното право предвижда друго.
     </p>
     <p>
-      17.4 В най-пълната степен, позволена от закона, MisaElectro няма да носи отговорност пред Бизнес клиенти
+      17.4 В най-пълната степен, позволена от закона, BrenwElectro няма да носи отговорност пред Бизнес клиенти
       за разходи за труд, разходи за електротехник, разходи за изпълнител, разходи за изпитване, разходи за
       демонтаж, разходи за повторен монтаж, разходи за сертифициране, забавяния по проекта, престой,
       пропуснати ползи, загуба на договор, загуба на приходи, загуба на бизнес възможност или косвени или

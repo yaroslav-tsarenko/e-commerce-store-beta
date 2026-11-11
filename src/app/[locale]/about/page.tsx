@@ -20,7 +20,7 @@ export default function AboutPage() {
       <div className={styles.inner}>
         <div className={styles.hero}>
           <h1 className={styles.title}>
-            {t("titlePrefix")} <span className="gradient-text">MisaElectro</span>
+            {t("titlePrefix")} <span className="gradient-text">BrenwElectro</span>
           </h1>
           <p className={styles.lead}>
             {t("lead")}

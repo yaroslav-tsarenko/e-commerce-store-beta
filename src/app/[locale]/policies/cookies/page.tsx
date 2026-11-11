@@ -4,10 +4,10 @@ import type { ReactNode } from "react";
 type Locale = "ro" | "hu" | "bg" | "en";
 
 const metaTitles: Record<Locale, string> = {
-  ro: "Politica de cookie-uri — MisaElectro",
-  hu: "Cookie-szabályzat — MisaElectro",
-  bg: "Политика за бисквитки — MisaElectro",
-  en: "Cookie Policy — MisaElectro",
+  ro: "Politica de cookie-uri — BrenwElectro",
+  hu: "Cookie-szabályzat — BrenwElectro",
+  bg: "Политика за бисквитки — BrenwElectro",
+  en: "Cookie Policy — BrenwElectro",
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -19,15 +19,15 @@ const content: Record<Locale, ReactNode> = {
   ro: (
     <PolicyLayout title="Politica de cookie-uri" lastUpdated="29 mai 2026">
       <p>
-        Această Politică de cookie-uri explică modul în care MISARELIANA S.R.L., care își desfășoară
-        activitatea sub denumirea comercială MisaElectro, utilizează cookie-uri și tehnologii similare pe
-        www.misaelectro.ro.
+        Această Politică de cookie-uri explică modul în care BRENWICK LIMITED, care își desfășoară
+        activitatea sub denumirea comercială BrenwElectro, utilizează cookie-uri și tehnologii similare pe
+        www.brenwelectro.com.
       </p>
       <p>Site-ul web este operat de:</p>
       <ContactBlock />
       <p>
-        În această Politică de cookie-uri, &bdquo;MisaElectro&rdquo;, &bdquo;noi&rdquo; sau
-        &bdquo;al nostru&rdquo; înseamnă MISARELIANA S.R.L.. &bdquo;Dumneavoastră&rdquo; sau
+        În această Politică de cookie-uri, &bdquo;BrenwElectro&rdquo;, &bdquo;noi&rdquo; sau
+        &bdquo;al nostru&rdquo; înseamnă BRENWICK LIMITED. &bdquo;Dumneavoastră&rdquo; sau
         &bdquo;al dumneavoastră&rdquo; înseamnă orice vizitator, client, titular de cont, client de afaceri
         sau utilizator al Site-ului web.
       </p>
@@ -66,7 +66,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>2.3 Cookie-urile pot fi:</p>
       <ul>
-        <li>cookie-uri proprii (first-party), setate direct de MisaElectro; sau</li>
+        <li>cookie-uri proprii (first-party), setate direct de BrenwElectro; sau</li>
         <li>cookie-uri terțe (third-party), setate de furnizori externi ale căror servicii le utilizăm, cum ar fi furnizori de analiză, plăți, securitate, publicitate sau servicii încorporate.</li>
       </ul>
       <p>2.4 Cookie-urile pot fi, de asemenea:</p>
@@ -218,7 +218,7 @@ const content: Record<Locale, ReactNode> = {
         înțelege modul în care utilizatorii interacționează cu campaniile de marketing.
       </p>
       <p>
-        8.2 Aceste cookie-uri pot fi setate de MisaElectro sau de parteneri terți de publicitate și marketing.
+        8.2 Aceste cookie-uri pot fi setate de BrenwElectro sau de parteneri terți de publicitate și marketing.
       </p>
       <p>
         8.3 Cookie-urile de marketing pot urmări activitatea dumneavoastră de navigare pe diferite site-uri web
@@ -268,7 +268,7 @@ const content: Record<Locale, ReactNode> = {
         9.3 Unele cookie-uri de plată și securitate sunt strict necesare pentru finalizarea comenzii și
         prevenirea fraudei. Altele pot fi controlate de furnizorul terț relevant.
       </p>
-      <p>9.4 MisaElectro nu stochează numărul complet al cardului dumneavoastră sau codul de securitate complet al cardului.</p>
+      <p>9.4 BrenwElectro nu stochează numărul complet al cardului dumneavoastră sau codul de securitate complet al cardului.</p>
 
       <h2>10. Cookie-uri terțe</h2>
       <p>10.1 Unele cookie-uri pot fi setate de furnizori terți care susțin Site-ul nostru web.</p>
@@ -425,14 +425,14 @@ const content: Record<Locale, ReactNode> = {
   hu: (
     <PolicyLayout title="Cookie-szabályzat" lastUpdated="2026. május 29.">
       <p>
-        Ez a Cookie-szabályzat ismerteti, hogyan használ a MISARELIANA S.R.L., amely MisaElectro
-        kereskedelmi néven működik, cookie-kat és hasonló technológiákat a www.misaelectro.ro oldalon.
+        Ez a Cookie-szabályzat ismerteti, hogyan használ a BRENWICK LIMITED, amely BrenwElectro
+        kereskedelmi néven működik, cookie-kat és hasonló technológiákat a www.brenwelectro.com oldalon.
       </p>
       <p>A weboldalt a következő üzemelteti:</p>
       <ContactBlock />
       <p>
-        Ebben a Cookie-szabályzatban a &bdquo;MisaElectro&rdquo;, &bdquo;mi&rdquo; vagy &bdquo;miénk&rdquo; a
-        MISARELIANA S.R.L. társaságot jelenti. Az &bdquo;Ön&rdquo; vagy &bdquo;Öné&rdquo; a weboldal bármely
+        Ebben a Cookie-szabályzatban a &bdquo;BrenwElectro&rdquo;, &bdquo;mi&rdquo; vagy &bdquo;miénk&rdquo; a
+        BRENWICK LIMITED társaságot jelenti. Az &bdquo;Ön&rdquo; vagy &bdquo;Öné&rdquo; a weboldal bármely
         látogatóját, ügyfelét, fióktulajdonosát, üzleti ügyfelét vagy felhasználóját jelenti.
       </p>
       <p>
@@ -470,7 +470,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>2.3 A cookie-k lehetnek:</p>
       <ul>
-        <li>saját (first-party) cookie-k, amelyeket közvetlenül a MisaElectro állít be; vagy</li>
+        <li>saját (first-party) cookie-k, amelyeket közvetlenül a BrenwElectro állít be; vagy</li>
         <li>harmadik féltől származó (third-party) cookie-k, amelyeket olyan külső szolgáltatók állítanak be, akiknek a szolgáltatásait használjuk, például elemzési, fizetési, biztonsági, hirdetési vagy beágyazott szolgáltatók.</li>
       </ul>
       <p>2.4 A cookie-k továbbá lehetnek:</p>
@@ -621,7 +621,7 @@ const content: Record<Locale, ReactNode> = {
         megértésére használhatók, hogy a felhasználók hogyan lépnek kapcsolatba a marketingkampányokkal.
       </p>
       <p>
-        8.2 Ezeket a cookie-kat a MisaElectro vagy harmadik féltől származó hirdetési és marketingpartnerek
+        8.2 Ezeket a cookie-kat a BrenwElectro vagy harmadik féltől származó hirdetési és marketingpartnerek
         állíthatják be.
       </p>
       <p>
@@ -671,7 +671,7 @@ const content: Record<Locale, ReactNode> = {
         9.3 Egyes fizetési és biztonsági cookie-k feltétlenül szükségesek a pénztárhoz és a
         csalásmegelőzéshez. Másokat az érintett harmadik fél szolgáltató irányíthat.
       </p>
-      <p>9.4 A MisaElectro nem tárolja az Ön teljes kártyaszámát vagy a kártya teljes biztonsági kódját.</p>
+      <p>9.4 A BrenwElectro nem tárolja az Ön teljes kártyaszámát vagy a kártya teljes biztonsági kódját.</p>
 
       <h2>10. Harmadik féltől származó cookie-k</h2>
       <p>10.1 Egyes cookie-kat harmadik féltől származó szolgáltatók állíthatnak be, amelyek támogatják a weboldalunkat.</p>
@@ -827,14 +827,14 @@ const content: Record<Locale, ReactNode> = {
   bg: (
     <PolicyLayout title="Политика за бисквитки" lastUpdated="29 май 2026 г.">
       <p>
-        Тази Политика за бисквитки обяснява как MISARELIANA S.R.L., извършваща дейност под търговското
-        наименование MisaElectro, използва бисквитки и подобни технологии на www.misaelectro.ro.
+        Тази Политика за бисквитки обяснява как BRENWICK LIMITED, извършваща дейност под търговското
+        наименование BrenwElectro, използва бисквитки и подобни технологии на www.brenwelectro.com.
       </p>
       <p>Уебсайтът се управлява от:</p>
       <ContactBlock />
       <p>
-        В тази Политика за бисквитки &bdquo;MisaElectro&ldquo;, &bdquo;ние&ldquo;, &bdquo;нас&ldquo; или
-        &bdquo;наш&ldquo; означава MISARELIANA S.R.L.. &bdquo;Вие&ldquo; или &bdquo;ваш&ldquo; означава всеки
+        В тази Политика за бисквитки &bdquo;BrenwElectro&ldquo;, &bdquo;ние&ldquo;, &bdquo;нас&ldquo; или
+        &bdquo;наш&ldquo; означава BRENWICK LIMITED. &bdquo;Вие&ldquo; или &bdquo;ваш&ldquo; означава всеки
         посетител, клиент, притежател на акаунт, бизнес клиент или потребител на Уебсайта.
       </p>
       <p>
@@ -872,7 +872,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>2.3 Бисквитките могат да бъдат:</p>
       <ul>
-        <li>собствени (first-party) бисквитки, зададени директно от MisaElectro; или</li>
+        <li>собствени (first-party) бисквитки, зададени директно от BrenwElectro; или</li>
         <li>бисквитки на трети страни (third-party), зададени от външни доставчици, чиито услуги използваме, като доставчици на анализ, плащания, сигурност, реклама или вградени услуги.</li>
       </ul>
       <p>2.4 Бисквитките могат също да бъдат:</p>
@@ -1024,7 +1024,7 @@ const content: Record<Locale, ReactNode> = {
         аудиторията или разбиране как потребителите взаимодействат с маркетинговите кампании.
       </p>
       <p>
-        8.2 Тези бисквитки могат да бъдат зададени от MisaElectro или от рекламни и маркетингови партньори,
+        8.2 Тези бисквитки могат да бъдат зададени от BrenwElectro или от рекламни и маркетингови партньори,
         трети страни.
       </p>
       <p>
@@ -1075,7 +1075,7 @@ const content: Record<Locale, ReactNode> = {
         9.3 Някои бисквитки за плащане и сигурност са строго необходими за плащането и предотвратяването на
         измами. Други могат да се контролират от съответния доставчик, трета страна.
       </p>
-      <p>9.4 MisaElectro не съхранява пълния номер на вашата карта или пълния код за сигурност на картата.</p>
+      <p>9.4 BrenwElectro не съхранява пълния номер на вашата карта или пълния код за сигурност на картата.</p>
 
       <h2>10. Бисквитки на трети страни</h2>
       <p>10.1 Някои бисквитки могат да бъдат зададени от доставчици, трети страни, които подпомагат нашия Уебсайт.</p>
@@ -1230,14 +1230,14 @@ const content: Record<Locale, ReactNode> = {
   en: (
     <PolicyLayout title="Cookie Policy" lastUpdated="29 May 2026">
       <p>
-        This Cookie Policy explains how MISARELIANA S.R.L., trading as MisaElectro, uses cookies and similar
-        technologies on www.misaelectro.ro.
+        This Cookie Policy explains how BRENWICK LIMITED, trading as BrenwElectro, uses cookies and similar
+        technologies on www.brenwelectro.com.
       </p>
       <p>The Website is operated by:</p>
       <ContactBlock />
       <p>
-        In this Cookie Policy, &ldquo;MisaElectro&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or
-        &ldquo;our&rdquo; means MISARELIANA S.R.L.. &ldquo;You&rdquo; or &ldquo;your&rdquo; means any visitor,
+        In this Cookie Policy, &ldquo;BrenwElectro&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or
+        &ldquo;our&rdquo; means BRENWICK LIMITED. &ldquo;You&rdquo; or &ldquo;your&rdquo; means any visitor,
         customer, account holder, business customer, or user of the Website.
       </p>
       <p>
@@ -1274,7 +1274,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>2.3 Cookies may be:</p>
       <ul>
-        <li>first-party cookies, set directly by MisaElectro; or</li>
+        <li>first-party cookies, set directly by BrenwElectro; or</li>
         <li>third-party cookies, set by external providers whose services we use, such as analytics, payment, security, advertising, or embedded service providers.</li>
       </ul>
       <p>2.4 Cookies may also be:</p>
@@ -1424,7 +1424,7 @@ const content: Record<Locale, ReactNode> = {
         marketing campaigns.
       </p>
       <p>
-        8.2 These cookies may be set by MisaElectro or by third-party advertising and marketing partners.
+        8.2 These cookies may be set by BrenwElectro or by third-party advertising and marketing partners.
       </p>
       <p>
         8.3 Marketing cookies may track your browsing activity across websites and may be used to create a
@@ -1473,7 +1473,7 @@ const content: Record<Locale, ReactNode> = {
         9.3 Some payment and security cookies are strictly necessary for checkout and fraud prevention.
         Others may be controlled by the relevant third-party provider.
       </p>
-      <p>9.4 MisaElectro does not store your full card number or full card security code.</p>
+      <p>9.4 BrenwElectro does not store your full card number or full card security code.</p>
 
       <h2>10. Third-Party Cookies</h2>
       <p>10.1 Some cookies may be set by third-party providers that support our Website.</p>

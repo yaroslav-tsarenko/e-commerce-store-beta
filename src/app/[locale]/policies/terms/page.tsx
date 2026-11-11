@@ -4,10 +4,10 @@ import type { ReactNode } from "react";
 type Locale = "ro" | "hu" | "bg" | "en";
 
 const metaTitles: Record<Locale, string> = {
-  ro: "Termeni și condiții — MisaElectro",
-  hu: "Általános szerződési feltételek — MisaElectro",
-  bg: "Общи условия — MisaElectro",
-  en: "Terms and Conditions — MisaElectro",
+  ro: "Termeni și condiții — BrenwElectro",
+  hu: "Általános szerződési feltételek — BrenwElectro",
+  bg: "Общи условия — BrenwElectro",
+  en: "Terms and Conditions — BrenwElectro",
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -20,26 +20,26 @@ const content: Record<Locale, ReactNode> = {
     <PolicyLayout title="Termeni și condiții" lastUpdated="29 mai 2026">
       <p>
         Acești Termeni și condiții (&bdquo;Termeni&rdquo;) reglementează accesul dumneavoastră la site-ul
-        www.misaelectro.ro și utilizarea acestuia, precum și orice pagini, servicii, comenzi, achiziții,
-        comunicări și tranzacții conexe operate sub marca MisaElectro.
+        www.brenwelectro.com și utilizarea acestuia, precum și orice pagini, servicii, comenzi, achiziții,
+        comunicări și tranzacții conexe operate sub marca BrenwElectro.
       </p>
       <p>Site-ul este operat de:</p>
       <ContactBlock />
       <p>
-        În acești Termeni, &bdquo;MisaElectro&rdquo;, &bdquo;noi&rdquo; sau &bdquo;al nostru&rdquo; înseamnă MISARELIANA S.R.L..
+        În acești Termeni, &bdquo;BrenwElectro&rdquo;, &bdquo;noi&rdquo; sau &bdquo;al nostru&rdquo; înseamnă BRENWICK LIMITED.
         &bdquo;Client&rdquo;, &bdquo;dumneavoastră&rdquo; sau &bdquo;al dumneavoastră&rdquo; înseamnă orice persoană sau întreprindere care accesează
         site-ul, plasează o comandă, achiziționează bunuri sau utilizează în alt mod serviciile noastre.
       </p>
       <p>
         Vă rugăm să citiți cu atenție acești Termeni înainte de a plasa o comandă. Prin accesarea site-ului, crearea
-        unui cont, transmiterea unei comenzi sau achiziționarea de bunuri de la MisaElectro, sunteți de acord să
+        unui cont, transmiterea unei comenzi sau achiziționarea de bunuri de la BrenwElectro, sunteți de acord să
         respectați acești Termeni.
       </p>
 
       <h2>1. Domeniul de aplicare al acestor Termeni</h2>
-      <p>1.1 Acești Termeni se aplică oricărei utilizări a site-ului și tuturor achizițiilor de bunuri efectuate prin intermediul MisaElectro.</p>
+      <p>1.1 Acești Termeni se aplică oricărei utilizări a site-ului și tuturor achizițiilor de bunuri efectuate prin intermediul BrenwElectro.</p>
       <p>
-        1.2 MisaElectro vinde produse electrice fizice, materiale electrice, accesorii de cablaj,
+        1.2 BrenwElectro vinde produse electrice fizice, materiale electrice, accesorii de cablaj,
         produse legate de iluminat, componente de instalare, produse de distribuție și de protecție a circuitelor,
         prize, întrerupătoare, cabluri, accesorii de montare și alte bunuri conexe pentru uz casnic, comercial,
         de meserie și profesional.
@@ -71,12 +71,12 @@ const content: Record<Locale, ReactNode> = {
         taxele și orice alte informații necesare pentru procesarea comenzii dumneavoastră.
       </p>
       <p>
-        2.4 Nu trebuie să utilizați site-ul sau să achiziționați bunuri de la MisaElectro în niciun scop ilegal, nesigur,
+        2.4 Nu trebuie să utilizați site-ul sau să achiziționați bunuri de la BrenwElectro în niciun scop ilegal, nesigur,
         fraudulos sau neautorizat.
       </p>
 
       <h2>3. Clienți consumatori și clienți întreprinderi</h2>
-      <p>3.1 MisaElectro vinde atât consumatorilor, cât și clienților întreprinderi.</p>
+      <p>3.1 BrenwElectro vinde atât consumatorilor, cât și clienților întreprinderi.</p>
       <p>
         3.2 Un &bdquo;Consumator&rdquo; înseamnă o persoană fizică care acționează în întregime sau în principal în afara activității sale
         comerciale, de afaceri, meșteșugărești sau profesionale.
@@ -152,12 +152,12 @@ const content: Record<Locale, ReactNode> = {
         competent, atunci când este necesar sau adecvat.
       </p>
       <p>
-        5.4 MisaElectro nu furnizează servicii de inginerie electrică, instalare, conformitate, inspecție,
+        5.4 BrenwElectro nu furnizează servicii de inginerie electrică, instalare, conformitate, inspecție,
         certificare sau aprobare de siguranță prin intermediul site-ului.
       </p>
       <p>
         5.5 Orice îndrumare, descriere de produs, notă de compatibilitate sau răspuns al asistenței pentru clienți furnizat de
-        MisaElectro reprezintă doar informații cu caracter general și nu trebuie tratat ca un substitut pentru consilierea
+        BrenwElectro reprezintă doar informații cu caracter general și nu trebuie tratat ca un substitut pentru consilierea
         profesională, inspecția electrică sau evaluarea conformității.
       </p>
       <p>
@@ -199,7 +199,7 @@ const content: Record<Locale, ReactNode> = {
         nu înseamnă automat că comanda dumneavoastră a fost acceptată.
       </p>
       <p>
-        7.3 Un contract între dumneavoastră și MisaElectro se formează numai atunci când acceptăm comanda, o procesăm pentru
+        7.3 Un contract între dumneavoastră și BrenwElectro se formează numai atunci când acceptăm comanda, o procesăm pentru
         onorare sau expediem bunurile, oricare dintre acestea survine mai întâi.
       </p>
       <p>7.4 Putem refuza, anula sau limita orice comandă înainte de acceptare atunci când:</p>
@@ -238,14 +238,14 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         8.6 Conversia valutară, comisioanele bancare, comisioanele pentru tranzacții străine, comisioanele emitentului cardului sau
-        diferențele de curs valutar sunt responsabilitatea clientului și nu sunt controlate de MisaElectro.
+        diferențele de curs valutar sunt responsabilitatea clientului și nu sunt controlate de BrenwElectro.
       </p>
 
       <h2>9. Condiții de plată</h2>
       <p>9.1 Plata trebuie efectuată la finalizarea comenzii.</p>
       <p>9.2 Acceptăm plăți securizate cu cardul, inclusiv Visa și Mastercard.</p>
       <p>
-        9.3 Plățile sunt procesate de furnizori de plăți terți securizați. MisaElectro nu stochează numărul complet
+        9.3 Plățile sunt procesate de furnizori de plăți terți securizați. BrenwElectro nu stochează numărul complet
         al cardului dumneavoastră sau datele complete de securitate ale cardului.
       </p>
       <p>
@@ -266,7 +266,7 @@ const content: Record<Locale, ReactNode> = {
 
       <h2>10. Reduceri, promoții și livrare gratuită</h2>
       <p>
-        10.1 Din când în când, MisaElectro poate oferi reduceri, coduri promoționale, prețuri speciale, praguri de
+        10.1 Din când în când, BrenwElectro poate oferi reduceri, coduri promoționale, prețuri speciale, praguri de
         livrare gratuită sau prețuri de meserie.
       </p>
       <p>
@@ -290,7 +290,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>11. Livrare și expediere</h2>
-      <p>11.1 MisaElectro expediază comenzile din Regatul Unit.</p>
+      <p>11.1 BrenwElectro expediază comenzile din Regatul Unit.</p>
       <p>
         11.2 Livrarea este disponibilă la destinațiile de livrare acceptate afișate pe site sau la finalizarea comenzii.
       </p>
@@ -352,7 +352,7 @@ const content: Record<Locale, ReactNode> = {
         TVA-ul de import, taxele, comisioanele de brokeraj și taxele locale de plată în țara de destinație.
       </p>
       <p>
-        12.3 MisaElectro nu are niciun control asupra timpilor de procesare vamală, deciziilor vamale, restricțiilor de import,
+        12.3 BrenwElectro nu are niciun control asupra timpilor de procesare vamală, deciziilor vamale, restricțiilor de import,
         evaluărilor fiscale locale sau taxelor impuse de autorități, curieri sau brokeri vamali.
       </p>
       <p>
@@ -362,7 +362,7 @@ const content: Record<Locale, ReactNode> = {
       <p>
         12.5 Dacă o comandă este întârziată, returnată, confiscată, respinsă sau distrusă de vamă sau de autoritățile
         locale din cauza restricțiilor de import, a taxelor neplătite, a informațiilor incorecte furnizate de dumneavoastră sau a
-        nerespectării cerințelor locale, MisaElectro nu va fi responsabil pentru pierderea, întârzierea sau costurile
+        nerespectării cerințelor locale, BrenwElectro nu va fi responsabil pentru pierderea, întârzierea sau costurile
         rezultate, cu excepția cazului în care legea prevede altfel.
       </p>
 
@@ -398,7 +398,7 @@ const content: Record<Locale, ReactNode> = {
         zile după ziua în care primiți ultimul colet.
       </p>
       <p>
-        14.4 Pentru a vă exercita dreptul de anulare, trebuie să ne informați clar prin e-mail la info@misaelectro.ro
+        14.4 Pentru a vă exercita dreptul de anulare, trebuie să ne informați clar prin e-mail la info@brenwelectro.com
         înainte de expirarea perioadei de anulare.
       </p>
       <p>
@@ -451,7 +451,7 @@ const content: Record<Locale, ReactNode> = {
       <h2>16. Bunuri defecte, deteriorate sau incorecte</h2>
       <p>
         16.1 Dacă bunurile sosesc deteriorate, defecte, incomplete sau incorecte, ar trebui să ne contactați cât mai
-        curând posibil la info@misaelectro.ro.
+        curând posibil la info@brenwelectro.com.
       </p>
       <p>
         16.2 Vă rugăm să furnizați numărul comenzii, o descriere a problemei și fotografii sau videoclipuri clare
@@ -502,7 +502,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         17.4 Aceste drepturi statutare sunt separate de și nu sunt limitate de nicio garanție a producătorului,
-        garanție comercială, garanție suplimentară sau politică de returnare oferită de MisaElectro.
+        garanție comercială, garanție suplimentară sau politică de returnare oferită de BrenwElectro.
       </p>
       <p>
         17.5 Clienții întreprinderi nu beneficiază de drepturile statutare de anulare ale consumatorilor și pot avea drepturi mai
@@ -510,7 +510,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>18. Garanție suplimentară</h2>
-      <p>18.1 MisaElectro poate oferi opțiuni de garanție suplimentară plătită pentru produse selectate.</p>
+      <p>18.1 BrenwElectro poate oferi opțiuni de garanție suplimentară plătită pentru produse selectate.</p>
       <p>18.2 Garanția suplimentară este opțională și poate fi achiziționată la finalizarea comenzii, acolo unde este disponibilă.</p>
       <p>
         18.3 Cu excepția cazului în care se menționează altfel pe pagina de produs sau la finalizarea comenzii, prețul garanției suplimentare este
@@ -563,7 +563,7 @@ const content: Record<Locale, ReactNode> = {
         <li>pierderea profitului, costurile de manoperă, costurile electricianului, costurile de îndepărtare, costurile de reinstalare, timpul de nefuncționare sau pierderile indirecte.</li>
       </ul>
       <p>
-        18.9 Pentru a face o reclamație de garanție suplimentară, trebuie să ne contactați la info@misaelectro.ro cu numărul comenzii,
+        18.9 Pentru a face o reclamație de garanție suplimentară, trebuie să ne contactați la info@brenwelectro.com cu numărul comenzii,
         dovada achiziției, descrierea defectului și fotografii, videoclipuri sau informații de diagnosticare
         justificative, acolo unde este solicitat în mod rezonabil.
       </p>
@@ -617,7 +617,7 @@ const content: Record<Locale, ReactNode> = {
 
       <h2>20. Conformitatea produselor și reglementările locale</h2>
       <p>
-        20.1 Produsele vândute de MisaElectro pot fi concepute pentru piețe, standarde, sisteme de tensiune, corpuri
+        20.1 Produsele vândute de BrenwElectro pot fi concepute pentru piețe, standarde, sisteme de tensiune, corpuri
         sau medii de instalare specifice.
       </p>
       <p>
@@ -625,7 +625,7 @@ const content: Record<Locale, ReactNode> = {
         revânzare, import sau utilizare în țara, regiunea, proprietatea, proiectul sau sistemul electric al dumneavoastră.
       </p>
       <p>
-        20.3 Nu garantăm că produsele achiziționate de la MisaElectro vor îndeplini fiecare cod local de construcții,
+        20.3 Nu garantăm că produsele achiziționate de la BrenwElectro vor îndeplini fiecare cod local de construcții,
         cod electric, cerință de certificare, cerință de asigurare, cerință la locul de muncă sau specificație
         de proiect, în afara informațiilor menționate expres pe pagina de produs.
       </p>
@@ -638,8 +638,8 @@ const content: Record<Locale, ReactNode> = {
       <h2>21. Proprietate intelectuală</h2>
       <p>
         21.1 Tot conținutul de pe site, inclusiv textul, aspectul, brandingul, logourile, grafica, pictogramele, descrierile
-        de produse, fotografiile, videoclipurile, elementele de design și alte materiale, aparțin MisaElectro,
-        MISARELIANA S.R.L., furnizorilor, producătorilor, licențiatorilor sau altor titulari de drepturi.
+        de produse, fotografiile, videoclipurile, elementele de design și alte materiale, aparțin BrenwElectro,
+        BRENWICK LIMITED, furnizorilor, producătorilor, licențiatorilor sau altor titulari de drepturi.
       </p>
       <p>
         21.2 Puteți utiliza site-ul numai în scopuri personale, de afaceri sau de achiziție, în conformitate cu
@@ -717,7 +717,7 @@ const content: Record<Locale, ReactNode> = {
         eronată sau orice răspundere care nu poate fi exclusă în temeiul legislației aplicabile.
       </p>
       <p>25.2 Nimic din acești Termeni nu limitează drepturile dumneavoastră statutare obligatorii în calitate de consumator.</p>
-      <p>25.3 Sub rezerva secțiunilor 25.1 și 25.2, MisaElectro nu va fi răspunzător pentru:</p>
+      <p>25.3 Sub rezerva secțiunilor 25.1 și 25.2, BrenwElectro nu va fi răspunzător pentru:</p>
       <ul>
         <li>pierderi indirecte, incidentale, speciale, subsecvente sau punitive;</li>
         <li>pierderea profitului, veniturilor, afacerii, oportunității, contractului, reputației comerciale sau economiilor anticipate;</li>
@@ -816,27 +816,27 @@ const content: Record<Locale, ReactNode> = {
   hu: (
     <PolicyLayout title="Általános szerződési feltételek" lastUpdated="2026. május 29.">
       <p>
-        A jelen Általános szerződési feltételek (&bdquo;Feltételek&rdquo;) szabályozzák a www.misaelectro.ro
-        webhelyhez való hozzáférését és annak használatát, valamint a MisaElectro márka alatt üzemeltetett
+        A jelen Általános szerződési feltételek (&bdquo;Feltételek&rdquo;) szabályozzák a www.brenwelectro.com
+        webhelyhez való hozzáférését és annak használatát, valamint a BrenwElectro márka alatt üzemeltetett
         bármely kapcsolódó oldalt, szolgáltatást, megrendelést, vásárlást, kommunikációt és tranzakciót.
       </p>
       <p>A webhelyet a következő üzemelteti:</p>
       <ContactBlock />
       <p>
-        A jelen Feltételekben a &bdquo;MisaElectro&rdquo;, &bdquo;mi&rdquo; vagy &bdquo;miénk&rdquo; kifejezés a MISARELIANA S.R.L.-t jelenti.
+        A jelen Feltételekben a &bdquo;BrenwElectro&rdquo;, &bdquo;mi&rdquo; vagy &bdquo;miénk&rdquo; kifejezés a BRENWICK LIMITED-t jelenti.
         A &bdquo;Vásárló&rdquo; vagy &bdquo;Ön&rdquo; kifejezés bármely olyan személyt vagy vállalkozást jelent, aki hozzáfér
         a webhelyhez, megrendelést ad le, árut vásárol, vagy más módon igénybe veszi szolgáltatásainkat.
       </p>
       <p>
         Kérjük, megrendelés leadása előtt figyelmesen olvassa el a jelen Feltételeket. A webhely elérésével, fiók
-        létrehozásával, megrendelés benyújtásával vagy a MisaElectrótól történő áruvásárlással Ön elfogadja, hogy a jelen
+        létrehozásával, megrendelés benyújtásával vagy a BrenwElectrótól történő áruvásárlással Ön elfogadja, hogy a jelen
         Feltételek kötelezik.
       </p>
 
       <h2>1. A jelen Feltételek hatálya</h2>
-      <p>1.1 A jelen Feltételek a webhely minden használatára és a MisaElectrón keresztül történő minden áruvásárlásra vonatkoznak.</p>
+      <p>1.1 A jelen Feltételek a webhely minden használatára és a BrenwElectrón keresztül történő minden áruvásárlásra vonatkoznak.</p>
       <p>
-        1.2 A MisaElectro fizikai elektromos termékeket, elektromos anyagokat, huzalozási tartozékokat,
+        1.2 A BrenwElectro fizikai elektromos termékeket, elektromos anyagokat, huzalozási tartozékokat,
         világítással kapcsolatos termékeket, szerelési alkatrészeket, elosztási és áramkörvédelmi termékeket,
         aljzatokat, kapcsolókat, kábeleket, rögzítési tartozékokat és más kapcsolódó árukat értékesít háztartási, kereskedelmi,
         szakipari és professzionális felhasználásra.
@@ -868,12 +868,12 @@ const content: Record<Locale, ReactNode> = {
         valamint a megrendelés feldolgozásához szükséges bármely egyéb információt.
       </p>
       <p>
-        2.4 Nem használhatja a webhelyet, és nem vásárolhat árut a MisaElectrótól semmilyen jogellenes, nem biztonságos,
+        2.4 Nem használhatja a webhelyet, és nem vásárolhat árut a BrenwElectrótól semmilyen jogellenes, nem biztonságos,
         csalárd vagy jogosulatlan célból.
       </p>
 
       <h2>3. Fogyasztói és üzleti vásárlók</h2>
-      <p>3.1 A MisaElectro fogyasztóknak és üzleti vásárlóknak egyaránt értékesít.</p>
+      <p>3.1 A BrenwElectro fogyasztóknak és üzleti vásárlóknak egyaránt értékesít.</p>
       <p>
         3.2 A &bdquo;Fogyasztó&rdquo; olyan magánszemélyt jelent, aki teljes egészében vagy főként a szakmai, üzleti,
         kézműves vagy foglalkozási tevékenységén kívül jár el.
@@ -949,11 +949,11 @@ const content: Record<Locale, ReactNode> = {
         szakembernek kell beszerelnie, amennyiben ez szükséges vagy indokolt.
       </p>
       <p>
-        5.4 A MisaElectro nem nyújt elektromos mérnöki, szerelési, megfelelőségi, ellenőrzési,
+        5.4 A BrenwElectro nem nyújt elektromos mérnöki, szerelési, megfelelőségi, ellenőrzési,
         tanúsítási vagy biztonsági jóváhagyási szolgáltatásokat a webhelyen keresztül.
       </p>
       <p>
-        5.5 A MisaElectro által nyújtott bármely útmutatás, termékleírás, kompatibilitási megjegyzés vagy ügyfélszolgálati válasz
+        5.5 A BrenwElectro által nyújtott bármely útmutatás, termékleírás, kompatibilitási megjegyzés vagy ügyfélszolgálati válasz
         kizárólag általános tájékoztatás, és nem tekinthető a szakmai
         tanácsadás, elektromos ellenőrzés vagy megfelelőségi értékelés helyettesítőjének.
       </p>
@@ -996,7 +996,7 @@ const content: Record<Locale, ReactNode> = {
         nem jelenti automatikusan azt, hogy megrendelését elfogadtuk.
       </p>
       <p>
-        7.3 Az Ön és a MisaElectro közötti szerződés csak akkor jön létre, amikor elfogadjuk megrendelését, teljesítés céljából
+        7.3 Az Ön és a BrenwElectro közötti szerződés csak akkor jön létre, amikor elfogadjuk megrendelését, teljesítés céljából
         feldolgozzuk, vagy elküldjük az árut, attól függően, hogy melyik következik be előbb.
       </p>
       <p>7.4 Az elfogadás előtt bármely megrendelést elutasíthatunk, törölhetünk vagy korlátozhatunk, amennyiben:</p>
@@ -1035,14 +1035,14 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         8.6 A pénznemátváltás, a banki díjak, a külföldi tranzakciós díjak, a kártyakibocsátói díjak vagy az árfolyam-különbségek
-        a vásárló felelősségi körébe tartoznak, és nem a MisaElectro befolyása alatt állnak.
+        a vásárló felelősségi körébe tartoznak, és nem a BrenwElectro befolyása alatt állnak.
       </p>
 
       <h2>9. Fizetési feltételek</h2>
       <p>9.1 A fizetést a pénztárnál kell teljesíteni.</p>
       <p>9.2 Biztonságos kártyás fizetéseket fogadunk el, beleértve a Visa és Mastercard kártyákat.</p>
       <p>
-        9.3 A fizetéseket biztonságos, harmadik fél fizetési szolgáltatók dolgozzák fel. A MisaElectro nem tárolja az Ön teljes
+        9.3 A fizetéseket biztonságos, harmadik fél fizetési szolgáltatók dolgozzák fel. A BrenwElectro nem tárolja az Ön teljes
         kártyaszámát vagy teljes kártyabiztonsági adatait.
       </p>
       <p>
@@ -1063,7 +1063,7 @@ const content: Record<Locale, ReactNode> = {
 
       <h2>10. Kedvezmények, akciók és ingyenes szállítás</h2>
       <p>
-        10.1 A MisaElectro időről időre kedvezményeket, promóciós kódokat, különleges árakat, ingyenes
+        10.1 A BrenwElectro időről időre kedvezményeket, promóciós kódokat, különleges árakat, ingyenes
         szállítási küszöbértékeket vagy szakipari árazást kínálhat.
       </p>
       <p>
@@ -1087,7 +1087,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>11. Szállítás és feladás</h2>
-      <p>11.1 A MisaElectro a megrendeléseket az Egyesült Királyságból adja fel.</p>
+      <p>11.1 A BrenwElectro a megrendeléseket az Egyesült Királyságból adja fel.</p>
       <p>
         11.2 A szállítás a webhelyen vagy a pénztárnál feltüntetett támogatott szállítási rendeltetési helyekre érhető el.
       </p>
@@ -1149,7 +1149,7 @@ const content: Record<Locale, ReactNode> = {
         import-áfáért, adóért, ügynöki díjért és helyi díjért.
       </p>
       <p>
-        12.3 A MisaElectrónak nincs befolyása a vámkezelési időkre, a vámhatósági döntésekre, az importkorlátozásokra,
+        12.3 A BrenwElectrónak nincs befolyása a vámkezelési időkre, a vámhatósági döntésekre, az importkorlátozásokra,
         a helyi adómegállapításokra, illetve a hatóságok, futárszolgálatok vagy vámügynökök által kivetett díjakra.
       </p>
       <p>
@@ -1159,7 +1159,7 @@ const content: Record<Locale, ReactNode> = {
       <p>
         12.5 Ha egy megrendelést a vám vagy a helyi hatóságok késleltetnek, visszaküldenek, lefoglalnak, elutasítanak vagy megsemmisítenek
         importkorlátozások, kifizetetlen díjak, az Ön által megadott helytelen információk vagy a helyi
-        követelmények be nem tartása miatt, a MisaElectro nem vállal felelősséget az ebből eredő veszteségért,
+        követelmények be nem tartása miatt, a BrenwElectro nem vállal felelősséget az ebből eredő veszteségért,
         késedelemért vagy költségekért, kivéve, ha jogszabály másként rendelkezik.
       </p>
 
@@ -1195,7 +1195,7 @@ const content: Record<Locale, ReactNode> = {
         nappal jár le, amikor Ön átveszi az utolsó csomagot.
       </p>
       <p>
-        14.4 Elállási jogának gyakorlásához az elállási időszak lejárta előtt egyértelműen tájékoztatnia kell minket e-mailben az info@misaelectro.ro
+        14.4 Elállási jogának gyakorlásához az elállási időszak lejárta előtt egyértelműen tájékoztatnia kell minket e-mailben az info@brenwelectro.com
         címen.
       </p>
       <p>
@@ -1248,7 +1248,7 @@ const content: Record<Locale, ReactNode> = {
       <h2>16. Hibás, sérült vagy helytelen áruk</h2>
       <p>
         16.1 Ha az áru sérülten, hibásan, hiányosan vagy helytelenül érkezik, a lehető leghamarabb vegye fel velünk a
-        kapcsolatot az info@misaelectro.ro címen.
+        kapcsolatot az info@brenwelectro.com címen.
       </p>
       <p>
         16.2 Kérjük, adja meg megrendelési számát, a probléma leírását, valamint lehetőség szerint egyértelmű fényképeket vagy videókat,
@@ -1298,7 +1298,7 @@ const content: Record<Locale, ReactNode> = {
         magukban foglalhatnak jogorvoslatokat, ha az áru hibás, nem a leírásnak megfelelő, vagy nem alkalmas a célra.
       </p>
       <p>
-        17.4 Ezek a törvényes jogok elkülönülnek a MisaElectro által kínált bármely gyártói jótállástól,
+        17.4 Ezek a törvényes jogok elkülönülnek a BrenwElectro által kínált bármely gyártói jótállástól,
         kereskedelmi jótállástól, kiegészítő jótállástól vagy visszaküldési szabályzattól, és azok nem korlátozzák ezeket.
       </p>
       <p>
@@ -1307,7 +1307,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>18. Kiegészítő jótállás</h2>
-      <p>18.1 A MisaElectro fizetős kiegészítő jótállási lehetőségeket kínálhat kiválasztott termékekre.</p>
+      <p>18.1 A BrenwElectro fizetős kiegészítő jótállási lehetőségeket kínálhat kiválasztott termékekre.</p>
       <p>18.2 A kiegészítő jótállás opcionális, és ahol elérhető, a pénztárnál megvásárolható.</p>
       <p>
         18.3 Kivéve, ha a termékoldalon vagy a pénztárnál másként van feltüntetve, a kiegészítő jótállás ára a
@@ -1359,7 +1359,7 @@ const content: Record<Locale, ReactNode> = {
         <li>az elmaradt hasznot, munkaköltségeket, villanyszerelői költségeket, eltávolítási költségeket, újratelepítési költségeket, állásidőt vagy közvetett veszteségeket.</li>
       </ul>
       <p>
-        18.9 Kiegészítő jótállási igény benyújtásához vegye fel velünk a kapcsolatot az info@misaelectro.ro címen, megadva megrendelési
+        18.9 Kiegészítő jótállási igény benyújtásához vegye fel velünk a kapcsolatot az info@brenwelectro.com címen, megadva megrendelési
         számát, a vásárlás igazolását, a hiba leírását, valamint észszerű kérés esetén alátámasztó fényképeket, videókat vagy diagnosztikai
         információkat.
       </p>
@@ -1413,7 +1413,7 @@ const content: Record<Locale, ReactNode> = {
 
       <h2>20. Termékmegfelelőség és helyi szabályozások</h2>
       <p>
-        20.1 A MisaElectro által értékesített termékeket meghatározott piacokra, szabványokra, feszültségrendszerekre, szerelvényekre
+        20.1 A BrenwElectro által értékesített termékeket meghatározott piacokra, szabványokra, feszültségrendszerekre, szerelvényekre
         vagy szerelési környezetekre tervezhették.
       </p>
       <p>
@@ -1421,7 +1421,7 @@ const content: Record<Locale, ReactNode> = {
         viszonteladásra, importra vagy használatra az Ön országában, régiójában, ingatlanjában, projektjében vagy elektromos rendszerében.
       </p>
       <p>
-        20.3 Nem garantáljuk, hogy a MisaElectrótól vásárolt termékek megfelelnek minden helyi építési előírásnak,
+        20.3 Nem garantáljuk, hogy a BrenwElectrótól vásárolt termékek megfelelnek minden helyi építési előírásnak,
         elektromos előírásnak, tanúsítási követelménynek, biztosítási követelménynek, munkahelyi követelménynek vagy projektspecifikációnak
         a termékoldalon kifejezetten feltüntetett információkon túl.
       </p>
@@ -1434,8 +1434,8 @@ const content: Record<Locale, ReactNode> = {
       <h2>21. Szellemi tulajdon</h2>
       <p>
         21.1 A webhelyen található minden tartalom, beleértve a szöveget, az elrendezést, a márkajelzést, a logókat, a grafikákat, az ikonokat, a
-        termékleírásokat, a fényképeket, a videókat, a designelemeket és egyéb anyagokat, a MisaElectro,
-        a MISARELIANA S.R.L., a beszállítók, gyártók, licencadók vagy más jogtulajdonosok tulajdonát képezi.
+        termékleírásokat, a fényképeket, a videókat, a designelemeket és egyéb anyagokat, a BrenwElectro,
+        a BRENWICK LIMITED, a beszállítók, gyártók, licencadók vagy más jogtulajdonosok tulajdonát képezi.
       </p>
       <p>
         21.2 A webhelyet kizárólag személyes, üzleti vagy vásárlási célra használhatja a jelen
@@ -1512,7 +1512,7 @@ const content: Record<Locale, ReactNode> = {
         felelősséget, illetve bármely olyan felelősséget, amely az alkalmazandó jogszabályok szerint nem zárható ki.
       </p>
       <p>25.2 A jelen Feltételekben semmi sem korlátozza az Ön fogyasztóként fennálló kötelező érvényű törvényes jogait.</p>
-      <p>25.3 A 25.1 és 25.2 szakasz függvényében a MisaElectro nem felelős a következőkért:</p>
+      <p>25.3 A 25.1 és 25.2 szakasz függvényében a BrenwElectro nem felelős a következőkért:</p>
       <ul>
         <li>közvetett, járulékos, különleges, következményes vagy büntető jellegű veszteségek;</li>
         <li>elmaradt haszon, bevétel, üzlet, lehetőség, szerződés, jó hírnév vagy várt megtakarítások elvesztése;</li>
@@ -1611,26 +1611,26 @@ const content: Record<Locale, ReactNode> = {
     <PolicyLayout title="Общи условия" lastUpdated="29 май 2026 г.">
       <p>
         Настоящите Общи условия (&bdquo;Условия&rdquo;) уреждат достъпа Ви до и използването на уебсайта
-        www.misaelectro.ro, както и всички свързани страници, услуги, поръчки, покупки, съобщения и
-        транзакции, управлявани под марката MisaElectro.
+        www.brenwelectro.com, както и всички свързани страници, услуги, поръчки, покупки, съобщения и
+        транзакции, управлявани под марката BrenwElectro.
       </p>
       <p>Уебсайтът се управлява от:</p>
       <ContactBlock />
       <p>
-        В настоящите Условия &bdquo;MisaElectro&rdquo;, &bdquo;ние&rdquo;, &bdquo;нас&rdquo; или &bdquo;наш&rdquo; означава MISARELIANA S.R.L..
+        В настоящите Условия &bdquo;BrenwElectro&rdquo;, &bdquo;ние&rdquo;, &bdquo;нас&rdquo; или &bdquo;наш&rdquo; означава BRENWICK LIMITED.
         &bdquo;Клиент&rdquo; или &bdquo;Вие&rdquo; означава всяко физическо лице или предприятие, което осъществява достъп до
         уебсайта, прави поръчка, купува стоки или по друг начин използва нашите услуги.
       </p>
       <p>
         Моля, прочетете внимателно настоящите Условия, преди да направите поръчка. С осъществяването на достъп до уебсайта, създаването на
-        акаунт, изпращането на поръчка или закупуването на стоки от MisaElectro Вие се съгласявате да бъдете обвързани с настоящите
+        акаунт, изпращането на поръчка или закупуването на стоки от BrenwElectro Вие се съгласявате да бъдете обвързани с настоящите
         Условия.
       </p>
 
       <h2>1. Обхват на настоящите Условия</h2>
-      <p>1.1 Настоящите Условия се прилагат за всяко използване на уебсайта и всички покупки на стоки, направени чрез MisaElectro.</p>
+      <p>1.1 Настоящите Условия се прилагат за всяко използване на уебсайта и всички покупки на стоки, направени чрез BrenwElectro.</p>
       <p>
-        1.2 MisaElectro продава физически електрически продукти, електрически материали, аксесоари за окабеляване,
+        1.2 BrenwElectro продава физически електрически продукти, електрически материали, аксесоари за окабеляване,
         продукти, свързани с осветлението, монтажни компоненти, продукти за разпределение и защита на веригите,
         контакти, ключове, кабели, монтажни аксесоари и други свързани стоки за домашна, търговска,
         занаятчийска и професионална употреба.
@@ -1662,12 +1662,12 @@ const content: Record<Locale, ReactNode> = {
         както и всяка друга информация, необходима за обработката на Вашата поръчка.
       </p>
       <p>
-        2.4 Не трябва да използвате уебсайта или да купувате стоки от MisaElectro за каквато и да е незаконна, опасна,
+        2.4 Не трябва да използвате уебсайта или да купувате стоки от BrenwElectro за каквато и да е незаконна, опасна,
         измамна или неоторизирана цел.
       </p>
 
       <h2>3. Потребители и бизнес клиенти</h2>
-      <p>3.1 MisaElectro продава както на потребители, така и на бизнес клиенти.</p>
+      <p>3.1 BrenwElectro продава както на потребители, така и на бизнес клиенти.</p>
       <p>
         3.2 &bdquo;Потребител&rdquo; означава физическо лице, което действа изцяло или предимно извън своята търговска, стопанска,
         занаятчийска или професионална дейност.
@@ -1743,12 +1743,12 @@ const content: Record<Locale, ReactNode> = {
         специалист, когато това се изисква или е целесъобразно.
       </p>
       <p>
-        5.4 MisaElectro не предоставя услуги по електроинженерство, монтаж, съответствие, инспекция,
+        5.4 BrenwElectro не предоставя услуги по електроинженерство, монтаж, съответствие, инспекция,
         сертифициране или одобрение за безопасност чрез уебсайта.
       </p>
       <p>
         5.5 Всякакви насоки, продуктово описание, бележка за съвместимост или отговор на клиентската поддръжка, предоставени от
-        MisaElectro, представляват само обща информация и не трябва да се третират като заместител на професионален
+        BrenwElectro, представляват само обща информация и не трябва да се третират като заместител на професионален
         съвет, електрическа инспекция или оценка на съответствието.
       </p>
       <p>
@@ -1790,7 +1790,7 @@ const content: Record<Locale, ReactNode> = {
         не означава автоматично, че Вашата поръчка е приета.
       </p>
       <p>
-        7.3 Договор между Вас и MisaElectro се сключва само когато приемем Вашата поръчка, обработим я за
+        7.3 Договор между Вас и BrenwElectro се сключва само когато приемем Вашата поръчка, обработим я за
         изпълнение или изпратим стоките, което от посочените настъпи първо.
       </p>
       <p>7.4 Може да откажем, отменим или ограничим всяка поръчка преди приемане, когато:</p>
@@ -1829,14 +1829,14 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         8.6 Валутното конвертиране, банковите такси, таксите за чуждестранни транзакции, таксите на издателя на картата или
-        разликите в обменния курс са отговорност на клиента и не се контролират от MisaElectro.
+        разликите в обменния курс са отговорност на клиента и не се контролират от BrenwElectro.
       </p>
 
       <h2>9. Условия на плащане</h2>
       <p>9.1 Плащането трябва да бъде извършено при плащане.</p>
       <p>9.2 Приемаме сигурни плащания с карта, включително Visa и Mastercard.</p>
       <p>
-        9.3 Плащанията се обработват от сигурни доставчици на платежни услуги — трети страни. MisaElectro не съхранява Вашия пълен
+        9.3 Плащанията се обработват от сигурни доставчици на платежни услуги — трети страни. BrenwElectro не съхранява Вашия пълен
         номер на картата или пълните данни за сигурност на картата.
       </p>
       <p>
@@ -1857,7 +1857,7 @@ const content: Record<Locale, ReactNode> = {
 
       <h2>10. Отстъпки, промоции и безплатна доставка</h2>
       <p>
-        10.1 От време на време MisaElectro може да предлага отстъпки, промоционални кодове, специални цени, прагове за
+        10.1 От време на време BrenwElectro може да предлага отстъпки, промоционални кодове, специални цени, прагове за
         безплатна доставка или занаятчийско ценообразуване.
       </p>
       <p>
@@ -1881,7 +1881,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>11. Доставка и изпращане</h2>
-      <p>11.1 MisaElectro изпраща поръчките от Обединеното кралство.</p>
+      <p>11.1 BrenwElectro изпраща поръчките от Обединеното кралство.</p>
       <p>
         11.2 Доставката е налична до поддържаните дестинации за доставка, показани на уебсайта или при плащане.
       </p>
@@ -1943,7 +1943,7 @@ const content: Record<Locale, ReactNode> = {
         ДДС при внос, данъци, брокерски такси и местни такси, дължими в държавата на местоназначение.
       </p>
       <p>
-        12.3 MisaElectro няма контрол върху сроковете за митническа обработка, митническите решения, вносните ограничения,
+        12.3 BrenwElectro няма контрол върху сроковете за митническа обработка, митническите решения, вносните ограничения,
         местните данъчни оценки или таксите, наложени от органи, куриери или митнически брокери.
       </p>
       <p>
@@ -1953,7 +1953,7 @@ const content: Record<Locale, ReactNode> = {
       <p>
         12.5 Ако поръчка бъде забавена, върната, задържана, отхвърлена или унищожена от митниците или местните
         органи поради вносни ограничения, неплатени такси, неправилна информация, предоставена от Вас, или
-        неспазване на местните изисквания, MisaElectro няма да носи отговорност за произтичащата загуба,
+        неспазване на местните изисквания, BrenwElectro няма да носи отговорност за произтичащата загуба,
         забавяне или разходи, освен когато законът изисква друго.
       </p>
 
@@ -1989,7 +1989,7 @@ const content: Record<Locale, ReactNode> = {
         дни след деня, в който получите последния колет.
       </p>
       <p>
-        14.4 За да упражните правото си на отказ, трябва да ни уведомите ясно по имейл на info@misaelectro.ro
+        14.4 За да упражните правото си на отказ, трябва да ни уведомите ясно по имейл на info@brenwelectro.com
         преди изтичането на срока за отказ.
       </p>
       <p>
@@ -2042,7 +2042,7 @@ const content: Record<Locale, ReactNode> = {
       <h2>16. Дефектни, повредени или неправилни стоки</h2>
       <p>
         16.1 Ако стоките пристигнат повредени, дефектни, непълни или неправилни, следва да се свържете с нас възможно
-        най-скоро на info@misaelectro.ro.
+        най-скоро на info@brenwelectro.com.
       </p>
       <p>
         16.2 Моля, предоставете номера на поръчката си, описание на проблема и ясни снимки или видеоклипове,
@@ -2093,7 +2093,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         17.4 Тези законови права са отделни от и не се ограничават от каквато и да е гаранция на производителя,
-        търговска гаранция, допълнителна гаранция или политика за връщане, предлагана от MisaElectro.
+        търговска гаранция, допълнителна гаранция или политика за връщане, предлагана от BrenwElectro.
       </p>
       <p>
         17.5 Бизнес клиентите не получават потребителски законови права за отказ и може да имат по-ограничени
@@ -2101,7 +2101,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>18. Допълнителна гаранция</h2>
-      <p>18.1 MisaElectro може да предлага платени опции за допълнителна гаранция за избрани продукти.</p>
+      <p>18.1 BrenwElectro може да предлага платени опции за допълнителна гаранция за избрани продукти.</p>
       <p>18.2 Допълнителната гаранция е по избор и може да бъде закупена при плащане, когато е налична.</p>
       <p>
         18.3 Освен ако не е посочено друго на продуктовата страница или при плащане, цената на допълнителната гаранция се
@@ -2154,7 +2154,7 @@ const content: Record<Locale, ReactNode> = {
         <li>пропуснати ползи, разходи за труд, разходи за електротехник, разходи за демонтаж, разходи за повторен монтаж, престой или косвени загуби.</li>
       </ul>
       <p>
-        18.9 За да предявите претенция по допълнителна гаранция, трябва да се свържете с нас на info@misaelectro.ro с номера на поръчката си,
+        18.9 За да предявите претенция по допълнителна гаранция, трябва да се свържете с нас на info@brenwelectro.com с номера на поръчката си,
         доказателство за покупка, описание на дефекта и подкрепящи снимки, видеоклипове или диагностична
         информация, когато това е разумно поискано.
       </p>
@@ -2208,7 +2208,7 @@ const content: Record<Locale, ReactNode> = {
 
       <h2>20. Съответствие на продуктите и местни разпоредби</h2>
       <p>
-        20.1 Продуктите, продавани от MisaElectro, може да са проектирани за конкретни пазари, стандарти, системи на напрежение, арматура
+        20.1 Продуктите, продавани от BrenwElectro, може да са проектирани за конкретни пазари, стандарти, системи на напрежение, арматура
         или монтажни среди.
       </p>
       <p>
@@ -2216,7 +2216,7 @@ const content: Record<Locale, ReactNode> = {
         препродажба, внос или употреба във Вашата държава, регион, имот, проект или електрическа система.
       </p>
       <p>
-        20.3 Ние не гарантираме, че продуктите, закупени от MisaElectro, ще отговарят на всеки местен строителен кодекс,
+        20.3 Ние не гарантираме, че продуктите, закупени от BrenwElectro, ще отговарят на всеки местен строителен кодекс,
         електрически кодекс, изискване за сертифициране, застрахователно изискване, изискване на работното място или проектна спецификация
         извън информацията, изрично посочена на продуктовата страница.
       </p>
@@ -2229,8 +2229,8 @@ const content: Record<Locale, ReactNode> = {
       <h2>21. Интелектуална собственост</h2>
       <p>
         21.1 Цялото съдържание на уебсайта, включително текст, оформление, брандиране, лога, графики, икони, продуктови
-        описания, фотографии, видеоклипове, дизайнерски елементи и други материали, принадлежи на MisaElectro,
-        MISARELIANA S.R.L., доставчици, производители, лицензодатели или други притежатели на права.
+        описания, фотографии, видеоклипове, дизайнерски елементи и други материали, принадлежи на BrenwElectro,
+        BRENWICK LIMITED, доставчици, производители, лицензодатели или други притежатели на права.
       </p>
       <p>
         21.2 Може да използвате уебсайта само за лични, бизнес или покупателни цели в съответствие с
@@ -2308,7 +2308,7 @@ const content: Record<Locale, ReactNode> = {
         представяне, или каквато и да е отговорност, която не може да бъде изключена съгласно приложимото законодателство.
       </p>
       <p>25.2 Нищо в настоящите Условия не ограничава Вашите задължителни законови права като потребител.</p>
-      <p>25.3 При спазване на раздели 25.1 и 25.2, MisaElectro няма да носи отговорност за:</p>
+      <p>25.3 При спазване на раздели 25.1 и 25.2, BrenwElectro няма да носи отговорност за:</p>
       <ul>
         <li>косвени, случайни, специални, последващи или наказателни загуби;</li>
         <li>пропуснати ползи, приходи, бизнес, възможности, договори, репутация или очаквани спестявания;</li>
@@ -2408,26 +2408,26 @@ const content: Record<Locale, ReactNode> = {
     <PolicyLayout title="Terms and Conditions" lastUpdated="29 May 2026">
       <p>
         These Terms and Conditions (&ldquo;Terms&rdquo;) govern your access to and use of the website
-        www.misaelectro.ro and any related pages, services, orders, purchases, communications, and
-        transactions operated under the MisaElectro brand.
+        www.brenwelectro.com and any related pages, services, orders, purchases, communications, and
+        transactions operated under the BrenwElectro brand.
       </p>
       <p>The Website is operated by:</p>
       <ContactBlock />
       <p>
-        In these Terms, &ldquo;MisaElectro&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo; means MISARELIANA S.R.L..
+        In these Terms, &ldquo;BrenwElectro&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo; means BRENWICK LIMITED.
         &ldquo;Customer&rdquo;, &ldquo;you&rdquo; or &ldquo;your&rdquo; means any person or business accessing the
         Website, placing an order, purchasing goods, or otherwise using our services.
       </p>
       <p>
         Please read these Terms carefully before placing an order. By accessing the Website, creating an
-        account, submitting an order, or purchasing goods from MisaElectro, you agree to be bound by these
+        account, submitting an order, or purchasing goods from BrenwElectro, you agree to be bound by these
         Terms.
       </p>
 
       <h2>1. Scope of These Terms</h2>
-      <p>1.1 These Terms apply to all use of the Website and all purchases of goods made through MisaElectro.</p>
+      <p>1.1 These Terms apply to all use of the Website and all purchases of goods made through BrenwElectro.</p>
       <p>
-        1.2 MisaElectro sells physical electrical products, electrical materials, wiring accessories,
+        1.2 BrenwElectro sells physical electrical products, electrical materials, wiring accessories,
         lighting-related products, installation components, distribution and circuit protection products,
         sockets, switches, cables, mounting accessories, and other related goods for domestic, commercial,
         trade, and professional use.
@@ -2459,12 +2459,12 @@ const content: Record<Locale, ReactNode> = {
         details, and any other information required to process your order.
       </p>
       <p>
-        2.4 You must not use the Website or purchase goods from MisaElectro for any unlawful, unsafe,
+        2.4 You must not use the Website or purchase goods from BrenwElectro for any unlawful, unsafe,
         fraudulent, or unauthorised purpose.
       </p>
 
       <h2>3. Consumer and Business Customers</h2>
-      <p>3.1 MisaElectro sells to both consumers and business customers.</p>
+      <p>3.1 BrenwElectro sells to both consumers and business customers.</p>
       <p>
         3.2 A &ldquo;Consumer&rdquo; means an individual acting wholly or mainly outside their trade, business,
         craft, or profession.
@@ -2540,12 +2540,12 @@ const content: Record<Locale, ReactNode> = {
         professional where required or appropriate.
       </p>
       <p>
-        5.4 MisaElectro does not provide electrical engineering, installation, compliance, inspection,
+        5.4 BrenwElectro does not provide electrical engineering, installation, compliance, inspection,
         certification, or safety approval services through the Website.
       </p>
       <p>
         5.5 Any guidance, product description, compatibility note, or customer support response provided by
-        MisaElectro is general information only and must not be treated as a substitute for professional
+        BrenwElectro is general information only and must not be treated as a substitute for professional
         advice, electrical inspection, or compliance assessment.
       </p>
       <p>
@@ -2587,7 +2587,7 @@ const content: Record<Locale, ReactNode> = {
         does not automatically mean that your order has been accepted.
       </p>
       <p>
-        7.3 A contract between you and MisaElectro is formed only when we accept your order, process it for
+        7.3 A contract between you and BrenwElectro is formed only when we accept your order, process it for
         fulfilment, or dispatch the goods, whichever occurs first.
       </p>
       <p>7.4 We may refuse, cancel, or limit any order before acceptance where:</p>
@@ -2626,14 +2626,14 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         8.6 Currency conversion, bank fees, foreign transaction fees, card issuer fees, or exchange rate
-        differences are the responsibility of the customer and are not controlled by MisaElectro.
+        differences are the responsibility of the customer and are not controlled by BrenwElectro.
       </p>
 
       <h2>9. Payment Terms</h2>
       <p>9.1 Payment must be made at checkout.</p>
       <p>9.2 We accept secure card payments, including Visa and Mastercard.</p>
       <p>
-        9.3 Payments are processed by secure third-party payment providers. MisaElectro does not store your
+        9.3 Payments are processed by secure third-party payment providers. BrenwElectro does not store your
         full card number or full card security details.
       </p>
       <p>
@@ -2654,7 +2654,7 @@ const content: Record<Locale, ReactNode> = {
 
       <h2>10. Discounts, Promotions, and Free Delivery</h2>
       <p>
-        10.1 From time to time, MisaElectro may offer discounts, promotional codes, special prices, free
+        10.1 From time to time, BrenwElectro may offer discounts, promotional codes, special prices, free
         delivery thresholds, or trade pricing.
       </p>
       <p>
@@ -2678,7 +2678,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>11. Delivery and Dispatch</h2>
-      <p>11.1 MisaElectro dispatches orders from the United Kingdom.</p>
+      <p>11.1 BrenwElectro dispatches orders from the United Kingdom.</p>
       <p>
         11.2 Delivery is available to supported delivery destinations shown on the Website or at checkout.
       </p>
@@ -2740,7 +2740,7 @@ const content: Record<Locale, ReactNode> = {
         import VAT, taxes, brokerage fees, and local charges payable in the destination country.
       </p>
       <p>
-        12.3 MisaElectro has no control over customs processing times, customs decisions, import restrictions,
+        12.3 BrenwElectro has no control over customs processing times, customs decisions, import restrictions,
         local tax assessments, or charges imposed by authorities, couriers, or customs brokers.
       </p>
       <p>
@@ -2750,7 +2750,7 @@ const content: Record<Locale, ReactNode> = {
       <p>
         12.5 If an order is delayed, returned, seized, rejected, or destroyed by customs or local
         authorities due to import restrictions, unpaid charges, incorrect information provided by you, or
-        failure to comply with local requirements, MisaElectro will not be responsible for the resulting loss,
+        failure to comply with local requirements, BrenwElectro will not be responsible for the resulting loss,
         delay, or costs except where required by law.
       </p>
 
@@ -2786,7 +2786,7 @@ const content: Record<Locale, ReactNode> = {
         days after the day on which you receive the last parcel.
       </p>
       <p>
-        14.4 To exercise your cancellation right, you must inform us clearly by email at info@misaelectro.ro
+        14.4 To exercise your cancellation right, you must inform us clearly by email at info@brenwelectro.com
         before the cancellation period expires.
       </p>
       <p>
@@ -2839,7 +2839,7 @@ const content: Record<Locale, ReactNode> = {
       <h2>16. Faulty, Damaged, or Incorrect Goods</h2>
       <p>
         16.1 If goods arrive damaged, faulty, incomplete, or incorrect, you should contact us as soon as
-        possible at info@misaelectro.ro.
+        possible at info@brenwelectro.com.
       </p>
       <p>
         16.2 Please provide your order number, a description of the issue, and clear photos or videos
@@ -2890,7 +2890,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
       <p>
         17.4 These statutory rights are separate from, and are not limited by, any manufacturer warranty,
-        commercial warranty, additional warranty, or return policy offered by MisaElectro.
+        commercial warranty, additional warranty, or return policy offered by BrenwElectro.
       </p>
       <p>
         17.5 Business Customers do not receive consumer statutory cancellation rights and may have more
@@ -2898,7 +2898,7 @@ const content: Record<Locale, ReactNode> = {
       </p>
 
       <h2>18. Additional Warranty</h2>
-      <p>18.1 MisaElectro may offer paid additional warranty options for selected products.</p>
+      <p>18.1 BrenwElectro may offer paid additional warranty options for selected products.</p>
       <p>18.2 Additional Warranty is optional and may be purchased at checkout where available.</p>
       <p>
         18.3 Unless otherwise stated on the product page or at checkout, Additional Warranty pricing is
@@ -2951,7 +2951,7 @@ const content: Record<Locale, ReactNode> = {
         <li>loss of profits, labour costs, electrician costs, removal costs, reinstallation costs, downtime, or indirect losses.</li>
       </ul>
       <p>
-        18.9 To make an Additional Warranty claim, you must contact us at info@misaelectro.ro with your order
+        18.9 To make an Additional Warranty claim, you must contact us at info@brenwelectro.com with your order
         number, proof of purchase, description of the defect, and supporting photos, videos, or diagnostic
         information where reasonably requested.
       </p>
@@ -3005,7 +3005,7 @@ const content: Record<Locale, ReactNode> = {
 
       <h2>20. Product Compliance and Local Regulations</h2>
       <p>
-        20.1 Products sold by MisaElectro may be designed for specific markets, standards, voltage systems,
+        20.1 Products sold by BrenwElectro may be designed for specific markets, standards, voltage systems,
         fittings, or installation environments.
       </p>
       <p>
@@ -3013,7 +3013,7 @@ const content: Record<Locale, ReactNode> = {
         resale, import, or use in your country, region, property, project, or electrical system.
       </p>
       <p>
-        20.3 We do not guarantee that products purchased from MisaElectro will meet every local building code,
+        20.3 We do not guarantee that products purchased from BrenwElectro will meet every local building code,
         electrical code, certification requirement, insurance requirement, workplace requirement, or project
         specification outside the information expressly stated on the product page.
       </p>
@@ -3026,8 +3026,8 @@ const content: Record<Locale, ReactNode> = {
       <h2>21. Intellectual Property</h2>
       <p>
         21.1 All content on the Website, including text, layout, branding, logos, graphics, icons, product
-        descriptions, photographs, videos, design elements, and other materials, belongs to MisaElectro,
-        MISARELIANA S.R.L., suppliers, manufacturers, licensors, or other rights holders.
+        descriptions, photographs, videos, design elements, and other materials, belongs to BrenwElectro,
+        BRENWICK LIMITED, suppliers, manufacturers, licensors, or other rights holders.
       </p>
       <p>
         21.2 You may use the Website only for personal, business, or purchasing purposes in accordance with
@@ -3105,7 +3105,7 @@ const content: Record<Locale, ReactNode> = {
         misrepresentation, or any liability that cannot be excluded under applicable law.
       </p>
       <p>25.2 Nothing in these Terms limits your mandatory statutory rights as a Consumer.</p>
-      <p>25.3 Subject to sections 25.1 and 25.2, MisaElectro will not be liable for:</p>
+      <p>25.3 Subject to sections 25.1 and 25.2, BrenwElectro will not be liable for:</p>
       <ul>
         <li>indirect, incidental, special, consequential, or punitive losses;</li>
         <li>loss of profit, revenue, business, opportunity, contract, goodwill, or anticipated savings;</li>

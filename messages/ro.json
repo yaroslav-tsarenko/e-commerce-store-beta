@@ -555,14 +555,14 @@
   "homeSections": {
     "testimonialsEyebrow": "Vocile clienților",
     "testimonialsTitle": "De încredere pentru profesioniști din toată Europa",
-    "testimonialsSubtitle": "Feedback real de la electricieni, antreprenori și echipe de achiziții care cumpără de la MisaElectro în fiecare săptămână.",
+    "testimonialsSubtitle": "Feedback real de la electricieni, antreprenori și echipe de achiziții care cumpără de la BrenwElectro în fiecare săptămână.",
     "review1Role": "Electrician · Berlin",
     "review1Quote": "Am comandat cabluri și tuburi vineri seara — livrate luni dimineața. Totul ambalat curat, cu fișa tehnică. Este singurul furnizor în care am încredere pentru lucrări urgente.",
     "review2Role": "Manager de șantier · Lyon",
     "review2Quote": "Mă ocup de achiziții pentru o echipă de 14 oameni. Filtrele catalogului după amperaj și secțiune mi-au economisit ore în fiecare săptămână. Prețuri transparente, fără taxe surpriză la livrarea în UE.",
     "review3Role": "Instalator industrial · Rotterdam",
     "review3Quote": "Aveam nevoie urgent de un bloc de distribuție Schneider de nișă. Suportul a găsit un echivalent OEM compatibil într-o oră și l-a expediat în aceeași zi. Peste așteptări.",
-    "whyTitle": "De ce să alegi MisaElectro",
+    "whyTitle": "De ce să alegi BrenwElectro",
     "whySubtitle": "Materiale electrice de calitate profesională, cu suport de specialitate și livrare rapidă",
     "why1Title": "Cumpărături sigure",
     "why1Desc": "Datele tale sunt protejate prin criptare de nivel enterprise și plăți securizate.",
@@ -700,7 +700,7 @@
     "service": {
       "eyebrow": "Promisiunea noastră de serviciu",
       "title": "Creat pentru profesioniștii care nu își permit să aștepte.",
-      "lead": "Fiecare comandă la MisaElectro este gestionată de o echipă care știe de ce are nevoie un instalator luni dimineața. Corect specificat, certificat și expediat rapid.",
+      "lead": "Fiecare comandă la BrenwElectro este gestionată de o echipă care știe de ce are nevoie un instalator luni dimineața. Corect specificat, certificat și expediat rapid.",
       "bullet1": "Expediere în aceeași zi pentru comenzile plasate înainte de 14:00 CET",
       "bullet2": "Retur gratuit în UE în 30 de zile, fără întrebări",
       "bullet3": "Stoc certificat de producător, cu trasabilitate pe lot",
@@ -782,10 +782,10 @@
     "q7": "Oferiți ambalaj cadou?",
     "a7": "Da! Ambalajul cadou este disponibil la finalizarea comenzii pentru o mică taxă suplimentară. Poți include și un mesaj personalizat cu cadoul tău.",
     "q8": "Cum contactez asistența pentru clienți?",
-    "a8": "Ne poți contacta prin formularul de contact, prin e-mail la support@misaelectro.ro sau prin chat live pe site-ul nostru. Suntem disponibili 24/7 pentru a te ajuta."
+    "a8": "Ne poți contacta prin formularul de contact, prin e-mail la support@brenwelectro.com sau prin chat live pe site-ul nostru. Suntem disponibili 24/7 pentru a te ajuta."
   },
   "policiesIndex": {
-    "intro": "Vă rugăm să consultați politicile noastre de mai jos. Aceste politici reglementează utilizarea site-ului MisaElectro și orice achiziții efectuate prin intermediul acestuia.",
+    "intro": "Vă rugăm să consultați politicile noastre de mai jos. Aceste politici reglementează utilizarea site-ului BrenwElectro și orice achiziții efectuate prin intermediul acestuia.",
     "terms": "Termeni și condiții",
     "shipping": "Politica de livrare",
     "privacy": "Politica de confidențialitate",

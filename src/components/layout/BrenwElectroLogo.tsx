@@ -1,9 +1,9 @@
 /**
- * Brand logo for MisaElectro (display) — domain reads as misaelectro.ro in SEO metadata.
+ * Brand logo for BrenwElectro (display) — domain reads as brenwelectro.com in SEO metadata.
  * Two-color refined wordmark + glyph: indigo gradient base with a warm orange bolt.
  */
-export function MisaElectroMark({ size = 28 }: { size?: number }) {
-  const id = `misaelectro-logo-${size}`;
+export function BrenwElectroMark({ size = 28 }: { size?: number }) {
+  const id = `brenwelectro-logo-${size}`;
   return (
     <svg
       width={size}
@@ -33,6 +33,6 @@ export function MisaElectroMark({ size = 28 }: { size?: number }) {
   );
 }
 
-export function MisaElectroLogo({ size = 28 }: { size?: number }) {
-  return <MisaElectroMark size={size} />;
+export function BrenwElectroLogo({ size = 28 }: { size?: number }) {
+  return <BrenwElectroMark size={size} />;
 }

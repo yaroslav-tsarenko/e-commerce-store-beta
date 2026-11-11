@@ -4,10 +4,10 @@ import type { ReactNode } from "react";
 type Locale = "ro" | "hu" | "bg" | "en";
 
 const metaTitles: Record<Locale, string> = {
-  ro: "Politica de livrare — MisaElectro",
-  hu: "Szállítási szabályzat — MisaElectro",
-  bg: "Политика за доставка — MisaElectro",
-  en: "Shipping Policy — MisaElectro",
+  ro: "Politica de livrare — BrenwElectro",
+  hu: "Szállítási szabályzat — BrenwElectro",
+  bg: "Политика за доставка — BrenwElectro",
+  en: "Shipping Policy — BrenwElectro",
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -18,14 +18,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 const en: ReactNode = (
   <PolicyLayout title="Shipping Policy" lastUpdated="29 May 2026">
     <p>
-      This Shipping Policy explains how orders placed through www.misaelectro.ro are processed,
+      This Shipping Policy explains how orders placed through www.brenwelectro.com are processed,
       dispatched, delivered, and handled in the event of delivery issues.
     </p>
     <p>The Website is operated by:</p>
     <ContactBlock />
     <p>
-      In this Policy, &ldquo;MisaElectro&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo;
-      means MISARELIANA S.R.L.. &ldquo;Customer&rdquo;, &ldquo;you&rdquo; or &ldquo;your&rdquo; means the
+      In this Policy, &ldquo;BrenwElectro&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo;
+      means BRENWICK LIMITED. &ldquo;Customer&rdquo;, &ldquo;you&rdquo; or &ldquo;your&rdquo; means the
       person or business placing an order through the Website.
     </p>
     <p>
@@ -34,9 +34,9 @@ const en: ReactNode = (
     </p>
 
     <h2>1. Scope of This Policy</h2>
-    <p>1.1 This Policy applies to the delivery of physical goods purchased through MisaElectro.</p>
+    <p>1.1 This Policy applies to the delivery of physical goods purchased through BrenwElectro.</p>
     <p>
-      1.2 MisaElectro supplies electrical products, electrical materials, wiring accessories,
+      1.2 BrenwElectro supplies electrical products, electrical materials, wiring accessories,
       lighting-related products, installation components, distribution and circuit protection products,
       sockets, switches, cables, mounting accessories, and other related goods.
     </p>
@@ -47,7 +47,7 @@ const en: ReactNode = (
     </p>
     <p>
       1.4 Delivery estimates are not guaranteed delivery dates unless expressly stated otherwise in writing
-      by MisaElectro.
+      by BrenwElectro.
     </p>
 
     <h2>2. Order Processing Time</h2>
@@ -75,7 +75,7 @@ const en: ReactNode = (
     </p>
 
     <h2>3. Dispatch Location</h2>
-    <p>3.1 MisaElectro dispatches orders from the United Kingdom.</p>
+    <p>3.1 BrenwElectro dispatches orders from the United Kingdom.</p>
     <p>
       3.2 Delivery times shown in this Policy are calculated from the date of dispatch, not from the date
       the order is placed.
@@ -136,7 +136,7 @@ const en: ReactNode = (
       longer.
     </p>
     <p>
-      5.4 MisaElectro is not responsible for delays caused by customs authorities, local postal operators,
+      5.4 BrenwElectro is not responsible for delays caused by customs authorities, local postal operators,
       courier networks, incorrect delivery information, failed delivery attempts, unpaid import charges,
       or events outside our reasonable control.
     </p>
@@ -183,7 +183,7 @@ const en: ReactNode = (
       country, phone number, and any access instructions required for delivery.
     </p>
     <p>
-      7.3 MisaElectro is not responsible for delays, failed deliveries, lost parcels, return charges, or
+      7.3 BrenwElectro is not responsible for delays, failed deliveries, lost parcels, return charges, or
       additional costs caused by incorrect, incomplete, outdated, or improperly formatted address
       information provided by you.
     </p>
@@ -196,7 +196,7 @@ const en: ReactNode = (
 
     <h2>8. International Shipping</h2>
     <p>
-      8.1 MisaElectro may accept international orders to supported delivery destinations shown on the
+      8.1 BrenwElectro may accept international orders to supported delivery destinations shown on the
       Website or at checkout.
     </p>
     <p>
@@ -229,7 +229,7 @@ const en: ReactNode = (
       customer.
     </p>
     <p>
-      9.3 MisaElectro does not control customs authorities, import tax assessments, duty rates, customs
+      9.3 BrenwElectro does not control customs authorities, import tax assessments, duty rates, customs
       inspections, courier customs procedures, or local government charges.
     </p>
     <p>
@@ -309,7 +309,7 @@ const en: ReactNode = (
       instructions to rearrange delivery or collect the parcel within the stated timeframe.
     </p>
     <p>
-      12.4 MisaElectro is not responsible for failed delivery where you do not respond to courier notices, do
+      12.4 BrenwElectro is not responsible for failed delivery where you do not respond to courier notices, do
       not collect the parcel, refuse the parcel, provide an inaccessible address, or fail to pay customs
       or local charges.
     </p>
@@ -326,7 +326,7 @@ const en: ReactNode = (
     </p>
     <p>
       13.3 If goods arrive damaged, missing, incomplete, or incorrect, please contact us as soon as
-      possible at info@misaelectro.ro.
+      possible at info@brenwelectro.com.
     </p>
     <p>
       13.4 Please include your order number, a description of the issue, and clear photos or videos of the
@@ -353,7 +353,7 @@ const en: ReactNode = (
     </p>
     <p>
       14.2 If tracking shows an unusual delay, failed delivery, customs hold, or no movement for an
-      extended period, please contact us at info@misaelectro.ro.
+      extended period, please contact us at info@brenwelectro.com.
     </p>
     <p>
       14.3 We may need to open an investigation with the courier before confirming that a parcel is lost.
@@ -399,7 +399,7 @@ const en: ReactNode = (
       completed when the carrier delivers the parcel to that address or authorised recipient.
     </p>
     <p>
-      16.2 MisaElectro is not responsible for loss, damage, delay, customs issues, onward shipping problems,
+      16.2 BrenwElectro is not responsible for loss, damage, delay, customs issues, onward shipping problems,
       or failed delivery after the parcel has been delivered to a third party, forwarding service,
       collection point, or authorised recipient chosen by you.
     </p>
@@ -416,7 +416,7 @@ const en: ReactNode = (
     </p>
     <p>17.2 Delivery estimates should not be treated as guaranteed project deadlines.</p>
     <p>
-      17.3 MisaElectro is not responsible for labour costs, electrician costs, contractor costs, installation
+      17.3 BrenwElectro is not responsible for labour costs, electrician costs, contractor costs, installation
       costs, project delay, missed appointments, downtime, loss of profit, loss of contract, or other
       indirect losses caused by delivery delay, customs delay, courier issue, or product unavailability,
       except where liability cannot lawfully be excluded.
@@ -491,14 +491,14 @@ const en: ReactNode = (
 const ro: ReactNode = (
   <PolicyLayout title="Politica de livrare" lastUpdated="29 mai 2026">
     <p>
-      Această Politică de livrare explică modul în care comenzile plasate prin www.misaelectro.ro sunt
+      Această Politică de livrare explică modul în care comenzile plasate prin www.brenwelectro.com sunt
       procesate, expediate, livrate și gestionate în cazul apariției unor probleme de livrare.
     </p>
     <p>Site-ul web este operat de:</p>
     <ContactBlock />
     <p>
-      În prezenta Politică, &bdquo;MisaElectro&rdquo;, &bdquo;noi&rdquo; sau &bdquo;al nostru&rdquo;
-      înseamnă MISARELIANA S.R.L.. &bdquo;Client&rdquo;, &bdquo;dumneavoastră&rdquo; sau &bdquo;al
+      În prezenta Politică, &bdquo;BrenwElectro&rdquo;, &bdquo;noi&rdquo; sau &bdquo;al nostru&rdquo;
+      înseamnă BRENWICK LIMITED. &bdquo;Client&rdquo;, &bdquo;dumneavoastră&rdquo; sau &bdquo;al
       dumneavoastră&rdquo; înseamnă persoana fizică sau juridică ce plasează o comandă prin intermediul
       Site-ului web.
     </p>
@@ -510,10 +510,10 @@ const ro: ReactNode = (
 
     <h2>1. Domeniul de aplicare al prezentei Politici</h2>
     <p>
-      1.1 Prezenta Politică se aplică livrării de bunuri fizice achiziționate prin intermediul MisaElectro.
+      1.1 Prezenta Politică se aplică livrării de bunuri fizice achiziționate prin intermediul BrenwElectro.
     </p>
     <p>
-      1.2 MisaElectro furnizează produse electrice, materiale electrice, accesorii de cablaj, produse
+      1.2 BrenwElectro furnizează produse electrice, materiale electrice, accesorii de cablaj, produse
       pentru iluminat, componente de instalare, produse de distribuție și de protecție a circuitelor,
       prize, întrerupătoare, cabluri, accesorii de montaj și alte bunuri conexe.
     </p>
@@ -525,7 +525,7 @@ const ro: ReactNode = (
     </p>
     <p>
       1.4 Estimările de livrare nu reprezintă date de livrare garantate, cu excepția cazului în care se
-      prevede în mod expres altfel, în scris, de către MisaElectro.
+      prevede în mod expres altfel, în scris, de către BrenwElectro.
     </p>
 
     <h2>2. Timpul de procesare a comenzii</h2>
@@ -555,7 +555,7 @@ const ro: ReactNode = (
     </p>
 
     <h2>3. Locul de expediere</h2>
-    <p>3.1 MisaElectro expediază comenzile din Regatul Unit.</p>
+    <p>3.1 BrenwElectro expediază comenzile din Regatul Unit.</p>
     <p>
       3.2 Timpii de livrare indicați în prezenta Politică sunt calculați de la data expedierii, nu de la
       data plasării comenzii.
@@ -620,7 +620,7 @@ const ro: ReactNode = (
       limitat al curierului pot dura mai mult.
     </p>
     <p>
-      5.4 MisaElectro nu este responsabilă pentru întârzierile cauzate de autoritățile vamale, operatorii
+      5.4 BrenwElectro nu este responsabilă pentru întârzierile cauzate de autoritățile vamale, operatorii
       poștali locali, rețelele de curierat, informațiile de livrare incorecte, încercările de livrare
       eșuate, taxele de import neachitate sau evenimentele aflate în afara controlului nostru rezonabil.
     </p>
@@ -672,7 +672,7 @@ const ro: ReactNode = (
       pentru livrare.
     </p>
     <p>
-      7.3 MisaElectro nu este responsabilă pentru întârzieri, livrări eșuate, colete pierdute, taxe de
+      7.3 BrenwElectro nu este responsabilă pentru întârzieri, livrări eșuate, colete pierdute, taxe de
       returnare sau costuri suplimentare cauzate de informații de adresă incorecte, incomplete, expirate
       sau formatate necorespunzător, furnizate de dumneavoastră.
     </p>
@@ -688,7 +688,7 @@ const ro: ReactNode = (
 
     <h2>8. Expediere internațională</h2>
     <p>
-      8.1 MisaElectro poate accepta comenzi internaționale către destinațiile de livrare acceptate,
+      8.1 BrenwElectro poate accepta comenzi internaționale către destinațiile de livrare acceptate,
       afișate pe Site-ul web sau la finalizarea comenzii.
     </p>
     <p>
@@ -721,7 +721,7 @@ const ro: ReactNode = (
       sunt în responsabilitatea clientului.
     </p>
     <p>
-      9.3 MisaElectro nu controlează autoritățile vamale, evaluările taxelor de import, cotele taxelor
+      9.3 BrenwElectro nu controlează autoritățile vamale, evaluările taxelor de import, cotele taxelor
       vamale, inspecțiile vamale, procedurile vamale ale curierului sau taxele autorităților locale.
     </p>
     <p>
@@ -803,7 +803,7 @@ const ro: ReactNode = (
       curierului pentru a reprograma livrarea sau a ridica coletul în intervalul de timp indicat.
     </p>
     <p>
-      12.4 MisaElectro nu este responsabilă pentru livrarea eșuată atunci când nu răspundeți la
+      12.4 BrenwElectro nu este responsabilă pentru livrarea eșuată atunci când nu răspundeți la
       notificările curierului, nu ridicați coletul, refuzați coletul, furnizați o adresă inaccesibilă
       sau nu plătiți taxele vamale ori locale.
     </p>
@@ -820,7 +820,7 @@ const ro: ReactNode = (
     </p>
     <p>
       13.3 Dacă bunurile sosesc deteriorate, lipsă, incomplete sau incorecte, vă rugăm să ne contactați
-      cât mai curând posibil la info@misaelectro.ro.
+      cât mai curând posibil la info@brenwelectro.com.
     </p>
     <p>
       13.4 Vă rugăm să includeți numărul comenzii, o descriere a problemei și fotografii sau înregistrări
@@ -847,7 +847,7 @@ const ro: ReactNode = (
     </p>
     <p>
       14.2 Dacă urmărirea indică o întârziere neobișnuită, o livrare eșuată, o reținere vamală sau nicio
-      mișcare pentru o perioadă extinsă, vă rugăm să ne contactați la info@misaelectro.ro.
+      mișcare pentru o perioadă extinsă, vă rugăm să ne contactați la info@brenwelectro.com.
     </p>
     <p>
       14.3 Este posibil să fie necesar să deschidem o investigație împreună cu curierul înainte de a
@@ -896,7 +896,7 @@ const ro: ReactNode = (
       transportatorul livrează coletul la acea adresă sau destinatarului autorizat.
     </p>
     <p>
-      16.2 MisaElectro nu este responsabilă pentru pierdere, deteriorare, întârziere, probleme vamale,
+      16.2 BrenwElectro nu este responsabilă pentru pierdere, deteriorare, întârziere, probleme vamale,
       probleme de expediere ulterioară sau livrare eșuată după ce coletul a fost livrat unui terț, unui
       serviciu de redirecționare, unui punct de ridicare sau unui destinatar autorizat ales de
       dumneavoastră.
@@ -916,7 +916,7 @@ const ro: ReactNode = (
       17.2 Estimările de livrare nu trebuie tratate ca termene-limită garantate ale proiectului.
     </p>
     <p>
-      17.3 MisaElectro nu este responsabilă pentru costurile cu forța de muncă, costurile cu electricianul,
+      17.3 BrenwElectro nu este responsabilă pentru costurile cu forța de muncă, costurile cu electricianul,
       costurile cu contractorul, costurile de instalare, întârzierea proiectului, întâlnirile ratate,
       timpul de nefuncționare, pierderea de profit, pierderea de contract sau alte pierderi indirecte
       cauzate de întârzierea livrării, întârzierea vamală, problemele de curierat sau indisponibilitatea
@@ -998,15 +998,15 @@ const ro: ReactNode = (
 const hu: ReactNode = (
   <PolicyLayout title="Szállítási szabályzat" lastUpdated="2026. május 29.">
     <p>
-      Ez a Szállítási szabályzat ismerteti, hogy a www.misaelectro.ro oldalon leadott rendeléseket
+      Ez a Szállítási szabályzat ismerteti, hogy a www.brenwelectro.com oldalon leadott rendeléseket
       hogyan dolgozzuk fel, adjuk fel, kézbesítjük, valamint hogyan kezeljük a szállítási problémák
       esetén.
     </p>
     <p>A Weboldalt a következő cég üzemelteti:</p>
     <ContactBlock />
     <p>
-      A jelen Szabályzatban a &bdquo;MisaElectro&rdquo;, &bdquo;mi&rdquo;, &bdquo;minket&rdquo; vagy
-      &bdquo;a mi&rdquo; kifejezés a MISARELIANA S.R.L. társaságot jelenti. A &bdquo;Vásárló&rdquo;,
+      A jelen Szabályzatban a &bdquo;BrenwElectro&rdquo;, &bdquo;mi&rdquo;, &bdquo;minket&rdquo; vagy
+      &bdquo;a mi&rdquo; kifejezés a BRENWICK LIMITED társaságot jelenti. A &bdquo;Vásárló&rdquo;,
       &bdquo;Ön&rdquo; vagy &bdquo;az Ön&rdquo; kifejezés azt a személyt vagy vállalkozást jelenti, aki a
       Weboldalon keresztül rendelést ad le.
     </p>
@@ -1018,11 +1018,11 @@ const hu: ReactNode = (
 
     <h2>1. A jelen Szabályzat hatálya</h2>
     <p>
-      1.1 A jelen Szabályzat a MisaElectro oldalon keresztül vásárolt fizikai áruk kézbesítésére
+      1.1 A jelen Szabályzat a BrenwElectro oldalon keresztül vásárolt fizikai áruk kézbesítésére
       vonatkozik.
     </p>
     <p>
-      1.2 A MisaElectro elektromos termékeket, elektromos anyagokat, vezetékezési tartozékokat,
+      1.2 A BrenwElectro elektromos termékeket, elektromos anyagokat, vezetékezési tartozékokat,
       világítással kapcsolatos termékeket, szerelési alkatrészeket, elosztási és áramkörvédelmi
       termékeket, dugaljakat, kapcsolókat, kábeleket, rögzítési tartozékokat és egyéb kapcsolódó árukat
       forgalmaz.
@@ -1034,7 +1034,7 @@ const hu: ReactNode = (
       változhatnak.
     </p>
     <p>
-      1.4 A szállítási becslések nem minősülnek garantált kézbesítési időpontnak, kivéve, ha a MisaElectro
+      1.4 A szállítási becslések nem minősülnek garantált kézbesítési időpontnak, kivéve, ha a BrenwElectro
       írásban kifejezetten másként rendelkezik.
     </p>
 
@@ -1066,7 +1066,7 @@ const hu: ReactNode = (
     </p>
 
     <h2>3. A feladás helye</h2>
-    <p>3.1 A MisaElectro az Egyesült Királyságból adja fel a rendeléseket.</p>
+    <p>3.1 A BrenwElectro az Egyesült Királyságból adja fel a rendeléseket.</p>
     <p>
       3.2 A jelen Szabályzatban feltüntetett szállítási idők a feladás dátumától számítandók, nem a
       rendelés leadásának dátumától.
@@ -1130,7 +1130,7 @@ const hu: ReactNode = (
       kézbesítés hosszabb ideig tarthat.
     </p>
     <p>
-      5.4 A MisaElectro nem felelős a vámhatóságok, a helyi postai szolgáltatók, a futárhálózatok, a hibás
+      5.4 A BrenwElectro nem felelős a vámhatóságok, a helyi postai szolgáltatók, a futárhálózatok, a hibás
       kézbesítési információk, a sikertelen kézbesítési kísérletek, a ki nem fizetett importköltségek vagy
       az ésszerű befolyásunkon kívül eső események által okozott késedelmekért.
     </p>
@@ -1180,7 +1180,7 @@ const hu: ReactNode = (
       utasítást.
     </p>
     <p>
-      7.3 A MisaElectro nem felelős az Ön által megadott hibás, hiányos, elavult vagy nem megfelelően
+      7.3 A BrenwElectro nem felelős az Ön által megadott hibás, hiányos, elavult vagy nem megfelelően
       formázott címadatok által okozott késedelmekért, sikertelen kézbesítésekért, elveszett csomagokért,
       visszaküldési díjakért vagy többletköltségekért.
     </p>
@@ -1196,7 +1196,7 @@ const hu: ReactNode = (
 
     <h2>8. Nemzetközi szállítás</h2>
     <p>
-      8.1 A MisaElectro elfogadhat nemzetközi rendeléseket a Weboldalon vagy a pénztárnál feltüntetett
+      8.1 A BrenwElectro elfogadhat nemzetközi rendeléseket a Weboldalon vagy a pénztárnál feltüntetett
       támogatott kézbesítési célállomásokra.
     </p>
     <p>
@@ -1228,7 +1228,7 @@ const hu: ReactNode = (
       9.2 Eltérő kifejezett rendelkezés hiányában a pénztárnál ezek a költségek a vásárlót terhelik.
     </p>
     <p>
-      9.3 A MisaElectro nem befolyásolja a vámhatóságokat, az importadó-megállapításokat, a vámtételeket, a
+      9.3 A BrenwElectro nem befolyásolja a vámhatóságokat, az importadó-megállapításokat, a vámtételeket, a
       vámvizsgálatokat, a futárszolgálat vámeljárásait vagy a helyi hatósági díjakat.
     </p>
     <p>
@@ -1312,7 +1312,7 @@ const hu: ReactNode = (
       kell a futár utasításait a kézbesítés újraegyeztetéséhez vagy a csomag átvételéhez.
     </p>
     <p>
-      12.4 A MisaElectro nem felelős a sikertelen kézbesítésért, ha Ön nem válaszol a futár értesítéseire,
+      12.4 A BrenwElectro nem felelős a sikertelen kézbesítésért, ha Ön nem válaszol a futár értesítéseire,
       nem veszi át a csomagot, elutasítja a csomagot, hozzáférhetetlen címet ad meg, vagy nem fizeti meg a
       vám- vagy helyi költségeket.
     </p>
@@ -1330,7 +1330,7 @@ const hu: ReactNode = (
     </p>
     <p>
       13.3 Ha az áruk sérülten, hiányosan, hiánnyal vagy hibásan érkeznek, kérjük, mielőbb vegye fel velünk
-      a kapcsolatot az info@misaelectro.ro címen.
+      a kapcsolatot az info@brenwelectro.com címen.
     </p>
     <p>
       13.4 Kérjük, tüntesse fel a rendelésszámát, a probléma leírását, valamint a termékről, a
@@ -1358,7 +1358,7 @@ const hu: ReactNode = (
     </p>
     <p>
       14.2 Ha a nyomkövetés szokatlan késedelmet, sikertelen kézbesítést, vámvisszatartást vagy hosszabb
-      ideig tartó mozdulatlanságot mutat, kérjük, vegye fel velünk a kapcsolatot az info@misaelectro.ro
+      ideig tartó mozdulatlanságot mutat, kérjük, vegye fel velünk a kapcsolatot az info@brenwelectro.com
       címen.
     </p>
     <p>
@@ -1407,7 +1407,7 @@ const hu: ReactNode = (
       címzettnek kézbesíti.
     </p>
     <p>
-      16.2 A MisaElectro nem felelős a veszteségért, sérülésért, késedelemért, vámproblémákért, a további
+      16.2 A BrenwElectro nem felelős a veszteségért, sérülésért, késedelemért, vámproblémákért, a további
       szállítási problémákért vagy a sikertelen kézbesítésért, miután a csomagot az Ön által választott
       harmadik félnek, továbbítási szolgáltatásnak, átvételi pontnak vagy felhatalmazott címzettnek
       kézbesítették.
@@ -1427,7 +1427,7 @@ const hu: ReactNode = (
       17.2 A szállítási becsléseket nem szabad garantált projekthatáridőként kezelni.
     </p>
     <p>
-      17.3 A MisaElectro nem felelős a munkaerőköltségekért, a villanyszerelő költségeiért, a vállalkozói
+      17.3 A BrenwElectro nem felelős a munkaerőköltségekért, a villanyszerelő költségeiért, a vállalkozói
       költségekért, a szerelési költségekért, a projektkésedelemért, az elmulasztott időpontokért, az
       állásidőért, az elmaradt haszonért, a szerződés elvesztéséért vagy a szállítási késedelem, a
       vámkésedelem, a futárprobléma vagy a termék elérhetetlensége által okozott egyéb közvetett
@@ -1509,13 +1509,13 @@ const hu: ReactNode = (
 const bg: ReactNode = (
   <PolicyLayout title="Политика за доставка" lastUpdated="29 май 2026 г.">
     <p>
-      Тази Политика за доставка обяснява как поръчките, направени чрез www.misaelectro.ro, се обработват,
+      Тази Политика за доставка обяснява как поръчките, направени чрез www.brenwelectro.com, се обработват,
       изпращат, доставят и как се процедира в случай на проблеми с доставката.
     </p>
     <p>Уебсайтът се управлява от:</p>
     <ContactBlock />
     <p>
-      В настоящата Политика „MisaElectro“, „ние“, „нас“ или „наш“ означава MISARELIANA S.R.L.. „Клиент“,
+      В настоящата Политика „BrenwElectro“, „ние“, „нас“ или „наш“ означава BRENWICK LIMITED. „Клиент“,
       „Вие“ или „Ваш“ означава лицето или предприятието, което прави поръчка чрез Уебсайта.
     </p>
     <p>
@@ -1526,10 +1526,10 @@ const bg: ReactNode = (
 
     <h2>1. Обхват на настоящата Политика</h2>
     <p>
-      1.1 Настоящата Политика се прилага за доставката на физически стоки, закупени чрез MisaElectro.
+      1.1 Настоящата Политика се прилага за доставката на физически стоки, закупени чрез BrenwElectro.
     </p>
     <p>
-      1.2 MisaElectro доставя електрически продукти, електрически материали, аксесоари за окабеляване,
+      1.2 BrenwElectro доставя електрически продукти, електрически материали, аксесоари за окабеляване,
       продукти, свързани с осветлението, монтажни компоненти, продукти за разпределение и защита на
       веригите, контакти, ключове, кабели, монтажни аксесоари и други свързани стоки.
     </p>
@@ -1540,7 +1540,7 @@ const bg: ReactNode = (
       изисквания и други оперативни фактори.
     </p>
     <p>
-      1.4 Прогнозите за доставка не са гарантирани дати на доставка, освен ако MisaElectro изрично не
+      1.4 Прогнозите за доставка не са гарантирани дати на доставка, освен ако BrenwElectro изрично не
       посочи друго в писмен вид.
     </p>
 
@@ -1572,7 +1572,7 @@ const bg: ReactNode = (
     </p>
 
     <h2>3. Място на изпращане</h2>
-    <p>3.1 MisaElectro изпраща поръчките от Обединеното кралство.</p>
+    <p>3.1 BrenwElectro изпраща поръчките от Обединеното кралство.</p>
     <p>
       3.2 Сроковете за доставка, посочени в настоящата Политика, се изчисляват от датата на изпращане, а
       не от датата на подаване на поръчката.
@@ -1636,7 +1636,7 @@ const bg: ReactNode = (
       на куриера могат да отнемат повече време.
     </p>
     <p>
-      5.4 MisaElectro не носи отговорност за забавяния, причинени от митническите органи, местните пощенски
+      5.4 BrenwElectro не носи отговорност за забавяния, причинени от митническите органи, местните пощенски
       оператори, куриерските мрежи, неправилна информация за доставка, неуспешни опити за доставка,
       неплатени вносни такси или събития извън нашия разумен контрол.
     </p>
@@ -1687,7 +1687,7 @@ const bg: ReactNode = (
       достъп, необходими за доставката.
     </p>
     <p>
-      7.3 MisaElectro не носи отговорност за забавяния, неуспешни доставки, изгубени пратки, такси за
+      7.3 BrenwElectro не носи отговорност за забавяния, неуспешни доставки, изгубени пратки, такси за
       връщане или допълнителни разходи, причинени от неправилна, непълна, остаряла или неправилно
       форматирана адресна информация, предоставена от Вас.
     </p>
@@ -1703,7 +1703,7 @@ const bg: ReactNode = (
 
     <h2>8. Международна доставка</h2>
     <p>
-      8.1 MisaElectro може да приема международни поръчки до поддържаните дестинации за доставка, показани на
+      8.1 BrenwElectro може да приема международни поръчки до поддържаните дестинации за доставка, показани на
       Уебсайта или при плащане.
     </p>
     <p>
@@ -1735,7 +1735,7 @@ const bg: ReactNode = (
       9.2 Освен ако изрично не е посочено друго при плащане, тези такси са отговорност на клиента.
     </p>
     <p>
-      9.3 MisaElectro не контролира митническите органи, оценките на вносните данъци, ставките на митата,
+      9.3 BrenwElectro не контролира митническите органи, оценките на вносните данъци, ставките на митата,
       митническите проверки, митническите процедури на куриера или местните държавни такси.
     </p>
     <p>
@@ -1817,7 +1817,7 @@ const bg: ReactNode = (
       за да пренасрочите доставката или да получите пратката в посочения срок.
     </p>
     <p>
-      12.4 MisaElectro не носи отговорност за неуспешна доставка, когато не отговаряте на известията на
+      12.4 BrenwElectro не носи отговорност за неуспешна доставка, когато не отговаряте на известията на
       куриера, не получите пратката, откажете пратката, предоставите недостъпен адрес или не заплатите
       митническите или местните такси.
     </p>
@@ -1835,7 +1835,7 @@ const bg: ReactNode = (
     </p>
     <p>
       13.3 Ако стоките пристигнат повредени, липсващи, непълни или неправилни, моля, свържете се с нас
-      възможно най-скоро на info@misaelectro.ro.
+      възможно най-скоро на info@brenwelectro.com.
     </p>
     <p>
       13.4 Моля, посочете номера на поръчката си, описание на проблема и ясни снимки или видеоклипове на
@@ -1862,7 +1862,7 @@ const bg: ReactNode = (
     </p>
     <p>
       14.2 Ако проследяването показва необичайно забавяне, неуспешна доставка, задържане от митницата или
-      липса на движение за продължителен период, моля, свържете се с нас на info@misaelectro.ro.
+      липса на движение за продължителен период, моля, свържете се с нас на info@brenwelectro.com.
     </p>
     <p>
       14.3 Може да се наложи да започнем разследване с куриера, преди да потвърдим, че дадена пратка е
@@ -1910,7 +1910,7 @@ const bg: ReactNode = (
       за завършена, когато превозвачът достави пратката на този адрес или на упълномощения получател.
     </p>
     <p>
-      16.2 MisaElectro не носи отговорност за загуба, повреда, забавяне, митнически проблеми, проблеми с
+      16.2 BrenwElectro не носи отговорност за загуба, повреда, забавяне, митнически проблеми, проблеми с
       последващото изпращане или неуспешна доставка, след като пратката е доставена на трета страна,
       услуга за препращане, пункт за получаване или упълномощен получател, избрани от Вас.
     </p>
@@ -1929,7 +1929,7 @@ const bg: ReactNode = (
       17.2 Прогнозите за доставка не следва да се третират като гарантирани крайни срокове на проекта.
     </p>
     <p>
-      17.3 MisaElectro не носи отговорност за разходи за труд, разходи за електротехник, разходи за
+      17.3 BrenwElectro не носи отговорност за разходи за труд, разходи за електротехник, разходи за
       изпълнител, разходи за монтаж, забавяне на проекта, пропуснати срещи, престой, пропуснати ползи,
       загуба на договор или други косвени загуби, причинени от забавяне на доставката, митническо
       забавяне, проблем с куриера или липса на наличност на продукта, освен когато отговорността не може

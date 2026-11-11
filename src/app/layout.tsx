@@ -16,25 +16,25 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "MisaElectro — Electrical Materials & Supplies | misaelectro.ro",
-    template: "%s | MisaElectro — misaelectro.ro",
+    default: "BrenwElectro — Electrical Materials & Supplies | brenwelectro.com",
+    template: "%s | BrenwElectro — brenwelectro.com",
   },
   description:
-    "MisaElectro (misaelectro.ro) — your trusted source for electrical materials, wiring, lighting and installation supplies across Europe. Certified inventory, fast delivery.",
-  applicationName: "MisaElectro",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://misaelectro.ro"),
+    "BrenwElectro (brenwelectro.com) — your trusted source for electrical materials, wiring, lighting and installation supplies across Europe. Certified inventory, fast delivery.",
+  applicationName: "BrenwElectro",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://brenwelectro.com"),
   openGraph: {
     type: "website",
-    siteName: "MisaElectro",
-    url: "https://misaelectro.ro",
-    title: "MisaElectro — Electrical Materials & Supplies",
+    siteName: "BrenwElectro",
+    url: "https://brenwelectro.com",
+    title: "BrenwElectro — Electrical Materials & Supplies",
     description:
       "Certified electrical materials, wiring, lighting and installation supplies. Delivered across Europe.",
   },
   twitter: {
     card: "summary_large_image",
-    site: "@misaelectro",
-    title: "MisaElectro — misaelectro.ro",
+    site: "@brenwelectro",
+    title: "BrenwElectro — brenwelectro.com",
   },
   icons: { icon: "/icon.svg", apple: "/icon.svg" },
 };

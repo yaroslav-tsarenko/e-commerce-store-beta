@@ -35,15 +35,15 @@ export function ContactBlock() {
   return (
     <div className={styles.contactBlock}>
       <p>
-        <strong>MISARELIANA S.R.L.</strong>
+        <strong>BRENWICK LIMITED</strong>
         <br />
-        {t("registrationNumber")}: 54316682
+        {t("registrationNumber")}: 17550297
         <br />
-        {t("registeredOffice")}: IAŞI, Mun. Iaşi, Str. Fântânilor 43
+        {t("registeredOffice")}: Suite 34, Cariocca Business Park, 2 Sawley Road, Manchester, England, M40 8BB
         <br />
-        {t("generalEmail")}: info@misaelectro.ro
+        {t("generalEmail")}: info@brenwelectro.com
         <br />
-        {t("wholesale")}: b2b@misaelectro.ro
+        {t("wholesale")}: b2b@brenwelectro.com
       </p>
     </div>
   );

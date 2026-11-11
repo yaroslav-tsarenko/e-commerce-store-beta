@@ -8,7 +8,7 @@ export async function GET() {
       include: { images: { orderBy: { sortOrder: "asc" }, take: 1 } },
     });
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://misaelectro.ro";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://brenwelectro.com";
 
     const headers = [
       "id", "title", "description", "availability", "condition",

@@ -120,7 +120,7 @@ export async function POST(request: NextRequest) {
             currency: "eur",
             unit_amount: Math.round(total * 100),
             product_data: {
-              name: `MisaElectro — comanda ${order.orderNumber}`,
+              name: `BrenwElectro — comanda ${order.orderNumber}`,
             },
           },
         },
